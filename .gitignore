@@ -251,6 +251,7 @@
 /administrator/language/en-GB/index.html
 /administrator/language/overrides/*
 /administrator/language/index.html
+/administrator/logs/*
 /administrator/manifests/*
 /administrator/modules/mod_custom/*
 /administrator/modules/mod_feed/*
@@ -544,5 +545,5 @@
 /joomla.xml
 /*.txt
 /robots.txt.dist
-
+/error_log
 /media/nextend/cache/*
