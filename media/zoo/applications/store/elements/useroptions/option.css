@@ -1,0 +1,54 @@
+.user-options #choice-name {
+    width: 200px;
+}
+.user-options #choice-value {
+    width: 100px;
+}
+.user-options .choices input[type="text"] {
+    float: left;
+    margin-left: 10px;
+}
+.user-options .data input[type="text"] {
+    width:385px;
+}
+.user-options .delete {
+    margin-left: 25px;
+}
+.user-options .delete, .user-options .sort-handle {
+    float: left;
+    padding: 5px;
+}
+
+.user-options .add button {
+    
+}
+
+.user-options .add {
+    clear:both;
+    padding: 5px;
+}
+
+.user-options .option-box {
+    float: left;
+    padding: 10px 0px 0px 10px;
+    border: 1px solid #CCC;
+    width: 408px;
+}
+
+.user-options .row {
+    position: relative;
+}
+
+.vFail {
+    display: none;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    background: url("/media/zoo/applications/store/assets/images/warning_16.png") repeat scroll 0% 0% transparent;
+    top: 8px;
+    right: 20px;
+}
+
+.vFail.active {
+    display: block;
+}

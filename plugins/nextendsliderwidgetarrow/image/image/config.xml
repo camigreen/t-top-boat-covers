@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="image" label="Image_settings" hidetitle="1">
+        <param type="mixed" name="previousposition" label="Previous_position" default="left|*|0|*|%|*|top|*|50|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="cssimagelist" name="previous" label="Previous" folder="previous"
+               prefix="nextend-image nextend-image-previous nextend-image-previous-" default="circle-button-cream.png">
+            <![CDATA[<div class="{class}"></div>]]>
+        </param>
+        <param type="mixed" name="nextposition" label="Next_position" default="right|*|0|*|%|*|top|*|50|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="cssimagelist" name="next" label="Next" folder="next"
+               prefix="nextend-image nextend-image-previous nextend-image-next-" default="circle-button-cream.png">
+            <![CDATA[<div class="{class}"></div>]]>
+        </param>
+                
+    </params>
+</root>

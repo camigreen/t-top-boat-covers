@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <params name="gradient" label="Gradient settings" hidetitle="1">
+        <param type="mixed" name="bargradientposition" label="Position" default="left|*|0|*|%|*|top|*|50|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="cssimagelist" name="bargradient" label="Bar" folder="gradient"
+               prefix="nextend-bar nextend-bar-g nextend-bar-g-" default="cream.png">
+            <![CDATA[<div class="{class}"><h6>Title</h6><p>- Here comes the description</p></div>]]>
+        </param>
+        <param type="text" name="bargradientwidth" label="Width" default="100%" />
+        <param name="bargradientheight" type="text" label="Height" default="35" style="width:50px;">
+            <unit>px</unit>
+        </param>
+        <param name="bargradienttitlefont" type="fontmatrixchooser" label="Title_font" default="sliderfont7" />
+        <param name="bargradientdescriptionfont" type="fontmatrixchooser" label="Description_font" default="sliderfont7" />
+                
+    </params>
+</root>

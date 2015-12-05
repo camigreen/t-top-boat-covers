@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="slidertypeaccordionhorizontal" label="Accordion_Horizontal_type_settings">
+        <param name="accordionhorizontalskins" type="mixed" default="" label="Choose_a_skin">
+            <param type="skin" label="Theme">
+                <dark label="Dark_theme">
+                    <accordionhorizontaltabbg>3E3E3E</accordionhorizontaltabbg>
+                    <accordionhorizontalborder>6|*|3E3E3Eff|*|6|*|222222ff</accordionhorizontalborder>
+                    <accordionhorizontalthemeclass>dark</accordionhorizontalthemeclass>
+                    <accordionhorizontaltabfont>
+                        <![CDATA[eyJUZXh0Ijp7ImFmb250IjoiZ29vZ2xlKEBpbXBvcnQgdXJsKGh0dHA6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3M/ZmFtaWx5PU9wZW4gU2Fucyk7KSxBcmlhbCIsImNvbG9yIjoiZTRlYWVlZmYiLCJzaXplIjoiMTEyfHwlIiwiYm9sZCI6MSwiaXRhbGljIjowLCJ1bmRlcmxpbmUiOjAsInRzaGFkb3ciOiIwfCp8MXwqfDB8KnwwMDAwMDBGRiIsInBhZGRpbmdsZWZ0IjowfSwiQWN0aXZlIjp7ImNvbG9yIjoiMjIyMjIyZmYiLCJ0c2hhZG93IjoiMHwqfDF8KnwwfCp8ZmZmZmZmM2QiLCJwYWRkaW5nbGVmdCI6MH0sImZpcnN0dGFiIjoiVGV4dCJ9]]>
+                    </accordionhorizontaltabfont>
+                </dark>
+                <light label="Light_theme">
+                    <accordionhorizontaltabbg>e9e8e0</accordionhorizontaltabbg>
+                    <accordionhorizontalborder>6|*|e9e8e0|*|6|*|d2d0c8ff</accordionhorizontalborder>
+                    <accordionhorizontalthemeclass>light</accordionhorizontalthemeclass>
+                    <accordionhorizontaltabfont>
+                        <![CDATA[eyJUZXh0Ijp7ImFmb250IjoiZ29vZ2xlKEBpbXBvcnQgdXJsKGh0dHA6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3M/ZmFtaWx5PU9wZW4gU2Fucyk7KSxBcmlhbCIsInNpemUiOiIxMTJ8fCUiLCJjb2xvciI6Ijg1ODI3N2ZmIiwidHNoYWRvdyI6IjB8KnwxfCp8MHwqfGZmZmZmZmFiIiwiYm9sZCI6MSwiaXRhbGljIjowLCJ1bmRlcmxpbmUiOjAsInBhZGRpbmdsZWZ0IjowfSwiQWN0aXZlIjp7ImNvbG9yIjoiMjIyMjIyZmYiLCJ0c2hhZG93IjoiMHwqfDF8KnwwfCp8ZmZmZmZmM2QiLCJwYWRkaW5nbGVmdCI6MH0sImZpcnN0dGFiIjoiVGV4dCJ9]]>
+                    </accordionhorizontaltabfont>
+                </light>
+            </param>
+            <param type="skin" label="Skin">
+                <blue label="Blue">
+                    <accordionhorizontaltabbgactive>188dd9</accordionhorizontaltabbgactive>
+                </blue>
+                <green label="Green">
+                    <accordionhorizontaltabbgactive>87b801</accordionhorizontaltabbgactive>
+                </green>
+                <orange label="Orange">
+                    <accordionhorizontaltabbgactive>fb7400</accordionhorizontaltabbgactive>
+                </orange>
+                <red label="Red">
+                    <accordionhorizontaltabbgactive>bd161f</accordionhorizontaltabbgactive>
+                </red>
+                <purple label="Purple">
+                    <accordionhorizontaltabbgactive>823fcd</accordionhorizontaltabbgactive>
+                </purple>
+            </param>
+        </param>
+        <param type="mixed" name="accordionhorizontalborder" default="6|*|3E3E3Eff|*|6|*|222222ff" label="Border">
+            <param type="text" style="width: 30px;" label="Outer_width">
+                <unit>px</unit>
+            </param>
+            <param type="color" alpha='1' label="Outer_color"/>
+            <param type="text" style="width: 30px;" label="Inner_width">
+                <unit>px</unit>
+            </param>
+            <param type="color" alpha='1' label="Inner_color"/>
+        </param>
+        <param type="mixed" name="accordionhorizontalborderradius" default="6|*|6|*|6|*|6" label="Border_radius">
+            <param type="text" style="width: 30px;" label="TL">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="TR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BL">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="accordionhorizontaltagmargin" default="10|*|10" label="Tab_title_margin">
+            <param type="text" style="width: 30px;" label="Top">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Bottom">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param name="accordionhorizontaltabbg" type="color" alpha="0" default="3E3E3E" label="Tab_background"/>
+        <param name="accordionhorizontaltabbgactive" type="color" alpha="0" default="87B801"
+               label="Active_tab_background"/>
+        <param name="accordionhorizontalthemeclass" type="text" default="dark" label="Theme_class"/>
+        <param name="accordionhorizontaltabfont" tabs="Text|Active" type="fontmanager" base64="1"
+               default='eyJUZXh0Ijp7ImFmb250IjoiZ29vZ2xlKEBpbXBvcnQgdXJsKGh0dHA6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3M/ZmFtaWx5PU9wZW4gU2Fucyk7KSxBcmlhbCIsImNvbG9yIjoiZTRlYWVlZmYiLCJzaXplIjoiMTEyfHwlIiwiYm9sZCI6MSwiaXRhbGljIjowLCJ1bmRlcmxpbmUiOjAsInRzaGFkb3ciOiIwfCp8MXwqfDB8KnwwMDAwMDBGRiIsInBhZGRpbmdsZWZ0IjowfSwiQWN0aXZlIjp7ImNvbG9yIjoiMjIyMjIyZmYiLCJ0c2hhZG93IjoiMHwqfDF8KnwwfCp8ZmZmZmZmM2QiLCJwYWRkaW5nbGVmdCI6MH0sImZpcnN0dGFiIjoiVGV4dCJ9'
+               label="Tab_font"/>
+    </params>
+    <params name="accordionhorizontalslidertypeaccordionhorizontalanimation" label="Animation_settings">
+        <param type="text" name="accordionhorizontalduration" default="1000" label="Duration"/>
+        <param type="jqueryeasing" name="accordionhorizontaleasing" default="easeInCubic" label="Easing"/>
+    </params>
+</root>

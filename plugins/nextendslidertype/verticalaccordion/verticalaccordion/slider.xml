@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="slidertypeaccordionvertical" label="Vertical_accordion_slider_type_settings">
+        <param name="accordionverticalskins" type="mixed" default="" label="Choose_a_skin">
+            <param type="skin" label="Theme">
+                <dark label="Dark_theme">
+                    <accordionverticaltabbg>3E3E3E</accordionverticaltabbg>
+                    <accordionverticalborder>6|*|3E3E3Eff|*|6|*|222222ff</accordionverticalborder>
+                    <accordionverticalthemeclass>dark</accordionverticalthemeclass>
+                    <accordionverticaltabfont>
+                        <![CDATA[eyJUZXh0Ijp7ImNvbG9yIjoiZTRlYWVlZmYiLCJzaXplIjoiMTEyfHwlIiwiYm9sZCI6MSwiaXRhbGljIjowLCJ1bmRlcmxpbmUiOjAsImFmb250IjoiQGltcG9ydCB1cmwoaHR0cDovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2Nzcz9mYW1pbHk9T3BlbiBTYW5zKTspLEFyaWFsIiwicGFkZGluZ2xlZnQiOjB9LCJBY3RpdmUiOnsiY29sb3IiOiIyMjIyMjJmZiIsInRzaGFkb3ciOiIwfCp8MXwqfDB8KnxmZmZmZmYzZCIsImJvbGQiOjEsIml0YWxpYyI6MCwidW5kZXJsaW5lIjowLCJwYWRkaW5nbGVmdCI6MH0sImZpcnN0dGFiIjoiVGV4dCJ9]]>
+                    </accordionverticaltabfont>
+                </dark>
+                <light label="Light_theme">
+                    <accordionverticaltabbg>e9e8e0</accordionverticaltabbg>
+                    <accordionverticalborder>6|*|e9e8e0|*|6|*|d2d0c8ff</accordionverticalborder>
+                    <accordionverticalthemeclass>light</accordionverticalthemeclass>
+                    <accordionverticaltabfont>
+                        <![CDATA[eyJUZXh0Ijp7InBhZGRpbmdsZWZ0IjowLCJhZm9udCI6Imdvb2dsZShAaW1wb3J0IHVybChodHRwOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzP2ZhbWlseT1PcGVuIFNhbnMpOyksQXJpYWwiLCJjb2xvciI6Ijg1ODI3N2ZmIiwic2l6ZSI6IjExMnx8JSIsImJvbGQiOjEsIml0YWxpYyI6MCwidW5kZXJsaW5lIjowLCJ0c2hhZG93IjoiMHwqfDF8KnwwfCp8ZmZmZmZmYWIifSwiQWN0aXZlIjp7InBhZGRpbmdsZWZ0IjowLCJjb2xvciI6IjIyMjIyMmZmIiwic2l6ZSI6IjExMnx8JSIsImJvbGQiOjEsIml0YWxpYyI6MCwidW5kZXJsaW5lIjowLCJ0c2hhZG93IjoiMHwqfDF8KnwwfCp8ZmZmZmZmM2QiLCJhZm9udCI6Imdvb2dsZShAaW1wb3J0IHVybChodHRwOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzP2ZhbWlseT1PcGVuIFNhbnMpOyksQXJpYWwifSwiZmlyc3R0YWIiOiJUZXh0In0=]]>
+                    </accordionverticaltabfont>
+                </light>
+            </param>
+            <param type="skin" label="Skin">
+                <blue label="Blue">
+                    <accordionverticaltabbgactive>188dd9</accordionverticaltabbgactive>
+                </blue>
+                <green label="Green">
+                    <accordionverticaltabbgactive>87b801</accordionverticaltabbgactive>
+                </green>
+                <orange label="Orange">
+                    <accordionverticaltabbgactive>fb7400</accordionverticaltabbgactive>
+                </orange>
+                <red label="Red">
+                    <accordionverticaltabbgactive>bd161f</accordionverticaltabbgactive>
+                </red>
+                <purple label="Purple">
+                    <accordionverticaltabbgactive>823fcd</accordionverticaltabbgactive>
+                </purple>
+            </param>
+        </param>
+        <param type="mixed" name="accordionverticalborder" default="6|*|3E3E3Eff|*|6|*|222222ff" label="Border">
+            <param type="text" style="width: 30px;" label="Outer_width">
+                <unit>px</unit>
+            </param>
+            <param type="color" alpha='1' label="Outer_color"/>
+            <param type="text" style="width: 30px;" label="Inner_width">
+                <unit>px</unit>
+            </param>
+            <param type="color" alpha='1' label="Inner_color"/>
+        </param>
+        <param type="mixed" name="accordionverticalborderradius" default="6|*|6|*|6|*|6" label="Border_radius">
+            <param type="text" style="width: 30px;" label="TL">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="TR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BL">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="accordionverticaltagmargin" default="10|*|10" label="Tab_title_margin">
+            <param type="text" style="width: 30px;" label="Left">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Right">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param name="accordionverticaltabbg" type="color" alpha="0" default="3E3E3E" label="Tab_background"/>
+        <param name="accordionverticaltabbgactive" type="color" alpha="0" default="87B801"
+               label="Active_tab_background"/>
+        <param name="accordionverticalthemeclass" type="text" default="dark" label="Theme_class"/>
+        <param name="accordionverticaltabfont" tabs="Text|Active" type="fontmanager" base64="1"
+               default='eyJUZXh0Ijp7ImNvbG9yIjoiZTRlYWVlZmYiLCJzaXplIjoiMTEyfHwlIiwiYm9sZCI6MSwiaXRhbGljIjowLCJ1bmRlcmxpbmUiOjAsImFmb250IjoiQGltcG9ydCB1cmwoaHR0cDovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2Nzcz9mYW1pbHk9T3BlbiBTYW5zKTspLEFyaWFsIiwicGFkZGluZ2xlZnQiOjB9LCJBY3RpdmUiOnsiY29sb3IiOiIyMjIyMjJmZiIsInRzaGFkb3ciOiIwfCp8MXwqfDB8KnxmZmZmZmYzZCIsImJvbGQiOjEsIml0YWxpYyI6MCwidW5kZXJsaW5lIjowLCJwYWRkaW5nbGVmdCI6MH0sImZpcnN0dGFiIjoiVGV4dCJ9'
+               label="Tab_font"/>
+    </params>
+    <params name="accordionverticalslidertypeaccordionverticalanimation" label="Animation_settings">
+        <param type="text" name="accordionverticalduration" default="1000" label="Duration"/>
+        <param type="jqueryeasing" name="accordionverticaleasing" default="easeInCubic" label="Easing"/>
+    </params>
+</root>

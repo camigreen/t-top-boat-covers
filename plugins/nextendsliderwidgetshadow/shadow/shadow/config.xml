@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <params name="shadow" label="Shadow settings" hidetitle="1">
+        <param type="mixed" name="shadowposition" label="Position" default="left|*|0|*|%|*|top|*|height|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="text" name="shadowwidth" label="Width" default="width" />
+        <param type="cssimagelist" name="shadowcss" label="Shadow" folder="shadow"
+               prefix="nextend-shadow nextend-shadow-">
+            <![CDATA[<div class="{class}"><img src="{image}"/></div>]]>
+        </param>
+    </params>
+</root>

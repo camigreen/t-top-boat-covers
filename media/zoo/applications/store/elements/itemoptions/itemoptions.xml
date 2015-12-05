@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="itemoptions" group="Store" orderable="true">
+	<name>Options</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>A list of options to be used as a drop down.</description>
+	<params>
+            <param name="field_name" type="text" default="" label="Field Name" description="" />
+            <param name="option_type" type="list" default="1" label="Option Type" description="">
+                    <option value="global_options">Item Options(Global)</option>
+                    <option value="user_options">Item Options(User Defined)</option>
+                    <option value="attributes">Item Attributes</option>
+                    <option value="item_year">Item Year</option>
+                    <option value="user_entered">User Entered (Text Box)</option>
+            </param>
+            <param name="layout" type="list" default="1" label="Option Layout" description="">
+                    <option value="dropdown">Dropdown</option>
+                    <option value="checkbox">Checkboxes</option>
+            </param>
+            <param name="default" type="text" default="" label="Default Selection" description="" />
+            <param name="option_list" type="list" default="" label="Options" description="">
+                <option value="0">- Select -</option>
+                <option value="fabric">Fabric</option>
+                <option value="ccc-fabric">CCC Fabric</option>
+                <option value="t-top_type">T-Top Type</option>
+                <option value="motors">Motors</option>
+                <option value="motor_make">Motor Make</option>
+                <option value="motor_size">Motor Size</option>
+                <option value="boat_length">Boat Length</option>
+                <option value="boat_style">Boat Style</option>
+		<option value="ubskboat_style">Style of Boat</option>
+                <option value="color">Color</option>
+                <option value="bow_rails">Bow Rails</option>
+                <option value="zipper">Zipper</option>
+                <option value="storage">Boat Storage</option>
+                <option value="bow_options">Bow Options</option>
+                <option value="trolling_motor">Trolling Motor</option>
+                <option value="power_poles">Power Poles</option>
+                <option value="jack_plate">Jack Plate</option>
+                <option value="swim_ladder">Swim Ladder</option>
+                <option value="aft_options">Aft Options</option>
+                <option value="ski_tow_bar">Ski/Tow Bar</option>
+                <option value="activity_platform">Activity Platform</option>
+                <option value="beam_bsk">Beam Width BSK</option>
+                <option value="ttop_width_bsk">T-Top Width BSK</option>
+                <option value="ttop2rodholders_bsk">T-Top to Rod Holders BSK</option>
+                <option value="storagebag_size">Storage Bag Size</option>
+            </param>
+            <param name="all_options" type="radio" default="1" label="Use all options" description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+            <param name="all_items" type="radio" default="1" label="Use with all Items" description="Select if this option is to be used with all items">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+            <param name="items" type="text" default="" label="Selected Items" description="Enter the name of the items that this option is to be used for. Separate by a comma for multiple" />
+	</params>
+        <params group="render">
+            <param name="field_width" type="list" default="2" label="Field Width" description="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+            </param>
+            <param name="hidden" type="radio" default="0" label="Hidden" description="Is this option hidden?">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+            <param name="required" type="radio" default="1" label="Required" description="Is this option required?">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+        </params>
+</element>

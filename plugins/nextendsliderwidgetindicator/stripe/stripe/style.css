@@ -1,0 +1,11 @@
+.nextend-element .nextend-indicator-stripe-container{
+    width: 200px;
+    background: RGBA(0,0,0,.7);
+    height: 6px;
+}
+
+.nextend-element .nextend-indicator-stripe{
+    width: 40%;
+    background: #7670c7;
+    height: 6px;
+}

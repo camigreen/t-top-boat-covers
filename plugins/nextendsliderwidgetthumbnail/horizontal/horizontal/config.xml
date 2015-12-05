@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="horizontal" label="Thumbnail1 settings" hidetitle="1">
+        <param type="mixed" name="thumbnailposition" label="Position" default="left|*|0|*|%|*|bottom|*|0|*|px">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+
+        <param type="mixed" name="thumbnailsize" label="Thumbnail_size" default="100|*|60">
+            <param type="text" label="Width" style="width:50px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Height" style="width:50px;">
+                <unit>px</unit>
+            </param>
+        </param>
+
+        <param type="text" name="thumbnailperpage" label="Thumbnail_per_page" default="2" style="width:50px;"/>
+
+        <param type="text" name="thumbnailanimation" label="Animation_duration" default="700" style="width:50px;">
+            <unit>ms</unit>
+        </param>
+
+        <param type="cssimagelist" name="thumbnail" label="Thumbnail" folder="thumbnails"
+               prefix="nextend-thumbnail nextend-thumbnail-horizontal nextend-thumbnail-horizontal-" default="horizontal-dark.png">
+            <![CDATA[<div class="nextend-thumbnail-container {class} nextend-clearfix"><div class="nextend-arrow-left"></div><div class="{class}" style="background-image: url({image})"></div><div class="{class} active" style="background-image: url({image}); box-shadow: inset 0 0 0 6px RGBA(0,0,0,0.6);"></div><div class="{class}" style="background-image: url({image})"></div><div class="nextend-arrow-right"></div></div>]]>
+        </param>
+        
+        <param name="thumbnailactivebackground" type="color" label="Active_background_border" alpha='1' default="00000080" />   
+    </params>
+</root>

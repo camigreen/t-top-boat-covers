@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="itemoptions" group="Store" orderable="true">
+	<name>Color Chooser</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>A list of options to be used as a drop down.</description>
+	<params>
+               <param name="field_name" type="text" default="" label="Field Name" description="" />
+               <param name="default" type="text" default="" label="Default" description="" />
+               <param name="helper" type="radio" default="0" label="Item Option Helper" description="">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+	</params>
+        <params group="render">
+            <param name="field_width" type="list" default="2" label="Field Width" description="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+            </param>
+            <param name="modal_large" type="radio" default="0" label="Large Modal" description="Use a large modal?">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+        </params>
+</element>

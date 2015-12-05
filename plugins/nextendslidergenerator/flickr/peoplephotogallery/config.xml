@@ -1,0 +1,5 @@
+<root>
+    <params name="Flickr_Peoplephotogallery" label="Filter_by">
+        <param name="peoplephotogallery" label="Gallery" type="flickrgalleries" default="0" />
+    </params>
+</root>

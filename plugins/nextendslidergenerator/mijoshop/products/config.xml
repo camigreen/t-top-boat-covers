@@ -1,0 +1,41 @@
+<root>
+    <params name="mijoshopproducts" label="Filter_by">
+        <param name="mijoshopproductssourcecategory" label="Source_category" type="mijoshopcategories" default="0" multiple="1" size="10" />
+        <param name="mijoshopproductssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="mijoshopproductssourcespecial" label="Special" type="onoff" default="0"/>
+        <param name="mijoshopproductssourceinstock" label="In_stock" type="onoff" default="0"/>
+        <param name="mijoshopproductssourcelanguage" label="Language_filter" type="mijoshoplanguages" default="1"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="mijoshopproductsorder1" type="mixed" label="Order_1" default="pc.name|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pc.name">Product name</option>
+                <option value="p.sort_order">Ordering</option>
+                <option value="p.viewed">Viewed</option>
+                <option value="p.price">Price</option>
+                <option value="p.date_added">Creation time</option>
+                <option value="p.date_modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="mijoshopproductsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pc.name">Product name</option>
+                <option value="p.sort_order">Ordering</option>
+                <option value="p.viewed">Viewed</option>
+                <option value="p.price">Price</option>
+                <option value="p.date_added">Creation time</option>
+                <option value="p.date_modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

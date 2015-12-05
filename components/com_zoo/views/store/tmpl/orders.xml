@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+
+	<layout title="Orders">
+		<message><![CDATA[Displays all of the products from the store application]]></message>
+	</layout>
+
+	<fields name="params">
+		<fieldset name="params"	addfieldpath="/administrator/components/com_zoo/joomla/fields">
+			<field name="page" type="hidden" default="orders" />
+            <field name="filter" type="list" label="Filter" required="true" description="Choose an order page.">
+                <option value="all">All Orders</option>
+                <option value="active">Active Orders</option>
+                <option value="closed">Closed Orders</option>
+            </field>                  
+		</fieldset>
+	</fields>
+	<fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_zoo/joomla/fields">  
+			<field name="controller" type="hidden" label="" required="true" default="store" />          
+		</fieldset>
+	</fields>
+
+</metadata>

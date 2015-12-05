@@ -1,0 +1,11 @@
+<root>
+    <params name="widgetsshadow" label="" hidetitle="1">
+        <param name="widgetshadow" type="subpluginmatrix" label="Shadow" group="nextendsliderwidgetshadow" method="shadow" file="config.xml" default="" />
+        <param type="mixed" label="Display" name="widgetshadowdisplay" default="0|*|always|*|0|*|0">
+            <param type="onoff" label="Desktop"/>
+            <param type="hidden" label="Desktop mode" />
+            <param type="onoff" label="Tablet"/>
+            <param type="onoff" label="Mobile"/>
+        </param>
+    </params>
+</root>

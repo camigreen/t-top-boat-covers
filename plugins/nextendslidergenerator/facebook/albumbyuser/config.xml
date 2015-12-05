@@ -1,0 +1,5 @@
+<root>
+    <params name="Facebook_albumbyuser" label="Filter_by">
+        <param name="facebookalbumsbyuser" label="Album" type="facebookalbumsbyuser" default="0" />
+    </params>
+</root>

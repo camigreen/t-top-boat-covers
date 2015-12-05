@@ -1,0 +1,40 @@
+<root>
+    <params name="redshopproducts" label="Filter_by">
+        <param name="redshopproductssourcecategory" label="Source_category" type="redshopcategories" default="0" multiple="1" size="10" />
+        <param name="redshopproductssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="redshopproductssourcespecial" label="Special" type="onoff" default="0"/>
+        <param name="redshopproductssourceonsale" label="On sale" type="onoff" default="0"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="redshopproductsorder1" type="mixed" label="Order_1" default="pr.product_name|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pr.product_name">Product name</option>
+                <option value="category_name">Category title</option>
+                <option value="pr_cat.ordering">Ordering</option>
+                <option value="pr.publish_date">Creation time</option>
+                <option value="pr.update_date">Modification time</option>
+                <option value="pr.visited">Hits</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="redshopproductsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pr.product_name">Product name</option>
+                <option value="category_name">Category title</option>
+                <option value="pr_cat.ordering">Ordering</option>
+                <option value="pr.publish_date">Creation time</option>
+                <option value="pr.update_date">Modification time</option>
+                <option value="pr.visited">Hits</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

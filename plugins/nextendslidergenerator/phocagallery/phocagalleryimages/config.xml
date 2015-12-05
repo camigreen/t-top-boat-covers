@@ -1,0 +1,37 @@
+<root>
+    <params name="phocagalleryimages" label="Filter_by">
+        <param name="phocagallerysourcecategory" label="Source_category" type="phocagallerycategories" default="0" multiple="1" size="10" />
+        <param name="phocagallerysourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="phocagallerysourcelanguage" label="Language_filter" type="text" default="*"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="phocagalleryorder1" type="mixed" label="Order_1" default="con.title|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.title">Title</option>
+                <option value="cat_title">Category title</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.hits">Hits</option>
+                <option value="con.date">Date</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="phocagalleryorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.title">Title</option>
+                <option value="cat_title">Category title</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.hits">Hits</option>
+                <option value="con.date">Date</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

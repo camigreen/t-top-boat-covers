@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="button" group="Store" orderable="true">
+	<name>Button</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>Product Description Button</description>
+	<params>
+	</params>
+</element>

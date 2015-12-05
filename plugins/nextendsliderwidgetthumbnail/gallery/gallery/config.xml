@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="gallery" label="Gallery settings" hidetitle="1">
+        <param type="mixed" name="thumbnailgalleryposition" label="Position" default="left|*|0|*|%|*|bottom|*|0|*|px">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+
+        <param type="mixed" name="thumbnailgalleryoutersize" label="Gallery_size" default="100%|*|auto">
+            <param type="text" label="Width" style="width:70px;" />
+            <param type="text" label="Height" style="width:70px;" />
+        </param>
+        <param type="mixed" name="thumbnailgallerypadding" default="5|*|5|*|5|*|5" label="Gallery_padding">
+            <param type="text" style="width: 30px;" label="Top">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Right">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Bottom">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Left">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="thumbnailgalleryborderradius" default="0|*|0|*|0|*|0" label="Gallery_border_radius">
+            <param type="text" style="width: 30px;" label="TL">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="TR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BL">
+                <unit>px</unit>
+            </param>
+        </param>
+        
+        <param name="thumbnailgallerybackground" type="color" label="Gallery_background" alpha='1' default="EEEEEEFF" />  
+
+        <param type="mixed" name="thumbnailgallerysize" label="Thumbnail_size" default="100|*|60">
+            <param type="text" label="Width" style="width:50px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Height" style="width:50px;">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="thumbnailgallerymargin" default="0|*|1|*|1|*|0" label="Margin">
+            <param type="text" style="width: 30px;" label="Top">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Right">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Bottom">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Left">
+                <unit>px</unit>
+            </param>
+        </param>
+
+
+        <param type="cssimagelist" name="thumbnail" label="Thumbnail" folder="thumbnails"
+               prefix="nextend-thumbnail nextend-thumbnail-gallery nextend-thumbnail-gallery-" default="aligncenter.png">
+            <![CDATA[<div class="nextend-thumbnail-container {class} nextend-clearfix"><div class="{class}" style="background-image: url({image})"></div><div class="{class} active" style="background-image: url({image});"></div><div class="{class}" style="background-image: url({image})"></div></div>]]>
+        </param>
+    </params>
+</root>

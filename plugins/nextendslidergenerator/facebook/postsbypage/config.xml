@@ -1,0 +1,10 @@
+<root>
+    <params name="Facebook_postbypage" label="Filter_by">
+        <param type="text" name="facebookpostbypagepage" label="Page" default="Nextendweb" />
+        <param type="list" name="facebookpostbypage" label="Filter_type" default="photo" size="10" multiple="1">
+            <option value="link">Link</option>
+            <option value="photo">Photo</option>
+            <option value="status">Status</option>
+        </param>
+    </params>
+</root>

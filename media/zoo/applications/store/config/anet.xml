@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<name>ANET</name>
+	<params>
+		<param name="testing" type="radio" default="0" label="Payment Testing" description="Set the payment operation to testing mode.">
+			<option value="0">Off</option>
+			<option value="1">On</option>
+		</param>
+		<param name="api_login_id" type="text" default="" label="API Login ID" description="Enter the API Login ID" />
+		<param name="api_transaction_key" type="text" default="" label="API Transaction Key" description="Enter the API Transaction Key" />
+		<param name="sandbox_api_login_id" type="text" default="" label="Sandbox API Login ID" description="Enter the API Login ID" />
+		<param name="sandbox_api_transaction_key" type="text" default="" label="Sandbox API Transaction Key" description="Enter the API Transaction Key" />
+	</params>
+</config>

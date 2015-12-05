@@ -1,0 +1,131 @@
+@import 'elements.less';
+@import 'fade.less';
+@import 'slide.less';
+@import 'clear.less';
+
+(~'div@{id}') {
+  width: @width;
+  height: @height;
+  float: left;
+  
+  .x-rtl &{
+      float: right;
+  }
+
+  .smart-slider-border1 {
+    position: relative;
+    padding: @border1;
+    height: @border1height;
+    width: @border1width;
+    overflow: hidden;
+    background-color: @border1hex;
+    background-color: @border1rgba;
+    .border-radius(@tr, @br, @bl, @tl);
+  }
+
+  .smart-slider-border2 {
+    position: relative;
+    padding: @border2;
+    height: @border2height;
+    width: @border2width;
+    overflow: hidden;
+    background-color: @border2hex;
+    background-color: @border2rgba;
+    .rounded(6px);
+  }
+
+  .accordion-vertical-title {
+    float:left;
+    width: @titlewidth;
+    height: @titleheight;
+    cursor: pointer;
+    background-color: @tabbg;
+    margin-top: @slidemargin;
+    margin-bottom: 0;
+    margin-right: @slidemargin;
+    margin-left: @slidemargin;
+    .rounded(@innerborderradius);
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    
+    d: e(~"@{tabfont-text}");
+    .accordion-vertical-title-inner{
+      margin: 3px @tagmarginright 3px @tagmarginleft;
+      overflow: hidden;
+      width: (@titlewidth - @tagmarginright - @tagmarginleft);
+      height: (@titleheight - 6);
+      line-height: (@titleheight - 6);
+    }
+  }
+
+  .accordion-vertical-title:HOVER,
+  .accordion-vertical-title.active {
+    background-color: @tabbgactive;
+    box-shadow: 0 0 0 1px RGBA(255,255,255,.05) inset;
+    d: e(~"@{tabfont-active}");
+  }
+  
+  
+  .accordion-vertical-title.active {   
+    cursor: default; 
+    .border-radius(@innerborderradius, 0, 0, @innerborderradius);
+  }  
+
+  .accordion-vertical-slide {
+    float:left;
+    position: relative;
+    z-index: 1;
+    height: 0;
+    width: @canvaswidth;
+    overflow: hidden;
+    margin-left: @slidemargin;
+    margin-right: @slidemargin;
+    margin-bottom: @slidemargin;
+    margin-top: 0;
+    background: #fff;
+    .border-radius(0, @innerborderradius, @innerborderradius, 0);
+  }
+
+  .accordion-vertical-slide.active {
+    height: @canvasheight;
+  }
+
+  .smart-slider-canvas {
+    width: @canvaswidth;
+    height: @canvasheight;
+    display: block;
+  }
+
+  .smart-slider-layer {
+    position: absolute;
+  }
+
+  h1 {
+    color: #fff;
+    border: 0;
+    font-size: 30px;
+    background: RGBA(0, 0, 0, 0.4);
+  }
+}
+
+
+.dark .accordion-vertical-title {
+  box-shadow: 0 0 0 1px RGBA(255,255,255,.05) inset,0 0 2px 1px RGBA(0,0,0,.3);
+}
+
+.dark .smart-slider-border2 {
+    box-shadow: 0 1px 3px 1px RGBA(0,0,0,.3) inset;
+}
+
+.light .smart-slider-border2 {
+    box-shadow: 0 1px 3px 1px RGBA(0,0,0,.2) inset;
+}
+
+.light .accordion-vertical-title {
+  box-shadow: 0 0 2px 1px RGBA(0,0,0,.2);
+}
+
+.light .smart-slider-border1{
+  box-shadow: 0 0 0 1px #cccccc inset;
+}

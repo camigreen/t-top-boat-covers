@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="fullpageslidertype" label="Fullpage_slider_type_settings">
+        <param type="image" name="fullpagebackgroundimage" default="" label="Background_image"/>
+        <param type="text" name="fullpagebackgroundimagesize" default="auto" label="Background_size"/>
+        <param type="text" name="fullpageresponsivemaxwidth" style="width: 70px;" default="3000" label="Responsive_maximum_slide_width">
+            <unit>px</unit>
+        </param>
+        <param type="mixed" name="fullscale" default="0|*|0" label="Scale_to_full">
+            <param type="onoff" label="Horizontal"/>
+            <param type="onoff" label="Vertical"/>
+        </param>
+        <param type="mixed" name="fullfocus" default="1|*|0" label="Focus">
+            <param type="onoff" label="User_interaction"/>
+            <param type="onoff" label="Autoplay"/>
+        </param>
+        <param type="onoff" name="fullcarousel" label="Carousel" default="0" />
+    </params>
+    <params name="fullpagedefaultslidertypeanimation" label="Animation_settings">
+        <param name="fullpageanimation" type="list" label="Animation" default="horizontal" translateable="1" multiple="1" size="5">
+            <option value="no">No_animation</option>
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+            <option value="fade">Fade</option>
+        </param>
+        <param type="mixed" name="fullpageanimationproperties" label="Properties"
+               default="1500|*|0|*|easeInOutQuint|*|1">
+            <param type="text" label="Duration" style="width:50px;">
+                <unit>ms</unit>
+            </param>
+            <param type="text" label="Delay" style="width:50px;">
+                <unit>ms</unit>
+            </param>
+            <param type="jqueryeasing" label="Easing"/>
+            <param type="text" label="Parallax" style="width:50px;"/>
+        </param>
+        <param type="mixed" name="fullpagebackgroundanimation" label="Background_animation"
+               default="0|*|bars||blocks">
+            <param type="onoff" label="Enabled"/>
+            <param type="list" label="Animation" multiple="1" size="12" translateable="1">
+                <option value="dissolve">Dissolve</option>
+                <option value="bars">Bars</option>
+                <option value="zip">Zip</option>
+                <option value="blinds">Blinds</option>
+                <option value="blocks">Blocks</option>
+                <option value="blocks2">Blocks_2</option>
+                <option value="concentric">Concentric</option>
+                <option value="warp">Warp</option>
+                <option value="cube">Cube__3D</option>
+                <option value="bars3d">Bars__3D</option>
+                <option value="tiles3d">Tiles__3D</option>
+                <option value="turn">Page_turn__3D</option>
+            </param>
+        </param>
+    </params>
+</root>

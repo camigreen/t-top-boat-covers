@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="vertical" label="Thumbnail1 settings" hidetitle="1">
+        <param type="mixed" name="thumbnailposition" label="Position" default="left|*|0|*|%|*|bottom|*|0|*|px">
+            <param type="list" label="Horizontal" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+
+        <param type="mixed" name="thumbnailgalleryoutersize" label="Gallery_size" default="30%|*|100%">
+            <param type="text" label="Width" style="width:70px;"/>
+            <param type="text" label="Height" style="width:70px;"/>
+        </param>
+
+        <param type="text" name="thumbnailcolumn" label="Column_width" style="width:50px;" default="30">
+            <unit>percent</unit>
+        </param>
+
+        <param type="text" name="thumbnailperpage" label="Thumbnail_per_page" default="4" style="width:50px;" />
+
+        <param type="text" name="thumbnailanimation" label="Animation_duration" default="700" style="width:50px;">
+            <unit>ms</unit>
+        </param>
+
+        <param type="cssimagelist" name="thumbnail" label="Thumbnail" folder="thumbnails"
+               prefix="nextend-thumbnail nextend-thumbnail-vertical nextend-thumbnail-vertical-" default="vertical1.png">
+            <![CDATA[
+            <div class="nextend-thumbnail-container {class} nextend-clearfix">
+                <div class="nextend-arrow-top"></div>
+                <div class="{class}">
+                    <div class="nextend-thumbnail-vertical-image" style="width:30%;margin-right:2%; background-image:url('{image}');"></div>
+                    <div class="nextend-thumbnail-vertical-content" style="width:68%;"><h4>Perfect pair</h4><p>These comfy leggings have saved my legs many times...</p></div>
+                </div>
+                <div class="{class} active">
+                    <div class="nextend-thumbnail-vertical-image" style="width:30%;margin-right:2%; background-image:url('{image}');"></div>
+                    <div class="nextend-thumbnail-vertical-content" style="width:68%;"><h4>Perfect pair</h4><p>These comfy leggings have saved my legs many times...</p></div>
+                </div>
+                <div class="{class}">
+                    <div class="nextend-thumbnail-vertical-image" style="width:30%;margin-right:2%; background-image:url('{image}');"></div>
+                    <div class="nextend-thumbnail-vertical-content" style="width:68%;"><h4>Perfect pair</h4><p>These comfy leggings have saved my legs many times...</p></div>
+                </div>
+                <div class="nextend-arrow-bottom"></div>
+            </div>]]>
+        </param>
+        <param name="thumbnailtitlelink" type="onoff" label="Title as link" default="0" />
+        <param name="thumbnailshowdescription" type="onoff" label="Show description" default="1" />
+        <param name="thumbnailfontclasstitle" type="fontmatrixchooser" label="Title_font" default="sliderfont7" />
+        <param name="thumbnailfontclassdescription" type="fontmatrixchooser" label="Description_font" default="sliderfont7" />
+        <param name="thumbnailactivebackground" type="color" label="Active_background_color" alpha='1' default="00000080" />  
+    </params>
+</root>

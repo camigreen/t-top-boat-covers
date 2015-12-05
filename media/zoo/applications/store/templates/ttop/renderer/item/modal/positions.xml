@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer>
+	<positions layout="full">
+		<position name="description">Description</position>
+                <position name="scripts">Scripts</position>
+	</positions>
+</renderer>

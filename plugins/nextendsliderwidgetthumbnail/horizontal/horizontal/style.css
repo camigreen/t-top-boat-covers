@@ -1,0 +1,188 @@
+.nextend-clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.nextend-clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .nextend-clearfix {
+    display: block;
+}
+
+* html .nextend-clearfix {
+    height: 1%;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1,
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-horizontal-dark {
+    width: 380px;
+}
+
+.nextend-thumbnail-container table{
+    border-spacing:0;
+    border-collapse:collapse;
+    border: 0px;
+    width: 100%;
+}
+
+.nextend-thumbnail-container table tr,
+.nextend-thumbnail-container table td{
+    border: 0;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 {
+    width: auto;
+    display: block;
+    border: 1px solid #cccccc;
+    background: #E2E0D6;
+
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #E2E0D6 100% );
+
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #E2E0D6 100%);
+
+    /* Opera */
+    background: -o-linear-gradient(top, #FFFFFF 0%, #E2E0D6 100%);
+
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #E2E0D6));
+
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #FFFFFF 0%, #E2E0D6 100%);
+
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #FFFFFF 0%, #E2E0D6 100%);
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-arrow-left,
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-arrow-right{
+    float: left;
+    height: 100%;
+    width: 25px;
+    height: 54px;
+    margin: 5px 0;
+    background: url('images/horizontal1-arrow.png') no-repeat 10px center;
+    cursor: pointer;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-arrow-right{
+    float: right;
+    background-position: -12px center;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-thumbnail-strip-hider{
+    width: 100%;
+    overflow: hidden;
+    float:left;
+}
+
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-thumbnail-strip{
+    width: 100%;
+    height: 50px;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-thumbnail{
+    float: left;
+    width: 100px;
+    height: 54px;
+    margin: 5px 5px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: inset 0 0 3px 1px RGBA(0,0,0,0.4), 0 1px 1px RGBA(255,255,255,.7);
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+
+.x-rtl .nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal1 .nextend-thumbnail{
+    float: right;
+}
+
+/* DARK */
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark {
+    width: auto;
+    display: block;
+    border: 1px solid #1f1f1f;
+    box-shadow: 0 0 0 1px RGBA(255,255,255,.1) inset;
+    background: #242424;
+
+    /* IE10 Consumer Preview */
+    background: -ms-linear-gradient(top, #3e3e3e 0%, #242424 100% );
+
+    /* Mozilla Firefox */
+    background: -moz-linear-gradient(top, #3e3e3e 0%, #242424 100%);
+
+    /* Opera */
+    background: -o-linear-gradient(top, #3e3e3e 0%, #242424 100%);
+
+    /* Webkit (Safari/Chrome 10) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3e3e3e), color-stop(1, #242424));
+
+    /* Webkit (Chrome 11+) */
+    background: -webkit-linear-gradient(top, #3e3e3e 0%, #242424 100%);
+
+    /* W3C Markup, IE10 Release Preview */
+    background: linear-gradient(to bottom, #3e3e3e 0%, #242424 100%);
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-arrow-left,
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-arrow-right{
+    float: left;
+    height: 100%;
+    width: 25px;
+    height: 54px;
+    margin: 5px 0;
+    background: url('images/horizontal-dark-arrow.png') no-repeat 10px center;
+    cursor: pointer;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-arrow-right{
+    float: right;
+    background-position: -12px center;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-thumbnail-strip-hider{
+    width: 100%;
+    overflow: hidden;
+    float:left;
+}
+
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-thumbnail-strip{
+    width: 100%;
+    height: 50px;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-thumbnail{
+    float: left;
+    width: 100px;
+    height: 54px;
+    margin: 5px 5px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+    box-shadow:  0 0 3px 1px RGBA(0,0,0,0.6), 0 0 0 1px RGBA(255,255,255,.2) inset;
+}
+
+.x-rtl .nextend-thumbnail-container.nextend-thumbnail-horizontal-horizontal-dark .nextend-thumbnail{
+    float: right;
+}

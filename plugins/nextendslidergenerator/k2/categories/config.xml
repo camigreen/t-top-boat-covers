@@ -1,0 +1,33 @@
+<root>
+    <params name="k2items" label="Filter_by">
+        <param name="k2itemssourcecategory" label="Source_category" type="k2categories" default="0" multiple="1" size="10" />
+        <param name="k2itemssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="k2itemssourcelimit" label="Limit to group result/category" type="onoff" default="0"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="k2itemsorder1" type="mixed" label="Order_1" default="con.title|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="m.name">Title</option>                
+                <option value="m.id">ID</option>
+                <option value="m.ordering">Ordering</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="k2itemsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="m.name">Title</option>                
+                <option value="m.id">ID</option>
+                <option value="m.ordering">Ordering</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

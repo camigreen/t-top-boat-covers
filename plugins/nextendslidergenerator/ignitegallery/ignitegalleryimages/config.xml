@@ -1,0 +1,36 @@
+<root>
+    <params name="ignitegalleryimages" label="Filter_by">
+        <param name="ignitegallerysourcecategory" label="Source_category" type="ignitegallerycategories" default="0" multiple="1" size="10" />
+        <param name="ignitegallerysourcepublished" label="Published" type="onoff" default="1"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="ignitegalleryorder1" type="mixed" label="Order_1" default="con.ordering|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.filename">Filename</option>
+                <option value="cat_title">Category title</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.hits">Hits</option>
+                <option value="con.date">Date</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="ignitegalleryorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.filename">Filename</option>
+                <option value="cat_title">Category title</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.hits">Hits</option>
+                <option value="con.date">Date</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

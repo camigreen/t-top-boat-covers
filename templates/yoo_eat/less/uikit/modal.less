@@ -1,0 +1,71 @@
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+//
+// Component: Modal
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@modal-z-index:                                 @global-z-index + 10;
+@modal-background:                              rgba(0,0,0,0.8);
+
+@modal-dialog-background:                       @global-background;
+
+@modal-header-margin-bottom:                    @global-margin;
+@modal-header-font-size:                        round((@global-font-size * 1.74)); // 24px / 28px
+@modal-header-line-height:                      round((@modal-header-font-size * 1.27)); // 30px / 36px
+
+@modal-footer-margin-top:                       @global-margin;
+
+@modal-caption-color:                           @global-contrast-color;
+
+
+// Component
+// ========================================================================
+
+.hook-modal() {}
+
+
+// Sub-object: `uk-modal-dialog`
+// ========================================================================
+
+.hook-modal-dialog() {}
+
+
+// Modifier: `uk-modal-dialog-lightbox`
+// ========================================================================
+
+.hook-modal-dialog-lightbox() {}
+
+
+// Sub-object: `uk-modal-header`
+// ========================================================================
+
+.hook-modal-header() {}
+
+
+// Sub-object: `uk-modal-footer`
+// ========================================================================
+
+.hook-modal-footer() {}
+
+
+// Sub-object: `uk-modal-caption`
+// ========================================================================
+
+.hook-modal-caption() {}
+
+
+// Sub-object: `uk-modal-spinner`
+// ========================================================================
+
+.hook-modal-spinner() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-modal-misc() {}

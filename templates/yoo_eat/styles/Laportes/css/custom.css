@@ -1,0 +1,142 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+
+
+/* ========================================================================
+
+   Use this file to add custom CSS easily
+
+ ========================================================================== */
+
+
+
+.fullscreen-slideshow .tm-page {         
+
+z-index: 2;        
+
+position: relative;        
+
+}        
+
+
+
+.fullscreen-slideshow .tm-fullscreen .wk-slideshow .tm-image {      
+
+height: 600px;  
+
+}
+
+.subtitle:before,
+
+.subtitle:after {
+
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+
+  width: 160px;
+
+  border-top: 4px solid rgba(255, 255, 255, 0.3);
+
+}
+
+.subtitle:before {
+
+  left: 0;
+
+}
+
+.subtitle:after {
+
+  right: 0;
+
+}
+
+.subtitle:before {
+
+  left: -175px;
+
+  opacity: 1;
+
+}
+
+.subtitle:after {
+
+  right: -175px;
+
+  opacity: 1;
+
+}
+
+#headerbar {  
+
+     position: relative;  
+
+     z-index: 1;  
+
+}
+
+.tm-page {
+
+  margin:10px auto;
+
+}
+
+.tm-nav-border {
+
+  	height:15px;
+
+	background-image: -webkit-linear-gradient(top, #E5C800, #93881B);
+
+	background-image: linear-gradient(to bottom, #E5C800, #93881B);
+
+	border-color: transparent;
+
+}
+
+
+
+.absolute {
+
+  position:absolute;
+
+  
+
+}
+
+
+
+.menu-logo {
+
+  float:left;
+
+  height:60px;
+
+}
+
+.menu-logo img {
+
+  position:relative;	
+
+  z-index:4;
+
+  -webkit-backface-visibility: hidden;
+
+}
+
+
+
+.uk-container.uk-container-center.menu-navbar {
+
+  padding:0px;
+
+}
+
+.tm-header-image {
+  width: 100%;
+}
+.tm-header-image img {
+  width:100%;
+}

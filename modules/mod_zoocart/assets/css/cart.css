@@ -1,0 +1,78 @@
+/* 
+    Document   : cart
+    Created on : Nov 30, 2014, 11:25:22 PM
+    Author     : Shawn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#cart-module {
+    height :60px;
+    color: #F4FF54;
+    cursor: pointer;
+}
+#cart-module .icon {
+    font-family: FontAwesome;
+    display: inline-block;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size:24px;
+    padding-right:5px;
+
+}
+#cart-module .icon:before {
+    content: "\f07a";
+}
+#cart-module .items {
+    padding-left:5px;
+}
+#cart .cart-title, #cart .item-name, #cart .item-update {
+    
+}
+
+#cart .uk-panel {
+  float:none !important;
+  max-width:none !important;
+}
+
+.cart-icon span, .cart-icon i {
+  padding-left: 5px;
+  color: #F4FF54 !important;
+}
+
+#cart-modal .item-sku {
+	display: block;
+  	font-size: 10px;
+  	line-height: 10px;
+  	color: #525252 !important;
+}
+#cart-modal .item-options ul {
+    margin-bottom: 0px;
+}
+#cart-modal .option-toggle {
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 12px;
+}
+#cart-modal .option-toggle i {
+    margin-right: 5px;
+}
+#cart-modal .item-remove {
+  position: relative;
+  left: 15px;
+}
+
+#cart button {
+  margin-right: 5px;
+}
+#cart-modal .item-options {
+    font-weight: 400;
+    line-height: 20px;
+    background-color: white;
+    border: 1px solid #eaeaea;
+    padding: 5px;
+}
+

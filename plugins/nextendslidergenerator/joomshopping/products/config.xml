@@ -1,0 +1,40 @@
+<root>
+    <params name="joomshoppingproducts" label="Filter_by">
+        <param name="joomshoppingproductssourcecategory" label="Source_category" type="joomshoppingcategories" default="0" multiple="1" size="10" />
+        <param name="joomshoppingproductssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="joomshoppingproductssourceinstock" label="In_stock" type="onoff" default="0"/>
+        <param name="joomshoppingproductssourcelabel" label="Source label" type="joomshoppinglabels" default="0" />
+    </params>
+    <params name="order" label="Order_by">
+        <param name="joomshoppingproductsorder1" type="mixed" label="Order_1" default="pr.name|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pr.name">Product name</option>
+                <option value="category_name">Category title</option>
+                <option value="pr_cat.product_ordering">Ordering</option>
+                <option value="pr.hits">Hits</option>
+                <option value="pr.product_date_added">Creation time</option>
+                <option value="pr.date_modify">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="joomshoppingproductsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="pr.name">Product name</option>
+                <option value="category_name">Category title</option>
+                <option value="pr_cat.product_ordering">Ordering</option>
+                <option value="pr.hits">Hits</option>
+                <option value="pr.product_date_added">Creation time</option>
+                <option value="pr.date_modify">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

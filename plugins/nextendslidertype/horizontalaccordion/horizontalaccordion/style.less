@@ -1,0 +1,145 @@
+@import 'elements.less';
+@import 'fade.less';
+@import 'slide.less';
+@import 'clear.less';
+
+(~'div@{id}') {
+  width: @width;
+  height: @height;
+  float: left;
+  
+  .x-rtl &{
+      float: right;
+  }
+
+  .smart-slider-border1 {
+    position: relative;
+    padding: @border1;
+    height: @border1height;
+    width: @border1width;
+    overflow: hidden;
+    background-color: @border1hex;
+    background-color: @border1rgba;
+    .border-radius(@tr, @br, @bl, @tl);
+  }
+
+  .smart-slider-border2 {
+    position: relative;
+    padding: @border2;
+    height: @border2height;
+    width: @border2width;
+    overflow: hidden;
+    background-color: @border2hex;
+    background-color: @border2rgba;
+    .rounded(6px);
+  }
+
+  .accordion-horizontal-title {
+    width: @titlewidth;
+    height: @titleheight;
+    float: left;
+    cursor: pointer;
+    background-color: @tabbg;
+    margin-top: @slidemargin;
+    margin-right: 0;
+    margin-bottom: @slidemargin;
+    margin-left: @slidemargin;
+    .rounded(@innerborderradius);
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    
+    .accordion-horizontal-title-inner{
+      margin: 3px;
+      overflow: hidden;
+    }
+
+    .accordion-horizontal-title-rotate-90 {
+      margin-top: @tagmargintop;
+      margin-bottom: @tagmarginbottom;
+      width: (@titleheight - @tagmargintop - @tagmarginbottom - 6);
+      height: (@titleheight - @tagmargintop - @tagmarginbottom - 6);
+      background-color: @tabbg;
+      d: e(~"@{tabfont-text}");
+      line-height: (@titlewidth - 6);
+      .rotate-90();
+    }
+  }
+  
+  .x-msie-9 & .accordion-horizontal-title .accordion-horizontal-title-rotate-90{
+      -ms-transform: none;
+  }
+
+  .accordion-horizontal-title:HOVER,
+  .accordion-horizontal-title.active {
+    background-color: @tabbgactive;
+    box-shadow: 0 0 0 1px RGBA(255,255,255,.05) inset;
+    .accordion-horizontal-title-rotate-90 {
+      background-color: @tabbgactive;
+      d: e(~"@{tabfont-active}");
+      line-height: (@titlewidth - 6);
+    }
+  }  
+  
+  .accordion-horizontal-title.active {   
+    cursor: default;
+    .border-radius(0, 0, @innerborderradius, @innerborderradius);
+  }  
+
+  .accordion-horizontal-slide {
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: 0;
+    height: @canvasheight;
+    overflow: hidden;
+    margin-top: @slidemargin;
+    margin-right: @slidemargin;
+    margin-bottom: @slidemargin;
+    margin-left: 0;
+    background: #fff;
+    .border-radius(@innerborderradius, @innerborderradius, 0, 0);
+  }
+
+  .accordion-horizontal-slide.active {
+    width: @canvaswidth;
+  }
+
+  .smart-slider-canvas {
+    width: @canvaswidth;
+    height: @canvasheight;
+    display: block;
+  }
+
+  .smart-slider-layer {
+    position: absolute;
+  }
+
+  h1 {
+    color: #fff;
+    border: 0;
+    font-size: 30px;
+    background: RGBA(0, 0, 0, 0.4);
+  }
+}
+
+
+.dark .accordion-horizontal-title {
+  box-shadow: 0 0 0 1px RGBA(255,255,255,.05) inset,0 0 2px 1px RGBA(0,0,0,.3);
+}
+
+.dark .smart-slider-border2 {
+    box-shadow: 0 1px 3px 1px RGBA(0,0,0,.3) inset;
+}
+
+.light .smart-slider-border2 {
+    box-shadow: 0 1px 3px 1px RGBA(0,0,0,.2) inset;
+}
+
+.light .accordion-horizontal-title {
+  box-shadow: 0 0 2px 1px RGBA(0,0,0,.2);
+}
+
+.light .smart-slider-border1{
+  box-shadow: 0 0 0 1px #cccccc inset;
+}

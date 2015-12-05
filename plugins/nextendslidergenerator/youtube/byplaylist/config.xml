@@ -1,0 +1,5 @@
+<root>
+    <params name="youtube_byplaylist" label="YouTube_videos_by_users_playlist">
+        <param name="youtubeplaylist" label="Playlist" type="youtubeplaylistbyuser" default=""  />
+    </params>
+</root>

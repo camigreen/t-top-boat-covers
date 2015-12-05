@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <params name="vertical" label="Vertical settings" hidetitle="1">
+        <param type="mixed" name="barverticalposition" label="Position" default="left|*|0|*|%|*|top|*|0|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="cssimagelist" name="barvertical" label="Bar" folder="vertical"
+               prefix="nextend-bar nextend-bar-v nextend-bar-v-" default="vertical.png">
+            <![CDATA[<div class="{class}"><h6>Title</h6><p>Here comes the description</p><div style="clear: both;"></div></div>]]>
+        </param>
+        <param name="barverticalwidth" type="text" label="Width" default="30" style="width:50px;">
+            <unit>percent</unit>
+        </param>
+        <param name="barverticalheight" type="text" label="Height" default="100" style="width:50px;">
+            <unit>percent</unit>
+        </param>
+        <param name="barverticaltitlefont" type="fontmatrixchooser" label="Title_font" default="sliderfont5" />
+        <param name="barverticaldescriptionfont" type="fontmatrixchooser" label="Description_font" default="sliderfont7" />        
+        <param name="barbackground" type="color" label="Background" alpha='1' default="00000080" />        
+                
+    </params>
+</root>

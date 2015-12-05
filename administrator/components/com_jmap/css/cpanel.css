@@ -1,0 +1,173 @@
+div#accordion_cpanel_seo {
+	margin-top: 30px;
+}
+
+div#accordion_cpanel_seo input.sitemap_links {
+	width: 50%;
+}
+
+@media screen and (max-width: 1199px) {
+	div#accordion_cpanel_seo input.sitemap_links {
+		width: 40%;
+	}
+}
+
+@media screen and (max-width: 979px) {
+	div#accordion_cpanel_seo input.sitemap_links {
+		width: 90%;
+		display: block;
+		margin-bottom: 5px !important;
+	}
+	
+	div#jmap_seo div.single_container.xmlcontainer {
+		height: 105px;
+		border-bottom: 1px solid #CCC;
+		margin-bottom: 10px;
+	}
+}
+
+label.label {
+	display: inline-block;
+	margin-bottom: 0;
+	padding: 5px;
+	min-width: 270px;
+	font-size: 115%;
+}
+
+div.panel-body label.glyphicon {
+	font-size: 170%;
+	cursor: pointer;
+}
+
+div#jmap_seo div.panel-body label.glyphicon {
+	padding-right: 5px;
+}
+
+div#jmap_seo span.label {
+	margin: 0 5px;
+	font-size: 12px;
+	padding: 2px 6px !important;
+}
+
+#updatestatus {
+	clear: both;
+}
+
+#updatestatus>label {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#updatestatus label {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#updatestatus a,#updatestatus label.label-danger {
+	cursor: pointer;
+}
+
+#updatestatus label.glyphicon {
+	font-size: 12px;
+	cursor: auto;
+}
+
+div.single_container {
+	padding: 10px 0 0 10px;
+}
+
+div#jmap_seo div.single_container {
+	height: 70px;
+}
+
+div#jmap_about div.single_container {
+	height: 50px;
+}
+
+ul.cpanelinfo {
+	margin-left: 9px;
+}
+
+ul.cpanelinfo li {
+	margin: 0 5px 5px 0;
+}
+
+ul.cpanelinfo span.badge.pull-right {
+	margin-top: -2px;
+}
+
+div#jmap_about {
+	padding-top: 20px;
+}
+
+div#jmap_about div.panel-body {
+	border-top: none !important;
+}
+
+div.alert-success.hidden,span.step_details {
+	display: none;
+	font-size: 12px;
+}
+
+a.pinger {
+	display: block;
+	font-size: 150%;
+	padding-bottom: 10px;
+	white-space: nowrap;
+}
+
+.iframeform {
+	width: 100%;
+}
+
+#robots_contents {
+	width: 100%;
+}
+
+#robots_contents {
+	width: 100%;
+	min-height: 510px;
+	margin-top: 20px;
+}
+
+label.hasRobotsPopover {
+	min-width: 180px;
+	padding-bottom: 8px;
+}
+
+body.component {
+	padding: 12px !important;
+}
+
+div.row.no-margin {
+	margin-left: 0;
+}
+
+div.row.no-margin:first-child {
+	min-height: 320px;
+}
+
+label.closeprecaching {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	font-size: 16px;
+}
+
+label.glyphicon.glyphicon-download-alt.disabled {
+	color: #AAA;
+}
+
+button[data-role=clearcache] {
+	font-size: 12px;
+	margin-top: -5px;
+}
+
+#progress_info span.badge {
+	color: #428bca;
+	background-color: #ffffff;
+}
+
+#progress_info span.label {
+	text-align: left;
+}

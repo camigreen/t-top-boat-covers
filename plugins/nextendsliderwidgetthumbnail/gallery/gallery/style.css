@@ -1,0 +1,48 @@
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-gallery {
+    width: 380px;
+    height: auto;
+    background: #eee;
+    padding: 5px;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-gallery .nextend-thumbnail-gallery{
+    width: 100px;
+    height: 54px;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery{
+    line-height: 0;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery .nextend-thumbnail-gallery{
+    display: inline-block;
+    margin: 0 1px 1px 0;
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out; /* Safari */
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery .nextend-thumbnail-gallery.active{
+    opacity: 0.5;
+}
+
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery-alignleft{
+    text-align: left;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery-aligncenter{
+    text-align: center;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery-alignright{
+    text-align: right;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-gallery-aligncenter .nextend-thumbnail-gallery{
+}
+
+.nextend-thumbnail-gallery{
+    background-size:cover;
+}

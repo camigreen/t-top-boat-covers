@@ -1,0 +1,31 @@
+<root>
+    <params name="joomlacategory" label="Filter_by">
+        <param name="sourcecategory" label="Source_parent_category" type="joomlacategories" default="0" multiple="1" size="10" />
+        <param name="sourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="sourcelanguage" label="Language_filter" type="text" default="*"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="joomlacartegoryorder1" type="mixed" label="Order_1" default="cat.title|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="cat.title">Title</option>
+                <option value="cat.lft">Ordering</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="joomlacartegoryorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="cat.title">Title</option>
+                <option value="cat.lft">Ordering</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

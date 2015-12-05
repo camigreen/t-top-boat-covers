@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="modal" group="Store" orderable="true">
+	<name>Modal</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>A modal for the store.</description>
+	<params>
+            <param name="element_id" type="text" default="" label="Element ID" description="Name of the modal ID"></param>
+	</params>
+        <params group="render">
+            <param name="modal_large" type="radio" default="0" label="Large Modal" description="Use a large modal?">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+            </param>
+        </params>
+</element>

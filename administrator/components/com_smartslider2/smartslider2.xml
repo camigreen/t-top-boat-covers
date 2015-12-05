@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6.0" method="upgrade">
+	<name>Smart Slider 2</name>
+  <author>Roland Soos</author>
+  <copyright>Copyright (C) Nextendweb.com</copyright>
+  <authorEmail>roland@nextendweb.com</authorEmail>
+  <authorUrl>http://www.nextendweb.com</authorUrl>
+  <creationDate>2013-10-01</creationDate>
+  <license>http://www.gnu.org/licenses/gpl-3.0.txt GNU/GPL</license>
+  <releaseDate>2013-10-01</releaseDate>
+	<version>2.3.13</version>
+	<description>Component for Smart Slider 2 which allow you to create sliders and slides.</description>
+  <files folder="site">
+      <filename>index.html</filename>
+  </files>
+	<administration>
+		<menu img="components/com_smartslider2/icon16.png">COM_SMARTSLIDER2</menu>
+		<files>
+			<filename>smartslider2.php</filename>
+			<filename>icon16.png</filename>
+			<filename>config.xml</filename>
+			<filename>access.xml</filename>
+      <folder>language</folder>
+			<filename>index.html</filename>
+		</files>
+    <languages folder="language">
+      <language tag="en-GB">en-GB/en-GB.com_smartslider2.ini</language>
+      <language tag="en-GB">en-GB/en-GB.com_smartslider2.sys.ini</language>
+      <language tag="en-GB">en-GB/en-GB.com_smartslider2.menu.ini</language>
+    </languages>
+	</administration>
+  <updateservers>
+    <server type="extension">http://www.nextendweb.com/update2/joomla/update.php</server>
+  </updateservers>
+</extension>
+

@@ -1,0 +1,5 @@
+<root>
+    <params name="Instagram_Myphotos" label="Filter_by">
+        <param name="Username" type="text" label="Username" />
+    </params>
+</root>

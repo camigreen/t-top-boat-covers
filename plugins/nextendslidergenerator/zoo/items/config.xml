@@ -1,0 +1,33 @@
+<root>
+    <params name="zooitems" label="Filter_by">
+        <param name="zooitemssourcecategories" type="zoocategories" default="0" multiple="1" size="10" label="Category" description="" />
+    </params>
+    <params name="order" label="Order_by">
+        <param name="zooitemsorder1" type="mixed" label="Order_1" default="a.name|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="a.name">Name</option>
+                <option value="a.hits">Hits</option>
+                <option value="a.created">Creation time</option>
+                <option value="a.modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="zooitemsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="a.name">Name</option>
+                <option value="a.hits">Hits</option>
+                <option value="a.created">Creation time</option>
+                <option value="a.modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

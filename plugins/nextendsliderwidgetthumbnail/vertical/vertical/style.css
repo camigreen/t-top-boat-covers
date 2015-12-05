@@ -1,0 +1,170 @@
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1,
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light {
+    width: 320px;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail,
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail{
+    height: 74px;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-vertical-content{
+    width: 200px;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail .nextend-thumbnail-vertical-content h4{
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    box-shadow: none;
+    line-height: 20px;
+}
+
+.nextend-pluginmatrix-panes .nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail .nextend-thumbnail-vertical-content p{
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 12px;
+    color: #fff;
+    box-shadow: none;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #322f2d;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-arrow-top,
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-arrow-bottom{
+    width: 100%;
+    height: 25px;
+    background: url('images/vertical1-arrow.png') no-repeat center 10px;
+    cursor: pointer;
+    border-bottom: #181d20 solid 1px;
+    -webkit-transition: background-color 0.2s ease-out 0s;
+    -moz-transition: background-color 0.2s ease-out 0s;
+    -ms-transition: background-color 0.2s ease-out 0s;
+    -o-transition: background-color 0.2s ease-out 0s;
+    transition: background-color 0.2s ease-out 0s;
+    box-shadow: 0 1px 0px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-arrow-bottom{
+    background-position: center -12px;
+    border-bottom: 0;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-strip-hider{
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-strip{
+    width: 100%;
+    height: 50px;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail{
+    cursor: pointer;
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: #181d20 solid 1px;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+    box-shadow:   0 1px 0px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-vertical-image{
+    float:left;
+    height:100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail .nextend-thumbnail-vertical-content{
+    float:left;
+    height:100%;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail .nextend-thumbnail-vertical-content h4{
+    margin: 10px 0 0 10px !important;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical1 .nextend-thumbnail .nextend-thumbnail-vertical-content p{
+    margin: 5px 0 5px 10px !important;
+}
+
+/* LIGHT */
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #eeede8;    
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-arrow-top,
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-arrow-bottom{
+    width: 100%;
+    height: 25px;
+    background: url('images/vertical-light-arrow.png') no-repeat center 10px;
+    cursor: pointer;
+    border-bottom: #cccccc solid 1px;
+    -webkit-transition: background-color 0.2s ease-out 0s;
+    -moz-transition: background-color 0.2s ease-out 0s;
+    -ms-transition: background-color 0.2s ease-out 0s;
+    -o-transition: background-color 0.2s ease-out 0s;
+    transition: background-color 0.2s ease-out 0s;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-arrow-bottom{
+    background-position: center -12px;
+    border-bottom: 0;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail-strip-hider{
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail-strip{
+    width: 100%;
+    height: 50px;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail{
+    cursor: pointer;
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: #cccccc solid 1px;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+    box-shadow:   0 1px 0px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail-vertical-image{
+    float:left;
+    height:100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.nextend-thumbnail-container.nextend-thumbnail-vertical-vertical-light .nextend-thumbnail .nextend-thumbnail-vertical-content{
+    float:left;
+    height:100%;
+}
+
+.nextend-element .nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-vertical-content p,
+.nextend-element .nextend-thumbnail-vertical-vertical1 .nextend-thumbnail-vertical-content h4{
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+}

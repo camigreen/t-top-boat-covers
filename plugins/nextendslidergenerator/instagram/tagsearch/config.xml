@@ -1,0 +1,6 @@
+<root>
+    <params name="Instagram_tagsearch" label="Filter_by">
+        <param type="text" name="instagramtagsearch" label="Search_by_tag" default="" />
+    </params>
+
+</root>

@@ -1,0 +1,46 @@
+.ttop-receipt-mail {
+    background-color:transparent;
+}
+.ttop-receipt-mail .ttop-receipt-logo {
+    position: absolute;
+    top:40px;
+}
+.ttop-receipt-mail .uk-table, .ttop-receipt-mail td, .ttop-receipt-mail .uk-table th {
+    border: 1px solid #C6C6C6 !important;
+}
+.ttop-receipt-mail .uk-table td, .ttop-receipt-mail .uk-table th {
+    padding: 2px 10px 2px 10px;
+}
+.ttop-receipt-mail th {
+    
+}
+.ttop-receipt th {
+    background-color: #EAEAEA;
+}
+.ttop-receipt .uk-table, .ttop-receipt .uk-table td, .ttop-receipt .uk-table th {
+    padding: 2px 10px 2px 10px !important;
+}
+.ttop-receipt p {
+    margin:0px;
+}
+
+@media print {
+    body {
+        font-size:50% !important;
+    }
+    .ttop-receipt {
+        page-break-inside: avoid;
+    }
+    .tm-top-block, .ttop-checkout-steps, footer, .ttop-checkout-title, .ttop-checkout-printbutton {
+        display:none !important;
+    }
+    .ttop-checkout-printonly {
+        display:block;
+        position: absolute;
+        top:30px;
+        left:50px
+    }
+    td, th {
+        padding:0px !important;
+    }
+}

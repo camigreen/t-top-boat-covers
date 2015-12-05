@@ -1,0 +1,14 @@
+<root>
+    <params name="widgetsautoplay" label="" hidetitle="1">
+        <param name="widgetautoplay" type="subpluginmatrix" label="Autoplay" group="nextendsliderwidgetautoplay" method="autoplay" file="config.xml" default="" />
+        <param type="mixed" label="Display" name="widgetautoplaydisplay" default="0|*|always|*|0|*|0">
+            <param type="onoff" label="Desktop"/>
+            <param type="list" label="Desktop mode" translateable="1">
+                <option value="always">Always</option>
+                <option value="hover">on_Hover</option>
+            </param>
+            <param type="onoff" label="Tablet"/>
+            <param type="onoff" label="Mobile"/>
+        </param>
+    </params>
+</root>

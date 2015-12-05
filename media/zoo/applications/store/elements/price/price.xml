@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="price" group="Store" orderable="true">
+	<name>Price</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>A pricing element.</description>
+	<params>
+            <param name="price_type" type="text" default="" label="Price Type" description="" />
+	</params>
+        <params group="render">
+            <param name="field_width" type="list" default="2" label="Field Width" description="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+            </param>
+            
+        </params>
+</element>

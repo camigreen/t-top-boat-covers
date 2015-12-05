@@ -1,0 +1,17 @@
+<root>
+    <params name="basic" label="Basic parameters">
+        <param name="slider" type="slider" label="Slider" default="" description="Choose the slider."/>
+
+        <param type="onoff" name="showtablet" label="Show on tablets" default="1" />
+        <param name="showcustomtablet" type="mixed" label="Custom slider on tablets" default="0|*|">
+            <param type="onoff" label="Enabled" />
+            <param type="slider" label="Slider" />
+        </param>
+
+        <param type="onoff" name="showmobile" label="Show on mobiles" default="1" />
+        <param name="showcustommobile" type="mixed" label="Custom slider on mobiles" default="0|*|">
+            <param type="onoff" label="Enabled" />
+            <param type="slider" label="Slider" />
+        </param>
+    </params>
+</root>

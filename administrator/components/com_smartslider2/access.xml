@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<access component="com_smartslider2">
+    <section name="component">
+        <action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+        <action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+        <action name="slider.create" title="NEXTEND_SLIDER_CREATE" description="NEXTEND_SLIDER_CREATE_DESC" />
+        <action name="slider.delete" title="NEXTEND_SLIDER_DELETE" description="NEXTEND_SLIDER_DELETE_DESC" />
+        <action name="slider.edit" title="NEXTEND_SLIDER_EDIT" description="NEXTEND_SLIDER_EDIT_DESC" />
+        <action name="slide.create" title="NEXTEND_SLIDE_CREATE" description="NEXTEND_SLIDE_CREATE_DESC" />
+        <action name="slide.delete" title="NEXTEND_SLIDE_DELETE" description="NEXTEND_SLIDE_DELETE_DESC" />
+        <action name="slide.edit" title="NEXTEND_SLIDE_EDIT" description="NEXTEND_SLIDE_EDIT_DESC" />
+        <action name="layout.create" title="NEXTEND_LAYOUT_CREATE" description="NEXTEND_LAYOUT_CREATE_DESC" />
+        <action name="layout.delete" title="NEXTEND_LAYOUT_DELETE" description="NEXTEND_LAYOUT_DELETE_DESC" />
+        <action name="layout.edit" title="NEXTEND_LAYOUT_EDIT" description="NEXTEND_LAYOUT_EDIT_DESC" />
+    </section>
+</access>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="stripe" label="Stripe indicator settings" hidetitle="1">
+        <param type="mixed" name="indicatorposition" label="Position" default="left|*|0|*|%|*|bottom|*|0|*|px">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="text" name="indicatorwidth" label="Width" default="100%" />
+        <param type="cssimagelist" name="indicatorstripe" label="Stripe" folder="stripe"
+               prefix="nextend-indicator nextend-indicator-stripe nextend-indicator-stripe-" default="dark.png">
+            <![CDATA[<div class="nextend-indicator-stripe-container"><div class="{class}"></div></div>]]>
+        </param>
+
+        <param type="text" name="indicatorstripeheight" label="Stripe_height" default="6" style="width:50px;">
+            <unit>px</unit>
+        </param>
+        <param type="color" name="indicatorstripecolor" label="Stripe_color" alpha="1" default="000000cc" />
+        <param type="color" name="backgroundstripecolor" label="Stripe_background_color" alpha="1" default="7670c7ff" />
+    </params>
+</root>

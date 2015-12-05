@@ -1,0 +1,42 @@
+<root>
+    <params name="easyblogitems" label="Filter_by">
+        <param name="easyblogcategories" label="Source_category" type="easyblogcategories" default="0" multiple="1" size="10" />
+        <param name="easybloguserid" label="User" type="text" default=""/>
+		<param name="easyblogpublished" label="Published" type="onoff" default="1"/>
+		<param name="easyblogfrontpage" label="Front page" type="onoff" default="1"/>
+    </params>
+	
+	<params name="order" label="Order_by">
+        <param name="easyblogorder1" type="mixed" label="Order_1" default="con.title|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.title">Title</option>
+                <option value="cattitle">Category title</option>
+                <option value="blogger">Username</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.created">Creation time</option>
+                <option value="con.modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="easyblogorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="con.title">Title</option>
+                <option value="cattitle">Category title</option>
+                <option value="blogger">Username</option>
+                <option value="con.ordering">Ordering</option>
+                <option value="con.created">Creation time</option>
+                <option value="con.modified">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+    
+</root>

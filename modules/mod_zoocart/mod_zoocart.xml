@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site">
+    <name>ZOO Shopping Cart</name>
+    <author>Shawn Gibbons</author>
+    <version>1.0.0</version>
+    <creationDate>September 2014</creationDate>
+    <description>Shopping Cart module for ZOO developed by Shawn Gibbons (http://www.palmettoimages.com)</description>
+    <files>
+        <filename module="mod_zoocart">mod_zoocart.php</filename>
+        <filename>helper.php</filename>
+        <folder>tmpl</folder>
+        <folder>fields</folder>
+    </files>
+    <config>
+        <fields name="params" >
+                <fieldset name="basic" addfieldpath="/modules/mod_zoocart/fields">
+                        <field name="layout" type="filename" default="" label="Layout" description="The Item Layout" path="/tmpl/" />
+                        <field name="application" type="hidden" default="1" />
+                </fieldset>
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,5 @@
+<root>
+    <params name="youtube_bysearch" label="YouTube_videos_by_search">
+        <param name="youtubesearch" label="Search_term" type="text" default=""  />
+    </params>
+</root>

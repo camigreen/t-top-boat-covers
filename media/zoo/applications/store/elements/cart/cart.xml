@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="cart" group="Store" orderable="true">
+	<name>Shopping Cart</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>An add to cart button.</description>
+	<params>
+            <param name="payment_api" type="radio" default="static" label="Payment API" description="Javascript API to payment solution">
+                    <option value="paypal">Pay Pal</option>
+                    <option value="first_data">First Data</option>
+            </param>
+	</params>
+</element>

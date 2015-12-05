@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="itemoptions" group="Store" orderable="true">
+	<name>User Options</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>August 2014</creationDate>
+	<copyright>Copyright (C) Shawn Gibbons</copyright>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+	<version>1.0</version>
+	<description>A list of options to be used as a drop down.</description>
+	<params>
+        </params>
+        <params group="render">
+            <param name="field_width" type="list" default="2" label="Field Width" description="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+            </param>
+            <param name="required" type="radio" default="0" label="Required" description="Is this field Required?">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+            </param>
+        </params>
+</element>

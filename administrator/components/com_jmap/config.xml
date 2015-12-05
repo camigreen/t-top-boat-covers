@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+  	<fieldset name="preferences" id="preferences" label="COM_JMAP_SITEMAP_PREFERENCES">
+  		<field type="spacer" class="label label-info spacer" label="COM_JMAP_PREFERENCES"/>
+	 	<field name="show_title" class="btn-group pivno" type="radio" default="1" label="COM_JMAP_SHOWMAINTITLE" description="COM_JMAP_SHOWMAINTITLE_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	  	<field name="defaulttitle" size="40" type="text" default="" label="COM_JMAP_COMPONENTTITLE" description="COM_JMAP_COMPONENTTITLE_DESC" />
+		<field name="headerlevel" class="btn-group" type="radio" default="1" label="COM_JMAP_HEADERLEVEL" description="COM_JMAP_HEADERLEVEL_DESC">
+			<option value="1">h1</option>
+			<option value="2">h2</option>
+			<option value="3">h3</option>
+			<option value="4">h4</option>
+			<option value="5">h5</option>
+		</field>
+	  	<field name="classdiv" type="text" default="sitemap" label="COM_JMAP_CLASSFORDIV" description="COM_JMAP_CLASSFORDIV_DESC" />
+	  	<field name="show_pagebreaks" class="btn-group" type="radio" default="0" label="COM_JMAP_SHOW_CONTENT_PAGEBREAKS" description="COM_JMAP_SHOW_CONTENT_PAGEBREAKS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="opentarget" class="btn-group" type="radio" default="_self" label="COM_JMAP_OPEN_TARGET" description="COM_JMAP_OPEN_TARGET_DESC">
+			<option value="_self">COM_JMAP_SELF_WINDOW</option>
+			<option value="_blank">COM_JMAP_BLANK_WINDOW</option>       
+			<option value="_parent">COM_JMAP_PARENT_WINDOW</option>            
+		</field>
+		<field name="include_external_links" class="btn-group" type="radio" default="1" label="COM_JMAP_INCLUDE_EXTERNAL_LINKS" description="COM_JMAP_INCLUDE_EXTERNAL_LINKS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>              
+		</field>
+  	</fieldset>
+  
+	<fieldset name="aspect" id="aspect" label="COM_JMAP_SITEMAP_ASPECT">
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_TEMPLATE_HTML"/>
+		<field name="sitemap_html_template" type="list" default="" label="COM_JMAP_HTML_TEMPLATE" description="COM_JMAP_HTML_TEMPLATE_DESC">
+			<option value="">COM_JMAP_TMPL_DEFAULT</option>
+			<option value="modern">COM_JMAP_TMPL_MODERN</option>       
+			<option value="dynamic">COM_JMAP_TMPL_DYNAMIC</option>
+			<option value="led">COM_JMAP_TMPL_LED</option>             
+			<option value="large">COM_JMAP_TMPL_LARGE</option>
+		</field>
+		<field name="show_icons" class="btn-group" type="radio" default="1" label="COM_JMAP_SHOW_ICONS" description="COM_JMAP_SHOW_ICONS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_RENDERING"/>
+	 	<field name="show_expanded" class="btn-group" type="radio" default="0" label="COM_JMAP_SHOW_EXPANDED" description="COM_JMAP_SHOW_EXPANDED_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="expand_location" class="btn-group" type="radio" default="location" label="COM_JMAP_EXPAND_CURRENT_MENU_FOLDER" description="COM_JMAP_EXPAND_CURRENT_MENU_FOLDER_DESC">
+			<option value="none">COM_JMAP_JMAPCOLLAPSE</option>
+			<option value="location">COM_JMAP_JMAPEXPAND</option>
+		</field>
+		<field name="column_sitemap" class="btn-group" type="radio" default="0" label="COM_JMAP_COLUMN_SITEMAP" description="COM_JMAP_COLUMN_SITEMAP_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="multilevel_categories" class="btn-group" type="radio" default="0" label="COM_JMAP_MULTILEVEL_CATEGORIES" description="COM_JMAP_MULTILEVEL_CATEGORIES_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+	</fieldset>
+	
+	<fieldset name="caching" id="caching" label="COM_JMAP_SITEMAP_CACHING_SPLITTING">
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_CACHE_STANDARD"/>
+		<field name="enable_view_cache" type="radiocache" default="0" label="COM_JMAP_CACHE" description="COM_JMAP_CACHE_DESC">
+			<option value="1">JENABLED</option>
+			<option value="0">JDISABLED</option>
+		</field>
+		<field name="lifetime_view_cache" type="list" default="1" label="COM_JMAP_LIFETIME_CACHE" description="COM_JMAP_LIFETIME_CACHE_DESC">
+			<option value="1">COM_JMAP_1DAY</option>       
+			<option value="3">COM_JMAP_3DAYS</option>   
+			<option value="7">COM_JMAP_1WEEK</option>   
+			<option value="15">COM_JMAP_2WEEKS</option>  
+			<option value="30">COM_JMAP_1MONTH</option>  
+			<option value="99999">COM_JMAP_USE_ALWAYS</option>
+		</field>
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_PRECACHING_AJAX"/>
+		<field name="enable_precaching" type="radiocache" default="0" cachetype="PRE" label="COM_JMAP_PRECACHING_ENABLED" description="COM_JMAP_PRECACHING_ENABLED_DESC">
+			<option value="1">JENABLED</option>
+			<option value="0">JDISABLED</option>
+		</field>
+	  	<field name="precaching_limit_xml" type="text" default="5000" label="COM_JMAP_PRECACHING_LIMIT_XML" description="COM_JMAP_PRECACHING_LIMIT_XML_DESC" />
+	  	<field name="precaching_limit_images" type="text" default="50" label="COM_JMAP_PRECACHING_LIMIT_IMAGES" description="COM_JMAP_PRECACHING_LIMIT_IMAGES_DESC" />
+	  	<field type="spacer" class="label label-info spacer" label="COM_JMAP_SPLITTING"/>
+		<field name="split_sitemap" class="btn-group" type="radio" default="0" label="COM_JMAP_SPLIT_SITEMAP" description="COM_JMAP_SPLIT_SITEMAP_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>              
+		</field>
+		<field name="split_chunks" type="text" default="50000" label="COM_JMAP_SPLITCHUNKS" description="COM_JMAP_SPLITCHUNKS_DESC" />
+	</fieldset>
+	
+	<fieldset name="advanced" id="advanced" label="COM_JMAP_SITEMAP_ADVANCED_SETTINGS" addfieldpath="/administrator/components/com_jmap/framework/html">
+	 	<field type="spacer" class="label label-info spacer" label="COM_JMAP_GNEWS_SITEMAP"/>
+	 	<field name="gnews_publication_name" type="text" default="" size="50" label="COM_JMAP_GNEWS_PUBLICATION_NAME" description="COM_JMAP_GNEWS_PUBLICATION_NAME_DESC" />
+	 	<field name="gnews_limit_recent" class="btn-group" type="radio" default="0" label="COM_JMAP_GNEWS_LIMIT_RECENT" description="COM_JMAP_GNEWS_LIMIT_RECENT_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="gnews_limit_valid_days" type="text" default="2" label="COM_JMAP_GNEWS_LIMIT_VALID_DAYS" description="COM_JMAP_GNEWS_LIMIT_VALID_DAYS_DESC" />
+		
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_IMAGES_SITEMAP"/>
+		<field name="imagetitle_processor" class="btn-group" type="radio" default="title|alt" label="COM_JMAP_IMAGETITLE_PROCESSOR" description="COM_JMAP_IMAGETITLE_PROCESSOR_DESC">
+			<option value="title|alt">COM_JMAP_TITLE_ALT</option>
+			<option value="title">COM_JMAP_ALWAYS_TITLE</option>
+			<option value="alt">COM_JMAP_ALWAYS_ALT</option>
+		</field>
+		<field name="max_images_requests" type="list" default="50" label="COM_JMAP_LIMIT_IMAGES_SITEMAP_REQUESTS" description="COM_JMAP_LIMIT_IMAGES_SITEMAP_REQUESTS_DESC">
+			<option value="0">COM_JMAP_LIMIT_IMAGES_SITEMAP_REQUESTS_UNLIMITED</option>
+			<option value="2000">2000 ~60 min</option>  
+			<option value="1000">1000 ~30 min</option>  
+			<option value="750">750 ~20 min</option>      
+			<option value="500">500 ~15 min</option>      
+			<option value="350">350 ~10 min</option> 
+			<option value="200">200 ~5 min</option>   
+			<option value="100">100 ~2 min</option>   
+			<option value="50">50 ~60 sec</option>       
+			<option value="40">40 ~50 sec</option>       
+			<option value="30">30 ~40 sec</option>       
+			<option value="20">20 ~30 sec</option>       
+			<option value="10">10 ~20 sec</option>       
+		</field>
+		
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_MISC_ACL"/>
+	 	<field name="include_archived" class="btn-group" type="radio" default="0" label="COM_JMAP_INCLUDE_ARCHIVED_CONTENTS" description="COM_JMAP_INCLUDE_ARCHIVED_CONTENTS_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		<field name="disable_acl" class="btn-group" type="radio" default="enabled" label="COM_JMAP_DISABLE_ACL" description="COM_JMAP_DISABLE_ACL_DESC">
+			<option value="enabled">JENABLED</option>
+			<option value="disabled">JDISABLED</option>
+		</field>
+		<field name="showalways_language_dropdown" class="btn-group" type="radio" default="" label="COM_JMAP_SHOWALWAYS_LANGUAGE_DROPDOWN" description="COM_JMAP_SHOWALWAYS_LANGUAGE_DROPDOWN_DESC">
+			<option value="">COM_JMAP_AUTODETECT</option>
+			<option value="1">COM_JMAP_SHOW_ALWAYS</option>
+		</field>
+		<field name="lists_limit_pagination" type="list" default="10" label="COM_JMAP_LISTS_LIMIT_PAGINATION" description="COM_JMAP_LISTS_LIMIT_PAGINATION_DESC">
+			<option value="5">J5</option>
+			<option value="10">J10</option>
+			<option value="15">J15</option>
+			<option value="20">J20</option>
+			<option value="25">J25</option>
+			<option value="30">J30</option>
+			<option value="50">J50</option>
+			<option value="100">J100</option> 
+		</field>
+		
+		<field type="spacer" class="label label-info spacer" label="COM_JMAP_ADVANCED"/>
+		<field name="sitemap_links_sef" class="btn-group" type="radio" default="0" label="COM_JMAP_ENABLE_SITEMAP_SEF_LINKS" description="COM_JMAP_ENABLE_SITEMAP_SEF_LINKS_DESC">
+   			<option value="0">JNO</option>              
+   			<option value="1">JYES</option>
+   		</field>
+   		<field name="append_livesite" class="btn-group" type="radio" default="1" label="COM_JMAP_APPEND_LIVESITE" description="COM_JMAP_APPEND_LIVESITE_DESC">
+   			<option value="0">JNO</option>              
+   			<option value="1">JYES</option>
+   		</field>
+   		<field name="includejquery" class="btn-group" type="radio" default="1" label="COM_JMAP_INCLUDE_JQUERY" description="COM_JMAP_INCLUDE_JQUERY_DESC">
+			<option value="0">JNO</option>              
+			<option value="1">JYES</option>
+		</field>
+		<field name="enable_debug" class="btn-group" type="radio" default="0" label="COM_JMAP_ENABLE_DEBUG" description="COM_JMAP_ENABLE_DEBUG_DESC">
+   			<option value="0">JNO</option>              
+   			<option value="1">JYES</option>
+   		</field>
+	</fieldset>
+	
+	<fieldset name="permissions" id="permissions" label="COM_JMAP_PERMISSIONS">
+		<field name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			validate="rules"
+			filter="rules"
+			component="com_jmap"
+			section="component" />
+ 	</fieldset>
+</config>

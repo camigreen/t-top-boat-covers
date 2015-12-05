@@ -1,0 +1,129 @@
+.nextend-autoplay-image {
+    cursor: pointer;
+    z-index: 11;
+    overflow: hidden;
+    position: relative;
+}
+
+.nextend-autoplay-cream {
+    background-image: url('play/cream.png');
+    width: 40px;
+    height: 40px;
+    background-position: 0 40px;
+}
+
+.nextend-autoplay-cream.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-cream-button {
+    background-image: url('play/cream-button.png');
+    width: 40px;
+    height: 40px;
+    background-position: 0 40px;
+}
+
+.nextend-autoplay-cream-button.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-dark-opacity {
+    background-image: url('play/dark-opacity.png');
+    width: 40px;
+    height: 40px;
+    background-position: 0 40px;
+}
+
+.nextend-autoplay-dark-opacity.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-dark {
+    background-image: url('play/dark.png');
+    width: 40px;
+    height: 40px;
+    background-position: 0 40px;
+}
+
+.nextend-autoplay-dark.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-dark-button {
+    background-image: url('play/dark-button.png');
+    width: 26px;
+    height: 26px;
+    background-position: 0 26px;
+}
+
+.nextend-autoplay-dark-button.paused{
+    background-position: 0 0;
+}
+
+
+.nextend-autoplay-dark-button-opacity {
+    background-image: url('play/dark-button-opacity.png');
+    width: 26px;
+    height: 26px;
+    background-position: 0 26px;
+}
+
+.nextend-autoplay-dark-button-opacity.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-cream-button-minii {
+    background-image: url('play/cream-button-minii.png');
+    width: 26px;
+    height: 26px;
+    background-position: 0 26px;
+}
+
+.nextend-autoplay-cream-button-minii.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-simple {
+    background-image: url('play/simple.png');
+    width: 26px;
+    height: 26px;
+    background-position: 0 26px;
+}
+
+.nextend-autoplay-simple.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-simple-light {
+    background-image: url('play/simple-light.png');
+    width: 26px;
+    height: 26px;
+    background-position: 0 26px;
+}
+
+.nextend-autoplay-simple-light.paused{
+    background-position: 0 0;
+}
+
+.nextend-autoplay-mini-light {
+    background-image: url('play/mini-light.png');
+    width: 11px;
+    height: 11px;
+    background-position: 0 11px;
+}
+
+.nextend-autoplay-mini-light.paused{
+    background-position: 0 0;
+}
+
+
+.nextend-autoplay-mini-dark {
+    background-image: url('play/mini-dark.png');
+    width: 11px;
+    height: 11px;
+    background-position: 0 11px;
+}
+
+.nextend-autoplay-mini-dark.paused{
+    background-position: 0 0;
+}

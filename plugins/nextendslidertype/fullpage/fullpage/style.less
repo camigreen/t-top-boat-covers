@@ -1,0 +1,84 @@
+@import 'elements.less';
+@import 'fade.less';
+@import 'slide.less';
+@import 'clear.less';
+
+(~'div@{id}') {
+  width: @width;
+  height: @height;
+  float: left;
+  margin: 0;
+  
+  .x-rtl &{
+      float: right;
+  }
+
+  .smart-slider-border1 {
+    position: relative;
+    height: @inner1height;
+    overflow: hidden;
+    background-repeat: repeat;
+    background-position: 0 0;
+    background-size: @bgsize;
+  }
+
+  .smart-slider-border2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .border-radius(@tr, @br, @bl, @tl);
+    overflow: hidden;
+  }
+  
+  .x-firefox & .smart-slider-border2{
+      opacity: 0.99999;
+  }
+
+  .smart-slider-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @canvaswidth;
+    height: @canvasheight;
+    z-index: 2;
+    opacity: 0;
+    display: block;
+  }
+
+  .smart-slider-canvas-inner {
+    position: relative;
+    width: @canvaswidth;
+    height: @canvasheight;
+  }
+
+  .smart-slider-slide-animate {
+    z-index: 3;
+  }
+
+  .smart-slider-slide-active {
+    z-index: 4;
+    opacity: 1;
+  }
+
+  .smart-slider-layer {
+    position: absolute;
+  }
+  
+  .nextend-flux{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      img{
+          max-width: none !important;
+          opacity: 0.999;
+      }
+  }
+  
+  .current{ /* Required for flux!!! */
+      border: 0;
+      padding: 0;
+  }
+}

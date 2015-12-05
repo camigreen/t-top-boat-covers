@@ -1,0 +1,40 @@
+<extension type="module" version="1.5.0" method="upgrade" client="site">
+  <name>Smart Slider 2</name>
+  <author>Roland Soos</author>
+  <copyright>Copyright (C) Nextendweb.com</copyright>
+  <authorEmail>roland@nextendweb.com</authorEmail>
+  <authorUrl>http://www.nextendweb.com</authorUrl>
+  <version>2.3.13</version>
+  <description>The module displays sliders from Smart Slider 2. You can create the sliders in the Smart Slider 2 component!</description>
+  <params addPath="/libraries/nextend/joomla/elements">
+    <param name="config" type="configurator" identifier="smartslider" manual="http://www.nextendweb.com/wiki/smart-slider-documentation/" support="http://www.nextendweb.com/smart-slider/#support" label="" xml="/modules/mod_smartslider2/configuration.xml" />
+  </params>
+  <params group="advanced">
+      <param name="cache" type="hidden" default="0" />
+      <param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" />
+  </params>
+  <config>
+    <fields name="params" addfieldpath="/libraries/nextend/joomla/fields">
+      <fieldset name="basic">
+        <field name="config" type="configurator" identifier="smartslider" manual="http://www.nextendweb.com/wiki/smart-slider-documentation/" support="http://www.nextendweb.com/smart-slider/#support" label="" xml="/modules/mod_smartslider2/configuration.xml" />
+      </fieldset>
+      <fieldset name="advanced">
+          <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+          <field name="cache" type="hidden" default="0" />
+          <field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+          <field name="cachemode" type="hidden" default="itemid">
+              <option value="itemid"></option>
+          </field>
+      </fieldset>
+    </fields>
+  </config>
+  <creationDate>2013-10-01</creationDate>
+  <license>http://www.gnu.org/licenses/gpl-3.0.txt GNU/GPL</license>
+  <releaseDate>2013-10-01</releaseDate>
+  <files>
+    <filename module="mod_smartslider2">mod_smartslider2.php</filename>
+    <filename>mod_smartslider2.xml</filename>
+    <filename>configuration.xml</filename>
+    <filename>index.html</filename>
+  </files>
+</extension>

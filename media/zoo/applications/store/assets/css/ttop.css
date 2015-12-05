@@ -1,0 +1,444 @@
+/* 
+    Document   : ttop
+    Created on : Oct 9, 2014, 10:03:08 AM
+    Author     : Shawn
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+.tabs {
+  	background-color: #8494A5;
+	color: white;
+	padding: 10px;
+  	border-radius:5px;
+}
+
+.tabs:hover {
+  	background-color: #232F3C;
+  	font-weight: bold;
+}
+
+.uk-form legend {
+    padding-bottom:0px !important;
+}
+.product .uk-panel {
+    /*color: yellow !important;*/
+}
+.product:hover .uk-panel {
+    background-color: #244379;
+    /*color: yellow;*/
+    font-weight: bold;
+    
+}
+.product {
+
+}
+.product .buttons {
+    position: relative;
+    top: -25px;
+}
+.product-container {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding:5px;
+}
+.zoo-gallery-wall {
+    margin-top:10px !important;
+}
+.zoo-gallery-wall .thumb {
+    border: 1px solid rgba(0, 0, 0, 0.19);
+}
+.frontpage-title-product {
+    
+}
+
+.ttop-related label {
+    font-size:18px;
+}
+.ttop-related .ttop-related-button {
+    margin-top:10px;
+}
+
+
+/*T-Top Template Styling*/
+
+.ttop {
+}
+.ttop .price {
+    font-size: 50px;
+    line-height:53px;
+    font-weight: 500;
+    margin-bottom:10px;
+}
+.ttop .currency {
+    font-family: FontAwesome;
+    display: inline-block;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-right: 20px;
+    font-size:23px;
+    vertical-align: top;
+}
+.ttop .currency:before {
+    content: "\f155";
+}
+
+/*T-Top Type Styling*/
+
+.ttop .accessories {
+    
+}
+.ttop .uk-button {
+    border-radius: 5px;
+    padding: 0px 15px;
+    color: #FAFAFA;
+}
+.ttop h1, .ttop h2, .ttop h3{
+    color:#1c3767;
+}
+
+/*T-Top Accessories Related Styling*/
+
+.ttop .accessories.related {
+    margin-top: 10px;
+}
+.ttop .accessories.related p {
+    margin-bottom:5px;
+}
+.ttop .accessories.related .button a {
+    color:#1C38EB;
+    font-size:15px;
+}
+.ttop .accessories.related .button a:nth-child(2) {
+    margin-left:20px;
+}
+
+/*T-Top Accessories Related Modal Styling*/
+
+.ttop .accessories .accessories-related-modal .cart {
+    line-height: 1em;
+}
+.ttop .accessories .accessories-related-modal .currency {
+    font-size:25px;
+    
+}
+.ttop .accessories .accessories-related-modal .price {
+    font-size:30px;
+}
+.ttop .uk-icon-button {
+    line-height:23px;
+/*    height: 0;*/
+}
+.validation-fail:not(.ignore) {
+    border-color: #FF0039 !important;
+    background: rgba(255, 0, 41, 0.31) !important;
+    color: #131212 !important;
+    font-weight: 900 !important;
+}
+.uk-form-file {
+    position: relative;
+}
+.uk-form-file input[type="file"] {
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    left: 0px;
+    font-size: 500px;
+}
+.uk-placeholder {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px dashed #DDD;
+    background: none repeat scroll 0% 0% #FAFAFA;
+    color: #444;
+    width: 200px;
+    height: 200px;
+}
+* + .uk-placeholder {
+    margin-top: 15px;
+}
+.uk-placeholder img{
+    max-height: 100%;
+}
+.uk-placeholder em {
+    font-size: 4rem;
+}
+
+.bsk-chooser .full-pic .active img {
+    display: block;
+}
+
+.bsk-chooser .full-pic img {
+    display: none;
+}
+
+.ttop .bsk-type {
+    display:none;
+}
+
+.ttop li.active .bsk-button {
+    background-color: #1C3767;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    border-radius: 7px;
+}
+
+.ttop .bsk-button:hover  {
+    background-color: #B7B7B7;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #FFF;
+    border-radius: 7px;
+}
+
+.ttop .bsk-type.active {
+    display:block;
+}
+.ttop .ubsk-measurements {
+    display:block;
+}
+.ttop .ccc-measurements {
+    display:block;
+}
+
+.cc {
+    position: relative;
+}
+.cc-img{
+    height: 38px;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    width: 60px;
+    background-image: url("/images/cc/all_cards.png");
+    background-position: 60px 38px;
+}
+.cc-img.visa {
+    background-position: 0px 0px;
+}
+.cc-img.discover {
+    background-position: 60px 0px;
+}
+.cc-img.mastercard {
+    background-position: 0px 76px;
+}
+.cc-img.american_express {
+    background-position: 60px 76px;
+}
+.cc-img.generic {
+    background-position: 0px 38px;
+}
+.cc-img.none {
+    background-position: 60px 38px;
+}
+input[type="text"] {
+    width:100%;
+}
+.loader.uk-icon-spin {
+    display:none;
+    position: absolute;
+    top: 5px;
+    left: 19px;
+    z-index: 1;
+    font-size: 28px;
+}
+
+/*Checkout*/
+.ttop-checkout {
+    
+}
+
+.ttop-checkout-printonly {
+    display:none;
+}
+
+
+
+
+.ttop-checkout .ttop-checkout-progress {
+    font-size: 18px;
+    color:white;
+}
+.ttop-checkout .ttop-checkout-progress div {
+    padding: 10px;
+    border-radius: 6px;
+}
+.ttop-checkout .ttop-checkout-progress .inProgress {
+    background-color: #007D00;
+}
+.ttop-checkout .ttop-checkout-progress .complete {
+    background-color:#1C3767;
+}
+.ttop-checkout .ttop-checkout-progress .incomplete {
+    background-color:#909090;
+}
+.ttop-checkout .ttop-checkout-progress div, .ttop-checkout .ttop-checkout-progress i {
+    line-height: 25px;
+}
+
+.ttop-checkout .ttop-checkout-validation-errors {
+    color: red;
+}
+
+.ttop-checkout .uk-icon-trash {
+    color: #70819E;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ttop-checkout .uk-icon-trash:hover {
+    color: #1C3767;
+}
+
+/*Receipt*/
+
+.ttop-reciept
+
+.ttop-receipt {
+    font: 16px/24px "Lato";
+}
+.ttop-receipt .data-title {
+    font: 600 16px/24px "Lato";
+}
+.ttop-receipt h4 {
+    color:#1C3767;
+}
+.ttop-checkout .ttop-checkout-pagetitle {
+    position: relative;
+}
+.ttop-checkout .ttop-checkout-printbutton {
+
+}
+
+.ttop .ttop-related-modal {
+}
+
+.ttop .ttop-related-modal .ttop-related-modal-header {
+    margin: -23px -20px 15px;
+    padding: 25px 0px 25px 25px;
+    border-bottom: 1px solid #E5E5E5;
+    border-radius: 4px 4px 0px 0px;
+    background: none repeat scroll 0% 0% #FAFAFA;
+}
+.ttop .ttop-related-modal .ttop-related-modal-footer {
+    padding: 25px 0px 15px 25px;
+    border-radius: 0px 0px 4px 4px;
+    background: none repeat scroll 0% 0% #FAFAFA;
+    margin: 15px -20px -23px;
+    border-top: 1px solid rgb(229, 229, 229);
+}
+.ttop .ttop-related-modal h2 {
+    font-size: 50px;
+    font-weight: 200;
+    line-height: 40px;
+    
+}
+.ttop .ttop-related-modal > .uk-close:first-child {
+    margin: -30px -30px 0px 0px;
+    float: right;
+}
+.ttop-checkout .ttop-checkout-processing-modal .uk-modal-dialog {
+    min-height:150px;
+    width: 350px;
+}
+.ttop-checkout .ttop-checkout-processing-modal .ttop-checkout-processing-modal-content span {
+    font-size:30px;
+}
+.ttop-checkout .ttop-checkout-processing-modal i {
+    margin-right: 5px;
+}
+.ttop-checkout .ttop-checkout-item-name {
+    font-size: 1.2em;
+}
+.ttop-checkout .ttop-checkout-item-description {
+    font-size:1em;
+    font-weight:200;
+    margin-left:30px;
+}
+.ttop-checkout .ttop-checkout-item-description p{
+    margin: 0px;
+}
+.ttop-checkout .ttop-checkout-item-qty {
+    text-align: center;
+    vertical-align: top;
+}
+.ttop-checkout .ttop-checkout-item-total {
+    text-align: center;
+    vertical-align: top;
+}
+.ttop-checkout table tbody tr, .ttop-checkout table thead tr  {
+    border:1px solid #EAEAEA;
+}
+.ttop-checkout table tfoot td{
+    border:none;
+}
+
+.ttop-checkout .ttop-checkout-total {
+    font-size: 25px;
+    font-weight: 300;
+}
+.ttop.ttop-item .uk-tab li > a {
+    border-radius: 10px 10px 0px 0px;
+}
+.ttop.ttop-item .uk-tab li:not(.uk-active) > a {
+    background-color: #E7E7E7;
+    border-color: #B9B9B9;
+    box-shadow: 9px 0px 8px -4px #939393 inset;
+}
+.ttop.ttop-item .uk-tab li:not(.uk-active):first-child > a {
+    background-color: #E7E7E7;
+    border-color: #B9B9B9;
+    box-shadow: 9px 0px 8px -4px #939393 inset;
+}
+.ttop.ttop-item .uk-tab li:not(.uk-active):hover > a {
+    background-color: #B0B0B0;
+}
+.ttop-checkout a:not(.uk-button), .ttop-checkout:not(.uk-navbar a), .ttop-checkout:not(input.uk-button) {
+    color: #183FC3;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ttop-checkout .testing-mode {
+    font-size: 45px;
+}
+
+.ttop-checkout .ttop-checkout-item-options .options-list li {
+    margin-left: 10px;
+}
+.ttop-checkout .ttop-checkout-item-options .options-list .option-text {
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.order-table {
+    font-size: .8em;
+}
+.order-table .uk-button {
+    line-height: 30px;
+    min-height: 30px;
+}
+.ttop-checkout .uk-button
+
+/* Confirm Modal */
+
+.ttop #confirm-modal .item-options .item-options-text {
+    font-weight: 400;
+}
+
+/* Orders */
+
+tr.overdue {
+    background:#FF7676 none repeat scroll 0% 0% !important;
+}
+
+tr.overdue:hover {
+    background:#FF2D2D none repeat scroll 0% 0% !important;
+}

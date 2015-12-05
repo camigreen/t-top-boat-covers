@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="pie" label="Pie indicator settings" hidetitle="1">
+        <param type="mixed" name="indicatorposition" label="Position" default="right|*|5|*|%|*|top|*|5|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;"/>
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="imagelistfromfolder" name="indicatorskin" label="Skin" folder="pie" default="default.png" />
+        <param type="mixed" name="indicatorcolor" label="Color" default="ffffffff|*|00000080">
+            <param type="color" label="Foreground" alpha="1" />
+            <param type="color" label="Background" alpha="1" />
+        </param>
+        <param type="text" name="indicatorsize" label="Size" default="25" style="width: 50px;">
+            <unit>px</unit>
+        </param>
+        <param type="text" name="indicatorthickness" label="Thickness" default="0.5" style="width: 50px;">
+                <unit>point</unit>
+        </param>
+        <param type="list" name="indicatorlinecap" label="Linecap" default="butt">
+            <option value="butt">Default</option>
+            <option value="round">Round</option>
+        </param>
+    </params>
+</root>

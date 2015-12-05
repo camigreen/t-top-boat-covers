@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <params name="colored" label="Colored settings" hidetitle="1">
+        <param type="mixed" name="barcoloredposition" label="Position" default="left|*|0|*|%|*|top|*|0|*|%">
+            <param type="list" label="Horizontal" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+
+            <param type="list" label="Vertical" mixedstyle="clear: both;" style="width:70px;" translateable="1">
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </param>
+            <param type="text" label="position" style="width:50px;" />
+            <param type="switcher" label="unit">
+                <unit value="px">px</unit>
+                <unit value="%">percent</unit>
+            </param>
+        </param>
+        <param type="cssimagelist" name="barcolored" label="Bar" folder="colored"
+               prefix="nextend-bar nextend-bar-c nextend-bar-c-" default="colored.png">
+            <![CDATA[<div class="{class}"><h6>Title</h6><p>Here comes the description</p><div style="clear: both;"></div></div>]]>
+        </param>
+        <param name="barcoloredwidth" type="text" label="Width" default="100" style="width:50px;">
+            <unit>percent</unit>
+        </param>
+        <!--<param name="barcoloredheight" type="text" label="Height" default="70" style="width:50px;">
+            <unit>px</unit>
+        </param>-->
+        <param name="barcoloredpadding" type="text" label="Padding" default="1" style="width:50px;">
+            <unit>percent</unit>
+        </param>
+        <param type="mixed" name="barcoloredborderradius" default="0|*|0|*|0|*|0" label="Border_radius">
+            <param type="text" style="width: 30px;" label="TL">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="TR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BL">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param name="barcoloredtitlefont" type="fontmatrixchooser" label="Title_font" default="sliderfont5" />
+        <param name="barcoloreddescriptionfont" type="fontmatrixchooser" label="Description_font" default="sliderfont7" />        
+        <param name="barbackground" type="color" label="Background" alpha='1' default="00000080" />        
+                
+    </params>
+</root>

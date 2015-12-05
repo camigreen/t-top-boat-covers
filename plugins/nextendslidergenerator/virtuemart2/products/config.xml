@@ -1,0 +1,43 @@
+<root>
+    <params name="virtuemartproducts" label="Filter_by">
+        <param name="virtuemartproductssourcecategory" label="Source_category" type="virtuemartcategories" default="0" multiple="1" size="10" />
+        <param name="virtuemartproductssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="virtuemartproductssourcespecial" label="Special" type="onoff" default="0"/>
+        <param name="virtuemartproductssourceinstock" label="In_stock" type="onoff" default="0"/>
+        <param name="virtuemartproductssourcelanguage" label="Language_filter" type="text" default="en_gb"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="virtuemartproductsorder1" type="mixed" label="Order_1" default="prod_ext.product_name|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="prod_ext.product_name">Product name</option>
+                <option value="cat.category_name">Category title</option>
+                <option value="prod.product_special">Special</option>
+                <option value="prod.pordering">Ordering</option>
+                <option value="prod.hits">Hits</option>
+                <option value="prod.created_on">Creation time</option>
+                <option value="prod.modified_on">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="virtuemartproductsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="prod_ext.product_name">Product name</option>
+                <option value="cat.category_name">Category title</option>
+                <option value="prod.product_special">Special</option>
+                <option value="prod.pordering">Ordering</option>
+                <option value="prod.hits">Hits</option>
+                <option value="prod.created_on">Creation time</option>
+                <option value="prod.modified_on">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>

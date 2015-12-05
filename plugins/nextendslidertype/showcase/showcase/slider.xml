@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root translate="smartslider">
+    <params name="showcaseslidertype" label="Showcase_slider_type_settings">
+        <param type="mixed" name="showcaseslidesize" default="600|*|400" label="Canvas_size">
+            <param type="text" style="width: 30px;" label="Width">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Height">
+                <unit>px</unit>
+            </param>
+        </param>
+        
+        <param type="image" name="showcasebackgroundimage" default="" label="Background_image"/>
+        <param type="text" name="showcasebackgroundimagesize" default="auto" label="Background_size"/>
+        <param type="mixed" name="showcasepadding" default="0|*|0|*|0|*|0" label="Padding">
+            <param type="text" style="width: 30px;" label="Top">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Right">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Bottom">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="Left">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="showcaseborder" default="0|*|3E3E3Eff" label="Border">
+            <param type="text" style="width: 30px;" label="Width">
+                <unit>px</unit>
+            </param>
+            <param type="color" alpha='1' label="Color"/>
+        </param>
+        <param type="mixed" name="showcaseborderradius" default="0|*|0|*|0|*|0" label="Border_radius">
+            <param type="text" style="width: 30px;" label="TL">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="TR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BR">
+                <unit>px</unit>
+            </param>
+            <param type="text" style="width: 30px;" label="BL">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="text" name="showcaseresponsivemaxwidth" style="width: 70px;" default="3000" label="Responsive_maximum_slide_width">
+            <unit>px</unit>
+        </param>
+
+        <param name="showcaseskins" type="mixed" default="" label="Choose_a_CSS_design">
+            <param type="skin" label="Theme">
+                <none label="None">
+                    <showcaseslidercss></showcaseslidercss>
+                </none>
+                <shadow label="Light_shadow">
+                    <showcaseslidercss>box-shadow: 1px 0 5px RGBA(0, 0, 0, 0.2), -1px 0 5px RGBA(0, 0, 0, 0.2);
+                    </showcaseslidercss>
+                </shadow>
+                <shadow2 label="Dark_shadow">
+                    <showcaseslidercss>box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.6);</showcaseslidercss>
+                </shadow2>
+                <photo label="Photo">
+                    <showcaseslidercss>box-shadow: 1px 0 5px RGBA(0, 0, 0, 0.2), -1px 0 5px RGBA(0, 0, 0, 0.2);
+                    </showcaseslidercss>
+                    <showcaseborder>8|*|FFFFFFFF</showcaseborder>
+                </photo>
+                <roundedphoto label="Photo_rounded">
+                    <showcaseslidercss>box-shadow: 1px 0 5px RGBA(0, 0, 0, 0.2), -1px 0 5px RGBA(0, 0, 0, 0.2);
+                    </showcaseslidercss>
+                    <showcaseborder>5|*|FFFFFFFF</showcaseborder>
+                    <showcaseborderradius>12|*|12|*|12|*|12</showcaseborderradius>
+                </roundedphoto>
+            </param>
+        </param>
+        <param type="textarea" name="showcaseslidercss" default="" label="CSS"/>
+
+        <param name="showcaseslideskins" type="mixed" default="" label="Slide_skin">
+            <param type="skin" label="Theme">
+                <none label="None">
+                    <showcaseslidecss></showcaseslidecss>
+                </none>
+                <shadow label="Light_shadow">
+                    <showcaseslidecss>box-shadow: 1px 0 5px RGBA(0, 0, 0, 0.2), -1px 0 5px RGBA(0, 0, 0, 0.2);</showcaseslidecss>
+                </shadow>
+                <borderradius label="Border_radius">
+                    <showcaseslidecss>-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;
+box-shadow: 1px 0 5px RGBA(0, 0, 0, 0.2), -1px 0 5px RGBA(0, 0, 0, 0.2);</showcaseslidecss>
+                </borderradius>
+
+            </param>
+        </param>
+        <param type="textarea" name="showcaseslidecss" default="" label="Slide_CSS"/>
+    </params>
+    <params name="showcasedefaultslidertypeanimation" label="Animation_settings">
+
+        <param name="showcaseanimationskins" type="mixed" default="" label="Predfined_animations">
+            <param type="skin" label="Animations">
+                <none label="Clear">
+                    <showcasedistance>60</showcasedistance>
+                    <showcaseperspective>1000</showcaseperspective>
+                    <showcaseopacity>0|*|100|*|100|*|100</showcaseopacity>
+                    <showcasescale>0|*|100|*|100|*|100</showcasescale>
+                    <showcasetranslatex>0|*|0|*|0|*|0</showcasetranslatex>
+                    <showcasetranslatey>0|*|0|*|0|*|0</showcasetranslatey>
+                    <showcasetranslatez>0|*|0|*|0|*|0</showcasetranslatez>
+                    <showcaserotatex>0|*|0|*|0|*|0</showcaserotatex>
+                    <showcaserotatey>0|*|0|*|0|*|0</showcaserotatey>
+                    <showcaserotatez>0|*|0|*|0|*|0</showcaserotatez>
+                </none>
+                <horizontal label="Horizontal_showcase">
+                    <showcasedirection>horizontal</showcasedirection>
+                    <showcasedistance>60</showcasedistance>
+                    <showcaseperspective>1000</showcaseperspective>
+                    <showcaseopacity>0|*|100|*|100|*|100</showcaseopacity>
+                    <showcasescale>0|*|100|*|100|*|100</showcasescale>
+                    <showcasetranslatex>0|*|0|*|0|*|0</showcasetranslatex>
+                    <showcasetranslatey>0|*|0|*|0|*|0</showcasetranslatey>
+                    <showcasetranslatez>0|*|0|*|0|*|0</showcasetranslatez>
+                    <showcaserotatex>0|*|0|*|0|*|0</showcaserotatex>
+                    <showcaserotatey>0|*|0|*|0|*|0</showcaserotatey>
+                    <showcaserotatez>0|*|0|*|0|*|0</showcaserotatez>
+                </horizontal>
+                <vertical label="Vertical_showcase">
+                    <showcasedirection>vertical</showcasedirection>
+                    <showcasedistance>30</showcasedistance>
+                    <showcaseperspective>1000</showcaseperspective>
+                    <showcaseopacity>0|*|100|*|100|*|100</showcaseopacity>
+                    <showcasescale>0|*|100|*|100|*|100</showcasescale>
+                    <showcasetranslatex>0|*|0|*|0|*|0</showcasetranslatex>
+                    <showcasetranslatey>0|*|0|*|0|*|0</showcasetranslatey>
+                    <showcasetranslatez>0|*|0|*|0|*|0</showcasetranslatez>
+                    <showcaserotatex>0|*|0|*|0|*|0</showcaserotatex>
+                    <showcaserotatey>0|*|0|*|0|*|0</showcaserotatey>
+                    <showcaserotatez>0|*|0|*|0|*|0</showcaserotatez>
+                </vertical>
+                <horizontalcoverflow label="Horizontal_Cover_Flow">
+                    <showcasedirection>horizontal</showcasedirection>
+                    <showcasedistance>10</showcasedistance>
+                    <showcaseperspective>2000</showcaseperspective>
+                    <showcaseopacity>0|*|100|*|100|*|100</showcaseopacity>
+                    <showcasescale>1|*|70|*|100|*|70</showcasescale>
+                    <showcasetranslatex>0|*|0|*|0|*|0</showcasetranslatex>
+                    <showcasetranslatey>0|*|0|*|0|*|0</showcasetranslatey>
+                    <showcasetranslatez>0|*|0|*|0|*|0</showcasetranslatez>
+                    <showcaserotatex>0|*|0|*|0|*|0</showcaserotatex>
+                    <showcaserotatey>1|*|45|*|0|*|-45</showcaserotatey>
+                    <showcaserotatez>0|*|0|*|0|*|0</showcaserotatez>
+                </horizontalcoverflow>
+                <verticalcoverflow label="Vertical_Cover_Flow">
+                    <showcasedirection>vertical</showcasedirection>
+                    <showcasedistance>10</showcasedistance>
+                    <showcaseperspective>2000</showcaseperspective>
+                    <showcaseopacity>0|*|100|*|100|*|100</showcaseopacity>
+                    <showcasescale>1|*|70|*|100|*|70</showcasescale>
+                    <showcasetranslatex>0|*|0|*|0|*|0</showcasetranslatex>
+                    <showcasetranslatey>0|*|0|*|0|*|0</showcasetranslatey>
+                    <showcasetranslatez>0|*|0|*|0|*|0</showcasetranslatez>
+                    <showcaserotatex>1|*|-45|*|0|*|45</showcaserotatex>
+                    <showcaserotatey>0|*|0|*|0|*|0</showcaserotatey>
+                    <showcaserotatez>0|*|0|*|0|*|0</showcaserotatez>
+                </verticalcoverflow>
+            </param>
+        </param>
+        <param type="mixed" name="showcaseanimationproperties" label="Properties" default="1500|*|0|*|easeInOutQuint">
+            <param type="text" label="Duration" style="width:50px;">
+                <unit>ms</unit>
+            </param>
+            <param type="text" label="Delay" style="width:50px;">
+                <unit>ms</unit>
+            </param>
+            <param type="jqueryeasing" label="Easing"/>
+        </param>
+        
+        <param type="list" translateable="1" name="showcasedirection" label="Direction" default="horizontal">
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+        </param>
+        
+        <param type="text" name="showcasedistance" label="Slide_distance" style="width:50px;" default="60">
+            <unit>px</unit>
+        </param>
+        
+        <param type="text" name="showcaseperspective" label="Perspective" style="width:50px;" default="1000">
+            <unit>px</unit>
+        </param>
+        
+        <param type="mixed" name="showcaseopacity" label="Opacity" default="0|*|100|*|100|*|100">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+        </param>
+        
+        <param type="mixed" name="showcasescale" label="Scale" default="0|*|100|*|100|*|100">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>percent</unit>
+            </param>
+        </param>
+        
+        <param type="mixed" name="showcasetranslatex" label="X" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="showcasetranslatey" label="Y" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>px</unit>
+            </param>
+        </param>
+        <param type="mixed" name="showcasetranslatez" label="Z" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>px</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>px</unit>
+            </param>
+        </param>
+        
+        <param type="mixed" name="showcaserotatex" label="Rotate_X" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+        </param>
+        <param type="mixed" name="showcaserotatey" label="Rotate_Y" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+        </param>
+        <param type="mixed" name="showcaserotatez" label="Rotate_Z" default="0|*|0|*|0|*|0">
+            <param type="onoff" label="Animated" />
+            <param type="text" label="Before" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="Active" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+            <param type="text" label="After" style="width:20px;">
+                <unit>deg</unit>
+            </param>
+        </param>
+    </params>
+</root>

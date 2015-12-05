@@ -1,0 +1,8 @@
+<root>
+    <params name="Facebook_albumbypage" label="Filter_by">
+        <param name="facebookalbumsbypage" label="Album" type="mixed" default="nextendweb|*|0">
+            <param type="text" label="Page" />
+            <param label="Album" type="facebookalbumsbypage" />
+        </param>
+    </params>
+</root>

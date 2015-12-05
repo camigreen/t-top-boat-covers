@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Standard HTML Sitemap Layout">
+		<message>Display HTML Sitemap</message>
+	</layout>
+	<state>
+		<name>Standard HTML Sitemap Layout</name>
+	</state>
+
+	<!-- Add parameters for data source filters -->
+	<fields name="params">
+		<fieldset name="basic" label="COM_JMAP_DATASOURCE_PARAM" addfieldpath="/administrator/components/com_jmap/framework/html">
+			<field name="datasource_filter" type="DataSources" label="COM_JMAP_FILTERBY_DATASOURCE" description="COM_JMAP_FILTERBY_DATASOURCE_DESC"/>
+		</fieldset>
+	</fields>
+	
+	<!-- Add parameters for sitemap styles -->
+	<fields name="params">
+		<fieldset name="aspect" label="COM_JMAP_ASPECT_PARAM">
+			<field name="sitemap_html_template" type="list" default="" label="COM_JMAP_HTML_TEMPLATE" description="COM_JMAP_HTML_TEMPLATE_DESC">
+				<option value="">COM_JMAP_TMPL_DEFAULT</option>
+				<option value="modern">COM_JMAP_TMPL_MODERN</option>       
+				<option value="dynamic">COM_JMAP_TMPL_DYNAMIC</option>
+				<option value="led">COM_JMAP_TMPL_LED</option>             
+				<option value="large">COM_JMAP_TMPL_LARGE</option>
+			</field>
+			<field name="show_icons" type="radio" class="btn-group" default="" label="COM_JMAP_SHOW_ICONS_SHORT" description="COM_JMAP_SHOW_ICONS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="show_expanded" type="radio" class="btn-group" default="" label="COM_JMAP_SHOW_EXPANDED" description="COM_JMAP_SHOW_EXPANDED_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="expand_location" type="radio" class="btn-group" default="" label="COM_JMAP_EXPAND_CURRENT_MENU_FOLDER_SHORT" description="COM_JMAP_EXPAND_CURRENT_MENU_FOLDER_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="none">COM_JMAP_JMAPCOLLAPSE</option>
+				<option value="location">COM_JMAP_JMAPEXPAND</option>
+			</field>
+			<field name="column_sitemap" type="radio" class="btn-group" default="" label="COM_JMAP_COLUMN_SITEMAP_SHORT" description="COM_JMAP_COLUMN_SITEMAP_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+			<field name="multilevel_categories" class="btn-group" type="radio" default="" label="COM_JMAP_MULTILEVEL_CATEGORIES_SHORT" description="COM_JMAP_MULTILEVEL_CATEGORIES_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>

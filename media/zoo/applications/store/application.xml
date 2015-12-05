@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application>
+	<name>Store</name>
+	<group>store</group>
+	<version>1.0.1</version>
+	<creationDate>October 2014</creationDate>
+	<author>Shawn Gibbons</author>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>http://www.palmettoimages.com</authorUrl>
+        <copyright>Copyright (C) Shawn Gibbons</copyright>
+        <license></license>
+	<description></description>
+	<params group="application-config">
+		<param name="items_per_page" type="text" size="3" default="15" label="Items Per Page" description="Number of items to show on a page" />
+		<param name="item_order" type="zooitemorder" default="_itemname" label="Item Order" description="ITEM_ORDER" />
+		<param name="alpha_index" type="list" default="3" label="Alpha Index" description="ALPHA_INDEX_DESCRIPTION">
+			<option value="1">Only Categories</option>
+			<option value="2">Only Items</option>
+			<option value="3">Both</option>
+		</param>
+		<param name="show_feed_link" type="zoofeed" default="0" label="Show Feed Link" description="DISPLAY_FEED_LINKS" />
+		<param name="show_empty_categories" type="radio" default="0" label="Show Empty Categories" description="SHOW_EMPTY_CATEGORIES_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+	</params>
+	<params group="category-config">
+		<param name="items_per_page" type="textglobal" size="3" default="15" label="Items Per Page" description="Number of items to show on a page" />
+		<param name="item_order" type="zooitemorderglobal" default="_itemname" label="Item Order" description="ITEM_ORDER" />
+		<param name="show_feed_link" type="zoofeedglobal" default="0" label="Show Feed Link" description="DISPLAY_FEED_LINKS" />
+		<param name="show_empty_categories" type="radioglobal" default="0" label="Show Empty Categories" description="SHOW_EMPTY_CATEGORIES_DESC">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+	</params>
+	<params group="application-content">
+		<param name="title" type="text" label="Title" description="Set a frontpage title." />
+		<param name="image" type="zooimage" label="Image" description="Choose a frontpage image." />
+		<param name="categories_title" type="text" label="Categories Title" description="Set a title above the displayed sub categories." />
+		<param name="items_title" type="text" label="Items Title" description="Set a title above the displayed items." />
+	</params>
+	<params group="category-content">
+        <param name="slider" type="text" label="Category Slider" description="Copy and paste the slider {loadposition smartslider-##}" />
+        <param name="layout" type="text" label="Layout Name" description="The layout to be used with this item" /> 
+        <param name="show_products" type="radio" default="0" label="Show On Product Page" description="">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+        <param name="order_now_button" type="radio" default="1" label="Show Order Now Button" description="">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+		<param name="order_now_url" type="text" label="Order Now Url" description="The Url where the order now page is located." /> 
+        <param name="more_info_button" type="radio" default="1" label="Show More Info Button" description="">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+		<param name="more_info_url" type="text" label="More Info Url" description="The Url where the More Info page is located." /> 
+        <param name="show_category_page" type="radio" default="1" label="Show On Category Page" description="">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+		<param name="teaser_description" type="textarea" label="Teaser Description" description="Set a teaser description for this category. It will be displayed in the parent category." />
+		<param name="logo_image" type="zooimage" label="Logo Image" description="Choose a Logo image." />
+                <param name="image" type="zooimage" label="Image" description="Choose a category image." />
+                <param name="teaser_image" type="zooimage" label="Teaser Image" description="Choose a teaser image for this category. It will be displayed in the parent category." />	
+		<param name="categories_title" type="text" label="Categories Title" description="Set a title above the categories." />
+		<param name="items_title" type="text" label="Items Title" description="Set a title above the items." />
+	</params>
+        <params group="item-content">
+                <param name="price_point" type="text" label="Price Points" description="Set the price points." />
+                <param name="ship_price_point" type="text" label="Shipping_Price Points" description="Set the shipping price points." />
+                <param name="ship_markup" type="text" label="Shipping Markup" description="This shipping markup." />
+	</params>
+</application>

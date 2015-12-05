@@ -1,0 +1,43 @@
+<root>
+    <params name="cobaltrecords" label="Filter_by">
+        <param name="cobaltrecordssourcesection" label="Source section" type="cobaltsections" default="0" multiple="1" size="10" />
+        <param name="cobaltrecordssourcecategory" label="Source_category" type="cobaltcategories" default="0" multiple="1" size="10" />
+        <param name="cobaltrecordssourcetype" label="Source type" type="cobalttypes" default="0" multiple="1" size="10" />
+        <param name="cobaltrecordssourceuserid" label="User_id" type="text" default=""/>
+        <param name="cobaltrecordssourcepublished" label="Published" type="onoff" default="1"/>
+        <param name="cobaltrecordssourcefeatured" label="Featured" type="onoff" default="0"/>
+        <param name="cobaltrecordssourcelanguage" label="Language_filter" type="text" default="*"/>
+    </params>
+    <params name="order" label="Order_by">
+        <param name="cobaltrecordsorder1" type="mixed" label="Order_1" default="rec.title|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="rec.title">Title</option>
+                <option value="rec.featured">Featured</option>
+                <option value="rec.ordering">Ordering</option>
+                <option value="rec.hits">Hits</option>
+                <option value="rec.ctime">Creation time</option>
+                <option value="rec.mtime">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+        <param name="cobaltrecordsorder2" type="mixed" label="Order_2" default="|*|asc">
+            <param type="list" label="Field">
+                <option value="">None</option>
+                <option value="rec.title">Title</option>
+                <option value="rec.featured">Featured</option>
+                <option value="rec.ordering">Ordering</option>
+                <option value="rec.hits">Hits</option>
+                <option value="rec.ctime">Creation time</option>
+                <option value="rec.mtime">Modification time</option>
+            </param>
+            <param type="radio" label="order">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+            </param>
+        </param>
+    </params>
+</root>
