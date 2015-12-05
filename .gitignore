@@ -544,3 +544,5 @@
 /joomla.xml
 /*.txt
 /robots.txt.dist
+
+/media/nextend/cache/*
