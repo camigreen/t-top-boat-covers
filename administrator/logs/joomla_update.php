@@ -25,3 +25,8 @@
 2015-09-14T16:13:00+00:00	INFO ::1	update	File Joomla_3.4.3_to_3.4.4-Stable-Patch_Package.zip successfully downloaded.
 2015-09-14T16:13:00+00:00	INFO ::1	update	Starting installation of new version.
 2015-09-14T16:16:36+00:00	INFO ::1	update	COM_JOOMLAUPDATE_UPDATE_LOG_DELETE_FILES
+2015-12-05T21:36:59+00:00	INFO ::1	update	Update started by user Shawn Gibbons (776). Old version is 3.4.4.
+2015-12-05T21:36:59+00:00	INFO ::1	update	Downloading update file from https://github.com/joomla/joomla-cms/releases/download/3.4.5/Joomla_3.4.4_to_3.4.5-Stable-Patch_Package.zip.
+2015-12-05T21:37:00+00:00	INFO ::1	update	File Joomla_3.4.4_to_3.4.5-Stable-Patch_Package.zip successfully downloaded.
+2015-12-05T21:37:00+00:00	INFO ::1	update	Starting installation of new version.
+2015-12-05T21:48:34+00:00	INFO ::1	update	COM_JOOMLAUPDATE_UPDATE_LOG_DELETE_FILES
