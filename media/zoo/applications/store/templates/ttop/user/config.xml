@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<user>
+	<type name="employee">
+		<fieldset group="details" label="Details" controlname="user" >
+			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
+			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." />
+			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." />
+			<field name="status" controlname="core" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="sendEmail" type="radio" width="2-10" default="0" label="Send Emails" description="Send emails to this account?">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+		</fieldset>
+		<fieldset group="password" label="password" controlname="user">
+			<field name="password" type="password" width="1-4" default="" label="Password" description="Password the account." />
+			<field name="password2" type="password" width="1-4" default="" label="Confirm Password" description="Confirm the password for the account." />
+		</fieldset>
+		<fieldset group="contact" label="Contact Info" controlname="elements">
+			<field name="office_phone" type="text" width="1-3" default="" label="Office Phone" description="An office phone number for the point of contact." />
+			<field name="mobile_phone" type="text" width="1-3" default="" label="Mobile Phone" description="A mobile phone number for the point of contact." />
+			<field name="other_phone" type="text" width="1-3" default="" label="Other Phone" description="Another phone number for the point of contact." />
+		</fieldset>
+		<fieldset group="elements" label="User Account Elements" controlname="elements" width="1-1">
+			<field name="job_title" type="list" width="1-4" default="0" label="Job Title" description="" >
+				<option value="0">-Select-</option>
+				<option value="10">Salesman</option>
+				<option value="11">Sales Manager</option>
+			</field>
+			<field name="commission" type="list" width="1-4" default="0" label="Commission" description="" >
+				<option value=".00">No Commission</option>
+				<option value=".01">1%</option>
+				<option value=".02">2%</option>
+				<option value=".03">3%</option>
+				<option value=".04">4%</option>
+				<option value=".05">5%</option>
+			</field>
+			<field name="account" controlname="assigned" type="accountlist" account_type="" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
+		</fieldset>
+	</type>
+	<type name="dealer">
+		<fieldset group="details" label="Details" controlname="user" >
+			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
+			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." />
+			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." />
+			<field name="status" controlname="core" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="sendEmail" type="radio" width="2-10" default="0" label="Send Emails" description="Send emails to this account?">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</field>
+		</fieldset>
+		<fieldset group="password" label="password" controlname="user">
+			<field name="password" type="password" width="1-4" default="" label="Password" description="Password the account." />
+			<field name="confirm_pwd" type="password" width="1-4" default="" label="Confirm Password" description="Confirm the password for the account." />
+		</fieldset>
+		<fieldset group="contact" label="Contact Info" controlname="elements">
+			<field name="office_phone" type="text" width="1-3" default="" label="Office Phone" description="An office phone number for the point of contact." />
+			<field name="mobile_phone" type="text" width="1-3" default="" label="Mobile Phone" description="A mobile phone number for the point of contact." />
+			<field name="other_phone" type="text" width="1-3" default="" label="Other Phone" description="Another phone number for the point of contact." />
+		</fieldset>
+		<fieldset group="elements" label="User Account Elements" controlname="elements" width="1-1">
+			<field name="account" controlname="assigned" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
+		</fieldset>
+	</type>
+</user>

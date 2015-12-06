@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<name>Shipping</name>
+	<params>
+		<param name="ship_markup" type="text" default="" label="Shipping Markup" description="The global markup for all shipping prices." />
+	</params>
+</config>

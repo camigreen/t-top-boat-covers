@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<checkout>
+	<type name="customer">
+		<fieldset group="billing" label="Billing Address" controlname="elements[billing]" >
+			<field name="name" type="storetext" width="1-1" default="" label="Name" description="Name of the account." required="1" />
+			<field name="street1" type="storetext" width="1-1" default="" label="Address Line 1" description="Address Line 1." required="1" />
+			<field name="street2" type="storetext" width="1-1" default="" label="Address Line 2" description="Address Line 2." />
+			<field name="city" type="storetext" width="4-10" default="" label="City" description="Enter a City." required="1" />
+			<field name="state" type="stateslist" width="3-10" default="" label="State" description="State" required="1" />
+			<field name="postalCode" type="storetext" width="3-10" default="" label="Postal Code" description="Postal Code" required="1" />
+			<field name="phoneNumber" type="storetext" width="1-2" default="" label="Phone Number" description="Phone Number" required="1" />
+			<field name="altNumber" type="storetext" width="1-2" default="" label="Alternate Phone Number" description="Alternate Phone Number" />
+		</fieldset>
+		<fieldset group="shipping" label="Shipping Address" controlname="elements[shipping]" >
+			<field name="name" type="storetext" width="1-1" default="" label="Name" description="Name of the account." required="1" />
+			<field name="street1" type="storetext" width="1-1" default="" label="Address Line 1" description="Address Line 1." required="1" />
+			<field name="street2" type="storetext" width="1-1" default="" label="Address Line 2" description="Address Line 2." />
+			<field name="city" type="storetext" width="4-10" default="" label="City" description="Address Line 2." required="1" />
+			<field name="state" type="stateslist" width="3-10" default="" label="State" description="State" required="1" />
+			<field name="postalCode" type="storetext" width="3-10" default="" label="Postal Code" description="Postal Code" required="1" />
+			<field name="phoneNumber" type="storetext" width="1-2" default="" label="Phone Number" description="Phone Number" required="1" />
+			<field name="altNumber" type="storetext" width="1-2" default="" label="Alternate Phone Number" description="Alternate Phone Number" />
+		</fieldset>
+		<fieldset group="email" label="E-Mail Address" controlname="elements" >
+			<field name="email" type="storetext" width="1-1" default="" label="E-Mail Address" description="E-Mail Address." required="1" />
+			<field name="confirm_email" type="storetext" width="1-1" default="" label="Confirm E-Mail Address" description="Confirm your e-mail address." required="1" />
+		</fieldset>
+		<fieldset group="shipping_method" label="Shipping Method" controlname="elements" >
+			<field name="shipping_method" type="ship_services_list" width="1-3" default="0" label="Shipping Method" description="Choose Your Shipping Method." required="1" />
+		</fieldset>
+	</type>
+</checkout>

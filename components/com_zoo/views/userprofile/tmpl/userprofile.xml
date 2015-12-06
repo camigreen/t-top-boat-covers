@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+
+	<layout title="User Profile">
+		<message><![CDATA[User Account Profiles]]></message>
+	</layout>
+
+	<fields name="params">
+		<fieldset name="params"	addfieldpath="/administrator/components/com_zoo/joomla/fields">  
+			<field name="application" type="zooapplication" label="Application" required="true" description="Set an Application" />         
+		</fieldset>
+	</fields>
+	<fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_zoo/joomla/fields">  
+			<field name="controller" type="hidden" label="" required="true" default="user" />   
+			<field name="task" type="list" label="Task" required="true" default="select">
+				<option value="select">All Users</option>
+			</field>       
+		</fieldset>
+	</fields>
+
+</metadata>
