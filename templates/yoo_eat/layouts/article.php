@@ -76,22 +76,26 @@
 	<?php endif; ?>
 
 	<?php if ($previous || $next) : ?>
-	<ul class="uk-pagination">
-		<?php if ($previous) : ?>
-		<li class="uk-pagination-previous">
-			<?php echo $previous; ?>
-			<i class="uk-icon-angle-double-left"></i>
-		</li>
-		<?php endif; ?>
+    <ul class="uk-pagination">
+        <?php if ($previous) : ?>
+        <li class="uk-pagination-previous">
+            <a href="<?php echo $previous; ?>" title="<?php echo JText::_('JPREV') ?>">
+                <i class="uk-icon-arrow-left"></i>
+                <?php echo JText::_('JPREV') ?>
+            </a>
+        </li>
+        <?php endif; ?>
 
-		<?php if ($next) : ?>
-		<li class="uk-pagination-next">
-			<?php echo $next; ?>
-			<i class="uk-icon-angle-double-right"></i>
-		</li>
-		<?php endif; ?>
-	</ul>
-	<?php endif; ?>
+        <?php if ($next) : ?>
+        <li class="uk-pagination-next">
+            <a href="<?php echo $next; ?>" title="<?php echo JText::_('JNEXT') ?>">
+                <?php echo JText::_('JNEXT') ?>
+                <i class="uk-icon-arrow-right"></i>
+            </a>
+        </li>
+        <?php endif; ?>
+    </ul>
+    <?php endif; ?>
 
 	<?php echo $hook_afterarticle; ?>
 

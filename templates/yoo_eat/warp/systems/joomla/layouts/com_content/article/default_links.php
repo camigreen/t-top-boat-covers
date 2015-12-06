@@ -13,11 +13,11 @@ defined('_JEXEC') or die;
 $urls = json_decode($this->item->urls);
 
 // Create shortcuts to some parameters.
-$params		= $this->item->params;
+$params	= $this->item->params;
 
 ?>
 
-<?php if ($urls && ($urls->urla || $urls->urlb || $urls->urlc)) : ?>
+<?php if ($urls && (!empty($urls->urla) || !empty($urls->urlb) || !empty($urls->urlc))) : ?>
 
 <ul class="uk-list">
 
@@ -28,13 +28,13 @@ $params		= $this->item->params;
 			array($urls->urlc, $urls->urlctext, $urls->targetc, 'c')
 		);
 
-		foreach($urlarray as $url) :
+		foreach ($urlarray as $url) :
 			$link = $url[0];
 			$label = $url[1];
 			$target = $url[2];
 			$id = $url[3];
 
-			if( ! $link) :
+			if (!$link) :
 				continue;
 			endif;
 
@@ -78,6 +78,6 @@ $params		= $this->item->params;
 			?>
 			</li>
 	<?php endforeach; ?>
-	
+
 </ul>
 <?php endif;

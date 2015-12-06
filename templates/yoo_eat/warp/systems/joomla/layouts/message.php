@@ -11,6 +11,8 @@ function renderMessage($msgList) {
     // Build the return string
     $buffer = array();
 
+    $buffer[] = '<div id="system-message-container">';
+
     // If messages exist render them
     if (is_array($msgList)) {
 
@@ -40,6 +42,8 @@ function renderMessage($msgList) {
             $buffer[] = '</div>';
         }
     }
+
+    $buffer[] = '</div>';
 
     return implode("\n", $buffer);
 }

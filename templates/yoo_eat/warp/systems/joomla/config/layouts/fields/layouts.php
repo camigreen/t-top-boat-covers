@@ -50,11 +50,16 @@ $layouts = $config->get('layouts', array('default' => array()));
             <?php foreach ($menus as $menu) : ?>
             <h2 class="uk-h3 uk-margin-bottom-remove"><?php echo $menu->title ?></h2>
             <ul class="uk-list">
-            <?php foreach ($menu->links as $i => $link) : ?>
-                <li>
-                    <label>
-                        <input value="<?php echo $link->value ?>" name="<?php echo "{$name}[{$layout}][assignment][]" ?>" type="checkbox"<?php if (@in_array($link->value, $layouts[$layout]['assignment'])) echo ' checked="checked"' ?>> <?php echo ltrim($link->text, '- ') ?>
-                    </label>
+                <?php foreach ($menu->links as $i => $link) : ?>
+                    <?php if (in_array($link->type, array('separator', 'heading'))) : ?>
+                        <li class="uk-margin-top">
+                            <label><?php echo ltrim($link->text, '- ') ?></label>
+                    <?php else : ?>
+                        <li>
+                            <label>
+                                <input value="<?php echo $link->value ?>" name="<?php echo "{$name}[{$layout}][assignment][]" ?>" type="checkbox"<?php if (@in_array($link->value, $layouts[$layout]['assignment'])) echo ' checked="checked"' ?>> <?php echo ltrim($link->text, '- ') ?>
+                            </label>
+                    <?php endif; ?>
                     <?php
                     $diff = isset($menu->links[$i + 1]) ? $menu->links[$i + 1]->level - $link->level : 1 - $link->level;
                     if ($diff > 0) {
@@ -66,7 +71,7 @@ $layouts = $config->get('layouts', array('default' => array()));
                     }
                     ?>
                 <?php endforeach ?>
-                </ul>
+            </ul>
             <?php endforeach ?>
         </div>
     </div>

@@ -56,11 +56,9 @@
 	<?php endif; ?>
 
 	<?php echo $hook_beforearticle; ?>
-	
+
 	<?php if ($article) : ?>
-	<div>
 		<?php echo $article; ?>
-	</div>
 	<?php endif; ?>
 
 	<?php if ($tags) : ?>
@@ -81,15 +79,13 @@
 	<ul class="uk-pagination">
 		<?php if ($previous) : ?>
 		<li class="uk-pagination-previous">
-			<?php echo $previous; ?>
-			<i class="uk-icon-angle-double-left"></i>
+			<a href="<?php echo $previous; ?>"><i class="uk-icon-angle-double-left"></i> <?php echo JText::_('JPREV'); ?></a>
 		</li>
 		<?php endif; ?>
 
 		<?php if ($next) : ?>
 		<li class="uk-pagination-next">
-			<?php echo $next; ?>
-			<i class="uk-icon-angle-double-right"></i>
+			<a href="<?php echo $next; ?>"><?php echo JText::_('JNEXT'); ?> <i class="uk-icon-angle-double-right"></i></a>
 		</li>
 		<?php endif; ?>
 	</ul>

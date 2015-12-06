@@ -13,6 +13,9 @@ namespace Warp\Menu;
  */
 class Post
 {
+    protected $scrollspy = false;
+    protected $active_url = '';
+
     /**
      * Process menu
      *
@@ -22,14 +25,35 @@ class Post
      */
     public function process($module, $element)
     {
+
+        $use_scrollspy  = false;
+        $active_url     = false;
+
+        //assuming the first active menu item is the current page
+        if ($module->nav_settings['scrollspy'] && $active = $element->first('li.uk-active')) {
+            $active_url = preg_replace('/#(.+)$/', '', $active->first('a')->attr('href'));
+        }
+
         foreach ($element->find('a') as $ele) {
 
-            if($type = $ele->attr("data-type")) {
+            // check if scrollspy needs to be applied
+            if ($module->nav_settings['scrollspy'] && $active_url && strpos($ele->attr('href'), $active_url.'#') !== false) {
+                $use_scrollspy = true;
+                $ele->attr('href', strstr($ele->attr('href'), '#'));
+            }
 
-                if($type=="separator") {
+            if ($type = $ele->attr("data-type")) {
+
+                if ($type=="separator-line") {
+
                     $ele->parent()->addClass("uk-nav-divider");
                     $ele->parent()->removeChild($ele);
-                } else {
+
+                } else if ($type=="separator-text") {
+
+                    $ele->removeAttr('data-type');
+
+                } else { // header
 
                     $ele->removeAttr('data-type');
 
@@ -49,7 +73,7 @@ class Post
         }
 
         foreach($element->first("ul:first")->addClass($module->nav_settings["modifier"])->find('ul.level2 ul') as $ul) {
-            if(!$ul->hasClass('uk-nav-sub')) $ul->removeAttr("class");
+            if (!$ul->hasClass('uk-nav-sub')) $ul->removeAttr("class");
         }
 
         foreach ($element->find('li') as $li) {
@@ -63,6 +87,12 @@ class Post
                ->removeClass("level2")
                ->removeClass("level3")
                ->removeClass("level4");
+        }
+
+        // apply scrollspy
+        if ($use_scrollspy) {
+            $element->first('a[href='.$active_url.']')->attr('href', '#top');
+            $element->first('ul:first')->attr('data-uk-scrollspy-nav', '{closest: \'li\', smoothscroll: true}');
         }
 
         return $element;

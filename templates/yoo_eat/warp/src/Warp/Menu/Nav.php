@@ -24,32 +24,32 @@ class Nav
     {
         $ul = $element->first('ul:first')->attr('class', 'uk-nav');
 
-        if($module->nav_settings["accordion"]) {
+        if ($module->nav_settings['accordion']) {
 
-            $ul->addClass("uk-nav-parent-icon")->addClass("uk-nav-side")->attr("data-uk-nav", "{}");
+            $modifier = (isset($module->nav_settings["modifier"]) && $module->nav_settings["modifier"]) ? $module->nav_settings["modifier"] : 'uk-nav-side';
+
+            $ul->addClass('uk-nav-parent-icon')->addClass($modifier)->attr('data-uk-nav', is_string($module->nav_settings['accordion']) ? $module->nav_settings['accordion']:'{}');
 
             foreach($ul->find("ul.level2") as $list) {
 
-                if ($list->prev()->tag() == 'a' && !$list->prev()->attr("href")) {
-                    $list->prev()->attr("href", "#");
+                if ($list->prev()->tag() == 'a') {
+
+                    if (!$list->prev()->attr("href")) {
+                        $list->prev()->attr("href", "#");
+                    }
+
+                    if ($list->prev()->attr("href") != "#" && $module->position == 'offcanvas') {
+                        $list->parent()->addClass("uk-open");
+                    }
                 }
 
                 $list->addClass("uk-nav-sub");
             }
+
         } else {
 
             foreach($ul->find("ul.level2") as $list) {
                 $list->addClass("uk-nav-sub");
-            }
-        }
-
-        if($module->position == "offcanvas") {
-
-            foreach($element->find("a") as $span) {
-
-                if ($span->attr("data-type")) {
-                    $span->removeAttr("data-type")->removeAttr("class");
-                }
             }
         }
 

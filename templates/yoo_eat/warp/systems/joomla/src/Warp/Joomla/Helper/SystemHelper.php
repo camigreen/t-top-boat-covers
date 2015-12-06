@@ -89,7 +89,7 @@ class SystemHelper extends AbstractHelper
         $this->language    = \JFactory::getLanguage();
         $this->path        = JPATH_ROOT;
         $this->url         = rtrim(\JURI::root(false), '/');
-        $this->cache_path  = $this->path . '/cache/template';
+        $this->cache_path  = $this->path . '/media/template';
         $this->cache_time  = max(\JFactory::getConfig()->get('cachetime') * 60, 86400);
 
         // set config or load defaults
@@ -110,7 +110,7 @@ class SystemHelper extends AbstractHelper
         $this['path']
             ->register($this->path, 'site')
             ->register($this->path . '/administrator', 'admin')
-            ->register($this->path . '/cache/template', 'cache');
+            ->register($this->path . '/media/template', 'cache');
 
         // set theme support
         \JFactory::getConfig()->set('widgetkit', true);
@@ -256,10 +256,10 @@ class SystemHelper extends AbstractHelper
 
                 // init vars
                 $file = $this['path']->path('theme:') . '/config.json';
-                $config = isset($_POST['config']) ? $_POST['config'] : '{}';
+                $json = isset($_POST['config']) ? $_POST['config'] : '{}';
 
                 // save config file
-                $message = ($config and null !== json_decode($config) and \JFile::write($file, $config)) ? 'success' : 'failed';
+                $message = ($json and null !== $config = json_decode($json, true) and !empty($config) and \JFile::write($file, $json)) ? 'success' : 'failed';
 
                 break;
 

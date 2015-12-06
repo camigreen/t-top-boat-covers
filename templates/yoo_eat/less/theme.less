@@ -639,12 +639,11 @@ span.tm-heading-italic {
 /* Phones and tablets */
 @media (max-width: @breakpoint-medium-max) {
 
-    [class*='uk-animation-'] {
-        -webkit-animation-name: none;
-        animation-name: none;
+    [data-uk-scrollspy*='uk-animation-']:not([data-uk-scrollspy*='target']) {
+      -webkit-animation-name: none;
+      animation-name: none;
+      opacity: 1; 
     }
-
-    [data-uk-scrollspy*='uk-animation-']:not([data-uk-scrollspy*='target']) { opacity: 1; }
 
 }
 

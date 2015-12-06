@@ -37,6 +37,9 @@ class Subnav
     {
         global $warp;
 
+        // get warp config
+        $config = $warp['config'];
+
         if ($level == 0) {
             $element->attr('class', 'uk-subnav');
         } else {
@@ -56,6 +59,14 @@ class Subnav
 
             // set class in li
             $li->attr('class', sprintf('level%d'.$parent.$active, $level + 1, $li->attr('data-id')));
+
+            // add all options that have a name starting with 'data-'
+            foreach ($config->get("menus." . $li->attr('data-id'), array()) as $key => $value) {
+                if (strpos($key, 'data-') === 0) {
+                    // add an attribute named like the option itself
+                    $li->attr($key, $value);
+                }
+            }
 
             // set class in a/span
             foreach ($li->children('a,span') as $child) {

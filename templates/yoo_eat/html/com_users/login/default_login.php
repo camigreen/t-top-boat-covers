@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 JHtml::_('behavior.keepalive');
 ?>
-<div class="login<?php echo $this->pageclass_sfx?>">
+<div class="login<?php echo $this->pageclass_sfx?> uk-container-center uk-width-1-3">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<div class="page-header">
 		<h1>
@@ -24,34 +24,38 @@ JHtml::_('behavior.keepalive');
 	<div class="login-description">
 	<?php endif; ?>
 
-		<?php if ($this->params->get('logindescription_show') == 1) : ?>
-			<?php echo $this->params->get('login_description'); ?>
-		<?php endif; ?>
-
 		<?php if (($this->params->get('login_image') != '')) :?>
-			<img src="<?php echo $this->escape($this->params->get('login_image')); ?>" class="login-image" alt="<?php echo JTEXT::_('COM_USER_LOGIN_IMAGE_ALT')?>"/>
+			<div class="uk-width-1-2 uk-container-center">
+				<img src="<?php echo $this->escape($this->params->get('login_image')); ?>" class="login-image uk-width-1-1" alt="<?php echo JTEXT::_('COM_USER_LOGIN_IMAGE_ALT')?>"/>
+			</div>
+		<?php endif; ?>
+		<?php if ($this->params->get('logindescription_show') == 1) : ?>
+			<div class="uk-width-1-1 uk-margin">
+				<?php echo $this->params->get('login_description'); ?>
+			</div>
 		<?php endif; ?>
 
 	<?php if (($this->params->get('logindescription_show') == 1 && str_replace(' ', '', $this->params->get('login_description')) != '') || $this->params->get('login_image') != '') : ?>
 	</div>
 	<?php endif; ?>
 
-	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well uk-form">
 
 		<fieldset>
-			<?php foreach ($this->form->getFieldset('credentials') as $field) : ?>
-				<?php if (!$field->hidden) : ?>
-					<div class="control-group">
-						<div class="control-label">
-							<?php echo $field->label; ?>
-						</div>
-						<div class="controls">
-							<?php echo $field->input; ?>
-						</div>
-					</div>
-				<?php endif; ?>
-			<?php endforeach; ?>
-
+			<div class="control-group" data-uk-margin>
+				<div class="control-label">
+					<label><?php echo JText::_("COM_USERS_LOGIN_USERNAME_LABEL") ?>*</label>
+				</div>
+				<div class="controls uk-width-1-1 uk-form-row">
+					<input name="username" id="username" value="" class="validate-username required uk-width-1-1" required="" aria-required="true" autofocus="" type="text">						
+				</div>
+				<div class="control-label">
+					<label><?php echo JText::_("JGLOBAL_PASSWORD") ?>*</label>
+				</div>
+				<div class="controls uk-width-1-1 uk-form-row">	
+					<input name="password" id="password" value="" class="validate-password required uk-width-1-1" maxlength="99" required="" aria-required="true" type="password">												
+				</div>
+			</div>
 			<?php if ($this->tfa): ?>
 				<div class="control-group">
 					<div class="control-label">
@@ -65,14 +69,13 @@ JHtml::_('behavior.keepalive');
 
 			<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
 			<div  class="control-group">
-				<div class="control-label"><label><?php echo JText::_('COM_USERS_LOGIN_REMEMBER_ME') ?></label></div>
-				<div class="controls"><input id="remember" type="checkbox" name="remember" class="inputbox" value="yes"/></div>
+				<label><input id="remember" type="checkbox" name="remember" class="inputbox" value="yes"/><?php echo JText::_('COM_USERS_LOGIN_REMEMBER_ME') ?></label>
 			</div>
 			<?php endif; ?>
 
-			<div class="control-group">
+			<div class="control-group uk-margin-top">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary">
+					<button type="submit" class="uk-button uk-button-primary uk-width-1-3">
 						<?php echo JText::_('JLOGIN'); ?>
 					</button>
 				</div>
@@ -83,8 +86,8 @@ JHtml::_('behavior.keepalive');
 		</fieldset>
 	</form>
 </div>
-<div>
-	<ul class="nav nav-tabs nav-stacked">
+<div class="uk-container-center uk-width-1-3 uk-margin-top">
+	<ul class="nav nav-tabs nav-stacked uk-list">
 		<li>
 			<a href="<?php echo JRoute::_('index.php?option=com_users&view=reset'); ?>">
 			<?php echo JText::_('COM_USERS_LOGIN_RESET'); ?></a>

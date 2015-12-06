@@ -41,8 +41,8 @@ class CssImageBase64Filter implements FilterInterface
 
         // check if image exists and filesize < 5kb
         foreach ($images as $url => $path) {
-            if ($path && filesize($path) <= 5120 && preg_match('/\.(gif|png|jpg)$/i', $path, $extension)) {
-               $content = str_replace($url, sprintf('url(data:image/%s;base64,%s)', str_replace('jpg', 'jpeg', strtolower($extension[1])), base64_encode(file_get_contents($path))), $content);
+            if ($path && filesize($path) <= 5120 && preg_match('/\.(gif|png|jpg|svg)$/i', $path, $extension)) {
+               $content = str_replace($url, sprintf('url(data:image/%s;base64,%s)', str_replace(array('jpg','svg'), array('jpeg','svg+xml'), strtolower($extension[1])), base64_encode(file_get_contents($path))), $content);
             }
         }
 

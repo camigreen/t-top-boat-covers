@@ -27,6 +27,7 @@ $scripts = $this['asset']->get('js');
 
 // load bootstrap styles
 if ($this['config']->get('bootstrap', true) && $file = $this['path']->url('css:bootstrap.css')) {
+	JHtml::_('bootstrap.framework');
 	$styles->prepend($bootstrap = $this['asset']->createFile($file));
 }
 

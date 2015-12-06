@@ -19,6 +19,7 @@ $user = \JFactory::getUser();
 
 foreach ($widgets as $index => $widget) {
 
+
 	// set widget params
 	$params           = array();
 	$params['count']  = $count;
@@ -28,9 +29,8 @@ foreach ($widgets as $index => $widget) {
 	$params['suffix'] = $widget->parameter->get('moduleclass_sfx', '');
 
 	// pass through menu params
-	if (isset($menu)) {
-		$params['menu'] = $menu;
-		$widget->nav_settings = array();
+	if ($widget->menu) {
+		$widget->nav_settings = array('scrollspy' => ($widget->position !== 'offcanvas') ? true : false);
 	}
 
     $params = array_merge($params, $config->get('widgets.'.$widget->id, array()));

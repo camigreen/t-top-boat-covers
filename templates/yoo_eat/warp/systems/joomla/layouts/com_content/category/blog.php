@@ -19,7 +19,7 @@ $app = JFactory::getApplication();
 $app->input->set('layout', 'blog');
 ?>
 
-<?php if ($this->params->get('show_page_heading') || $this->params->get('page_subheading') || $this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
+<?php if ($this->params->get('show_page_heading') || $this->params->get('page_subheading') || $this->params->get('show_description', 1) || $this->params->def('show_description_image', 1) || $this->params->get('show_category_title', 1)) : ?>
 <div class="uk-grid">
 	<div class="uk-width-1-1">
 		<div class="uk-panel uk-panel-header">

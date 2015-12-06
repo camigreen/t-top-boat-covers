@@ -5,6 +5,7 @@
 * @copyright Copyright (C) YOOtheme GmbH
 * @license   http://www.gnu.org/licenses/gpl.html GNU/GPL
 */
+
     $show_large = isset($value['large']) ? $value['large'] : "1";
     $show_medium  = isset($value['medium']) ? $value['medium'] : "1";
     $show_small   = isset($value['small']) ? $value['small'] : "1";

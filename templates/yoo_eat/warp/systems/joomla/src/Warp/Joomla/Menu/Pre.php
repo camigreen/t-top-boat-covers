@@ -86,7 +86,8 @@ class Pre
 
 				if($span->hasClass("nav-header")) $type = "header";
 				if($span->hasClass("separator")) {
-					$type = $span->text()=="-" ? "separator" : "header";
+					$isline = preg_match("/^\s*\-+\s*$/", $span->text());
+					$type = $isline ? "separator-line" : "separator-text";
 				}
 
 				if($type) {

@@ -139,8 +139,8 @@ if (!$this->print) {
 
 // set previous and next
 if (!empty($this->item->pagination)) {
-	$args['previous'] = ($prev = $this->item->prev) ? '<a href="'.$prev.'">'.JText::_('JGLOBAL_LT').' '.JText::_('JPREV').'</a>' : '';
-	$args['next'] = ($next = $this->item->next) ? '<a href="'.$next.'">'.JText::_('JNEXT').' '.JText::_('JGLOBAL_GT').'</a>' : '';
+	$args['previous'] = ($prev = $this->item->prev) ? $prev : '';
+	$args['next'] = ($next = $this->item->next) ? $next : '';
 }
 
 // render template

@@ -83,7 +83,12 @@ class Navbar
         }
 
         foreach ($element->find('li.level1') as $li) {
-            $li->attr("data-uk-dropdown", "{}");
+            // add attributes, if element has dropdown
+            if ($li->children('div.uk-dropdown')->length) {
+                $li->attr("data-uk-dropdown", "{preventflip:'y'}");
+                $li->attr("aria-haspopup", "true");
+                $li->attr("aria-expanded", "false");
+            }
 
             if ($li->attr('data-menu-subtitle')) {
                 $li->first("a")->addClass('uk-navbar-nav-subtitle');
