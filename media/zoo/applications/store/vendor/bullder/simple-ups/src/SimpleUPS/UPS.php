@@ -110,7 +110,6 @@ class UPS
      */
     public static function isValidRegion(Address $address)
     {
-        echo 'validating region';
         return self::_performRegionValidation($address)->isRegionValid();
     }
 
@@ -188,7 +187,6 @@ class UPS
      */
     public static function isValidAddress(Address $address)
     {
-        echo 'validating address';
         return self::_performAddressValidation($address)->isAddressValid();
     }
 
@@ -259,7 +257,6 @@ class UPS
             $request = new AddressValidate\Request();
             $request->setAddress($address);
             self::$addressValidationResponse = $request->sendRequest();
-            var_dump(self::$addressValidationResponse);
         }
 
         return self::$addressValidationResponse;
@@ -283,7 +280,6 @@ class UPS
             $request = new RegionValidate\Request();
             $request->setAddress($address);
             self::$regionValidationResponse = $request->sendRequest();
-            var_dump(self::$regionValidationResponse);
         }
 
         return self::$regionValidationResponse;

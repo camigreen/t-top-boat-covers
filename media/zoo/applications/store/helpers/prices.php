@@ -12,19 +12,74 @@
  * @author Shawn
  */
 class PricesHelper extends AppHelper {
+
+    protected $items;
+    protected $shipping;
+
+    public function __construct($app) {
+        parent::__construct($app);
+        include $this->app->path->path('prices:prices.php');
+        $this->items = $this->app->parameter->create($item);
+        $this->shipping = $this->app->parameter->create($shipping);
+        $this->account = $this->app->customer->getAccount();
+    }
+
+    public function test() {
+        include $this->app->path->path('prices:prices.php');
+        $output = implode(', ', array_map(function ($v, $k) { return $k . '=' . $v; }, $prices['ubsk'], array_keys($prices['ubsk'])));
+    }
+
     
-    
-    public function create($type, $secondary = null) {
-    	include $this->app->path->path('prices:retail.php');
-    	$prices = $prices[$type];
-    	if($secondary) {
-    		$result['item'] = $prices['item'][$secondary];
-    		$result['shipping'] = $prices['shipping'][$secondary];
-    		$prices = $result;
-    	}
-        return $this->app->data->create($prices);
+    public function get($group, $markup = null) {   
+        $markup = !is_null($markup) || $markup === 0 ? $markup : $this->account->params->get('markup')/100;
+
+        $retail = $this->items->get($group);
+
+        return $retail += ($retail*$markup);
+
+    }
+
+    public function getRetail($group) {
+        return $this->get($group, 0);
+    }
+
+    public function getDiscount($group, $discount = null) {
+        $discount = $discount || $discount == '0' ? $discount : $this->account->params->get('discount')/100;
+
+        $retail = $this->getRetail($group);
+
+        return $retail -= ($retail*$discount);
+
+    }
+
+    public function getMarkupList($group) {
+        $default = (float) $this->account->params->get('markup')/100;
+        $store = $this->app->account->getStoreAccount();
+        $markups = $store->params->get('options.markup.');
+        $list = array();
+        foreach($markups as $value => $text) {
+            $price = $this->get($group, $value/100);
+            $diff = $this->getRetail($group) * ($value/100);
+            $list[] = array('markup' => $value/100, 'price' => $price, 'formatted' => $this->currency($price), 'text' => $text.($text == 'No Markup' ? ' ' : ' Markup '), 'diff' => $diff,'default' => $default == $value/100 ? true : false);
+        }
+
+        return $list;
+    }
+
+    public function getShipping($group, $type = 'weight', $default = null, $formatCurrency = false, $currency = 'USD') {
+        $search = $group.'.'.$type;
+        $result = $this->shipping->get($search);
+
+        if($formatCurrency) {
+            return $this->formatCurrency($result, $currency);
+        }
+
+        return $result;
+    }
+
+    public function currency ($value, $currency = 'USD') {
+        $value = (float) $value;
+        return $this->app->number->currency($value ,array('currency' => $currency));
     }
 }
-
-class StoreAppException extends AppException {}
 

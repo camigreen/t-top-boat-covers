@@ -94,11 +94,25 @@
 }
 .ttop .uk-button {
     border-radius: 5px;
-    padding: 0px 15px;
-    color: #FAFAFA;
 }
+.ttop .menu-buttons .uk-button {
+    min-height: 30px;
+    line-height: 30px;
+}
+.ttop .menu-buttons {
+
+}
+.ttop .uk-button .uk-icon {
+    margin-right: 5px;
+}
+.ttop
 .ttop h1, .ttop h2, .ttop h3{
     color:#1c3767;
+}
+
+.ttop table {
+    font: 300 13px/14px "Lato";
+    color: #1C3767;
 }
 
 /*T-Top Accessories Related Styling*/
@@ -441,4 +455,14 @@ tr.overdue {
 
 tr.overdue:hover {
     background:#FF2D2D none repeat scroll 0% 0% !important;
+}
+
+/* OEM Select */
+select.oem-select {
+    min-height: 200px;
+}
+
+.ttop.ttop-account-edit .side-bar {
+   border: 1px solid #D2D2D2;
+   padding: 10px;
 }

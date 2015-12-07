@@ -221,7 +221,7 @@ class ElementItemOptions extends ElementStore {
             $option_list = $this->config->get('option_list');
             $fName = str_replace(' ','_',strtolower($option_list));
             $name = $this->config->get('name');
-            $html = '<input type="hidden" id="'.$fName.'" class="uk-width-1-1" name="'.$fName.'" data-name="'.$name.'" value="'.$this->get('option').'" />';
+            $html = '<input type="hidden" id="'.$fName.'" name="'.$fName.'" data-name="'.$name.'" value="'.$this->get('option').'" />';
             return $html;
         }
         

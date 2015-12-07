@@ -26,13 +26,18 @@ class PDFHelper extends AppHelper {
 
     public function create($type) {
         
-        if (file_exists($this->app->path->path('classes:fpdf/scripts/'.$type.'.xml'))) {
-            $class = 'FormPDF';
+        if (file_exists($this->app->path->path('classes:fpdf/scripts/'.$type.'.php'))) {
+            $class = $type.'FormPDF';
+            $this->app->loader->register($class, 'classes:fpdf/scripts/'.$type.'.php');
         } else {
-            $class = 'FPDF';
+            $class = 'FormFPDF';
         }
+
+
         
-        $object = new $class($this->app, $type);
+        $object = new $class();
+
+        $object->app = $this->app;
         
         return $object;
     }

@@ -18,7 +18,6 @@ class ElementPrice extends ElementStore {
     
         public function __construct() {
             parent::__construct();
-            $this->app->path->register(dirname(__FILE__).'/assets/', 'assets');
         }
 
 	/*
@@ -32,24 +31,30 @@ class ElementPrice extends ElementStore {
                 return false;
 	}
         
-        public function render($params = array())
-        {
-            $price_schedule = 'retail';
-            if(!$this->config->get('price_type') || $this->config->get('price_type') == '') {
-                $type = $this->_item->alias;
-            } else {
-                $type = $this->config->get('price_type');
-            }
-            return $this->renderLayout($this->app->path->path("elements:price/tmpl/default.php"),compact('price_schedule','type'));
+    public function render($params = array())
+    {
+
+
+        $pricing = $params['pricing'];
+        $group = $pricing->get('group').$pricing->get('option_values');
+        $account = $this->app->customer->getAccount();
+        if(!$account) {
+            $price = $this->app->prices->getRetail($group);
+            return $this->renderLayout($this->app->path->path('elements:price/tmpl/default.php'), compact('price','params'));
+        }
+        $layout = $account->type;
+        if(file_exists($this->app->path->path('elements:price/tmpl/'.$layout.'.php')) && $layout != 'default') {
+            return $this->renderLayout($this->app->path->path('elements:price/tmpl/'.$layout.'.php'), compact('group','params'));
+        } else {
+            return $this->renderLayout($this->app->path->path('elements:price/tmpl/default.php'), compact('group','params'));
         }
         
-        public function hasValue($params = array())
-        {
-            return true;
-        }
 
-        public function loadAssets() {
-            parent::loadAssets();
-            $this->app->document->addScript('elements:cart/assets/js/shop.js');
-        }
+    }
+    
+    public function hasValue($params = array())
+    {
+        return true;
+    }
+
 }

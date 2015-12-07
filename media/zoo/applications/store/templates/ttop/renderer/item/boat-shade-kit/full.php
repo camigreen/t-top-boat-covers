@@ -8,7 +8,9 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$prices = $this->app->prices->create('bsk');
+$prices = $this->app->prices->getRetail('bsk');
+$priceOptions = $this->app->parameter->create();
+$priceOptions->set('group', 'bsk')->set('options.', array('A', 'full'));
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
 ?>
@@ -265,9 +267,11 @@ $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
         </div>
         </div>
         <div class="uk-width-1-3 uk-margin-top">
-            <div class="uk-width-1-1 price-container">
-                <span class="price"><i class="currency"></i><span id="price" data-price='<?php echo json_encode($prices); ?>'>0.00</span></span>
-            </div>
+            <div class="uk-width-1-1 uk-grid price-container">
+                    <?php if ($this->checkPosition('pricing')) : ?>
+                            <?php echo $this->renderPosition('pricing', array('id' => $item->id, 'priceOptions' => $priceOptions)); ?>
+                    <?php endif; ?>
+                </div>
             <div class="uk-width-1-1">
                 <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
             </div>
@@ -590,18 +594,51 @@ $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
                         }
                         function getPrice(type) {
                             var BSK_class = m[type].kit.class;
-                            var price_array = self.$price.data('price').item;
-                            var shipping = self.$price.data('price').shipping;
-                            m[type].price = price_array[BSK_class][m.option.value];
-                            m[type].shipping = shipping[m.option.value];
-                            $('.bsk-type-'+type+' .price').html(m[type].price.toFixed(2));
-                            if(m.type === 'Bow|Aft') {
-                                self.price = m.Aft.price + m.Bow.price;
-                                self._publishPrice();
-                            } else {
-                                self.price = m[type].price;
-                                self._publishPrice();
-                            }
+                            var BSK_package = m.option.value;
+                            var priceData = {group: 'bsk', options: [BSK_class, BSK_package]};
+                            console.log(priceData);
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "?option=com_zoo&controller=store&task=getPrice&format=json",
+                                    data: priceData,
+                                    success: function(data){
+                                        m[type].price = data.price;
+                                        var elem = $('#'+self.item.id+'-price span');
+                                        console.log(elem)
+                                        var price = 0;
+                                        if(m.type === 'Bow|Aft') {
+                                            price = m.Aft.price + m.Bow.price;
+                                        } else {
+                                            price = m[type].price;
+                                        }
+                                        $('.bsk-type-Aft span.price').html(m.Aft.price.toFixed(2));
+                                        $('.bsk-type-Bow span.price').html(m.Aft.price.toFixed(2));
+                                        price = self.trigger('onPublishPrice', price);
+                                        console.log(price);
+                                        elem.html(price.toFixed(2));
+                                        
+                                    },
+                                    error: function(data, status, error) {
+                                        var elem = $('#'+self.item.id+'-price span');
+                                        elem.html('ERROR');
+                                        console.log('Error');
+                                        console.log(status);
+                                        console.log(error);
+                                    },
+                                    dataType: 'json'
+                            });
+                            // var price_array = self.$price.data('price').item;
+                            // var shipping = self.$price.data('price').shipping;
+                            // m[type].price = price_array[BSK_class][m.option.value];
+                            // m[type].shipping = shipping[m.option.value];
+                            // $('.bsk-type-'+type+' .price').html(m[type].price.toFixed(2));
+                            // if(m.type === 'Bow|Aft') {
+                            //     self.price = m.Aft.price + m.Bow.price;
+                            //     self._publishPrice();
+                            // } else {
+                            //     self.price = m[type].price;
+                            //     self._publishPrice();
+                            // }
                         }
                     }
                 ],

@@ -9,9 +9,20 @@ $embed = $this->app->request->get('embed','bool');
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 $class = $item->type.'-full';
-
-$boat_length = $item->getElement('555ad97f-e3e7-4608-a103-6de9f6d00291')->get('option');
-$prices = $this->app->prices->create($item->type, $boat_length);
+$pricing = $this->app->parameter->create();
+$group = 't-top-boat-cover';
+$pricing->set('options', array('fabric'));
+$option_values = '';
+foreach($item->getElementsByType('itemoptions') as $element) {
+    if($element->config->get('field_name') == 'boat_length')  {
+        $group .= '.'.$element->get('option');
+    }
+    if($element->config->get('field_name') == 'fabric')  {
+        $option_values .= '.'.$element->config->get('default');
+    }
+}
+$pricing->set('group', $group);
+$pricing->set('option_values', $option_values);
 $category = $item->getPrimaryCategory()->getParent();
 $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
 ?>
@@ -135,15 +146,6 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
                                             <textarea class="uk-width-1-1 item-option" style="height:120px;" name="add_info" data-name="Additional Information"></textarea>
                                     </fieldset>
                                 </div>
-                                <?php echo JHtml::_( 'form.token' ); ?>
-                                <input type="hidden" name="option-set" class="item-attribute" data-name="Option Set" value="ttopboatcover" />
-                                <input type="hidden" name="item" class="item-attribute" data-name="Item Name" value="<?php echo $category->name; ?>" />
-                                <input type="hidden" name="manufacturer" class="item-attribute" data-name="Item Manufacturer" value="Laporte's T-Top Boat Covers" />
-                                <input type="hidden" name="boat_make" class="item-attribute" data-name="Boat Make" value="<?php echo $item->getPrimaryCategory()->name; ?>" />
-                                <input type="hidden" name="boat_model" class="item-attribute" data-name="Boat Model" value="<?php echo $item->name; ?>" />
-
-
-
                             </li>
                             <?php if($category->description) : ?> 
                                 <li>
@@ -159,8 +161,10 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
                 </div>
             </div>
             <div class="uk-width-1-3">
-                <div class="uk-width-1-1 price-container">
-                    <span class="price"><i class="currency"></i><span id="price" data-price='<?php echo json_encode($prices); ?>'>0.00</span></span>
+                <div class="uk-width-1-1 uk-grid price-container">
+                    <?php if ($this->checkPosition('pricing')) : ?>
+                            <?php echo $this->renderPosition('pricing', array('id' => $item->id, 'pricing' => $pricing)); ?>
+                    <?php endif; ?>
                 </div>
                 <div class="uk-width-1-1 options-container uk-margin-top">
                     <?php if ($this->checkPosition('options')) : ?>
@@ -188,8 +192,19 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
                         </fieldset>
                 </div>
                 <?php endif; ?>
+                <?php if ($this->checkPosition('item_attributes')) : ?>
+                    <div class="uk-width-1-1 uk-margin-top item-attribute-container">
+                        <fieldset id="<?php echo $item->id; ?>-item-attributes">
+                            <input type="hidden" name="option-set" data-name="Option Set" value="ttopboatcover" />
+                            <input type="hidden" name="item" data-name="Item Name" value="<?php echo $category->name; ?>" />
+                            <input type="hidden" name="manufacturer" data-name="Item Manufacturer" value="Laporte's T-Top Boat Covers" />
+                            <input type="hidden" name="boat_make" data-name="Boat Make" value="<?php echo $item->getPrimaryCategory()->name; ?>" />
+                            <input type="hidden" name="boat_model" data-name="Boat Model" value="<?php echo $item->name; ?>" />
+                            <?php echo $this->renderPosition('item_attributes'); ?>
+                        </fieldset>  
+                    </div>
+                <?php endif; ?>
             </div>
-
             <?php if ($this->checkPosition('bottom')) : ?>
                     <?php echo $this->renderPosition('bottom', array('style' => 'block')); ?>
             <?php endif; ?>
@@ -366,7 +381,7 @@ jQuery(function($){
 
             mainItem.StoreItem({
                 name: 'T-Top Boat Cover',
-                validate: true,
+                validate: false,
                 confirm: true,
                 debug: true,
                 events: {
@@ -427,9 +442,7 @@ jQuery(function($){
                     ]
                 },
                 removeValues: true,
-                pricePoints: {
-                    item: ['fabric']
-                }
+                pricePoints: <?php echo $pricing; ?>
 
 
 

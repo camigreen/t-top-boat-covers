@@ -70,7 +70,7 @@ class OrderHelper extends AppHelper {
         $_order->billing = $this->app->data->create($_order->billing);
         $_order->shipping = $this->app->data->create($_order->shipping);
         $_order->creditCard = $this->app->data->create($_order->creditCard, 'creditcard');
-        $_order->items = $this->app->cart->get();
+        $_order->items = $this->app->cart->getAllItems();
         $_order->ip = $this->app->useragent->ip();
 
         return $_order;

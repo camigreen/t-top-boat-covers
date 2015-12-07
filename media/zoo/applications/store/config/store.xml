@@ -7,6 +7,5 @@
 			<option value="0">JNO</option>
 		</param>
 		<param name="notify_emails" type="textarea" default="" size="150" label="New Order Notifications" description="Email addresses for new orders.  Separate addresses by commas." />
-		<param name="ship_markup" type="text" default="" label="Shipping Markup" description="The global markup for all shipping prices." />
 	</params>
 </config>

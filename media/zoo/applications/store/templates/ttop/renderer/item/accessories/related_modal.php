@@ -10,7 +10,6 @@
 defined('_JEXEC') or die('Restricted access');
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => $item->name);
-$prices = $this->app->prices->create($item->alias);
 ?>
 <div class="uk-modal-dialog uk-modal-dialog-large ttop-related-modal ">
     <a class="uk-modal-close uk-close uk-close-alt"></a>
@@ -38,9 +37,11 @@ $prices = $this->app->prices->create($item->alias);
                     </div>
                 </div>
                 <div class="uk-width-1-3 uk-margin-top">
-                    <div class="uk-width-1-1 price-container">
-                        <span class="price"><i class="currency"></i><span id="price" data-price='<?php echo json_encode($prices); ?>'>0.00</span></span>
-                    </div>
+                    <div class="uk-width-1-1 uk-grid price-container">
+                    <?php if ($this->checkPosition('pricing')) : ?>
+                            <?php echo $this->renderPosition('pricing', array('type' => $item->type)); ?>
+                    <?php endif; ?>
+                </div>
                     <div class="uk-width-1-1 options-container uk-margin-top">
                         <?php if ($this->checkPosition('options')) : ?>
                             <div class="uk-panel uk-panel-box">

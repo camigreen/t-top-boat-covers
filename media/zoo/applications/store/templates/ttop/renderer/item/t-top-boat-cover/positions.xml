@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <renderer>
-        <positions layout="full">
-                <position name="logo">Logo</position>
+    <positions layout="full">
+        <position name="logo">Logo</position>
 		<position name="top">Top</position>
 		<position name="title">Title</position>
+		<position name="pricing">Pricing</position>
 		<position name="media">Media</position>
 		<position name="tabs">Tabs</position>
-                <position name="boat_options">Boat Options</position>
-                <position name="motor_options">Motor Options</position>
+        <position name="boat_options">Boat Options</position>
+        <position name="motor_options">Motor Options</position>
 		<position name="cover_options">Cover Options</position>
-                <position name="bow_options">Bow Options</position>
-                <position name="special_accessories">Special Accessories</position>
-                <position name="options">Options</position>
+        <position name="bow_options">Bow Options</position>
+        <position name="special_accessories">Special Accessories</position>
+        <position name="options">Options</position>
 		<position name="bottom">Bottom</position>
-                <position name="accessories">Accessories</position>
-                <position name="modals">Modals</position>
+        <position name="accessories">Accessories</position>
+        <position name="item_attributes">Item Attributes</position>
+        <position name="modals">Modals</position>
 	</positions>
 	<positions layout="cover">
-                <position name="logo">Logo</position>
+    	<position name="logo">Logo</position>
 		<position name="top">Top</position>
 		<position name="title">Title</position>
 		<position name="media">Media</position>
 		<position name="tabs">Tabs</position>
-                <position name="boat_options">Boat Options</position>
-                <position name="motor_options">Motor Options</position>
+        <position name="boat_options">Boat Options</position>
+        <position name="motor_options">Motor Options</position>
 		<position name="cover_options">Cover Options</position>
-                <position name="bow_options">Bow Options</position>
-                <position name="aft_options">Aft Options</position>
-                <position name="pricing">Pricing</position>
+        <position name="bow_options">Bow Options</position>
+        <position name="aft_options">Aft Options</position>
+        <position name="pricing">Pricing</position>
 		<position name="bottom">Bottom</position>
-                <position name="accessories">Accessories</position>
+        <position name="accessories">Accessories</position>
 	</positions>
         <positions layout="bsk">
 		<position name="title">Title</position>
 		<position name="media">Media</position>
 		<position name="tabs">Tabs</position>
-                <position name="measurements">Measurements</position>
-                <position name="diagram">Diagram</position>
-                <position name="pricing">Pricing</position>
+        <position name="measurements">Measurements</position>
+        <position name="diagram">Diagram</position>
+        <position name="pricing">Pricing</position>
 		<position name="bottom">Bottom</position>
 	</positions>
 	<positions layout="teaser">

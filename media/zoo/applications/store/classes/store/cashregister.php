@@ -19,7 +19,7 @@ class CashRegister {
 
     public $merchant;
     
-    public $page;
+    public $items;
     
     protected $taxRate = 0.07;
     
@@ -43,25 +43,18 @@ class CashRegister {
     
     public $app;
     
-    protected $notification_emails = array();
-    
     protected $shipper;
     
 
     public function __construct($app) {
-
         $app->loader->register('PageStore','classes:store/page.php');
         $this->app = $app;
         $this->merchant = $this->app->merchant->anet;
-        if($id = $this->app->request->get('orderID','int')) {
-            $this->order = $this->app->order->create($id);
-        } else {
-            $this->order = $this->app->order->create();
-        }
-        
-        $this->page = new PageStore();
+        $this->order = $this->app->orderdev->create();
         $this->application = $this->app->zoo->getApplication();
-        $this->setNotificationEmails();
+
+        $this->account = $this->app->customer->getAccount();
+        $this->calculateTotals();
     }
     
     protected function updateItemQty() {
@@ -76,27 +69,29 @@ class CashRegister {
     }
     
     public function scanItems () {
-        $cart = $this->app->cart;
-        $this->order->items = $cart->get();
+        $cart = $this->app->cart->create();
+        $this->order->items = $cart->getAllItems();
     }
     
-    protected function setNotificationEmails() {
-        $emails = array_map('trim', explode(',',$this->application->getParams()->get('global.store.notify_emails')));
-        $this->notification_emails = array_merge($this->notification_emails,$emails);
+    protected function getNotificationEmails() {
+        return explode("\n", $this->app->account->getStoreAccount()->params->get('notify_emails'));
     }
     
-    public function sendNotificationEmail($order, $for = 'payment') {
-        if(!$this->application->getParams()->get('global.store.notify_email_enable')) {
+    public function sendNotificationEmail($oid, $for = 'payment') {
+        if(!$this->app->account->getStoreAccount()->params->get('notify_email_enable', true)) {
             return;
         }
+        $order = $this->app->orderdev->get($oid);
         $email = $this->app->mail->create();
+
         $CR = $this;  
            if ($for == 'payment') {
-                $filename = $this->app->pdf->workorder->setData($order)->generate()->toFile();
+                $pdf = $this->app->pdf->workorder;
+                $filename = $pdf->setData($order)->generate()->toFile();
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("T-Top Boat Cover Online Order Notification");
                 $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.order.php');
-                $email->addRecipient($this->notification_emails);
+                $email->addRecipient($this->getNotificationEmails());
                 $email->addAttachment($path,'Order-'.$this->order->id.'.pdf');
                 $email->Send();
                 unlink($path);
@@ -106,8 +101,20 @@ class CashRegister {
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("Thank you for your order.");
                 $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.receipt.php');
-                $email->addRecipient($order->billing->get('email'));
-                $email->addAttachment($path,'Receipt'.$this->order->id.'.pdf');
+                $email->addRecipient($order->elements->get('email'));
+                $email->addAttachment($path,'Receipt-'.$this->order->id.'.pdf');
+                $email->Send();
+                unlink($path);
+            } 
+            if($for == 'invoice') {
+                $addresses = $order->getAccount()->getNotificationEmails();
+                $addresses[] = $order->elements->get('email');
+                $filename = $this->app->pdf->invoice->setData($order)->generate()->toFile();
+                $path = $this->app->path->path('assets:pdfs/'.$filename);
+                $email->setSubject("Thank you for your order.");
+                $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.invoice.php');
+                $email->addRecipient($addresses);
+                $email->addAttachment($path,'Invoice-'.$this->order->id.'.pdf');
                 $email->Send();
                 unlink($path);
             } 
@@ -147,7 +154,7 @@ class CashRegister {
     }
     public function processOrder() {
         $this->order->orderDate = $this->app->date->create()->toSql();
-        $this->order->save();
+        $this->order->save(true);
 
         return $this;
     }
@@ -158,17 +165,23 @@ class CashRegister {
     }
 
     
-    public function getShippingRate() {
-        $shipping = $this->order->get('shipping');
-        if($this->order->get('localPickup') || !$shipping->get('zip')) {
-            $this->shipping = 0;
-        } else {
-            $this->app->loader->register('Shipper','classes:store/shipper.php');
-            $this->shipper = new Shipper($this->app, $this->order);
-            $this->shipping = $this->shipper->getRate();
+    public function getShippingRate($service = null) {
+        if(!$service) {
+            return 0;
         }
-            
-        return $this->shipping;
+        $markup = $this->application->getParams()->get('global.shipping.ship_markup', 0);
+        $markup = intval($markup)/100;
+        $ship = $this->app->shipper;
+        $ship_to = $this->app->parameter->create($this->order->elements->get('shipping.'));
+        $rates = $ship->setDestination($ship_to)->assemblePackages($this->app->cart->getAllItems())->getRates();
+        $rate = 0;
+        foreach($rates as $shippingMethod) {
+            if($shippingMethod->getService()->getCode() == $service) {
+                $rate = $shippingMethod->getTotalCharges();
+            }
+        }
+
+        return $rate += ($rate * $markup);
     }
     
     private function clearTotals() {
@@ -177,77 +190,62 @@ class CashRegister {
     }
     
     public function calculateTotals() {
-        $this->clearTotals();
-        foreach ($this->order->get('items') as $item) {
-            $item->total = $item->price*$item->qty;
-            $this->subtotal += $item->total;
-            $this->taxTotal += ($item->taxable ? ($item->total*$this->taxRate) : 0);
+        $this->order->ship_total = $this->getShippingRate($this->order->elements->get('shipping_method'));
+        $this->order->calculateTotals();
+    }
+
+    public function processPayment($method) {
+
+        switch($method) {
+            case 'PO':
+                return $this->processPO();
+                break;
+            case 'CreditCard':
+                return $this->processCreditCard();
+                break;
+            case 'bypass':
+                $this->order->transaction_id = "Not Processed";
+                $this->order->save();
+                $result = array(
+                    'approved' => true,
+                    'orderID' => $this->order->id
+                );
+                $this->order->result = $result;
+
+                $this->sendNotificationEmail($this->order, 'receipt');
+                $this->sendNotificationEmail($this->order, 'payment');
+                $this->clearOrder();
+                
+                return $this->order;
+                break;
+            default:
+
         }
+    }
+
+    public function processPO () {
+
+        $items = $this->app->cart->create();
+        $this->order->transaction_id = "Purchase Order";
+        $this->order->elements->set('items.', $items->getAllItems());
+        // Update Payment Status
+        $this->order->params->set('payment.status', 2);
+        $this->order->setStatus(2);
+        //this->order->calculateCommissions();
+        $this->order->save(true);
+        $result = array(
+            'approved' => true,
+            'orderID' => $this->order->id
+        );
+        $this->order->result = $result;
+        $this->sendNotificationEmail($this->order->id, 'invoice');
+        $this->sendNotificationEmail($this->order->id, 'payment');
+        $this->clearOrder();
         
-        if($this->taxExempt) {
-            $this->taxTotal = 0;
-        }
-
-        if($this->order->discount > 0) {
-            $this->subtotal -= $this->subtotal*$this->order->discount;
-            $this->taxTotal -= $this->taxTotal*$this->order->discount;
-        }
-
-        if($this->order->service_fee > 0) {
-            $this->subtotal += $this->subtotal*$this->order->service_fee;
-            $this->taxTotal += $this->taxTotal*$this->order->service_fee;
-        }
-
-        $this->shipping = $this->getShippingRate();
-
-        $this->total = $this->subtotal + $this->taxTotal + $this->shipping;
-
-        $this->order->ship_total = $this->shipping;
-        $this->order->subtotal = $this->subtotal;
-        $this->order->tax_total = $this->taxTotal;
-        $this->order->total = $this->total;
+        return $this->order;
     }
 
-    public function setTaxExempt() {
-        $state = $this->order->get('billing')->get('state');
-        if ($state) {
-            $this->taxExempt = (!in_array($state,$this->taxableStates) && !$this->order->get('localPickup'));
-        }
-        $this->calculateTotals();
-    }
-
-    public function getCurrency($key) {
-        if(property_exists($this, $key)) {
-            return '$'.number_format(floatVal($this->$key),2,'.','');
-        }
-        return null;
-    }
-
-    public function import() {
-        $this->order->setSalesPerson(); 
-        $this->scanItems();
-        $this->setFormData();
-        $this->setTaxExempt();
-        $this->calculateTotals();
-    }
-
-    public function processPayment() {
-        if($this->app->request->get('bypass', 'boolean')) {
-            $this->order->transaction_id = "Not Processed";
-            $this->order->save();
-            $result = array(
-                'approved' => true,
-                'orderID' => $this->order->id
-            );
-            $this->order->result = $result;
-
-            $this->sendNotificationEmail($this->order, 'receipt');
-            $this->sendNotificationEmail($this->order, 'payment');
-            $this->clearOrder();
-            
-            return $this->order;
-        }
-
+    public function processCreditCard() {
         $order = $this->order;
         $billing = $order->get('billing');
         $shipping = $order->get('shipping');
@@ -323,14 +321,14 @@ class CashRegister {
 
             //$order->updateSession();
         } else {
-            $this->app->log->createLogger('email',array('sgibbons@palmettoimages.com'));
-            $data = (string) $this->app->data->create($response);
-            $this->app->log->notice($data,'Process Payment Failed');
+
+            // trigger payment failure event
+            $this->app->event->dispatcher->notify($this->app->event->create($this->order, 'order:paymentFailed', array('response' => $response)));
+            
             $result = array(
                 'approved' => $response->approved,
                 'response' => $response
             );
-            //$this->sendNotificationEmail($result, 'error');
         }
         $order->result = $result;
         return $order;

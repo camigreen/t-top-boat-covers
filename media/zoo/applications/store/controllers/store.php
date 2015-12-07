@@ -46,8 +46,8 @@ class StoreController extends AppController {
             // execute task
             $this->taskMap['display'] = null;
             $this->taskMap['__default'] = null;
-            $task = $this->params->get('page');
-            $this->execute($task);
+            $page = $this->params->get('page');
+            $this->execute($page);
     }
 
     public function version () {
@@ -110,40 +110,6 @@ class StoreController extends AppController {
            echo 'Stack trace:<br/><pre>'.$e->getTraceAsString().'</pre>';
         }
 
-    }
-
-    public function cart() {
-        $job = $this->app->request->get('job','word');
-        
-        $cart = $this->app->cart;
-
-        switch ($job) {
-            case 'add':
-                $items = $this->app->request->get('cartitems','array');
-                $cart->add($items);
-                break;
-            case 'updateQty':
-                $sku = $this->app->request->get('sku','string');
-                $qty = $this->app->request->get('qty','int');
-                $cart->updateQuantity($sku, $qty);
-                break;
-            case 'emptyCart':
-                $cart->emptyCart();
-                break;
-            case 'remove':
-                $sku = $this->app->request->get('sku','string');
-                $cart->remove($sku);
-                break;
-        }
-        
-        $this->app->document->setMimeEncoding('application/json');
-        $result = array(
-            'result' => true,
-            'items' => $cart->get(),
-            'item_count' => $cart->getItemCount(),
-            'total' => $cart->getCartTotal()
-        );
-        echo json_encode($result);
     }
 
     public function order() {
@@ -228,10 +194,9 @@ class StoreController extends AppController {
             return $this->app->error->raiseError(500, JText::_('PDF template does not exist'));
         }
         $this->app->document->setMimeEncoding('application/pdf');
-
         $pdf = $this->app->pdf->$type;
         $id = $this->app->request->get('id','int');
-        $order = $this->app->order->create($id);
+        $order = $this->app->orderdev->get($id);
 
         $pdf->setData($order)->generate()->toBrowser();
     }
@@ -315,6 +280,24 @@ class StoreController extends AppController {
 
             // display view
             $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
+
+    }
+
+    public function pricing() {
+
+        //$id = $this->app->request->get('item_id');
+
+        $id = 405;
+
+        $item = $this->app->table->item->get($id);
+
+        $type = $item->getType()->id;
+
+        foreach($item->getElements() as $element) {
+            var_dump($element->config->get('name'));
+        }
+
+        var_dump($item);
 
     }
 
@@ -587,9 +570,23 @@ class StoreController extends AppController {
         echo json_encode($order->result);
     }
 
+    public function getPrice() {
+        $pricing = $this->app->request->get('post:pricing','array', array());
+        $pricing = $this->app->parameter->create($pricing);
+        $prices = $this->app->prices->get($pricing->get('group'), $pricing->get('markup'));
+        $result['price'] = $prices;
+        $this->outputToJSON($result);
+
+    }
+
+    public function outputToJSON($output = null) {
+        $this->app->document->setMimeEncoding('application/json');
+        echo json_encode($output);
+    }
+
 }
 
 /*
-    Class: DefaultControllerException
+    Class: StoreControllerException
 */
-class ProductsControllerException extends AppException {}
+class StoreControllerException extends AppException {}

@@ -12,12 +12,16 @@ class StoreApplication extends Application {
         parent::__construct();
         
         $zoo = APP::getInstance('zoo');
+
+        // Set defines
+
+        JFactory::getLanguage()->load('' , dirname(__FILE__));
+
         
 //        Register Paths
         $path = dirname(__FILE__);
         $zoo->path->register($path.'/elements', 'elements');
         $zoo->path->register($path.'/assets', 'assets');
-        $zoo->path->register($path.'/templates/store/assets', 'assets');
         $zoo->path->register($path.'/controllers', 'controllers');
         $zoo->path->register($path.'/prices', 'prices');
         $zoo->path->register($path.'/classes', 'classes');
@@ -27,11 +31,23 @@ class StoreApplication extends Application {
         $zoo->path->register($path.'/pdf', 'pdf');
         $zoo->path->register($path.'/tables', 'tables');
         $zoo->path->register($path.'/classes/data', 'data');
+        $zoo->path->register($path.'/events', 'events');
+        $zoo->path->register($path.'/fields', 'fields');
         include_once $path.'/vendor/autoload.php';
         
 //        Load Classes
         $zoo->loader->register('ElementStore','elements:element/element.php');
         $zoo->loader->register('ElementStore','elements:elementstore/elementstore.php');
+
+        // register and connect events
+        $zoo->event->register('OrderEvent');
+        $zoo->event->dispatcher->connect('order:paymentFailed', array('OrderEvent', 'paymentFailed'));
+        $zoo->event->dispatcher->connect('order:init', array('OrderEvent', 'init'));
+        $zoo->event->register('AccountEvent');
+        $zoo->event->dispatcher->connect('account:init', array('AccountEvent', 'init'));
+        $zoo->event->register('UserProfileEvent');
+        $zoo->event->dispatcher->connect('userprofile:init', array('UserProfileEvent', 'init'));
+        $zoo->event->dispatcher->connect('userprofile:saved', array('UserProfileEvent', 'saved'));
         
 //        Add CSS
         $zoo->document->addStyleSheet('assets:css/ttop.css');
@@ -40,17 +56,6 @@ class StoreApplication extends Application {
 //        Add Scripts
         $zoo->document->addScript('elements:cart/assets/js/storeitem.js');
         
-        // test
-        
     }
-    
-    public function dispatch() {
-        $view = $this->app->request->get('view','word');
-        if ($view == 'store') {
-            $this->app->dispatch($view);
-        } else {
-            $this->app->dispatch('default');
-        }
-        
-    }
+
 }

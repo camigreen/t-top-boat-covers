@@ -27,12 +27,12 @@ class OrderTable extends AppTable {
 	public function save($object) {
 
 		$object->orderDate = $this->app->date->create($object->orderDate)->toSQL();
-		parent::save($object);
-		return $object;
+		$result = parent::save($object);
+		return $result;
 	}
 }
 
 /*
 	Class: ItemTableException
 */
-class ItemTableException extends AppException {}
+class OrderTableException extends AppException {}

@@ -95,7 +95,6 @@ class Request extends \SimpleUPS\Api\Request
         $xml = parent::sendRequest();
         $responseClass = new \SimpleUPS\RegionValidate\Response($this->getAddress());
         $response = $responseClass->fromXml($xml);
-        var_dump($response);
         return $response;
     }
 

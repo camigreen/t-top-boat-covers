@@ -17,83 +17,53 @@ class CartHelper extends AppHelper {
     
     public function __construct($app) {
         parent::__construct($app);
-
-        $this->app->loader->register('CartItem','classes:cartitem.php');
-
-        $this->_items = $this->app->data->create();
-        $cart = $this->app->session->get('cart',array(),'checkout');
-
-        $items = $this->app->data->create($cart);
-        $this->app->log->createLogger('file',array('media/zoo/applications/store/logs/cart/'.date('Y-m-d').'.txt'));
-        //$this->app->log->createLogger('email',array('sgibbons@palmettoimages.com'));
-        $this->add($items, true);
+        $this->_items = array();
+        //$this->app->loader->register('CartItem','classes:cartitem.php');
 
     }
 
-    public function get($key = null) {
-    	if($key) {
-            return $this->_items[$key];
-        }
+    public function create() {
 
+        $this->_items = array();
+
+        $items = $this->app->parameter->create($this->app->session->get('cart',array(),'checkout'));
+
+        $this->add($items);
+
+
+        return $this;
+
+    }
+
+    public function get($key) {
+        return $this->_items[$key]; 
+    }
+
+    public function getAllItems() {
         return $this->_items;
-        
     }
 
-    public function add($items, $imported = false) {
+    public function add($items) {
+
     	foreach($items as $key => $item) {
-    		$item_x = new CartItem($this->app, $item);
-            if (array_key_exists($item_x->getSKU(), $this->_items)) {
-                $this->_items[$item_x->getSKU()]->qty += $item_x->qty;
+    		$_item = new CartItem($this->app, $item);
+            $sku = $_item->sku;
+            if (isset($this->_items[$sku])) {
+                $this->_items[$sku]->qty += $_item->qty;
             } else {
-                $this->_items[$item_x->getSKU()] = $item_x;
-                $this->_items[$item_x->getSKU()]->imported = $imported;
-            }
-            if (!$imported) {
-                $this->app->log->notice($item_x->toLog(),'Cart Item Added');
+                $this->_items[$sku] = $_item;
             }
     	}
         return $this->updateSession();
     }
 
-    protected function createItem($item) {
-		$_item = $this->app->object->create('cartitem');
-        $_item->attributes = $this->app->data->create();
-    	foreach($item as $key => $value) {
-                switch ($key) {
-                    case 'attributes':
-                    case 'shipping':
-                        $_item->$key = $this->app->data->create($value);
-                        break;
-                    case 'options':
-                        $opt_set = $_item->attributes->get('option-set');
-                        if (file_exists($this->app->path->path('classes:data/'.(!is_null($opt_set) ? $opt_set['value'] : 'null').'.php'))) {
-                            $_item->options = $this->app->data->create($value, $opt_set['value']);
-                            $_item->options->ksort();
-                        } else {
-                            $_item->options = $this->app->data->create($value);
-                        }
-                        break;
-                    case 'price':
-                        $_item->$key = floatval($value);
-                        break;
-                    default:
-                        if(is_numeric($value)) {
-                            $_item->$key = intval($value);
-                        } else {
-                            $_item->$key = $value;
-                        }    
-                }
-    	}
-    	return $_item;
-    }
-
     public function remove($sku) {
-        if ($this->_items->get($sku)) {
-            $this->_items->remove($sku);
+        if (isset($this->_items[$sku])) {
+            unset($this->_items[$sku]);
             return $this->updateSession();
         }
         
-        return $this->_items;
+        return $this;
     }
 
     public function getItemCount() {
@@ -104,16 +74,21 @@ class CartHelper extends AppHelper {
         return $count;
     }
 
-    public function getCartTotal() {
+    public function isEmpty() {
+        return empty($this->_items);
+    }
+
+    public function getCartTotal($display = 'markup') {
         $total = 0.00;
         foreach($this->_items as $item) {
-            $total += $item->price*$item->qty;
+            
+            $total += $item->getTotal($display);
         }
         return $total;
     }
 
     public function emptyCart() {
-        $this->_items = $this->app->data->create();
+        $this->_items = array();
         return $this->updateSession();
     }
 
@@ -122,25 +97,192 @@ class CartHelper extends AppHelper {
         if ($qty == 0) {
             return $this->remove($sku);
         } else {
-            $item = $this->get($sku)->qty = $qty;
+            $this->_items[$sku]->qty = $qty;
         }
         
         return $this->updateSession();
     }
 
     public function updateSession() {
-        $this->app->session->set('cart',(string) $this->_items,'checkout');
+        $data = $this->app->data->create($this->_items);
+        $this->app->session->set('cart',(string) $data,'checkout');
         return $this;
     }
+    
+}
 
-    public function __toString() {
+/**
+ * Description of newPHPClass
+ *
+ * @author Shawn
+ */
+class CartItem {
+    
+    public $id;
+    
+    public $name;
+    
+    public $qty;
+    
+    public $total = 0;
+    
+    public $shipping;
+    
+    public $options;
+    
+    public $attributes;
+    
+    public $description;
+    
+    public $make;
+    
+    public $model;
+    
+    public $pricing;
+    
+    public $sku;
+    
+    public $taxable = true;
+    
+    public $app;
 
-        $cart = array(
-            'itemCount' => $this->getItemCount(),
-            'cartTotal' => $this->getCartTotal(),
-            'items' => $this->_items
-        );
-        return (string) $this->app->data->create($cart);
+    protected $price;
+    
+    public function __construct($app, $item) {
+
+        
+        foreach ($item as $key => $value) {
+            $this->$key = $value;
+        }
+        
+        $this->app = $app;
+        $options = $this->options;
+        $this->options = $this->app->parameter->create();
+        foreach($options as $key => $option) {
+            $opt = $this->app->parameter->create($option);
+            $this->options->set($key, $opt);
+        }
+        $this->attributes = $app->parameter->create($this->attributes);
+        $this->shipping = $app->parameter->create($this->shipping);
+        $this->pricing = $app->parameter->create($this->pricing);
+        $this->price = $this->app->parameter->create();
+        $account = $this->app->customer->getAccount();
+        $markup = $account->params->get('markup')/100;
+        $discount = $account->params->get('discount')/100;
+        $this->price->set('retail', $this->app->prices->getRetail($this->pricing->get('group')));
+        $this->price->set('markup', $this->pricing->get('markup', $markup));
+        $this->price->set('discount', $discount); 
+        //var_dump($this->options);
+        $this->generateSKU();
+        
+    }
+
+    
+    public function getDescription($type) {
+        $lines = array();
+        if ($type == 'receipt') {
+            foreach($this->options as $option) {
+                if (!isset($option['visible']) || $option['visible']) {
+                    $lines[] = $option['name'].': '.$option['text'];
+                }
+            } 
+            
+        } else {
+            foreach($this->options as $option) {
+                $lines[] = $option['name'].': '.$option['text'];
+            } 
+        }
+        $html = isset($lines) ? '<p>'.implode('</p><p>', $lines).'</p>' : '';
+        return $html;
+    }
+    public function generateSKU() {
+        if($this->sku) {
+            return $this->sku;
+        }
+        $options = '';
+        foreach($this->options as $key => $value) {
+            $options .= $key.$value->get('text');
+        }
+        $options .= $this->getPrice();
+        
+        $this->sku = hash('md5', $this->id.$options);
+        return $this->sku;
+    }
+
+    public function getPrice($type = 'markup') {
+        $price = $this->price->get('retail', 0);
+
+        switch($type) {
+            case 'markup':
+                $price += $price*$this->price->get('markup');
+                break;
+            case 'discount':
+                $price -= $price*$this->price->get('discount');
+                break;
+            case 'margin':
+                $markup = $this->getPrice('markup');
+                $discount = $this->getPrice('discount');
+                $price  = $markup - $discount;
+        }
+
+        return (float) $price;
+    }
+
+    public function getDiscountRate() {
+        return $this->app->number->toPercentage($this->price->get('discount')*100,0);
     }
     
+    public function getMarkupRate() {
+        return $this->app->number->toPercentage($this->price->get('markup')*100,0);
+    }
+
+    public function getProfitRate() {
+        $markup = $this->price->get('markup')*100;
+        $discount = $this->price->get('discount')*100;
+        $profit = $markup + $discount;
+        return $this->app->number->toPercentage($profit,0);
+    }
+    
+    public function getTotal($type = 'markup', $formatCurrency = false, $currency = 'USD') {
+        $price = $this->getPrice($type);
+        $this->total = $price*$this->qty;
+        if($formatCurrency) {
+            return $this->app->number->currency($this->total, array('currency' => $currency));
+        }
+        return $this->total;
+    }
+
+    public function getOptions() {
+        if (count($this->options) > 0) {
+            $html[] = "<ul class='uk-list options-list'>";
+            foreach($this->options as $option) {
+                $html[] = '<li><span class="option-name">'.$option->get('name').':</span><span class="option-text">'.$option->get('text').'</span></li>';
+            }
+            $html[] = "</ul>";
+
+            return implode('',$html);
+        }
+    }
+
+    public function export() {
+        $result = $this->app->parameter->create();
+        foreach($this as $key => $value) {
+            if(is_array($value)) {
+                $result->set($key.'.', $value);
+            } else {
+                $result->set($key, $value);
+            }
+        }
+        return $result;
+    }
+
+    public function toLog() {
+        foreach($this as $key => $value) {
+            if($key != 'app') {
+                $string[] = $key.': '.$value;
+            }
+        }
+        return implode(PHP_EOL,$string).PHP_EOL.'/////// End of Log ////////'.PHP_EOL;
+    }
+ 
 }
