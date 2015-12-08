@@ -8,6 +8,9 @@
 $embed = $this->app->request->get('embed','bool');
 // no direct access
 defined('_JEXEC') or die('Restricted access');
+$storeItem = $this->app->item->create($item);
+$modal = $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')));
+echo $modal->render('modal.markup_select');
 $class = $item->type.'-full';
 $pricing = $this->app->parameter->create();
 $group = 't-top-boat-cover';
@@ -163,7 +166,7 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
             <div class="uk-width-1-3">
                 <div class="uk-width-1-1 uk-grid price-container">
                     <?php if ($this->checkPosition('pricing')) : ?>
-                            <?php echo $this->renderPosition('pricing', array('id' => $item->id, 'pricing' => $pricing)); ?>
+                            <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                     <?php endif; ?>
                 </div>
                 <div class="uk-width-1-1 options-container uk-margin-top">

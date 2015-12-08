@@ -1,6 +1,6 @@
 <?php // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
-$salesperson = $zoo->salesperson->get();
+$user = $zoo->customer->getUser();
 $testMode = $zoo->merchant->testMode();
 ?>
 
@@ -11,7 +11,7 @@ $testMode = $zoo->merchant->testMode();
         <span class="currency">$</span>
         <span data-cart="total">0.00</span>
         <span class="items">(<span data-cart="quantity">0</span> Items)</span>
-        <div><?php if($salesperson) echo 'Salesman: '.$salesperson->name; ?><?php echo $testMode ? ' - Test Mode -' : '' ?></div>
+        <div><?php if($user && $user->canCreate()) echo 'Salesman: '.$user->name; ?><?php echo $testMode ? ' - Test Mode -' : '' ?></div>
     </div>
 </div>
 <div id="cart-modal" class="uk-modal">

@@ -139,16 +139,13 @@ class AppRenderer {
 	 * @since 2.0
 	 */
 	public function render($layout, $args = array()) {
-
 		// prevent render to recurse indefinitely
 		static $count = 0;
 		$count++;
 
 		if ($count < self::MAX_RENDER_RECURSIONS) {
-
 			// render layout
 			if ($__layout = $this->_getLayoutPath($layout)) {
-
 				// import vars and layout output
 				extract($args);
 				ob_start();
@@ -191,7 +188,6 @@ class AppRenderer {
 			$this->_layout = preg_replace('/[^A-Z0-9_\.-]/i', '', end($parts));
 			$this->_layout_paths[$layout] = $this->_path->path(implode('/', $parts).$this->_extension);
 		}
-
 		return $this->_layout_paths[$layout];
 	}
 

@@ -21,16 +21,17 @@ class PriceHelper extends AppHelper {
 
     public function __construct($app) {
         parent::__construct($app);
-        $this->app->loader->register('Price','classes:price.php');
+        $this->app->loader->register('Price','store.lib:/price/price.php');
 
     }
 
-    public function create($item, $resource = null) {
-        if(!isset($this->_prices[$item])) {
-            $this->_prices[$item] = new Price($this->app, $item, $resource);
+    public function create(StoreItem $item, $resource = null) {
+        $group = $item->getPriceGroup();
+        if(!isset($this->_prices[$group])) {
+            $this->_prices[$group] = new Price($this->app, $item, $resource);
         }
 
-        return $this->_prices[$item];
+        return $this->_prices[$group];
     }
 
 }
