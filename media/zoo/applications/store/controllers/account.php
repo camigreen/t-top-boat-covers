@@ -59,6 +59,8 @@ class AccountController extends AppController {
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
         }
+        $prices = $this->app->price->create('t-top-boat-cover.1819');
+        var_dump($prices);
         $options = array();
         $search = $this->app->request->get('search', 'string');
         if($search != 'all') {
