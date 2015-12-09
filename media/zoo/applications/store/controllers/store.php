@@ -579,6 +579,10 @@ class StoreController extends AppController {
 
     }
 
+    public function priceMarkupModal() {
+        echo $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')))->render('modal.markup_select');
+    }
+
     public function outputToJSON($output = null) {
         $this->app->document->setMimeEncoding('application/json');
         echo json_encode($output);
