@@ -239,7 +239,7 @@ class Price
             $price += $diff;
             $list[] = array('markup' => $value/100, 'price' => $price, 'formatted' => $this->app->number->currency($price, array('currency' => 'USD')), 'text' => $text.($text == 'No Markup' ? ' ' : ' Markup '), 'diff' => $diff,'default' => $default == $value/100 ? true : false);
         }
-        var_dump($list);
+        //var_dump($list);
         return $list;
     }
 
