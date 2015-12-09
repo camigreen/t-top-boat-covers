@@ -14,14 +14,26 @@
  */
 class ItemHelper extends AppHelper {
 
+	/**
+	 * @var [array]
+	 */
+	protected $_items = array();	
+	
+
 	public function __construct($app) {
 		parent::__construct($app);
 		$this->app->loader->register('StoreItem','classes:storeitem.php');
 	}
 
 	public function create($item) {
-		$storeItem = new StoreItem($this->app, $item);
-		return $storeItem;
+		if(!isset($this->_items[$item->id])) {
+			$this->_items[$item->id] = new StoreItem($this->app, $item);
+		}
+		
+		// fire event
+        $this->app->event->dispatcher->notify($this->app->event->create($this->_items[$item->id], 'storeitem:init'));
+
+		return $this->_items[$item->id];
 	}
 }
 

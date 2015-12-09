@@ -3,6 +3,7 @@
 	$price = $item->getPrice();
 	$group = $price->getGroup();
 	$markup = 0;
+	$this->app->renderer->create()->addPath(array('store.lib:/price'))->render('modal.markup_select');
 	$discountHTML = '<div class="uk-h4">Dealer Price</div><div>'.$this->app->number->currency($price->discount, array('currency' => 'USD')).' ('.$price->getDiscountRate().' off of MSRP)</div>';
 	$retailHTML = '<div class="uk-h4">MSRP</div><div>'.$this->app->number->currency($price->retail, array('currency' => 'USD')).'</div>';
 	$markuplist = $price->getMarkupList();

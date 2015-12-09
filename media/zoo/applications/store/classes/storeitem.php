@@ -167,6 +167,12 @@ class StoreItem {
                 $this->$key = $value;
             }
         }
+        if($item->getType()->id == "t-top-boat-cover") {
+            $this->setPriceGroup($item->getType()->id);
+        } else {
+            $this->setPriceGroup($item->alias);
+        }
+
         foreach($item->getElementsByType('itemoptions') as $element) {
             if($element->config->get('option_type') == 'global_options' || $element->config->get('option_type') == 'user_options') {
                 $value = $element->get('option', $element->config->get('default', null));
@@ -221,7 +227,7 @@ class StoreItem {
      *
      * @since 1.0
      */
-    public function getPrice($type = 'discount') {
+    public function getPrice() {
         $this->price = $this->app->price->create($this);
         return $this->price;
         
@@ -235,12 +241,22 @@ class StoreItem {
      * @since 1.0
      */
     public function getPriceGroup() {
-        if(!$this->price_group) {
-            // $this->price_group = $this->alias;
-            $this->price_group = 't-top-boat-cover.1819';
-        }
         return $this->price_group;
         
+    }
+
+    /**
+     * Set the price group.
+     *
+     * @param   String  $value  The price group.
+     *
+     * @return  Price   $this   Support for chaining.
+     *
+     * @since 1.0
+     */
+    public function setPriceGroup($value) {
+        $this->price_group = $value;
+        return $this;
     }
 
     

@@ -10,7 +10,7 @@ class Price
 	/**
 	 * @var [string]
 	 */
-	public $resource = 'prices:prices.php';
+	public $resource = 'store.lib:/price/list.php';
 
 	// Protected Variables
 
@@ -229,7 +229,7 @@ class Price
 	 * @since 1.0
 	 */
 	public function getMarkupList() {
-        $default = $this->getMarkupRate();
+        $default = $this->_markupRate;
         $store = $this->app->account->getStoreAccount();
         $markups = $store->params->get('options.markup.');
         $list = array();

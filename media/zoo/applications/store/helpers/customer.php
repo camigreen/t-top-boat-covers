@@ -20,7 +20,10 @@ class CustomerHelper extends AppHelper {
     public function getAccount() {
         if($this->isRegistered()) {
             $this->_account = $this->_user->getParentAccount();
+        } else {
+            return $this->_user;
         }
+
         
         return $this->_account;
         
@@ -36,11 +39,14 @@ class CustomerHelper extends AppHelper {
                 }
             }
         }
+        if(!$this->_user) {
+            $this->_user = $this->app->account->create('user.public');
+        }
         return $this->_user;
     }
 
     public function isRegistered() {
-        return $this->getUser() ? true : false;
+        return $this->getUser()->type != 'user.public' ? true : false;
     }
 
     public function isReseller() {

@@ -326,7 +326,7 @@ class Account {
      */
     public function getParents() {
 
-        return $this->_loadMappedAccounts()->_mappedAccounts->get('parents.');
+        return $this->_loadMappedAccounts()->_mappedAccounts->get('parents.', array());
 
     }
 

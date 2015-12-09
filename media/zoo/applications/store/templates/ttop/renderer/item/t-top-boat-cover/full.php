@@ -9,8 +9,6 @@ $embed = $this->app->request->get('embed','bool');
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 $storeItem = $this->app->item->create($item);
-$modal = $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')));
-echo $modal->render('modal.markup_select');
 $class = $item->type.'-full';
 $pricing = $this->app->parameter->create();
 $group = 't-top-boat-cover';
