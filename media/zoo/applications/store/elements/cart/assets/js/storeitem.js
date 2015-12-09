@@ -85,7 +85,8 @@
             this.$dealer = this.$element.find('#dealer-price');
             this.$atc = $('#atc-' + this.item.id);
             this.$qty = $('#qty-' + this.item.id);
-            
+            this.item.price_group = $('[name="price_group"]').val();
+            this.item.markup = $('[name="markup"]').val();
             this._getFields();
             this._getOptions();
             this._createConfirmModal();
@@ -259,6 +260,8 @@
                 id: this.item.id,
                 name: this.item.name,
                 pricing: this._getPricing(),
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
                 qty: this.qty,
                 shipping: this.shipping,
                 attributes: this._getAttributes(),
@@ -325,14 +328,23 @@
             return pricing;
         },
         _publishPrice: function () {
+            var item = {
+                id: this.item.id,
+                name: this.item.name,
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
+                qty: this.qty,
+                shipping: this.shipping,
+                attributes: this._getAttributes(),
+                options: this._getOptions()
+            };
             this._debug('Publishing Price');
             var self = this;
-            var pricing = this._getPricing();
-            console.log(pricing);
+            //var pricing = this._getPricing();
             $.ajax({
                 type: 'POST',
                 url: "?option=com_zoo&controller=store&task=getPrice&format=json",
-                data: {pricing: pricing},
+                data: {item: item},
                 success: function(data){
                     var elem = $('#'+self.item.id+'-price span');
                     price = self.trigger('onPublishPrice', data.price);

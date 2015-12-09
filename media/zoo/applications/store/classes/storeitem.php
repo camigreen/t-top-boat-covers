@@ -109,6 +109,31 @@ class StoreItem {
      * @since 1.0.0
      */
     public $price_group;
+
+    /**
+     * String that identifies the pricing group of an item.
+     *
+     * @var [string]
+     * @since 1.0.0
+     */
+    public $markup;
+
+    /**
+     * String that identifies the pricing group of an item.
+     *
+     * @var [string]
+     * @since 1.0.0
+     */
+    public $discount;
+
+    /**
+     * String that identifies the pricing group of an item.
+     *
+     * @var [string]
+     * @since 1.0.0
+     */
+    public $price;
+    
     
     /**
      * Item SKU
@@ -144,10 +169,8 @@ class StoreItem {
         if($item instanceof Item) {
             $this->importZooItem($item);
         } else {
-            echo 'StoreItem';
+            $this->importItem($item);
         }
-
-        $this->generateSKU();
 
     }
 
@@ -197,6 +220,45 @@ class StoreItem {
         
     }
 
+        /**
+     * Populate the object with data from the Zoo Item Object
+     *
+     * @param       Item    Item Object.
+     *
+     * @return      StoreItem   $this   for chaining support
+     *
+     * @since 1.0
+     */
+    public function importItem($item = null) {
+
+
+        foreach($item as $key => $value) {
+            if(property_exists($this, $key)) {
+                if($key != 'app') {
+                    $this->$key = $value;
+                }
+            }
+        }
+        $options = array();
+        foreach($this->options as $key => $value) {
+            $options[$key] = $this->app->parameter->create($value);
+        }
+        $this->options = $options;
+
+        $attributes = array();
+        foreach($this->attributes as $key => $value) {
+            $attributes[$key] = $this->app->parameter->create($value);
+        }
+        $this->attributes = $attributes;
+
+        if(isset($item->markup) && !is_null($item->markup)) {
+            $this->getPrice()->setMarkupRate($item->markup);
+        }
+
+        return $this;
+        
+    }
+
     /**
      * Create a unique SKU to identify the Item and the options and attributes selected.
      *
@@ -212,7 +274,7 @@ class StoreItem {
         foreach($this->options as $key => $value) {
             $options .= $key.$value->get('value');
         }
-        //$options .= $this->getPrice();
+        $options .= $this->getPrice()->get('markup');
         
         $this->sku = hash('md5', $this->id.$options);
         return $this->sku;
@@ -228,9 +290,21 @@ class StoreItem {
      * @since 1.0
      */
     public function getPrice() {
-        $this->price = $this->app->price->create($this);
+        if(!$this->price) {
+            $this->price = $this->app->price->create($this);
+        }
         return $this->price;
         
+    }
+
+    public function getTotal() {
+        if(!$this->price) {
+            $this->getPrice();
+        }
+
+        $this->total = $this->price->get('markup')*$this->qty;
+
+        return $this->total;
     }
 
     /**
@@ -257,6 +331,19 @@ class StoreItem {
     public function setPriceGroup($value) {
         $this->price_group = $value;
         return $this;
+    }
+
+    public function export() {
+        $data = $this->app->data->create();
+        $ignore = array('app', 'price');
+        foreach($this as $key => $value) {
+            if(!in_array($key, $ignore)) {
+                $data->set($key, $value);
+            }
+            
+        }
+        $data->set('total', $this->getPrice()->markup);
+        return $data;
     }
 
     

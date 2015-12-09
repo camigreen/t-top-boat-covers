@@ -18,7 +18,7 @@ class CartHelper extends AppHelper {
     public function __construct($app) {
         parent::__construct($app);
         $this->_items = array();
-        //$this->app->loader->register('CartItem','classes:cartitem.php');
+        //$this->app->loader->register('StoreItem','classes:cartitem.php');
 
     }
 
@@ -46,7 +46,7 @@ class CartHelper extends AppHelper {
     public function add($items) {
 
     	foreach($items as $key => $item) {
-    		$_item = new CartItem($this->app, $item);
+    		$_item = $this->app->item->create($item);
             $sku = $_item->sku;
             if (isset($this->_items[$sku])) {
                 $this->_items[$sku]->qty += $_item->qty;
@@ -104,7 +104,12 @@ class CartHelper extends AppHelper {
     }
 
     public function updateSession() {
-        $data = $this->app->data->create($this->_items);
+        $cartItems = $this->_items;
+        $items = array();
+        foreach($cartItems as $key => $item) {
+            $items[$key] = $item->export();
+        }
+        $data = $this->app->data->create($items);
         $this->app->session->set('cart',(string) $data,'checkout');
         return $this;
     }

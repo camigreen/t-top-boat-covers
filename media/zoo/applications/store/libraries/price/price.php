@@ -85,8 +85,9 @@ class Price
 	*/
 	public function __construct($app, StoreItem $item, $resource = null) {
 		$this->app = $app;
-		$this->init();
 		$this->setItem($item);
+		$this->init();
+		
 	}
 	public function get($name = 'retail', $formatted = false) {
 		if(!$this->{'_'.$name}) {
@@ -173,11 +174,16 @@ class Price
 		$this->_discountRate = (float) $value;
 		return $this;
 	}
-	public function getMarkupRate() {
-		return $this->app->number->toPercentage($this->_markupRate*100, 0);
+	public function getMarkupRate($format = false) {
+		$result = $this->_markupRate;
+		if($format) {
+			$result = $this->app->number->toPercentage($result*100, 0);
+		}
+		return $result;
 	}
 	public function setMarkupRate($value = 0) {
 		$this->_markupRate = (float) $value;
+		$this->calculate();
 		return $this;
 	}
 	/**

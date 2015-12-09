@@ -12,7 +12,7 @@
  *  For Shipping: $price['ITEM-NAME.shipping.OPTION'] = (price) 0.00
 
  */
-$price['t-top-boat-cover.global.option.trolling_motor'] = 125;
+$price['t-top-boat-cover.global.option.trolling_motor'] = 175;
 
 $price['t-top-boat-cover.1819.item.base'] = 0;
 $price['t-top-boat-cover.1819.item.option.fabric.7oz'] = 599;
@@ -27,6 +27,13 @@ $price['t-top-boat-cover.2022.item.option.fabric.8oz'] = 899;
 $price['t-top-boat-cover.2022.item.option.fabric.9oz'] = 1049;
 $price['t-top-boat-cover.2022.shipping.weight'] = 25;
 $price['t-top-boat-cover.2022.shipping.price'] = 30;
+
+$price['t-top-boat-cover.23.item.base'] = 0;
+$price['t-top-boat-cover.23.item.option.fabric.7oz'] = 699;
+$price['t-top-boat-cover.23.item.option.fabric.8oz'] = 899;
+$price['t-top-boat-cover.23.item.option.fabric.9oz'] = 1049;
+$price['t-top-boat-cover.23.shipping.weight'] = 25;
+$price['t-top-boat-cover.23.shipping.price'] = 30;
 
 $price['t-top-boat-cover.24.item.base'] = 0;
 $price['t-top-boat-cover.24.item.option.fabric.7oz'] = 899;

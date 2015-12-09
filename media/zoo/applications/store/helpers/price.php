@@ -26,12 +26,11 @@ class PriceHelper extends AppHelper {
     }
 
     public function create(StoreItem $item, $resource = null) {
-        $group = $item->getPriceGroup();
-        if(!isset($this->_prices[$group])) {
-            $this->_prices[$group] = new Price($this->app, $item, $resource);
+        if(!isset($this->_prices[$item->sku])) {
+            $this->_prices[$item->sku] = new Price($this->app, $item, $resource);
         }
 
-        return $this->_prices[$group];
+        return $this->_prices[$item->sku];
     }
 
 }

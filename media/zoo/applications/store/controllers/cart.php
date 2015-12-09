@@ -47,7 +47,7 @@ class CartController extends AppController {
                     Void
     */
     public function add() {
-
+        //$this->emptyCart();
         $items = $this->app->request->get('cartitems','array');
         $this->cart->add($items);
         $this->output();
@@ -74,9 +74,14 @@ class CartController extends AppController {
 
     public function output() {
         $this->app->document->setMimeEncoding('application/json');
+        $cartItems = $this->cart->getAllItems();
+        $items = array();
+        foreach($cartItems as $key => $item) {
+            $items[$key] = $item->export();
+        }
         $result = array(
             'result' => true,
-            'items' => $this->cart->getAllItems(),
+            'items' => $items,
             'item_count' => $this->cart->getItemCount(),
             'total' => $this->cart->getCartTotal()
         );

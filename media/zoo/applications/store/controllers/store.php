@@ -571,16 +571,30 @@ class StoreController extends AppController {
     }
 
     public function getPrice() {
-        $pricing = $this->app->request->get('post:pricing','array', array());
-        $pricing = $this->app->parameter->create($pricing);
-        $prices = $this->app->prices->get($pricing->get('group'), $pricing->get('markup'));
-        $result['price'] = $prices;
+        $post = $this->app->request->get('post:item','array', array());
+        $markup = $this->app->request->get('post:markup', 'float', null);
+        $post = $this->app->parameter->create($post);
+        $item = $this->app->item->create($post);
+        $price = $item->getPrice();
+        $result['price'] = $price->get('markup');
+        $result['markup'] = $price->getMarkupRate();
         $this->outputToJSON($result);
 
     }
 
     public function priceMarkupModal() {
-        echo $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')))->render('modal.markup_select');
+        $item = $this->app->table->item->get(5);
+        $markup = $this->app->request->get('post:markup', 'float', null);
+        $_item = $this->app->item->create($item);
+        $price = $this->app->price->create($_item);
+        if($markup) {
+            $price->setMarkupRate($markup);
+        }
+        $data = array(
+            'html' => $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')))->render('modal.markup_select', compact('price')),
+            'markup' => $price->getMarkupRate()
+        );
+        $this->outputToJSON($data);
     }
 
     public function outputToJSON($output = null) {

@@ -26,14 +26,21 @@ class ItemHelper extends AppHelper {
 	}
 
 	public function create($item) {
-		if(!isset($this->_items[$item->id])) {
-			$this->_items[$item->id] = new StoreItem($this->app, $item);
-		}
+		//var_dump($item);
+		// if(is_string($item) || is_array($item)) {
+		// 	$item = $this->app->parameter->create($item);
+		// }
+		// if(!isset($item->sku) || !isset($this->_items[$item->sku])) {
+		// 	var_dump($item);
+		// 	$item = new StoreItem($this->app, $item);
+		// 	$this->_items[$item->sku] = $item;
+		// }
+		$storeItem = new StoreItem($this->app, $item);
 		
 		// fire event
-        $this->app->event->dispatcher->notify($this->app->event->create($this->_items[$item->id], 'storeitem:init'));
+        $this->app->event->dispatcher->notify($this->app->event->create($storeItem, 'storeitem:init'));
 
-		return $this->_items[$item->id];
+		return $storeItem;
 	}
 }
 

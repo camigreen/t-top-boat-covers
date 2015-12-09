@@ -196,13 +196,13 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
                 <?php if ($this->checkPosition('item_attributes')) : ?>
                     <div class="uk-width-1-1 uk-margin-top item-attribute-container">
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
-                            <input type="hidden" name="option-set" data-name="Option Set" value="ttopboatcover" />
                             <input type="hidden" name="item" data-name="Item Name" value="<?php echo $category->name; ?>" />
                             <input type="hidden" name="manufacturer" data-name="Item Manufacturer" value="Laporte's T-Top Boat Covers" />
                             <input type="hidden" name="boat_make" data-name="Boat Make" value="<?php echo $item->getPrimaryCategory()->name; ?>" />
                             <input type="hidden" name="boat_model" data-name="Boat Model" value="<?php echo $item->name; ?>" />
                             <?php echo $this->renderPosition('item_attributes'); ?>
-                        </fieldset>  
+                        </fieldset>
+                        <input type="hidden" name="price_group" data-name="Price Group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
                     </div>
                 <?php endif; ?>
             </div>

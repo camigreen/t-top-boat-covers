@@ -26,6 +26,7 @@ class StoreItemEvent {
         if($storeItem->getPriceGroup() == 't-top-boat-cover') {
         	$storeItem->setPriceGroup($storeItem->getPriceGroup().'.'.$storeItem->attributes['boat_length']->get('value'));
         }
+        $storeItem->generateSKU();
 
 	}
 
