@@ -197,12 +197,11 @@ $data_item = array('id' => $item->id, 'name' => 'T-Top Boat Cover');
                     <div class="uk-width-1-1 uk-margin-top item-attribute-container">
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
                             <input type="hidden" name="item" data-name="Item Name" value="<?php echo $category->name; ?>" />
-                            <input type="hidden" name="manufacturer" data-name="Item Manufacturer" value="Laporte's T-Top Boat Covers" />
-                            <input type="hidden" name="boat_make" data-name="Boat Make" value="<?php echo $item->getPrimaryCategory()->name; ?>" />
-                            <input type="hidden" name="boat_model" data-name="Boat Model" value="<?php echo $item->name; ?>" />
+                            <input type="hidden" name="oem" data-name="<?php echo $storeItem->attributes->get('oem.name'); ?>" value="<?php echo $storeItem->attributes->get('oem.value'); ?>" />
+                            <input type="hidden" name="boat_model" data-name="Boat Model" value="<?php echo $storeItem->name; ?>" />
                             <?php echo $this->renderPosition('item_attributes'); ?>
                         </fieldset>
-                        <input type="hidden" name="price_group" data-name="Price Group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
+                        <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
                     </div>
                 <?php endif; ?>
             </div>
@@ -428,7 +427,7 @@ jQuery(function($){
                         function(e, args) {
                             var items = args[0];
                             console.log(items);
-                            items[0].name = 'Custom fit '+items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.boat_make.text+' '+items[0].attributes.boat_model.text;
+                            items[0].name = 'Custom fit '+items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.oem.name+' '+items[0].attributes.boat_model.text;
                             return items;
                         }
                     ],

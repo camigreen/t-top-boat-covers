@@ -1,6 +1,5 @@
 <?php 
     $items = $this->cart->getAllItems();
-    $order->calculateTotals('markup');
 ?>
 <table class="uk-table">
     <thead>
@@ -16,13 +15,19 @@
                 <td>
                     <div class="ttop-checkout-item-name"><?php echo $item->name ?></div>
                     <div class="ttop-checkout-item-description"><?php echo $item->description ?></div>
-                    <div class="ttop-checkout-item-options"><?php echo $item->getOptions(); ?></div>
+                    <div class="ttop-checkout-item-options"><?php echo $item->getOptionsList(); ?></div>
 
                 </td>
-                <td>
-                    <input type="number" class="uk-width-1-3 uk-text-center" name="qty" value="<?php echo $item->qty ?>" min="1"/>
-                    <button class="uk-button uk-button-primary update-qty">Update</button>                
-                </td>
+                <?php if($page != 'payment') : ?>
+                    <td>
+                        <input type="number" class="uk-width-1-3 uk-text-center" name="qty" value="<?php echo $item->qty ?>" min="1"/>
+                        <button class="uk-button uk-button-primary update-qty">Update</button>                
+                    </td>
+                <?php else : ?>
+                    <td>
+                        <div><?php echo $item->qty ?></div>             
+                    </td>
+                <?php endif; ?>
                 <td>
                     <?php echo $item->getTotal('markup', true); ?>
                 </td>
@@ -35,7 +40,7 @@
                     Subtotal:
                 </td>
                 <td>
-                    <?php echo $this->app->number->currency($order->subtotal,array('currency' => 'USD')); ?>
+                    <?php echo $this->app->number->currency($order->getSubTotal('markup'),array('currency' => 'USD')); ?>
                 </td>
             </tr>
             <tr>
@@ -43,7 +48,7 @@
                     Shipping:
                 </td>
                 <td>
-                    <?php echo $this->app->number->currency($order->ship_total,array('currency' => 'USD')); ?>
+                    <?php echo $this->app->number->currency($order->getShippingTotal(),array('currency' => 'USD')); ?>
                 </td>
             </tr>
             <tr>
@@ -51,7 +56,7 @@
                     Sales Tax:
                 </td>
                 <td>
-                    <?php echo $this->app->number->currency($order->tax_total,array('currency' => 'USD')); ?>
+                    <?php echo $this->app->number->currency($order->getTaxTotal(),array('currency' => 'USD')); ?>
                 </td>
             </tr>
             <tr>
@@ -59,7 +64,7 @@
                     Total Balance Due:
                 </td>
                 <td>
-                    <?php echo $this->app->number->currency($order->total,array('currency' => 'USD')); ?>
+                    <?php echo $this->app->number->currency($order->getTotal('markup'),array('currency' => 'USD')); ?>
                 </td>
             </tr>
         </tfoot>

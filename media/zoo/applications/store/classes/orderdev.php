@@ -34,7 +34,6 @@ class OrderDev {
 	protected $_account;
 	
 	public function __construct() {
-
 	}
 
 	public function save($writeToDB = false) {
@@ -43,7 +42,8 @@ class OrderDev {
 		$now        = $this->app->date->create();
 		$cUser = $this->app->customer->getUser();
 
-
+		var_dump($this->params);
+		var_dump((string) $this->elements->get('items.77a0f41cadcba66002e895bef422f12c'));
     	// set created date
 		try {
             $this->created = $this->app->date->create($this->created, $tzoffset)->toSQL();
@@ -129,17 +129,47 @@ class OrderDev {
 		return $item->total - ($item->total*$discount);
 	}
 
-	public function getSubtotal($type = 'discount') {
+	public function getSubtotal($display = 'retail') {
 
 		if(!$items = $this->elements->get('items.')) {
 			$items = $this->app->cart->create()->getAllItems();
 		}
 		$this->subtotal = 0;
 		foreach($items as $item) {
-			$this->subtotal += $item->getTotal($type);
+			$this->subtotal += $item->getTotal($display);
 		}
 		return $this->subtotal;
 	}
+
+	public function getShippingTotal() {
+		if($this->ship_total) {
+			return $this->ship_total;
+		}
+        if(!$service = $this->elements->get('shipping_method')) {
+            return 0;
+        }
+        $application = $this->app->zoo->getApplication();
+        $markup = $application->getParams()->get('global.shipping.ship_markup', 0);
+        $markup = intval($markup)/100;
+        $ship = $this->app->shipper;
+        $ship_to = $this->app->parameter->create($this->elements->get('shipping.'));
+
+        $rates = $ship->setDestination($ship_to)->assemblePackages($this->app->cart->getAllItems())->getRates();
+        $rate = 0;
+        foreach($rates as $shippingMethod) {
+            if($shippingMethod->getService()->getCode() == $service) {
+                $rate = $shippingMethod->getTotalCharges();
+            }
+        }
+
+		$this->ship_total = $rate += ($rate * $markup);
+
+        return $this->ship_total;
+    }
+
+    public function getTotal($display = 'retail') {
+    	return $this->getSubTotal($display) + $this->getTaxTotal() + $this->getShippingTotal();
+    }
 
 	public function isProcessed() {
 		return $this->id ? true : false;
@@ -185,21 +215,6 @@ class OrderDev {
 		
 		$this->tax_total = $taxtotal;
 		return $this->tax_total;
-	}
-	public function calculateTotals($type = 'discount') {
-
-		if(!$this->isProcessed()) {
-			$this->getSubtotal($type);
-			$this->getTaxTotal();
-		}
-
-		$this->total = $this->subtotal + $this->tax_total + $this->ship_total;
-		$totals['subtotal'] = $this->subtotal;
-		$totals['taxtotal'] = $this->tax_total;
-		$totals['shiptotal'] = $this->ship_total;
-		$totals['total'] = $this->total;
-
-		return $totals;
 	}
 
 	public function calculateCommissions() {

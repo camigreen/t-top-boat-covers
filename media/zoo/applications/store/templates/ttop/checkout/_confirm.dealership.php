@@ -10,6 +10,7 @@ $elements = $order->elements;
 $article = JTable::getInstance("content"); 
 $article->load(22); // Get Article ID  
 $salesperson = null;
+list($page) = explode('.',$this->page, 2);
 ?>
 <div class="uk-width-1-1 uk-container-center ttop-receipt">
     <div class="uk-grid">
@@ -62,26 +63,12 @@ $salesperson = null;
         </div>
         <div class='uk-width1-1 uk-margin-top'>
             <?php if($this->app->customer->isReseller()) : ?>
-            <div class="uk-width-1-1">
-                <button class="uk-button uk-button-primary uk-width-1-3 uk-margin-bottom items-table uk-hidden" data-uk-toggle="{target:'.items-table'}">Hide Full Invoice</button>
-                <button class="uk-button uk-button-primary uk-width-1-3 uk-margin-bottom items-table" data-uk-toggle="{target:'.items-table'}">View Full Invoice</button>
+            <div class='uk-width1-1 items-table'>
+                <?php echo $this->partial('item.table.reseller',compact('order', 'page')); ?>
             </div>
-            <div class='uk-width1-1 items-table uk-hidden'>
-                <?php echo $this->partial('item.table.reseller',compact('order')); ?>
-            </div>
-             <div class='uk-width1-1 items-table'>
-                <?php echo $this->partial('item.table',compact('order')); ?>
-            </div>
-            <script>
-                jQuery(function($) {
-                    $('button.items-table').on('click', function(e){
-                        e.preventDefault();
-                    })
-                })
-            </script>
         <?php else : ?>
-            <div class='uk-width1-1 items-table retail'>
-                <?php echo $this->partial('item.table',compact('order')); ?>
+            <div class='uk-width1-1 items-table'>
+                <?php echo $this->partial('item.table',compact('order', 'page')); ?>
             </div>
         <?php endif; ?>
         </div>

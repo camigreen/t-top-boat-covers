@@ -39,6 +39,14 @@ class Price
 	protected $_markup;
 
 	/**
+	 * The shipping weight of the item.
+	 *
+	 * @var [float]
+	 * @since 1.0.0
+	 */
+	protected $_shipWeight;
+
+	/**
 	 * Price List for the provided group
 	 *
 	 * @var [ParameterData]
@@ -85,65 +93,62 @@ class Price
 	*/
 	public function __construct($app, StoreItem $item, $resource = null) {
 		$this->app = $app;
-		$this->setItem($item);
-		$this->init();
-		
-	}
-	public function get($name = 'retail', $formatted = false) {
-		if(!$this->{'_'.$name}) {
-			$this->calculate();
-		}
-		if ($formatted) {
-			$price = $this->app->number->currency($this->$name(), array('currency' => 'USD'));
-		} else {
-			$price = (float) $this->$name();
-		}
-		return $price;
-	}
-	protected function discount() {
-		return (float) $this->_discount;
-	}
-	protected function markup() {
-		return (float) $this->_markup;
-	}
-	protected function retail() {
-		return (float) $this->_retail;
-	}
-	protected function init() {
-
-
 		// Set the Markup
 		$account = $this->app->customer->getAccount();
-		$this->setMarkupRate($account->params->get('markup')/100);
+		$this->_markupRate = $account->params->get('markup')/100;
 
 		// Set the Discount
-		$this->setDiscountRate($account->params->get('discount')/100);
+		$this->_discountRate = $account->params->get('discount')/100;
 
+		$this->setItem($item);
 
-		return $this;
-	}
-
-	/**
-	 * Describe the Function
-	 *
-	 * @param 	datatype		Description of the parameter.
-	 *
-	 * @return 	datatype	Description of the value returned.
-	 *
-	 * @since 1.0
-	 */
-	protected function calculate() {
 		if($path = $this->app->path->path($this->resource)) {
 			include $path;
 		}
 		$prices = $this->app->parameter->create($price);
 		$this->_price_options = $this->app->parameter->create($prices->get($this->_group.'.item.option.'));
 		$this->_base = $prices->get($this->_group.'.item.base');
-		$options = $this->getCalculatedOptions();
-		$this->_retail = $this->_base + $options;
-		$this->_markup = $this->_retail + ($this->_retail*$this->_markupRate);
-		$this->_discount = $this->_retail - ($this->_retail*$this->_discountRate);
+		$this->_shipWeight = $prices->get($this->_group.'.shipping.weight');
+		
 	}
+	public function get($name = 'retail', $formatted = false) {
+		
+		if(!method_exists($this, $name)) {
+			$name = 'retail';
+		}
+		
+		if ($formatted) {
+			$price = $this->app->number->currency($this->$name(), array('currency' => 'USD'));
+		} else {
+			$price = (float) $this->$name();
+		}
+		
+		return $price;
+	}
+	
+	protected function reseller() {
+		$base = $this->base();
+		return (float) $base - ($base*$this->_discountRate);
+	}
+	protected function markup() {
+		$base = $this->base();
+		return (float) $base + ($base*$this->_markupRate);
+	}
+	protected function retail() {
+		$retail = $this->base();
+		$retail += $retail*$this->_markupRate;
+		$retail -= $retail*$this->_discountRate;
+		return (float) $retail;
+	}
+	protected function margin() {
+		$margin = $this->markup() - $this->reseller();
+		return (float) $margin;
+	}
+	protected function base() {
+		$options = $this->getCalculatedOptions();
+		return $this->_base + $options;
+	}
+
 	/**
 	 * Describe the Function
 	 *
@@ -156,7 +161,9 @@ class Price
 	public function getCalculatedOptions() {
 		$total = 0;
 		foreach($this->getItemOptions() as $key => $value) {
-			$total += $this->_price_options->get($key.'.'.$value->get('value'), 0);
+			list($field) = explode('.', $key, 2);
+            $total += $this->_price_options->get($field.'.'.$value, 0);
+			
 		}
 		return $total;		
 	}
@@ -181,10 +188,19 @@ class Price
 		}
 		return $result;
 	}
-	public function setMarkupRate($value = 0) {
-		$this->_markupRate = (float) $value;
-		$this->calculate();
+	public function setMarkupRate($value = null) {
+		if(!is_null($value)) {
+			$this->_markupRate = (float) $value;
+		}
 		return $this;
+	}
+	public function getProfitRate($format = false) {
+		$profit = $this->_discountRate + $this->_markupRate;
+		if($format) {
+			$profit *= 100;
+			$profit = $this->app->number->toPercentage($profit, 0);
+		}
+		return $profit;
 	}
 	/**
 	 * Set the Item
@@ -198,7 +214,7 @@ class Price
 	public function setItem(StoreItem $item) {
 		$this->_item = $item;
 		$this->setGroup($item->getPriceGroup());
-		$this->calculate();
+		$this->setMarkupRate($item->markup);
 		return $this;
 	}
 
@@ -240,13 +256,26 @@ class Price
         $markups = $store->params->get('options.markup.');
         $list = array();
         foreach($markups as $value => $text) {
-            $price = $this->get('retail');
+            $price = $this->get('base');
             $diff = $price * ($value/100);
             $price += $diff;
             $list[] = array('markup' => $value/100, 'price' => $price, 'formatted' => $this->app->number->currency($price, array('currency' => 'USD')), 'text' => $text.($text == 'No Markup' ? ' ' : ' Markup '), 'diff' => $diff,'default' => $default == $value/100 ? true : false);
         }
         //var_dump($list);
         return $list;
+    }
+
+    /**
+     * Describe the Function
+     *
+     * @param 	datatype		Description of the parameter.
+     *
+     * @return 	datatype	Description of the value returned.
+     *
+     * @since 1.0
+     */
+    public function getShippingWeight() {
+    	return $this->_shipWeight;
     }
 
     /**

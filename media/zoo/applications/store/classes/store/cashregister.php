@@ -54,7 +54,6 @@ class CashRegister {
         $this->application = $this->app->zoo->getApplication();
 
         $this->account = $this->app->customer->getAccount();
-        $this->calculateTotals();
     }
     
     protected function updateItemQty() {
@@ -173,6 +172,8 @@ class CashRegister {
         $markup = intval($markup)/100;
         $ship = $this->app->shipper;
         $ship_to = $this->app->parameter->create($this->order->elements->get('shipping.'));
+        // var_dump($this->app->cart->getAllItems());
+        // return;
         $rates = $ship->setDestination($ship_to)->assemblePackages($this->app->cart->getAllItems())->getRates();
         $rate = 0;
         foreach($rates as $shippingMethod) {
@@ -187,11 +188,6 @@ class CashRegister {
     private function clearTotals() {
         $this->subtotal = 0;
         $this->taxTotal = 0;
-    }
-    
-    public function calculateTotals() {
-        $this->order->ship_total = $this->getShippingRate($this->order->elements->get('shipping_method'));
-        $this->order->calculateTotals();
     }
 
     public function processPayment($method) {

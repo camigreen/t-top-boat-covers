@@ -14,31 +14,39 @@
     </thead>
     <tbody>
     <?php foreach ($items as $sku => $item) : ?>
+            <?php echo $item->make; ?>
+            <?php $price = $item->getPrice(); ?>
             <tr id="<?php echo $sku; ?>">
                 <td>
                     <div class="ttop-checkout-item-name"><?php echo $item->name ?></div>
                     <div class="ttop-checkout-item-description"><?php echo $item->description ?></div>
-                    <div class="ttop-checkout-item-options"><?php echo $item->getOptions(); ?></div>
+                    <div class="ttop-checkout-item-options"><?php echo $item->getOptionsList(); ?></div>
 
                 </td>
+                <?php if($page != 'payment') : ?>
+                    <td class="ttop-checkout-item-total">
+                        <?php echo $item->qty ?>         
+                    </td>
+                <?php else : ?>
+                    <td>
+                        <input type="number" class="uk-width-1-3 uk-text-center" name="qty" value="<?php echo $item->qty ?>" min="1"/>
+                        <button class="uk-button uk-button-primary update-qty">Update</button>                
+                    </td>
+                <?php endif; ?>
                 <td class="ttop-checkout-item-total">
-                    <input type="number" class="uk-width-1-3 uk-text-center" name="qty" value="<?php echo $item->qty ?>" min="1"/>
-                    <button class="uk-button uk-button-primary update-qty">Update</button>                
+                    <?php echo $price->get('base', true); ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $item->getTotal('retail', true); ?>
+                    <?php echo $price->get('markup', true); ?>
+                    <?php echo '<p class="uk-text-small">('.$price->getMarkupRate(true).' Markup)</p>'; ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $item->getTotal('markup', true); ?>
-                    <?php echo '<p class="uk-text-small">('.$item->getMarkupRate().' Markup)</p>'; ?>
+                    <?php echo $price->get('reseller', true); ?>
+                    <?php echo '<p class="uk-text-small">('.$price->getDiscountRate(true).' Discount)</p>'; ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $item->getTotal('discount', true); ?>
-                    <?php echo '<p class="uk-text-small">('.$item->getDiscountRate().' Discount)</p>'; ?>
-                </td>
-                <td class="ttop-checkout-item-total">
-                    <?php echo $item->getTotal('margin', true); ?>
-                    <?php echo '<p class="uk-text-small">(Total Discount '.$item->getProfitRate().')</p>'; ?>
+                    <?php echo $price->get('margin', true);; ?>
+                    <?php echo '<p class="uk-text-small">(Total Discount '.$price->getProfitRate(true).')</p>'; ?>
                 </td>
             </tr>
     <?php endforeach; ?>
@@ -49,7 +57,7 @@
                 Subtotal:
             </td>
             <td>
-                <?php echo $this->app->number->currency($order->subtotal,array('currency' => 'USD')); ?>
+                <?php echo $this->app->number->currency($order->getSubtotal('reseller'),array('currency' => 'USD')); ?>
             </td>
         </tr>
         <tr>
@@ -57,7 +65,7 @@
                 Shipping:
             </td>
             <td>
-                <?php echo $this->app->number->currency($order->ship_total,array('currency' => 'USD')); ?>
+                <?php echo $this->app->number->currency($order->getShippingTotal(),array('currency' => 'USD')); ?>
             </td>
         </tr>
         <tr>
@@ -65,7 +73,7 @@
                 Sales Tax:
             </td>
             <td>
-                <?php echo $this->app->number->currency($order->tax_total,array('currency' => 'USD')); ?>
+                <?php echo $this->app->number->currency($order->getTaxTotal(),array('currency' => 'USD')); ?>
             </td>
         </tr>
         <tr>
@@ -73,7 +81,7 @@
                 Total Balance Due:
             </td>
             <td>
-                <?php echo $this->app->number->currency($order->total,array('currency' => 'USD')); ?>
+                <?php echo $this->app->number->currency($order->getTotal('reseller'),array('currency' => 'USD')); ?>
             </td>
         </tr>
     </tfoot>

@@ -281,6 +281,19 @@
             $('body').ShoppingCart('addToCart', items);
             this.trigger('afterAddToCart');
         },
+        getItem: function() {
+            var item = {
+                id: this.item.id,
+                name: this.item.name,
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
+                qty: this.qty,
+                shipping: this.shipping,
+                attributes: this._getAttributes(),
+                options: this._getOptions()
+            };
+            return item;
+        },
         _confirm: function() {
             var modal = this.confirm.elem;
             var accept = modal.find('[name="accept"]');

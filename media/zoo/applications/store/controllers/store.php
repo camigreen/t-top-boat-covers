@@ -583,13 +583,9 @@ class StoreController extends AppController {
     }
 
     public function priceMarkupModal() {
-        $item = $this->app->table->item->get(5);
-        $markup = $this->app->request->get('post:markup', 'float', null);
+        $item = $this->app->request->get('post:item', 'array', array());
         $_item = $this->app->item->create($item);
-        $price = $this->app->price->create($_item);
-        if($markup) {
-            $price->setMarkupRate($markup);
-        }
+        $price = $_item->getPrice();
         $data = array(
             'html' => $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')))->render('modal.markup_select', compact('price')),
             'markup' => $price->getMarkupRate()

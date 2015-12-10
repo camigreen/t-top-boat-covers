@@ -142,18 +142,18 @@ class ShipperHelper extends AppHelper {
         $newpackage = $this->app->parameter->create();
         $count = 1;
         foreach($items as $item) {
-            $shipping = $this->app->prices->getShipping('t-top-boat-cover.24');
+            $shipWeight = $item->getPrice()->getShippingWeight();
             $qty = $item->qty;
             while($qty >= 1) {
-                if(($newpackage->get('weight', 0) + $shipping) > $this->packageWeightMax) {
+                if(($newpackage->get('weight', 0) + $shipWeight) > $this->packageWeightMax) {
                     $package = new \SimpleUPS\Rates\Package();
                     $package->setWeight($newpackage->get('weight'))->setDeclaredValue($newpackage->get('insurance'), 'USD');
                     $this->packages[] = $package;
                     $newpackage = $this->app->parameter->create();
                     $count = 1;
                 }
-                $newpackage->set('weight', $newpackage->get('weight', 0) + $shipping);
-                $newpackage->set('insurance', $newpackage->get('insurance', 0.00) + $item->getPrice()*$this->packageInsuredValuePercentage);
+                $newpackage->set('weight', $newpackage->get('weight', 0) + $shipWeight);
+                $newpackage->set('insurance', $newpackage->get('insurance', 0.00) + $item->getPrice()->retail*$this->packageInsuredValuePercentage);
                 $count++;
                 $qty--;
             }
