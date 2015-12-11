@@ -38,7 +38,7 @@ class CheckoutController extends AppController {
         $this->baseurl = $this->app->link(array('controller' => $this->controller), false);
 
 
-        $this->cart = $this->app->cart->create();
+        $this->cart = $this->app->cart;
 
         // registers tasks
         $this->registerTask('receipt', 'display');
@@ -60,9 +60,9 @@ class CheckoutController extends AppController {
     */
     public function display($cachable = false, $urlparams = false) {
 
-        if($this->cart->isEmpty()) {
-            $this->setRedirect('/');
-        }
+        // if($this->cart->isEmpty()) {
+        //     $this->setRedirect('/');
+        // }
 
         if($this->task != 'receipt') {
             $this->CR = $this->app->cashregister->start();
@@ -229,15 +229,12 @@ class CheckoutController extends AppController {
         if(!$id = $this->app->request->get('oid', 'int', 0)) {
             return $this->app->error->raiseError(500, JText::_('Unable to locate that order.'));
         }
-        
+        $this->app->document->addScript('assets:js/formhandler.js');
         $order = $this->app->orderdev->get($id);
+        $order->save();
         $account = $order->getAccount();
         $layout = 'checkout';
         $this->page = 'receipt';
-        if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
-            
-        }
 
         $this->title = 'Order Receipt';
         $this->subtitle = 'Thank you for your purchase.';
@@ -284,6 +281,10 @@ class CheckoutController extends AppController {
 
         $CR->sendNotificationEmail(6371, 'invoice');
         $CR->sendNotificationEmail(6371, 'payment');
+    }
+
+    public function home() {
+        $this->setRedirect('/');
     }
 
     public function save() {

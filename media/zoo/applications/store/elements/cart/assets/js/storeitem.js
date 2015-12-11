@@ -416,7 +416,7 @@
                 itemAttributes[elem.prop('name')] = {
                     name: elem.data('name'),
                     value: elem.val(),
-                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
+                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.data('text'))
                 }
             });
 //            this._debug('Options Collected.');

@@ -29,17 +29,20 @@ class ttopboatcoverStoreItem extends StoreItem {
     public function importItem($item = null) {
         parent::importItem($item);
 		
-		$this->name = 'T-Top Boat Cover';
+
         $this->price_group = 'ttopboatcover.'.$this->attributes['boat_length']->get('value');
 
         if($item instanceof Item) {
+          $this->name = 'T-Top Boat Cover';
         	$this->attributes['boat_model'] = $this->app->data->create();
-	        $this->attributes['boat_model']->set('name', $this->name);
-	        $this->attributes['boat_model']->set('value', $this->name);
+	        $this->attributes['boat_model']->set('name', 'Boat Model');
+	        $this->attributes['boat_model']->set('value', $item->name);
+          $this->attributes['boat_model']->set('text', $item->name);
 	        list($oem) = $item->getRelatedCategories();
 	        $this->attributes['oem'] = $this->app->data->create();
-	        $this->attributes['oem']->set('name', $oem->name);
+	        $this->attributes['oem']->set('name', 'OEM');
 	        $this->attributes['oem']->set('value', $oem->id);
+          $this->attributes['oem']->set('text', $oem->name);
         }
         
 

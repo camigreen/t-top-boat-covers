@@ -171,8 +171,12 @@ class Price
 	public function getGroup() {
 		return $this->_group;
 	}
-	public function getDiscountRate() {
-		return $this->app->number->toPercentage($this->_discountRate*100, 0);
+	public function getDiscountRate($format = false) {
+		$result = $this->_discountRate;
+		if($format) {
+			return $this->app->number->toPercentage($result*100, 0);
+		}
+		return $result;
 	}
 	public function setDiscountRate($value = 0) {
 		$this->_discountRate = (float) $value;

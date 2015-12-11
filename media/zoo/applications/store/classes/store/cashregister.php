@@ -68,7 +68,7 @@ class CashRegister {
     }
     
     public function scanItems () {
-        $cart = $this->app->cart->create();
+        $cart = $this->app->cart;
         $this->order->items = $cart->getAllItems();
     }
     
@@ -221,7 +221,7 @@ class CashRegister {
 
     public function processPO () {
 
-        $items = $this->app->cart->create();
+        $items = $this->app->cart;
         $this->order->transaction_id = "Purchase Order";
         $this->order->elements->set('items.', $items->getAllItems());
         // Update Payment Status

@@ -172,7 +172,11 @@ class StoreItem {
      *
      * @param datatype    $app    Parameter Description
      */
-    public function __construct() {
+    public function __construct($app) {
+
+        $this->app = $app;
+
+        $this->discount = $this->app->customer->getAccount()->params->get('discount', 0)/100;
 
     }
 

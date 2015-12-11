@@ -31,8 +31,8 @@
 	</type>
 	<type name="payment">
 		<fieldset group="purchase_order" label="Billing Address" controlname="elements[payment]" >
-			<field name="account_name" type="storetext" width="1-1" default="" label="Account Name" description="" />
-			<field name="account_number" type="storetext" width="1-1" default="" label="Account Number" description="" />
+			<field name="account_name" type="storetext" width="1-1" default="" label="Account Name" description="" disabled="1"/>
+			<field name="account_number" type="storetext" width="1-1" default="" label="Account Number" description="" disabled="1"/>
 			<field name="customer_name" type="storetext" width="1-1" default="" label="Customer Name" description=""  required="1" />
 			<field name="po_number" type="storetext" width="1-1" default="" label="P.O. Number" description="" required="1" />
 		</fieldset>

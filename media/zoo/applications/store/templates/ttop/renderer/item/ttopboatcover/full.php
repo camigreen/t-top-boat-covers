@@ -180,8 +180,8 @@ $category = $item->getPrimaryCategory()->getParent();
                 <?php if ($this->checkPosition('item_attributes')) : ?>
                     <div class="uk-width-1-1 uk-margin-top item-attribute-container">
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
-                            <input type="hidden" name="oem" data-name="OEM" value="<?php echo $storeItem->attributes['oem']->get('value'); ?>" />
-                            <input type="hidden" name="boat_model" data-name="Boat Model" value="<?php echo $storeItem->name; ?>" />
+                            <input type="hidden" name="oem" data-name="OEM" data-text="<?php echo $storeItem->attributes['oem']->get('text'); ?>" value="<?php echo $storeItem->attributes['oem']->get('value'); ?>" />
+                            <input type="hidden" name="boat_model" data-name="Boat Model" data-text="<?php echo $storeItem->attributes['boat_model']->get('text'); ?>" value="<?php echo $storeItem->attributes['boat_model']->get('value'); ?>" />
                             <?php echo $this->renderPosition('item_attributes'); ?>
                         </fieldset>
                         <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
@@ -415,7 +415,7 @@ jQuery(function($){
                         function(e, args) {
                             var items = args[0];
                             console.log(items);
-                            items[0].name = 'Custom fit '+items[0].name+' for a '+items[0].options['year.text']+' '+items[0].attributes['oem.name']+' '+items[0].attributes['boat_model.text'];
+                            items[0].name = 'Custom fit '+items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.oem.text+' '+items[0].attributes.boat_model.text;
                             return items;
                         }
                     ],

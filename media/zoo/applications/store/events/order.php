@@ -27,10 +27,9 @@ class OrderEvent {
         $order->table = $app->table->orderdev;
         $order->params = $app->parameter->create($order->params);
         $order->elements = $app->parameter->create($order->elements);
-       	$app->loader->register('StoreItem', 'classes:storeitem.php');
         $items = $order->elements->get('items.', array());
         foreach($items as $key => $item) {
-        	$item = new StoreItem($app, $item);
+        	$item = $app->item->create($item);
          	$order->elements->set('items.'.$key, $item);
          }
         //$order->elements->set('items', $app->parameter->create($items));

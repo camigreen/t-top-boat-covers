@@ -18,6 +18,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
     </div>
     <div id="variables" class="uk-width-1-1 uk-hidden">
         <?php var_dump($order); ?>
+        <?php var_dump($this->cart->getAllItems()); ?>
     </div>
 </div>
 <?php endif; ?>
@@ -104,7 +105,6 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
         
     </div>
 </div>
-<?php var_dump($this->app->cart); ?>
 
 <script type="text/javascript">
 

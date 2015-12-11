@@ -31,15 +31,13 @@ class ItemHelper extends AppHelper {
 			if($type) {
 				if(file_exists($this->app->path->path('classes:store/items/'.$type.'.php'))) {
 					$this->app->loader->register($class, 'classes:store/items/'.$type.'.php');
-					$storeItem = new $class();
+					$storeItem = new $class($this->app);
 				} else {
-					$storeItem = new $class();
+					$storeItem = new $class($this->app);
 				}
 			} else {
-				$storeItem = new $class();
+				$storeItem = new $class($this->app);
 			} 
-
-			$storeItem->app = $this->app;
 
 			$storeItem->importItem($item);
 

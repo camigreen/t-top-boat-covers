@@ -1,11 +1,11 @@
 <?php 
     $items = $this->cart->getAllItems() ? $this->cart->getAllItems() : $order->elements->get('items.');
 ?>
-<table class="uk-table">
+<table id="item-reseller-table" class="uk-table">
     <thead>
         <tr>
             <th class="uk-width-4-10">Item Name</th>
-            <th class="uk-width-2-10">Quantity</th>
+            <th>Quantity</th>
             <th class="uk-width-1-10">MSRP</th>
             <th class="uk-width-1-10">Customer Retail Price</th>
             <th class="uk-width-1-10">Dealer's Price</th>
@@ -20,15 +20,16 @@
                 <td>
                     <div class="ttop-checkout-item-name"><?php echo $item->name ?></div>
                     <div class="ttop-checkout-item-description"><?php echo $item->description ?></div>
-                    <div class="ttop-checkout-item-options"><?php echo $item->getOptionsList(); ?></div>
+                    <a href="#" class="uk-text-small option-expand" data-uk-toggle="{target:'#item-reseller-table #<?php echo $sku; ?> .item-options'}" ><span class="uk-icon-plus-square-o uk-margin-small-right item-options"></span><span class="uk-icon-minus-square-o uk-margin-small-right item-options uk-hidden"></span>Options</a> 
+                    <div class="ttop-checkout-item-options item-options uk-hidden"><?php echo $item->getOptionsList(); ?></div>
 
                 </td>
-                <?php if($page != 'payment') : ?>
-                    <td class="ttop-checkout-item-total">
+                <?php if($this->page != 'payment') : ?>
+                    <td class="ttop-checkout-item-total uk-width-1-10">
                         <?php echo $item->qty ?>         
                     </td>
                 <?php else : ?>
-                    <td>
+                    <td class="ttop-checkout-item-total uk-width-2-10">
                         <input type="number" class="uk-width-1-3 uk-text-center" name="qty" value="<?php echo $item->qty ?>" min="1"/>
                         <button class="uk-button uk-button-primary update-qty">Update</button>                
                     </td>

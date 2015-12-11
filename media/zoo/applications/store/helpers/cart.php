@@ -15,16 +15,18 @@ class CartHelper extends AppHelper {
     
     protected $_items = array();
 
-    public function create() {
-        $this->app->createLogger('file', array($this->app->path->path('logs:test.txt')));
-        $message = (string) $this->app->data->create($this->_items);
-        $app->log->notice($message,'file');
+    public function __construct($app) {
+        parent::__construct($app);
 
         $items = $this->app->session->get('cart',array(),'checkout');
 
-        $this->add($items);
-
-        return $this;
+        foreach($items as $key => $value) {
+            if(is_string($value)) {
+                $value = $this->app->parameter->create($value);
+            }
+            $item = $this->app->item->create($value, $value['type']);
+            $this->_items[$item->sku] = $item;
+        }
 
     }
 
@@ -83,8 +85,7 @@ class CartHelper extends AppHelper {
 
     public function emptyCart() {
         $this->_items = array();
-        $this->app->session->set('cart',null,'checkout');
-        return $this->updateSession();
+        $this->updateSession();
     }
 
     public function updateQuantity($sku, $qty) {

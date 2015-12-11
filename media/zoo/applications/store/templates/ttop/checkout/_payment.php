@@ -49,25 +49,23 @@ $page = $this->page;
                             Payment Information
                         </legend>
                     </div>
+                    <div class="uk-width-1-1">
                     <?php if($this->app->customer->isReseller()) : ?>
-                            <?php $this->form->setValues($elements->get('payment.')); ?>
-                            <?php if($this->form->checkGroup('purchase_order')) : ?>
-                                <div class="uk-form-row">
-                                    <fieldset id="purchase_order">
-                                        <?php echo $this->form->render('purchase_order')?>
-                                    </fieldset>
-                                </div>
-                            <?php endif; ?>
-                        <?php if($this->app->customer->getAccountTerms() == 'DUR') : ?>
-                            <div class="uk-width-1-1">
-                                <?php echo $this->partial('payment.creditcard',compact('order')); ?>
+                        <?php $this->form->setValues($elements->get('payment.')); ?>
+                        <?php if($this->form->checkGroup('purchase_order')) : ?>
+                            <div class="uk-form-row">
+                                <fieldset id="purchase_order">
+                                    <?php echo $this->form->render('purchase_order')?>
+                                </fieldset>
                             </div>
                         <?php endif; ?>
-                    <?php else : ?> 
+                    <?php endif; ?>
+                    <?php if($this->app->customer->getAccountTerms() == 'DUR') : ?>
                         <div class="uk-width-1-1">
                             <?php echo $this->partial('payment.creditcard',compact('order')); ?>
                         </div>
-                    <?php endif; ?>
+                    <?php endif; ?> 
+                    </div>
                 </div>
             </fieldset>
         </div>

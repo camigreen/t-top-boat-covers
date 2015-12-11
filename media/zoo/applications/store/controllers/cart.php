@@ -16,7 +16,7 @@ class CartController extends AppController {
     public function __construct($default = array()) {
         parent::__construct($default);
 
-        $this->cart = $this->app->cart->create();
+        $this->cart = $this->app->cart;
 
         // get application
         $this->application = $this->app->zoo->getApplication();

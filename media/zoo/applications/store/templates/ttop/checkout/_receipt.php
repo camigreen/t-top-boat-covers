@@ -5,25 +5,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$order = $CR->order;
-$billing = $order->billing;
-$shipping = $order->shipping;
-$creditCard = $order->creditCard;
-$items = $order->items;
-
+$elements = $order->elements;
+$items = $order->elements->get('items.');
 ?>
 <div class='ttop-receipt'>
     <div class="uk-width-1-1 uk-container-center uk-text-right uk-margin-bottom">
-        <a href="/store/checkout?task=getPDF&type=receipt&id=<?php echo $order->id; ?>" class="uk-button uk-button-primary" target="_blank"><i class="uk-icon-print"></i> Print Receipt</a>
+        <a href="/store/checkout?task=getPDF&type=invoice&id=<?php echo $order->id; ?>&format=raw" class="uk-button uk-button-primary" target="_blank"><i class="uk-icon-print"></i> Print Inovice</a>
     </div>
     <div class="uk-width-1-1 uk-container-center">
         <table class="uk-table uk-table-condensed">
             <thead>
                 <tr>
-                    <th class="uk-text-center">Salesperson</th>
-                    <th class="uk-text-center">Order Number</th>
-                    <th>Order Date</th>
-                    <th>Delivery Method</th>
+                    <th class="uk-width-3-10 uk-text-center">Salesperson</th>
+                    <th class="uk-width-2-10 uk-text-center">Order Number</th>
+                    <th class="uk-width-3-10">Order Date</th>
+                    <th class="uk-width-2-10">Delivery Method</th>
                 </tr>
             </thead>
             <tfoot>
@@ -31,10 +27,10 @@ $items = $order->items;
             </tfoot>
             <tbody>
                 <tr>
-                    <td class="uk-text-center"><?php echo $order->getSalesperson(); ?></td>
+                    <td class="uk-text-center"><?php echo $this->app->account->get($order->created_by)->name ?></td>
                     <td class="uk-text-center"><?php echo $order->id; ?></td>
-                    <td class="uk-text-center"><?php echo $order->getOrderDate(); ?></td>
-                    <td class="uk-text-center"><?php echo $order->localPickup ? 'Local Pickup' : 'UPS Ground'; ?></td>
+                    <td class="uk-text-center"><?php echo $this->app->html->_('date', $order->created, JText::_('DATE_FORMAT_STORE_ORDER'), $this->app->date->getOffset()); ?></td>
+                    <td class="uk-text-center"><?php echo $elements->get('localPickup') ? 'Local Pickup' : 'UPS Ground'; ?></td>
                 </tr>
             </tbody>
         </table>
@@ -51,18 +47,19 @@ $items = $order->items;
                     <tbody>
                         <tr>
                             <td>
-                                <p><?php echo $billing->get('firstname').' '.$billing->get('lastname'); ?></p>
-                                <p><?php echo $billing->get('address'); ?></p>
-                                <p><?php echo $billing->get('city').', '.$billing->get('state').'  '.$billing->get('zip'); ?></p>
-                                <p><?php echo $billing->get('phoneNumber'); ?></p>
-                                <p><?php echo $billing->get('altNumber'); ?></p>
-                                <p><?php echo $billing->get('email'); ?></p>
+                                <div><?php echo $elements->get('billing.name'); ?></div>
+                                <div><?php echo $elements->get('billing.street1'); ?></div>
+                                <div><?php echo $elements->get('billing.street2'); ?></div>
+                                <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.zip'); ?></div>
+                                <div><?php echo $elements->get('billing.phoneNumber'); ?></div>
+                                <div><?php echo $elements->get('billing.altNumber'); ?></div>
+                                <div><?php echo $elements->get('email'); ?></div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <?php if(!$order->localPickup) : ?>
+            <?php if(!$order->elements->get('localPickup')) : ?>
             <div class='uk-width-1-2'>
                 <table class='uk-table shipping'>
                     <thead>
@@ -73,11 +70,12 @@ $items = $order->items;
                     <tbody>
                         <tr>
                             <td>
-                                <p><?php echo $shipping->get('firstname').' '.$shipping->get('lastname'); ?></p>
-                                <p><?php echo $shipping->get('address'); ?></p>
-                                <p><?php echo $shipping->get('city').', '.$shipping->get('state').'  '.$shipping->get('zip'); ?></p>
-                                <p><?php echo $shipping->get('phoneNumber'); ?></p>
-                                <p><?php echo $shipping->get('altNumber'); ?></p>
+                                <div><?php echo $elements->get('shipping.name'); ?></div>
+                                <div><?php echo $elements->get('shipping.street1'); ?></div>
+                                <div><?php echo $elements->get('shipping.street2'); ?></div>
+                                <div><?php echo $elements->get('shipping.city').', '.$elements->get('shipping.state').'  '.$elements->get('shipping.zip'); ?></div>
+                                <div><?php echo $elements->get('shipping.phoneNumber'); ?></div>
+                                <div><?php echo $elements->get('shipping.altNumber'); ?></div>
                             </td>
                         </tr>
                     </tbody>
@@ -91,84 +89,17 @@ $items = $order->items;
                     </div>
                     <div class="uk-width-1-1">
 
-                        <div class="payment-data">Last 4 of Credit Card: <?php echo substr($creditCard->get('cardNumber'), -4).' '.$creditCard->get('card_name'); ?></div>
+                        <div class="payment-data">
+                            <div>Account Name:  <?php echo $order->elements->get('payment.account_name'); ?></div>
+                            <div>Account Number:  <?php echo $order->elements->get('payment.account_number'); ?></div>
+                            <div>P.O. Number:  <?php echo $order->elements->get('payment.po_number'); ?></div>
+                        </div>
                     </div>
 
                 </div>
             </div>
             <div class='uk-width1-1 items-table'>
-                <table class="uk-table uk-table-condensed uk-table-striped">
-                    <thead>
-                        <tr>
-                            <th class="uk-width-4-6">Item Name</th>
-                            <th class="uk-width-1-6">Quantity</th>
-                            <th class="uk-width-1-6">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                <?php foreach ($items as $item) : ?>
-                            <tr>
-                                <td>
-                                    <?php echo $item->name; ?>
-                                    <div class="ttop-checkout-item-description"><?php echo $item->description; ?></div>
-                                    <div class="ttop-checkout-item-options"><?php echo $item->getOptions(); ?></div>
-                                </td>
-                                <td class="ttop-checkout-item-qty">
-                                    <?php echo $item->qty; ?>
-                                </td>
-                                <td class="ttop-checkout-item-total">
-                                    <?php echo $item->getTotal() ?>
-                                </td>
-                            </tr>
-                <?php endforeach; ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                Subtotal:
-                            </td>
-                            <td class="uk-text-right">
-                                <?php echo '$'.number_format($order->subtotal,2,'.',''); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                Shipping:
-                            </td>
-                            <td class="uk-text-right">
-                                <?php echo '$'.number_format($order->ship_total,2,'.',''); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                Sales Tax:
-                            </td>
-                            <td class="uk-text-right">
-                                <?php echo '$'.number_format($order->tax_total,2,'.',''); ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                <p>Total:</p>
-                            </td>
-                            <td>
-                                <p class="ttop-checkout-total uk-text-right"><?php echo '$'.number_format($order->total,2,'.',''); ?></p>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                <?php echo $this->partial('item.table.reseller',compact('order')); ?>
             </div>
         </div>
     </div>

@@ -42,8 +42,6 @@ class OrderDev {
 		$now        = $this->app->date->create();
 		$cUser = $this->app->customer->getUser();
 
-		var_dump($this->params);
-		var_dump((string) $this->elements->get('items.77a0f41cadcba66002e895bef422f12c'));
     	// set created date
 		try {
             $this->created = $this->app->date->create($this->created, $tzoffset)->toSQL();
@@ -57,7 +55,11 @@ class OrderDev {
         $this->modified_by = $cUser->id; 
 
         $this->params->set('terms', $this->app->customer->getAccount()->params->get('terms'));
-
+        if($this->app->customer->isReseller()) {
+        	$this->getTotal('reseller');
+        } else {
+        	$this->getTotal('retail');
+        }
 		if($writeToDB) {
 			$this->table->save($this);
 		}
@@ -122,7 +124,7 @@ class OrderDev {
 
 	public function getItemPrice($sku) {
 		if(!$item = $this->elements->get('items.'.$sku)) {
-			$item = $this->app->cart->create()->get($sku);
+			$item = $this->app->cart->get($sku);
 			$item->getTotal();
 		}
 		$discount = $this->getAccount()->params->get('discount', 0)/100;
@@ -132,7 +134,7 @@ class OrderDev {
 	public function getSubtotal($display = 'retail') {
 
 		if(!$items = $this->elements->get('items.')) {
-			$items = $this->app->cart->create()->getAllItems();
+			$items = $this->app->cart->getAllItems();
 		}
 		$this->subtotal = 0;
 		foreach($items as $item) {
@@ -142,7 +144,7 @@ class OrderDev {
 	}
 
 	public function getShippingTotal() {
-		if($this->ship_total) {
+		if($this->ship_total || $this->isProcessed()) {
 			return $this->ship_total;
 		}
         if(!$service = $this->elements->get('shipping_method')) {
@@ -168,11 +170,12 @@ class OrderDev {
     }
 
     public function getTotal($display = 'retail') {
-    	return $this->getSubTotal($display) + $this->getTaxTotal() + $this->getShippingTotal();
+    	$this->total = $this->getSubTotal($display) + $this->getTaxTotal() + $this->getShippingTotal();
+    	return $this->total;
     }
 
 	public function isProcessed() {
-		return $this->id ? true : false;
+		return $this->status > 1;
 	}
 
 	public function getUser() {
@@ -206,7 +209,7 @@ class OrderDev {
 		}
 
 		if(!$items = $this->elements->get('items.')) {
-			$items = $this->app->cart->create()->getAllItems();
+			$items = $this->app->cart->getAllItems();
 		}
 
 		foreach($items as $item) {
