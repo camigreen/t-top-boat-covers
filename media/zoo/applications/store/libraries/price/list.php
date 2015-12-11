@@ -12,35 +12,35 @@
  *  For Shipping: $price['ITEM-NAME.shipping.OPTION'] = (price) 0.00
 
  */
-$price['t-top-boat-cover.global.option.trolling_motor'] = 175;
+$price['ttopboatcover.global.option.trolling_motor'] = 175;
 
-$price['t-top-boat-cover.1819.item.base'] = 0;
-$price['t-top-boat-cover.1819.item.option.fabric.7oz'] = 599;
-$price['t-top-boat-cover.1819.item.option.fabric.8oz'] = 699;
-$price['t-top-boat-cover.1819.item.option.fabric.9oz'] = 849;
-$price['t-top-boat-cover.1819.shipping.weight'] = 22;
-$price['t-top-boat-cover.1819.shipping.price'] = 25;
+$price['ttopboatcover.1819.item.base'] = 0;
+$price['ttopboatcover.1819.item.option.fabric.7oz'] = 599;
+$price['ttopboatcover.1819.item.option.fabric.8oz'] = 699;
+$price['ttopboatcover.1819.item.option.fabric.9oz'] = 849;
+$price['ttopboatcover.1819.shipping.weight'] = 22;
+$price['ttopboatcover.1819.shipping.price'] = 25;
 
-$price['t-top-boat-cover.2022.item.base'] = 0;
-$price['t-top-boat-cover.2022.item.option.fabric.7oz'] = 699;
-$price['t-top-boat-cover.2022.item.option.fabric.8oz'] = 899;
-$price['t-top-boat-cover.2022.item.option.fabric.9oz'] = 1049;
-$price['t-top-boat-cover.2022.shipping.weight'] = 25;
-$price['t-top-boat-cover.2022.shipping.price'] = 30;
+$price['ttopboatcover.2022.item.base'] = 0;
+$price['ttopboatcover.2022.item.option.fabric.7oz'] = 699;
+$price['ttopboatcover.2022.item.option.fabric.8oz'] = 899;
+$price['ttopboatcover.2022.item.option.fabric.9oz'] = 1049;
+$price['ttopboatcover.2022.shipping.weight'] = 25;
+$price['ttopboatcover.2022.shipping.price'] = 30;
 
-$price['t-top-boat-cover.23.item.base'] = 0;
-$price['t-top-boat-cover.23.item.option.fabric.7oz'] = 699;
-$price['t-top-boat-cover.23.item.option.fabric.8oz'] = 899;
-$price['t-top-boat-cover.23.item.option.fabric.9oz'] = 1049;
-$price['t-top-boat-cover.23.shipping.weight'] = 25;
-$price['t-top-boat-cover.23.shipping.price'] = 30;
+$price['ttopboatcover.23.item.base'] = 0;
+$price['ttopboatcover.23.item.option.fabric.7oz'] = 699;
+$price['ttopboatcover.23.item.option.fabric.8oz'] = 899;
+$price['ttopboatcover.23.item.option.fabric.9oz'] = 1049;
+$price['ttopboatcover.23.shipping.weight'] = 25;
+$price['ttopboatcover.23.shipping.price'] = 30;
 
-$price['t-top-boat-cover.24.item.base'] = 0;
-$price['t-top-boat-cover.24.item.option.fabric.7oz'] = 899;
-$price['t-top-boat-cover.24.item.option.fabric.8oz'] = 1099;
-$price['t-top-boat-cover.24.item.option.fabric.9oz'] = 1249;
-$price['t-top-boat-cover.24.shipping.weight'] = 27;
-$price['t-top-boat-cover.24.shipping.price'] = 35;
+$price['ttopboatcover.24.item.base'] = 0;
+$price['ttopboatcover.24.item.option.fabric.7oz'] = 899;
+$price['ttopboatcover.24.item.option.fabric.8oz'] = 1099;
+$price['ttopboatcover.24.item.option.fabric.9oz'] = 1249;
+$price['ttopboatcover.24.shipping.weight'] = 27;
+$price['ttopboatcover.24.shipping.price'] = 35;
 
 // $item['t-top-boat-cover-1819.item.7oz'] = 599;
 // $item['t-top-boat-cover-1819.item.8oz'] = 699;

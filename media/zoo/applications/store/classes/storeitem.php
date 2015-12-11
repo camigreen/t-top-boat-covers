@@ -21,6 +21,14 @@ class StoreItem {
      * @since 1.0.0
      */
     public $id;
+
+    /**
+     * Item ID
+     *
+     * @var [int]
+     * @since 1.0.0
+     */
+    public $type;
     
     /**
      * Item Name
@@ -164,66 +172,11 @@ class StoreItem {
      *
      * @param datatype    $app    Parameter Description
      */
-    public function __construct($app, $item = null) {
-        $this->app = $app;
-        if($item instanceof Item) {
-            $this->importZooItem($item);
-        } else {
-            $this->importItem($item);
-        }
+    public function __construct() {
 
     }
 
     /**
-     * Populate the object with data from the Zoo Item Object
-     *
-     * @param       Item    Zoo Item Object.
-     *
-     * @return      StoreItem   $this   for chaining support
-     *
-     * @since 1.0
-     */
-    public function importZooItem(Item $item = null) {
-
-        foreach($item as $key => $value) {
-            if(property_exists($this, $key)) {
-                $this->$key = $value;
-            }
-        }
-        if($item->getType()->id == "t-top-boat-cover") {
-            $this->setPriceGroup($item->getType()->id);
-        } else {
-            $this->setPriceGroup($item->alias);
-        }
-        $options = $this->app->parameter->create();
-        $attributes = $this->app->parameter->create();
-        foreach($item->getElementsByType('itemoptions') as $element) {
-            if($element->config->get('option_type') == 'global_options' || $element->config->get('option_type') == 'user_options') {
-                $value = $element->get('option', $element->config->get('default', null));
-                $key = $element->config->get('field_name');
-                $options->set($key.'.name', $element->config->get('name'));
-                $options->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
-            }
-            if($element->config->get('option_type') == 'attributes') {
-                $value = $element->get('option', $element->config->get('default', null));
-                $key = $element->config->get('field_name');
-                $attributes->set($key.'.name', $element->config->get('name'));
-                $attributes->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
-            }
-            
-        }
-        $this->options = $options;
-        $this->attributes = $attributes;
-        $make = $item->getRelatedCategories()[0];
-        $this->attributes->set('oem.name', $make->name);
-        $this->attributes->set('oem.value', $make->id);
-
-        $this->make = $item->getPrimaryCategory()->name;
-        return $this;
-        
-    }
-
-        /**
      * Populate the object with data from the Zoo Item Object
      *
      * @param       Item    Item Object.
@@ -242,20 +195,52 @@ class StoreItem {
             }
         }
         $options = $this->app->parameter->create();
-        foreach($item->options as $key => $option) {
+        $attributes = $this->app->parameter->create();
+
+
+        if($item instanceof Item) {
+
+            foreach($item->getElementsByType('itemoptions') as $element) {
+                if($element->config->get('option_type') == 'global_options' || $element->config->get('option_type') == 'user_options') {
+                    $value = $element->get('option', $element->config->get('default', null));
+                    $key = $element->config->get('field_name');
+                    $options->set($key.'.name', $element->config->get('name'));
+                    $options->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
+                }
+                if($element->config->get('option_type') == 'attributes') {
+                    $value = $element->get('option', $element->config->get('default', null));
+                    $key = $element->config->get('field_name');
+                    $attributes->set($key.'.name', $element->config->get('name'));
+                    $attributes->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
+                }
+            
+            }
+            list($make) = $item->getRelatedCategories();
+            $attributes->set('oem.name', $make->name);
+            $attributes->set('oem.value', $make->id);
+            $this->make = $item->getPrimaryCategory()->name;
+            $this->price_group = $item->getType()->id;
+
+        } else {
+            var_dump($this->options);
+            foreach($item->options as $key => $option) {
                 $options->set($key.'.name', $option['name']);
                 $options->set($key.'.value', $option['value']);
                 $options->set($key.'.text', $option['text']);
-        }
-        $attributes = $this->app->parameter->create();
-        foreach($item->attributes as $key => $attr) {
+            }
+            foreach($item->attributes as $key => $attr) {
                 $attributes->set($key.'.name', $attr['name']);
                 $attributes->set($key.'.value', $attr['value']);
                 $attributes->set($key.'.text', $attr['text']);
+            }
         }
 
         $this->options = $options;
         $this->attributes = $attributes;
+
+        
+
+        return $this;
         
     }
 
@@ -381,6 +366,7 @@ class StoreItem {
         //$obj->attributes = (string) $obj->attributes;
         $obj = $this->app->data->create($obj);
         $obj->remove('price');
+        $obj->remove('app');
         return (string) $obj;
     }
 

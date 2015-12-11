@@ -25,19 +25,35 @@ class ItemHelper extends AppHelper {
 		$this->app->loader->register('StoreItem','classes:storeitem.php');
 	}
 
-	public function create($item) {
-
-		if(is_string($item) || is_array($item)) {
-			$item = $this->app->parameter->create($item);
-		}
+	public function create($item, $type = null) {
 		if(!isset($item->sku) || !isset($this->_items[$item->sku])) {
-			$item = new StoreItem($this->app, $item);
-			
-			// fire event
-        	$this->app->event->dispatcher->notify($this->app->event->create($item, 'storeitem:init'));
+			$class = $type.'StoreItem';
+			if($type) {
+				if(file_exists($this->app->path->path('classes:store/items/'.$type.'.php'))) {
+					$this->app->loader->register($class, 'classes:store/items/'.$type.'.php');
+					$storeItem = new $class();
+				} else {
+					$storeItem = new $class();
+				}
+			} else {
+				$storeItem = new $class();
+			}
+			var_dump($item); 
+			if(is_string($item) || is_array($item)) {
+				$item = $this->app->parameter->create($item);
+			}
 
-        	$this->_items[$item->sku] = $item;
-		}
+			$storeItem->app = $this->app;
+
+			$storeItem->importItem($item);
+
+			// fire event
+	    	$this->app->event->dispatcher->notify($this->app->event->create($storeItem, 'storeitem:init'));
+
+	    	$this->_items[$storeItem->sku] = $storeItem;
+
+	    	return $this->_items[$storeItem->sku];
+	    }
 
 		return $this->_items[$item->sku];
 	}

@@ -78,7 +78,9 @@
         subitem: false,
         fields: null,
         init: function () {
-            this.item = this.$element.data('item');
+            this.item.name = $('[name="item-name"]').val();
+            this.item.id = $('[name="item-id"]').val();
+            this.item.type = $('[name="item-type"]').val();
             this.subitem = this.$element.hasClass('sub-item');
             this.$element.find('#price').remove();
             this.$retail = this.$element.find('#retail-price');
@@ -259,7 +261,8 @@
             var items = [{
                 id: this.item.id,
                 name: this.item.name,
-                pricing: this._getPricing(),
+                type: this.item.type,
+                //pricing: this._getPricing(),
                 price_group: this.item.price_group,
                 markup: $('[name="markup"]').val(),
                 qty: this.qty,
@@ -267,7 +270,6 @@
                 attributes: this._getAttributes(),
                 options: this._getOptions()
             }];
-
             
 //            Add item to the Cart.    
             items = this.trigger('beforeAddToCart', items);
@@ -394,12 +396,10 @@
             var itemOptions = {};
             $.each(this.fields, function(k, v){
                 var elem = $(this);
-                itemOptions[elem.prop('name')] = {
-                    field: elem.prop('name'),
-                    name: elem.data('name'),
-                    value: elem.val(),
-                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
-                };
+                itemOptions[elem.prop('name')] = {};
+                itemOptions[elem.prop('name')][elem.prop('name')+'.name'] = elem.data('name');
+                itemOptions[elem.prop('name')][elem.prop('name')+'.value'] = elem.val();
+                itemOptions[elem.prop('name')][elem.prop('name')+'.name'] = (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val());
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);
@@ -412,11 +412,10 @@
             
             $.each(attributes, function(k, v){
                 var elem = $(this);
-                itemAttributes[elem.prop('name')] = {
-                    name: elem.data('name'),
-                    value: elem.val(),
-                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
-                };
+                itemAttributes[elem.prop('name')] = {};
+                itemAttributes[elem.prop('name')][elem.prop('name')+'.name'] = elem.data('name');
+                itemAttributes[elem.prop('name')][elem.prop('name')+'.value'] = elem.val();
+                itemAttributes[elem.prop('name')][elem.prop('name')+'.name'] = (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val());
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);

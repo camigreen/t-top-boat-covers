@@ -14,7 +14,7 @@ $price = $item->getPrice();
 		$(document).ready(function(){
 			$('#price_display').on('click', function(e) {
 				var modal;
-				var StoreItem = $('#'+<?php echo $item->id; ?>).StoreItem('getItem');
+				var StoreItem = $("<?php echo '#'.$item->id; ?>").StoreItem('getItem');
 				console.log(StoreItem);
 				$.ajax({
 	                type: 'POST',
