@@ -23,9 +23,6 @@ class StoreItemEvent {
 
 		$storeItem = $event->getSubject();
         $app = $storeItem->app;
-        if($storeItem->getPriceGroup() == 't-top-boat-cover') {
-        	$storeItem->setPriceGroup($storeItem->getPriceGroup().'.'.$storeItem->attributes->get('boat_length.value'));
-        }
         $storeItem->generateSKU();
 
 	}

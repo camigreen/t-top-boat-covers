@@ -37,11 +37,7 @@ class ItemHelper extends AppHelper {
 				}
 			} else {
 				$storeItem = new $class();
-			}
-			var_dump($item); 
-			if(is_string($item) || is_array($item)) {
-				$item = $this->app->parameter->create($item);
-			}
+			} 
 
 			$storeItem->app = $this->app;
 

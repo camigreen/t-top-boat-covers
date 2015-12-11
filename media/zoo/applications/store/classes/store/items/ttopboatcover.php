@@ -14,14 +14,36 @@
 class ttopboatcoverStoreItem extends StoreItem {
 
     public $type = "ttopboatcover";
+    /**
+     * @var [string]
+     */
+    public $make = "LaPorte's T-Top Boat Covers";
+
+   	/**
+   	 * @var [string]
+   	 */
+   	public $model;
+   	
+    
 
     public function importItem($item = null) {
         parent::importItem($item);
+		
+		$this->name = 'T-Top Boat Cover';
+        $this->price_group = 'ttopboatcover.'.$this->attributes['boat_length']->get('value');
 
-        $this->price_group .= '.'.$this->alias;
-        $this->attributes->set('boat_model.name', $this->name);
-        $this->attributes->set('boat_model.value', $this->name);
-        $this->name = 'T-Top Boat Cover';
+        if($item instanceof Item) {
+        	$this->attributes['boat_model'] = $this->app->data->create();
+	        $this->attributes['boat_model']->set('name', $this->name);
+	        $this->attributes['boat_model']->set('value', $this->name);
+	        list($oem) = $item->getRelatedCategories();
+	        $this->attributes['oem'] = $this->app->data->create();
+	        $this->attributes['oem']->set('name', $oem->name);
+	        $this->attributes['oem']->set('value', $oem->id);
+        }
+        
+
+        
     }
     
 

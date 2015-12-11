@@ -83,7 +83,6 @@ class CheckoutController extends AppController {
         $user = $order->getUser();
         $this->page = 'customer';
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
             if(!$order->elements->get('billing.')) {
                 $order->elements->set('billing.', $account->elements->get('billing.'));
                 $order->elements->set('billing.phoneNumber', $user->elements->get('office_phone'));
@@ -100,7 +99,6 @@ class CheckoutController extends AppController {
             }
             
         }
-
         $type = 'customer';
 
         $this->form = $this->app->form->create(array($this->template->getPath().'/checkout/config.xml', compact('type')));
@@ -132,7 +130,7 @@ class CheckoutController extends AppController {
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
         }
-
+ 
         $this->page = 'payment';
 
         $order = $this->CR->order;
@@ -140,7 +138,6 @@ class CheckoutController extends AppController {
         $user = $order->getUser();
 
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
             $order->elements->set('payment.account_name', $account->name);
             $order->elements->set('payment.account_number', $account->elements->get('account_number'));
             $this->app->session->set('order',(string) $order,'checkout');
@@ -150,6 +147,9 @@ class CheckoutController extends AppController {
 
         $layout = 'checkout';
 
+        $type = $this->page;
+
+        $this->form = $this->app->form->create(array($this->template->getPath().'/checkout/config.xml', compact('type')));
         
         $this->title = 'Payment Information';
         $this->subtitle = 'Please enter your payment information below.';

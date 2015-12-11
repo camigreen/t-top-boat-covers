@@ -99,7 +99,6 @@ class Price
 
 		// Set the Discount
 		$this->_discountRate = $account->params->get('discount')/100;
-
 		$this->setItem($item);
 
 		if($path = $this->app->path->path($this->resource)) {
@@ -161,9 +160,7 @@ class Price
 	public function getCalculatedOptions() {
 		$total = 0;
 		foreach($this->getItemOptions() as $key => $value) {
-			list($field) = explode('.', $key, 2);
-            $total += $this->_price_options->get($field.'.'.$value, 0);
-			
+			$total += $this->_price_options->get($key.'.'.$value->get('value'), 0);
 		}
 		return $total;		
 	}

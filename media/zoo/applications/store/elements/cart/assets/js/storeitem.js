@@ -396,10 +396,11 @@
             var itemOptions = {};
             $.each(this.fields, function(k, v){
                 var elem = $(this);
-                itemOptions[elem.prop('name')] = {};
-                itemOptions[elem.prop('name')][elem.prop('name')+'.name'] = elem.data('name');
-                itemOptions[elem.prop('name')][elem.prop('name')+'.value'] = elem.val();
-                itemOptions[elem.prop('name')][elem.prop('name')+'.name'] = (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val());
+                itemOptions[elem.prop('name')] = {
+                    name: elem.data('name'),
+                    value: elem.val(),
+                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
+                }
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);
@@ -412,10 +413,11 @@
             
             $.each(attributes, function(k, v){
                 var elem = $(this);
-                itemAttributes[elem.prop('name')] = {};
-                itemAttributes[elem.prop('name')][elem.prop('name')+'.name'] = elem.data('name');
-                itemAttributes[elem.prop('name')][elem.prop('name')+'.value'] = elem.val();
-                itemAttributes[elem.prop('name')][elem.prop('name')+'.name'] = (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val());
+                itemAttributes[elem.prop('name')] = {
+                    name: elem.data('name'),
+                    value: elem.val(),
+                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
+                }
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);

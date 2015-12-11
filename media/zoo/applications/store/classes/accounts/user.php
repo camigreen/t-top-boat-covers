@@ -62,8 +62,12 @@ class UserAccount extends Account {
 
     public function getParentAccount() {
         $parents = array_values($this->getParents());
-        
-        return $parents[0];
+        if(empty($parents)) {
+            return $this;
+        } else {
+            list($parent) = $parents;
+        }
+        return $parent;
     }
 
     public function getAssetName() {

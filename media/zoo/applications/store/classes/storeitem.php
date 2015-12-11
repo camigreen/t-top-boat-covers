@@ -140,7 +140,7 @@ class StoreItem {
      * @var [string]
      * @since 1.0.0
      */
-    public $price;
+    protected $price;
     
     
     /**
@@ -194,8 +194,8 @@ class StoreItem {
                 }
             }
         }
-        $options = $this->app->parameter->create();
-        $attributes = $this->app->parameter->create();
+        $options = array();
+        $attributes = array();
 
 
         if($item instanceof Item) {
@@ -204,34 +204,38 @@ class StoreItem {
                 if($element->config->get('option_type') == 'global_options' || $element->config->get('option_type') == 'user_options') {
                     $value = $element->get('option', $element->config->get('default', null));
                     $key = $element->config->get('field_name');
-                    $options->set($key.'.name', $element->config->get('name'));
-                    $options->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
+                    $options[$key] = $this->app->data->create();
+                    $options[$key]->set('name', $element->config->get('name'));
+                    $options[$key]->set('value', !is_array($value) && $value != '' ? $value : null);
                 }
                 if($element->config->get('option_type') == 'attributes') {
                     $value = $element->get('option', $element->config->get('default', null));
                     $key = $element->config->get('field_name');
-                    $attributes->set($key.'.name', $element->config->get('name'));
-                    $attributes->set($key.'.value', !is_array($value) && $value != '' ? $value : null);
+                    $attributes[$key] = $this->app->data->create();
+                    $attributes[$key]->set('name', $element->config->get('name'));
+                    $attributes[$key]->set('value', !is_array($value) && $value != '' ? $value : null);
                 }
             
             }
             list($make) = $item->getRelatedCategories();
-            $attributes->set('oem.name', $make->name);
-            $attributes->set('oem.value', $make->id);
+            $attributes['oem'] = $this->app->data->create();
+            $attributes['oem']->set('name', $make->name);
+            $attributes['oem']->set('value', $make->id);
             $this->make = $item->getPrimaryCategory()->name;
             $this->price_group = $item->getType()->id;
 
         } else {
-            var_dump($this->options);
-            foreach($item->options as $key => $option) {
-                $options->set($key.'.name', $option['name']);
-                $options->set($key.'.value', $option['value']);
-                $options->set($key.'.text', $option['text']);
+            foreach($item['options'] as $key => $option) {
+                $options[$key] = $this->app->data->create();
+                $options[$key]->set('name', $option['name']);
+                $options[$key]->set('value', $option['value']);
+                $options[$key]->set('text', isset($option['text']) ? $option['text'] : null);
             }
-            foreach($item->attributes as $key => $attr) {
-                $attributes->set($key.'.name', $attr['name']);
-                $attributes->set($key.'.value', $attr['value']);
-                $attributes->set($key.'.text', $attr['text']);
+            foreach($item['attributes'] as $key => $attr) {
+                $attributes[$key] = $this->app->data->create();
+                $attributes[$key]->set('name', $attr['name']);
+                $attributes[$key]->set('value', $attr['value']);
+                $attributes[$key]->set('text', isset($attr['text']) ? $attr['text'] : null);
             }
         }
 
@@ -347,27 +351,12 @@ class StoreItem {
         }
     }
 
-    public function export() {
-        $data = $this->app->data->create();
-        $ignore = array('app', 'price');
-        foreach($this as $key => $value) {
-            if(!in_array($key, $ignore)) {
-                $data->set($key, $value);
-            }
-            
-        }
-        $data->set('total', $this->getPrice()->markup);
+    public function toSession() {
+        $data = $this->app->parameter->create();
+        $data->loadObject($this);
+        $data->remove('app');
+        $data->set('total', $this->getTotal('markup'));
         return $data;
-    }
-
-    public function  __toString() {
-        $obj = $this;
-        //$obj->options = (string) $obj->options;
-        //$obj->attributes = (string) $obj->attributes;
-        $obj = $this->app->data->create($obj);
-        $obj->remove('price');
-        $obj->remove('app');
-        return (string) $obj;
     }
 
     

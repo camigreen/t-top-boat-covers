@@ -34,6 +34,7 @@ class StoreApplication extends Application {
         $zoo->path->register($path.'/events', 'events');
         $zoo->path->register($path.'/fields', 'fields');
         $zoo->path->register($path.'/libraries', 'store.lib');
+        $zoo->path->register($path.'/logs', 'logs');
         include_once $path.'/vendor/autoload.php';
         
 //        Load Classes

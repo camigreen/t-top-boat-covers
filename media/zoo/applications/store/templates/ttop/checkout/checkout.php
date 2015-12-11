@@ -104,6 +104,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
         
     </div>
 </div>
+<?php var_dump($this->app->cart); ?>
 
 <script type="text/javascript">
 
