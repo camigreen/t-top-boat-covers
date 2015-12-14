@@ -29,7 +29,7 @@ $items = $order->elements->get('items.');
                 <tr>
                     <td class="uk-text-center"><?php echo $this->app->account->get($order->created_by)->name ?></td>
                     <td class="uk-text-center"><?php echo $order->id; ?></td>
-                    <td class="uk-text-center"><?php echo $this->app->html->_('date', $order->created, JText::_('DATE_FORMAT_STORE_ORDER'), $this->app->date->getOffset()); ?></td>
+                    <td class="uk-text-center"><?php echo $this->app->html->_('date', $order->created, JText::_('DATE_FORMAT_STORE1'), $this->app->date->getOffset()); ?></td>
                     <td class="uk-text-center"><?php echo $elements->get('localPickup') ? 'Local Pickup' : 'UPS Ground'; ?></td>
                 </tr>
             </tbody>
@@ -37,50 +37,9 @@ $items = $order->elements->get('items.');
     </div>
     <div class="uk-width-1-1 uk-container-center">
         <div class="uk-grid">
-            <div class='uk-width-1-2'>
-                <table class='uk-table billing'>
-                    <thead>
-                        <tr>
-                            <th>Bill To:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div><?php echo $elements->get('billing.name'); ?></div>
-                                <div><?php echo $elements->get('billing.street1'); ?></div>
-                                <div><?php echo $elements->get('billing.street2'); ?></div>
-                                <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.zip'); ?></div>
-                                <div><?php echo $elements->get('billing.phoneNumber'); ?></div>
-                                <div><?php echo $elements->get('billing.altNumber'); ?></div>
-                                <div><?php echo $elements->get('email'); ?></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <?php echo $this->partial('billing',compact('elements')); ?>
             <?php if(!$order->elements->get('localPickup')) : ?>
-            <div class='uk-width-1-2'>
-                <table class='uk-table shipping'>
-                    <thead>
-                        <tr>
-                            <th>Ship To:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div><?php echo $elements->get('shipping.name'); ?></div>
-                                <div><?php echo $elements->get('shipping.street1'); ?></div>
-                                <div><?php echo $elements->get('shipping.street2'); ?></div>
-                                <div><?php echo $elements->get('shipping.city').', '.$elements->get('shipping.state').'  '.$elements->get('shipping.zip'); ?></div>
-                                <div><?php echo $elements->get('shipping.phoneNumber'); ?></div>
-                                <div><?php echo $elements->get('shipping.altNumber'); ?></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <?php echo $this->partial('shipping',compact('elements')); ?>
             <?php endif; ?>
             <div class="uk-width-1-1 payment uk-margin-top">
                 <div class="uk-grid" data-uk-margin>

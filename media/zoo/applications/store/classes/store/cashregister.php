@@ -193,11 +193,12 @@ class CashRegister {
     public function processPayment($method) {
 
         switch($method) {
-            case 'PO':
-                return $this->processPO();
+            case 'NET45':
+            case 'NET30':
+                return $this->_purchaseOrder();
                 break;
-            case 'CreditCard':
-                return $this->processCreditCard();
+            case 'DUR':
+                return $this->_creditCard();
                 break;
             case 'bypass':
                 $this->order->transaction_id = "Not Processed";
@@ -219,7 +220,7 @@ class CashRegister {
         }
     }
 
-    public function processPO () {
+    protected function _purchaseOrder () {
 
         $items = $this->app->cart;
         $this->order->transaction_id = "Purchase Order";
@@ -241,7 +242,7 @@ class CashRegister {
         return $this->order;
     }
 
-    public function processCreditCard() {
+    protected function _creditCard() {
         $order = $this->order;
         $billing = $order->get('billing');
         $shipping = $order->get('shipping');

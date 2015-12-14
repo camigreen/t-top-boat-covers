@@ -69,10 +69,10 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
             <?php endif; ?>
         </div>
     </div>
-    <input type="text" name="task" value="save" />
+    <input type="hidden" name="task" value="<?php echo $this->task; ?>" />
     <input type="hidden" name="updated" value="false" />
     <input type="hidden" name="process" value="true" />
-    <input type="text" name="next" />
+    <input type="hidden" name="next" />
     <input type="hidden" name="orderID" />
     <input type="hidden" name="bypass" value="0" />
 </form>
@@ -227,7 +227,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 ProcessingModal('show');
                 return $.ajax({
                     type: 'POST',
-                    url: "?option=com_zoo&controller=store&task=processPayment&format=json",
+                    url: "?option=com_zoo&controller=checkout&task=processPayment&format=json",
                     data: $('form#ttop-checkout').serialize(),
                     dataType: 'json'
                 }).promise();
@@ -344,7 +344,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                     beforeSubmit: [
                         function (e) {
                             var dfd = $.Deferred();
-                            if ($(e.target).data('task') === 'processPayment') {
+                            if ($(e.target).data('next') === 'processPayment') {
                                 if (!$('[name="TC_Agree"]').prop('checked')) {
                                     alert('Please read and agree to the terms and conditions.');
                                     return false;
@@ -352,7 +352,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                 $.when(processPayment()).done(function(data){   
                                     if (data.approved) {
 //                                        sendTransactionToGoogle(data);
-                                        $('input[name="step"]').val('receipt');
+                                        $('input[name="task"]').val('receipt');
                                         $('input[name="orderID"]').val(data.orderID);
                                         ProcessingModal('hide');
                                         thankYouModal('show');
