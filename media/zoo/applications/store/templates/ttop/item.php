@@ -14,7 +14,6 @@ defined('_JEXEC') or die('Restricted access');
 $class = $this->template->name.'';
 
 
-echo $this->item->type;
 ?>
 
 <div class="yoo-zoo <?php echo $this->application->getGroup(); ?> <?php echo $class; ?> ttop-item">
