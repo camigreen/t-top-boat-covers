@@ -432,11 +432,7 @@
         _refresh: function (e) {
             this._updateQuantity();
             var self = this;
-            $.each(this.settings.pricePoints.options, function(k,v) {
-                if($(e.target).prop("name") == v) {
-                    self._publishPrice();
-                }
-            });
+            self._publishPrice();
             
             if (this.validation.status === 'failed') {
                 this._validate();
