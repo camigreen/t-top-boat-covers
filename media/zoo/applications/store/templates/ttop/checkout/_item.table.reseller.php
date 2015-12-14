@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <td colspan="4" class="uk-text-right">
-                Total Balance Due:
+                Total Dealers Balance Due:
             </td>
             <td>
                 <?php echo $this->app->number->currency($order->getTotal('reseller'),array('currency' => 'USD')); ?>
