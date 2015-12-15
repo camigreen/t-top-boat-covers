@@ -23,7 +23,7 @@ $salesperson = null;
                     <h3>Bill To:</h3>
                     <div><?php echo $elements->get('billing.firstname').' '.$elements->get('billing.lastname'); ?></div>
                     <div><?php echo $elements->get('billing.address') ?></div>
-                    <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.zip') ?></div>
+                    <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.postalCode') ?></div>
                     <div>Phone: <?php echo $elements->get('billing.phoneNumber') ?></div>
                     <div>Alternate Phone: <?php echo $elements->get('billing.altNumber') ?></div>
                 </div>
@@ -32,7 +32,7 @@ $salesperson = null;
                         <h3>Ship To:</h3>
                         <div><?php echo $elements->get('shipping.firstname').' '.$elements->get('shipping.lastname'); ?></div>
                         <div><?php echo $elements->get('shipping.address') ?></div>
-                        <div><?php echo $elements->get('shipping.city').', '.$elements->get('shipping.state').'  '.$elements->get('shipping.zip') ?></div>
+                        <div><?php echo $elements->get('shipping.city').', '.$elements->get('shipping.state').'  '.$elements->get('shipping.postalCode') ?></div>
                         <div>Phone: <?php echo $elements->get('shipping.phoneNumber') ?></div>
                         <div>Alternate Phone: <?php echo $elements->get('shipping.altNumber') ?></div>
                     </div>
