@@ -223,14 +223,14 @@ class CashRegister {
     protected function _purchaseOrder () {
 
         $items = $this->app->cart;
-        $this->order->elements->set('payment.transaction_id', "Purchase Order");
+        $this->order->params->set('payment.transaction_id', "Purchase Order");
         $this->order->elements->set('items.', $items->getAllItems());
         // Update Payment Status
         $this->order->params->set('payment.status', 2);
         $this->order->params->set('payment.type', 'PO');
         $this->order->setStatus(2);
         //this->order->calculateCommissions();
-        $this->order->elements->set('payment.approved', true);
+        $this->order->params->set('payment.approved', true);
         $this->order->save(true);
         $this->sendNotificationEmail($this->order->id, 'invoice');
         $this->sendNotificationEmail($this->order->id, 'payment');
