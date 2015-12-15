@@ -33,10 +33,10 @@ class ItemHelper extends AppHelper {
 					$this->app->loader->register($class, 'classes:store/items/'.$type.'.php');
 					$storeItem = new $class($this->app);
 				} else {
-					$storeItem = new $class($this->app);
+					$storeItem = new StoreItem($this->app);
 				}
 			} else {
-				$storeItem = new $class($this->app);
+				$storeItem = new StoreItem($this->app);
 			} 
 
 			$storeItem->importItem($item);

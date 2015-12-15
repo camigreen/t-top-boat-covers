@@ -42,131 +42,104 @@ $price['ttopboatcover.24.item.option.fabric.9oz'] = 1249;
 $price['ttopboatcover.24.shipping.weight'] = 27;
 $price['ttopboatcover.24.shipping.price'] = 35;
 
-// $item['t-top-boat-cover-1819.item.7oz'] = 599;
-// $item['t-top-boat-cover-1819.item.8oz'] = 699;
-// $item['t-top-boat-cover-1819.item.9oz'] = 849;
+$price['ttopboatcover.25.item.base'] = 0;
+$price['ttopboatcover.25.item.option.fabric.7oz'] = 999;
+$price['ttopboatcover.25.item.option.fabric.8oz'] = 1199;
+$price['ttopboatcover.25.item.option.fabric.9oz'] = 1349;
+$price['ttopboatcover.25.shipping.weight'] = 28;
+$price['ttopboatcover.25.shipping.price'] = 35;
 
-// $item['t-top-boat-cover.2022.7oz'] = 699;
-// $item['t-top-boat-cover.2022.8oz'] = 899;
-// $item['t-top-boat-cover.2022.9oz'] = 1049;
+$price['ttopboatcover.26.item.base'] = 0;
+$price['ttopboatcover.26.item.option.fabric.7oz'] = 1099;
+$price['ttopboatcover.26.item.option.fabric.8oz'] = 1299;
+$price['ttopboatcover.26.item.option.fabric.9oz'] = 1449;
+$price['ttopboatcover.26.shipping.weight'] = 29;
+$price['ttopboatcover.26.shipping.price'] = 35;
 
-// $item['t-top-boat-cover.23.7oz'] = 749;
-// $item['t-top-boat-cover.23.8oz'] = 949;
-// $item['t-top-boat-cover.23.9oz'] = 1099;
+$price['ttopboatcover.27.item.base'] = 0;
+$price['ttopboatcover.27.item.option.fabric.7oz'] = 1250;
+$price['ttopboatcover.27.item.option.fabric.8oz'] = 1450;
+$price['ttopboatcover.27.item.option.fabric.9oz'] = 1600;
+$price['ttopboatcover.27.shipping.weight'] = 30;
+$price['ttopboatcover.27.shipping.price'] = 40;
 
-// $item['t-top-boat-cover.24.7oz'] = 899;
-// $item['t-top-boat-cover.24.8oz'] = 1099;
-// $item['t-top-boat-cover.24.9oz'] = 1249;
+$price['ttopboatcover.28.item.base'] = 0;
+$price['ttopboatcover.28.item.option.fabric.7oz'] =1350;
+$price['ttopboatcover.28.item.option.fabric.8oz'] = 1550;
+$price['ttopboatcover.28.item.option.fabric.9oz'] = 1700;
+$price['ttopboatcover.28.shipping.weight'] = 31;
+$price['ttopboatcover.28.shipping.price'] = 40;
 
-// $item['t-top-boat-cover.25.7oz'] = 999;
-// $item['t-top-boat-cover.25.8oz'] = 1199;
-// $item['t-top-boat-cover.25.9oz'] = 1349;
+$price['ttopboatcover.29.item.base'] = 0;
+$price['ttopboatcover.29.item.option.fabric.7oz'] = 1450;
+$price['ttopboatcover.29.item.option.fabric.8oz'] = 1650;
+$price['ttopboatcover.29.item.option.fabric.9oz'] = 1800;
+$price['ttopboatcover.29.shipping.weight'] = 32;
+$price['ttopboatcover.29.shipping.price'] = 40;
 
-// $item['t-top-boat-cover.26.7oz'] = 1099;
-// $item['t-top-boat-cover.26.8oz'] = 1299;
-// $item['t-top-boat-cover.26.9oz'] = 1449;
+$price['ttopboatcover.30.item.base'] = 0;
+$price['ttopboatcover.30.item.option.fabric.7oz'] = 1750;
+$price['ttopboatcover.30.item.option.fabric.8oz'] = 1950;
+$price['ttopboatcover.30.item.option.fabric.9oz'] = 2100;
+$price['ttopboatcover.30.shipping.weight'] = 33;
+$price['ttopboatcover.30.shipping.price'] = 45;
 
-// $item['t-top-boat-cover.27.7oz'] = 1250;
-// $item['t-top-boat-cover.27.8oz'] = 1450;
-// $item['t-top-boat-cover.27.9oz'] = 1600;
+$price['ttopboatcover.31.item.base'] = 0;
+$price['ttopboatcover.31.item.option.fabric.7oz'] = 1850;
+$price['ttopboatcover.31.item.option.fabric.8oz'] = 2050;
+$price['ttopboatcover.31.item.option.fabric.9oz'] = 2200;
+$price['ttopboatcover.31.shipping.weight'] = 34;
+$price['ttopboatcover.31.shipping.price'] = 45;
 
-// $item['t-top-boat-cover.28.7oz'] = 1350;
-// $item['t-top-boat-cover.28.8oz'] = 1550;
-// $item['t-top-boat-cover.28.9oz'] = 1700;
+$price['ttopboatcover.3234.item.base'] = 0;
+$price['ttopboatcover.3234.item.option.fabric.7oz'] = 2150;
+$price['ttopboatcover.3234.item.option.fabric.8oz'] = 2350;
+$price['ttopboatcover.3234.item.option.fabric.9oz'] = 2500;
+$price['ttopboatcover.3234.shipping.weight'] = 37;
+$price['ttopboatcover.3234.shipping.price'] = 45;
 
-// $item['t-top-boat-cover.29.7oz'] = 1450;
-// $item['t-top-boat-cover.29.8oz'] = 1650;
-// $item['t-top-boat-cover.29.9oz'] = 1800;
+$price['ttopboatcover.35.item.base'] = 0;
+$price['ttopboatcover.35.item.option.fabric.7oz'] = 2250;
+$price['ttopboatcover.35.item.option.fabric.8oz'] = 2450;
+$price['ttopboatcover.35.item.option.fabric.9oz'] = 2600;
+$price['ttopboatcover.35.shipping.weight'] = 38;
+$price['ttopboatcover.35.shipping.price'] = 40;
 
-// $item['t-top-boat-cover.30.7oz'] = 1750;
-// $item['t-top-boat-cover.30.8oz'] = 1950;
-// $item['t-top-boat-cover.30.9oz'] = 2100;
+$price['ttopboatcover.3637.item.base'] = 0;
+$price['ttopboatcover.3637.item.option.fabric.7oz'] = 2350;
+$price['ttopboatcover.3637.item.option.fabric.8oz'] = 2550;
+$price['ttopboatcover.3637.item.option.fabric.9oz'] = 2700;
+$price['ttopboatcover.3637.shipping.weight'] = 40;
+$price['ttopboatcover.3637.shipping.price'] = 45;
 
-// $item['t-top-boat-cover.31.7oz'] = 1850;
-// $item['t-top-boat-cover.31.8oz'] = 2050;
-// $item['t-top-boat-cover.31.9oz'] = 2200;
-
-// $item['t-top-boat-cover.3234.7oz'] = 2150;
-// $item['t-top-boat-cover.3234.8oz'] = 2350;
-// $item['t-top-boat-cover.3234.9oz'] = 2500;
-
-// $item['t-top-boat-cover.35.7oz'] = 2250;
-// $item['t-top-boat-cover.35.8oz'] = 2450;
-// $item['t-top-boat-cover.35.9oz'] = 2600;
-
-// $item['t-top-boat-cover.3637.7oz'] = 2350;
-// $item['t-top-boat-cover.3637.8oz'] = 2550;
-// $item['t-top-boat-cover.3637.9oz'] = 2700;
-
-// $item['t-top-boat-cover.38.7oz'] = 3000;
-// $item['t-top-boat-cover.38.8oz'] = 3200;
-// $item['t-top-boat-cover.38.9oz'] = 3350;
-
-//     // Shipping
-
-// $shipping['t-top-boat-cover.1819.weight'] = 22;
-// $shipping['t-top-boat-cover.1819.price'] = 25;
-
-// $shipping['t-top-boat-cover.2022.weight'] = 25;
-// $shipping['t-top-boat-cover.2022.price'] = 30;
-
-// $shipping['t-top-boat-cover.23.weight'] = 26;
-// $shipping['t-top-boat-cover.23.price'] = 30;
-
-// $shipping['t-top-boat-cover.24.weight'] = 27;
-// $shipping['t-top-boat-cover.24.price'] = 35;
-
-// $shipping['t-top-boat-cover.25.weight'] = 28;
-// $shipping['t-top-boat-cover.25.price'] = 35;
-
-// $shipping['t-top-boat-cover.26.weight'] = 29;
-// $shipping['t-top-boat-cover.26.price'] = 35;
-
-// $shipping['t-top-boat-cover.27.weight'] = 30;
-// $shipping['t-top-boat-cover.27.price'] = 40;
-
-// $shipping['t-top-boat-cover.28.weight'] = 31;
-// $shipping['t-top-boat-cover.28.price'] = 40;
-
-// $shipping['t-top-boat-cover.29.weight'] = 32;
-// $shipping['t-top-boat-cover.29.price'] = 40;
-
-// $shipping['t-top-boat-cover.30.weight'] = 33;
-// $shipping['t-top-boat-cover.30.price'] = 45;
-
-// $shipping['t-top-boat-cover.31.weight'] = 34;
-// $shipping['t-top-boat-cover.31.price'] = 45;
-
-// $shipping['t-top-boat-cover.3234.weight'] = 37;
-// $shipping['t-top-boat-cover.3234.price'] = 45;
-
-// $shipping['t-top-boat-cover.35.weight'] = 38;
-// $shipping['t-top-boat-cover.35.price'] = 45;
-
-// $shipping['t-top-boat-cover.3637.weight'] = 40;
-// $shipping['t-top-boat-cover.3637.price'] = 45;
-
-// $shipping['t-top-boat-cover.38.weight'] = 41;
-// $shipping['t-top-boat-cover.38.price'] = 45;
+$price['ttopboatcover.38.item.base'] = 0;
+$price['ttopboatcover.38.item.option.fabric.7oz'] = 3000;
+$price['ttopboatcover.38.item.option.fabric.8oz'] = 3200;
+$price['ttopboatcover.38.item.option.fabric.9oz'] = 3350;
+$price['ttopboatcover.38.shipping.weight'] = 41;
+$price['ttopboatcover.38.shipping.price'] = 45;
 
 // //TTop Accessories
 
-// $prices['sandbags.item'] = 15;
-// $prices['sandbags.shipping.weight'] = 8;
-// $prices['sandbags.shipping.price'] = 7.50;
+$price['sandbags.item.base'] = 15;
+$price['sandbags.item.discount'] = 0.3;
+$price['sandbags.item.allowMarkup'] = false;
+$price['sandbags.shipping.weight'] = 8;
+$price['sandbags.shipping.price'] = 7.5;
 
-// $prices['tie-down-set.item'] = 25;
-// $prices['tie-down-set.shipping.weight'] = 2;
-// $prices['tie-down-set.shipping.price'] = 0;
+$price['tie-down-set.item.base'] = 25;
+$price['tie-down-set.shipping.weight'] = 2;
+$price['tie-down-set.shipping.price'] = 0;
 
-// $prices['suction-cups.item'] = 38;
-// $prices['suction-cups.shipping.weight'] = 1;
-// $prices['suction-cups.shipping.price'] = 0;
+$price['suction-cups.item.base'] = 38;
+$price['suction-cups.shipping.weight'] = 1;
+$price['suction-cups.shipping.price'] = 0;
 
-// $prices['storage-bag.item.l'] = 30;
-// $prices['storage-bag.item.xl'] = 45;
-// $prices['storage-bag.shipping.weight'] = 2;
-// $prices['storage-bag.shipping.price'] = 0;
+$price['storage-bag.item.base'] = 0;
+$price['storage-bag.item.option.size.l'] = 30;
+$price['storage-bag.item.option.size.xl'] = 45;
+$price['storage-bag.shipping.weight'] = 2;
+$price['storage-bag.shipping.price'] = 0;
 
 // // Boat Shade Kit
 
@@ -188,29 +161,25 @@ $price['ttopboatcover.24.shipping.price'] = 35;
 
 // //BSK Accessories
 
-// $prices['telescoping-poles-2.item'] = 122.50;
-// $prices['telescoping-poles-2.shipping.weight'] = 4;
-// $prices['telescoping-poles-2.shipping.price'] = 0;
+$price['telescoping-poles-2.item.base'] = 122.50;
+$price['telescoping-poles-2.shipping.weight'] = 4;
+$price['telescoping-poles-2.shipping.price'] = 0;
 
-// $prices['velcro-clean-up-tabs-2.item'] = 5;
-// $prices['velcro-clean-up-tabs-2.shipping.weight'] = 1;
-// $prices['velcro-clean-up-tabs-2.shipping.price'] = 0;
+$price['velcro-clean-up-tabs-2.item.base'] = 5;
+$price['velcro-clean-up-tabs-2.shipping.weight'] = 1;
+$price['velcro-clean-up-tabs-2.shipping.price'] = 0;
 
-// $prices['shade-kit-bag.item'] = 30;
-// $prices['shade-kit-bag.shipping.weight'] = 1;
-// $prices['shade-kit-bag.shipping.price'] = 0;
+$price['shade-kit-bag.item.base'] = 30;
+$price['shade-kit-bag.shipping.weight'] = 1;
+$price['shade-kit-bag.shipping.price'] = 0;
 
-// $prices['pole-securing-straps.item'] = 10;
-// $prices['pole-securing-straps.shipping.weight'] = 1;
-// $prices['pole-securing-straps.shipping.price'] = 0;
+$price['pole-securing-straps.item.base'] = 10;
+$price['pole-securing-straps.shipping.weight'] = 1;
+$price['pole-securing-straps.shipping.price'] = 0;
 
-// $prices['bsk-webbing-straps.item'] = 15;
-// $prices['bsk-webbing-straps.shipping.weight'] = 2;
-// $prices['bsk-webbing-straps.shipping.price'] = 0;
-
-// $prices['suction-cups-2.item'] = 38;
-// $prices['suction-cups-2.shipping.weight'] = 1;
-// $prices['suction-cups-2.shipping.price'] = 0;
+$price['bsk-webbing-straps.item.base'] = 15;
+$price['bsk-webbing-straps.shipping.weight'] = 2;
+$price['bsk-webbing-straps.shipping.price'] = 0;
 
 //Ultimate Boat Shade Kit
 

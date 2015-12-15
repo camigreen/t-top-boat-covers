@@ -106,8 +106,13 @@ class Price
 		}
 		$prices = $this->app->parameter->create($price);
 		$this->_price_options = $this->app->parameter->create($prices->get($this->_group.'.item.option.'));
+		$this->allowMarkup = $prices->get($this->_group.'.item.allowMarkup', true);
 		$this->_base = $prices->get($this->_group.'.item.base');
 		$this->_shipWeight = $prices->get($this->_group.'.shipping.weight');
+		if($this->app->customer->isReseller()) {
+			$this->_discountRate = $prices->get($this->_group.'.item.discount') ? $prices->get($this->_group.'.item.discount') : $this->_discountRate;
+			$this->_markupRate = $this->allowMarkup ? $this->_markupRate : 0;
+		}
 		
 	}
 	public function get($name = 'retail', $formatted = false) {
@@ -146,6 +151,10 @@ class Price
 	protected function base() {
 		$options = $this->getCalculatedOptions();
 		return $this->_base + $options;
+	}
+
+	public function allowMarkups() {
+		return $this->allowMarkup;
 	}
 
 	/**

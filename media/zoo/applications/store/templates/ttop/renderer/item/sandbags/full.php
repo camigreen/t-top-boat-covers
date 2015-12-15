@@ -39,9 +39,9 @@ $_item = $storeItem->item;
         </div>
     </div>
     <div class="uk-width-1-3">
-        <div class="uk-width-1-1 price-container">
-            <?php if ($this->checkPosition('price')) : ?>
-                <?php echo $this->renderPosition('price', array('style' => 'pricing')); ?>
+        <div class="uk-width-1-1 uk-grid price-container">
+            <?php if ($this->checkPosition('pricing')) : ?>
+                    <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
             <?php endif; ?>
         </div>
         <div class="uk-width-1-1 options-container uk-margin-top">

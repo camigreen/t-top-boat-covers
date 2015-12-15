@@ -69,6 +69,14 @@ class StoreItem {
      * @since 1.0.0
      */
     public $shipping;
+
+    /**
+     * Contains the ParamterData Class to hold the item parameters.
+     *
+     * @var [ParameterData]
+     * @since 1.0.0
+     */
+    public $params;
     
     /**
      * Array of options and thier values.
@@ -190,22 +198,23 @@ class StoreItem {
      * @since 1.0
      */
     public function importItem($item = null) {
-
+        $ignore = array('app', 'params');
         foreach($item as $key => $value) {
             if(property_exists($this, $key)) {
-                if($key != 'app') {
+                if(!in_array($key, $ignore)) {
                     $this->$key = $value;
                 }
             }
         }
         $options = array();
         $attributes = array();
+        $this->params = $this->app->parameter->create();
 
 
         if($item instanceof Item) {
-
             foreach($item->getElementsByType('itemoptions') as $element) {
-                if($element->config->get('option_type') == 'global_options' || $element->config->get('option_type') == 'user_options') {
+                if($element->config->get('option_type') == 'global_options') {
+
                     $value = $element->get('option', $element->config->get('default', null));
                     $key = $element->config->get('field_name');
                     $options[$key] = $this->app->data->create();
@@ -221,25 +230,36 @@ class StoreItem {
                 }
             
             }
+            foreach($item->getElementsByType('useroptions') as $element) {
+                foreach($element->get('select') as $opts) {
+                    $options[$opts['field']] = $this->app->data->create();
+                    $options[$opts['field']]->set('name', $opts['name']);
+                    $options[$opts['field']]->set('value', $opts['default']);
+                }
+            }
             list($make) = $item->getRelatedCategories();
             $attributes['oem'] = $this->app->data->create();
             $attributes['oem']->set('name', $make->name);
             $attributes['oem']->set('value', $make->id);
             $this->make = $item->getPrimaryCategory()->name;
-            $this->price_group = $item->getType()->id;
+            $this->price_group = $item->alias;
 
         } else {
-            foreach($item['options'] as $key => $option) {
-                $options[$key] = $this->app->data->create();
-                $options[$key]->set('name', $option['name']);
-                $options[$key]->set('value', $option['value']);
-                $options[$key]->set('text', isset($option['text']) ? $option['text'] : null);
+            if(isset($item['options'])) {
+                foreach($item['options'] as $key => $option) {
+                    $options[$key] = $this->app->data->create();
+                    $options[$key]->set('name', $option['name']);
+                    $options[$key]->set('value', $option['value']);
+                    $options[$key]->set('text', isset($option['text']) ? $option['text'] : null);
+                }
             }
-            foreach($item['attributes'] as $key => $attr) {
-                $attributes[$key] = $this->app->data->create();
-                $attributes[$key]->set('name', $attr['name']);
-                $attributes[$key]->set('value', $attr['value']);
-                $attributes[$key]->set('text', isset($attr['text']) ? $attr['text'] : null);
+            if(isset($item['attributes'])) {
+                foreach($item['attributes'] as $key => $attr) {
+                    $attributes[$key] = $this->app->data->create();
+                    $attributes[$key]->set('name', $attr['name']);
+                    $attributes[$key]->set('value', $attr['value']);
+                    $attributes[$key]->set('text', isset($attr['text']) ? $attr['text'] : null);
+                }
             }
         }
 

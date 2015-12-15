@@ -182,16 +182,18 @@ $category = $item->getPrimaryCategory()->getParent();
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
                             <input type="hidden" name="oem" data-name="OEM" data-text="<?php echo $storeItem->attributes['oem']->get('text'); ?>" value="<?php echo $storeItem->attributes['oem']->get('value'); ?>" />
                             <input type="hidden" name="boat_model" data-name="Boat Model" data-text="<?php echo $storeItem->attributes['boat_model']->get('text'); ?>" value="<?php echo $storeItem->attributes['boat_model']->get('value'); ?>" />
-                            <?php echo $this->renderPosition('item_attributes'); ?>
                         </fieldset>
-                        <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
-                        <input type="hidden" name="item-name" value="<?php echo $storeItem->name; ?>" />  
-                        <input type="hidden" name="item-id" value="<?php echo $storeItem->id; ?>" />
-                        <input type="hidden" name="item-type" value="<?php echo $storeItem->type; ?>" />
-                        <input type="hidden" name="make" value="<?php echo $storeItem->make; ?>" /> 
-                        <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />    
                     </div>
+                    <?php echo $this->renderPosition('item_attributes'); ?>
                 <?php endif; ?>
+                <div class="item-details">
+                    <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
+                    <input type="hidden" name="item-name" value="<?php echo $storeItem->name; ?>" />  
+                    <input type="hidden" name="item-id" value="<?php echo $storeItem->id; ?>" />
+                    <input type="hidden" name="item-type" value="<?php echo $storeItem->type; ?>" />
+                    <input type="hidden" name="make" value="<?php echo $storeItem->make; ?>" /> 
+                    <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />    
+                </div>
             </div>
             <?php if ($this->checkPosition('bottom')) : ?>
                     <?php echo $this->renderPosition('bottom', array('style' => 'block')); ?>
