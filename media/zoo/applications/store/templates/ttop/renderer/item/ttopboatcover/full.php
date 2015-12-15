@@ -182,9 +182,10 @@ $category = $item->getPrimaryCategory()->getParent();
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
                             <input type="hidden" name="oem" data-name="OEM" data-text="<?php echo $storeItem->attributes['oem']->get('text'); ?>" value="<?php echo $storeItem->attributes['oem']->get('value'); ?>" />
                             <input type="hidden" name="boat_model" data-name="Boat Model" data-text="<?php echo $storeItem->attributes['boat_model']->get('text'); ?>" value="<?php echo $storeItem->attributes['boat_model']->get('value'); ?>" />
+                            <?php echo $this->renderPosition('item_attributes'); ?>
                         </fieldset>
                     </div>
-                    <?php echo $this->renderPosition('item_attributes'); ?>
+                    
                 <?php endif; ?>
                 <div class="item-details">
                     <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  

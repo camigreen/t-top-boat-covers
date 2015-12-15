@@ -120,7 +120,7 @@ class OrderEvent {
 				$value = is_bool($value) ? ($value ? 'True' : 'False') : $value;
 				$data[] = $key.': '.$value;
 		}
-		foreach ($order->items as $key => $value) {
+		foreach ($order->elements->get('items.', array()) as $key => $value) {
 				$data[] = $value->name."\n";
 		}
 		$message = implode("\n", $data);

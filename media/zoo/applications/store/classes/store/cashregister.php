@@ -82,10 +82,10 @@ class CashRegister {
         }
         $order = $this->app->orderdev->get($oid);
         $email = $this->app->mail->create();
-
+        $formType = $order->getAccount()->isReseller() ? 'reseller' : 'default';
         $CR = $this;  
            if ($for == 'payment') {
-                $pdf = $this->app->pdf->workorder;
+                $pdf = $this->app->pdf->create('workorder', $formType);
                 $filename = $pdf->setData($order)->generate()->toFile();
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("T-Top Boat Cover Online Order Notification");
@@ -96,7 +96,7 @@ class CashRegister {
                 unlink($path);
             } 
             if($for == 'receipt') {
-                $filename = $this->app->pdf->receipt->setData($order)->generate()->toFile();
+                $filename = $this->app->pdf->create('receipt', $formType)->setData($order)->generate()->toFile();
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("Thank you for your order.");
                 $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.receipt.php');
@@ -108,7 +108,7 @@ class CashRegister {
             if($for == 'invoice') {
                 $addresses = $order->getAccount()->getNotificationEmails();
                 $addresses[] = $order->elements->get('email');
-                $filename = $this->app->pdf->invoice->setData($order)->generate()->toFile();
+                $filename = $this->app->pdf->create('invoice', $formType)->setData($order)->generate()->toFile();
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("Thank you for your order.");
                 $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.invoice.php');
@@ -223,18 +223,15 @@ class CashRegister {
     protected function _purchaseOrder () {
 
         $items = $this->app->cart;
-        $this->order->transaction_id = "Purchase Order";
+        $this->order->elements->set('payment.transaction_id', "Purchase Order");
         $this->order->elements->set('items.', $items->getAllItems());
         // Update Payment Status
         $this->order->params->set('payment.status', 2);
+        $this->order->params->set('payment.type', 'PO');
         $this->order->setStatus(2);
         //this->order->calculateCommissions();
+        $this->order->elements->set('payment.approved', true);
         $this->order->save(true);
-        $result = array(
-            'approved' => true,
-            'orderID' => $this->order->id
-        );
-        $this->order->result = $result;
         $this->sendNotificationEmail($this->order->id, 'invoice');
         $this->sendNotificationEmail($this->order->id, 'payment');
         $this->clearOrder();
@@ -244,39 +241,42 @@ class CashRegister {
 
     protected function _creditCard() {
         $order = $this->order;
-        $billing = $order->get('billing');
-        $shipping = $order->get('shipping');
-        $items = $order->get('items');
-        $creditCard = $order->get('creditCard');
+        $billing = $order->elements->get('billing.');
+        $shipping = $order->elements->get('shipping.');
+        $items = $this->app->cart->getAllItems();
+        $creditCard = $order->elements->get('payment.creditcard.');
         $sale = $this->merchant;
         
-        $sale->card_num = $creditCard->get('cardNumber');
-        $sale->exp_date = $creditCard->getExpDate();
-        $sale->card_code = $creditCard->get('card_code');
-        $sale->amount = $this->total;
-        $sale->first_name = $billing->get('firstname');
-        $sale->last_name = $billing->get('lastname');
-        $sale->address = $billing->get('address');
-        $sale->city = $billing->get('city');
-        $sale->state = $billing->get('state');
-        $sale->zip = $billing->get('zip');
+        $sale->card_num = $creditCard['cardNumber'];
+        $sale->exp_date = $creditCard['expMonth'].'/'.$creditCard['expYear'];
+        $sale->card_code = $creditCard['card_code'];
+        $sale->amount = $order->total;
+        list($first, $last) = explode(' ', $shipping['name']);
+        $sale->first_name = $first;
+        $sale->last_name = $last;
+        $sale->address = $billing['street1'].($billing['street2'] ? ', '.$billing['street2'] : '');
+        $sale->city = $billing['city'];
+        $sale->state = $billing['state'];
+        $sale->zip = $billing['postalCode'];
 //        $sale->country = $country = "US";
-        $sale->phone = $billing->get('phoneNumber');
-        $sale->setCustomField("CustomerAltNumber", $billing->get('altNumber'));
-        $sale->email = $billing->get('email');
-        $sale->customer_ip = $order->get('ip');
-        $sale->invoice_num = $order->get('id');
-        $sale->ship_to_first_name = $shipping->get('firstname');
-        $sale->ship_to_last_name = $shipping->get('lastname');
-        $sale->ship_to_address = $shipping->get('address');
-        $sale->ship_to_city = $shipping->get('city');
-        $sale->ship_to_state = $shipping->get('state');
-        $sale->ship_to_zip = $shipping->get('zip');
+        $sale->phone = $billing['phoneNumber'];
+        $sale->setCustomField("CustomerAltNumber", $billing['altNumber']);
+        $sale->email = $order->elements->get('email');
+        $sale->customer_ip = $order->elements->get('ip');
+        $sale->invoice_num = $order->id;
+        list($first, $last) = explode(' ', $shipping['name']);
+        $sale->ship_to_first_name = $first;
+        $sale->ship_to_last_name = $last;
+        $sale->ship_to_address = $shipping['street1'] . ($shipping['street2'] ? ', ' . $shipping['street2'] : '');
+        $sale->ship_to_city = $shipping['city'];
+        $sale->ship_to_state = $shipping['state'];
+        $sale->ship_to_zip = $shipping['postalCode'];
 //        $sale->ship_to_country = $ship_to_country = "US";
-        $sale->tax = $tax = $this->taxTotal;
+        $sale->tax = $this->taxTotal;
         $sale->freight = $this->shipping;
 //        $sale->duty = $duty = "Duty1<|>export<|>15.00";
 //        $sale->po_num = $po_num = "12";
+        $priceDisplay = ($this->app->customer->isReseller() ? 'reseller' : 'retail');
         foreach($items as $item) {
             $sale->addLineItem(
                 $item->id,
@@ -284,50 +284,44 @@ class CashRegister {
                 '',
 //                str_replace('-',' ',substr($item->get('description'),0,31)),// Item Description
                 $item->qty,// Item Quantity
-                number_format($item->price,2,'.',''), // Item Unit Price
+                number_format($item->getPrice()->get($priceDisplay),2,'.',''), // Item Unit Price
                 ($item->taxable ? 'Y' : 'N')// Item taxable
             );
         }
         $response = $sale->authorizeAndCapture();
+
         
         if($response->approved) {
-            $order->creditCard->set('cardNumber', $response->account_number);
-            $order->creditCard->set('card_type', str_replace(' ','_',strtolower($response->card_type)));
-            $order->creditCard->set('card_name', $response->card_type);
-            $order->creditCard->set('auth_code', $response->authorization_code);
-            $order->creditCard->set('approved', $response->approved);
-            $order->creditCard->set('response', $response);
-            $order->transaction_id = $response->transaction_id;
-            $order->setStatus(1);
-            $order->setOrderDate();
-            if($this->app->merchant->testMode()) {
-                //$order->id = 'Test Mode';
-                $order->save();
-            } else {
-                $order->save();
-            }
+            $order->params->set('payment.creditcard.cardNumber', $response->account_number);
+            $order->params->set('payment.creditcard.card_type', str_replace(' ','_',strtolower($response->card_type)));
+            $order->params->set('payment.creditcard.card_name', $response->card_type);
+            $order->params->set('payment.creditcard.auth_code', $response->authorization_code);
+            $order->params->set('payment.approved', $response->approved);
+            $order->params->set('payment.response_text', $response->response_reason_text);
+            $order->params->set('payment.status', 3);
+            $order->params->set('payment.type', 'CC');
+            $order->elements->set('items.', $items);
             
-            $result = array(
-                'approved' => $response->approved,
-                'response' => $response,
-                'orderID' => $order->id
-            ); 
-            $this->sendNotificationEmail($order, 'receipt');
-            $this->sendNotificationEmail($order, 'payment');
+            $order->setStatus(2);
+            if($this->app->merchant->testMode()) {
+                $order->params->set('payment.transaction_id','Test Mode');
+                $order->save(true);
+            } else {
+                $order->params->set('payment.transaction_id',$response->transaction_id); ;
+                $order->save(true);
+            }
+            $this->sendNotificationEmail($order->id, 'receipt');
+            $this->sendNotificationEmail($order->id, 'payment');
             $this->clearOrder();
 
-            //$order->updateSession();
         } else {
 
             // trigger payment failure event
             $this->app->event->dispatcher->notify($this->app->event->create($this->order, 'order:paymentFailed', array('response' => $response)));
-            
-            $result = array(
-                'approved' => $response->approved,
-                'response' => $response
-            );
+            $order->params->set('payment.approved', $response->approved);
+            $order->params->set('payment.response_text', $response->response_reason_text);
         }
-        $order->result = $result;
+
         return $order;
     }
 }

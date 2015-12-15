@@ -1,11 +1,17 @@
 <?php 
 
-class WorkOrderFormPDF extends FormPDF {
+class ReceiptFormPDF extends FormPDF {
 
-	public function __construct() {
-		$this->type = strtolower(basename(get_class(), 'FormPDF'));
-		parent::__construct();
-	}
+	/**
+	 * @var [string]
+	 */
+	public $resource = 'reseller';
+
+	/**
+	 * @var [string]
+	 */
+	public $type = 'receipt';
+
 
 	public function setData($order) {
 		$order = $this->app->data->create(get_object_vars($order));
@@ -43,10 +49,10 @@ class WorkOrderFormPDF extends FormPDF {
 	    			array('format' => 'item-options','text' => implode("\n",$options))
 	    		),
 	    		'qty' => array('text' => $item->qty),
-	    		'msrp' => array('text' => $item->getTotal('retail')),
-	    		'markup_price' => array('text' => $this->app->number->currency($item->getTotal('markup'), array('currency' => 'USD'))."\n".$item->getPrice()->getMarkupRate().' Markup'),
-	    		'dealer_price' => array('text' => $this->app->number->currency($item->getTotal('discount'), array('currency' => 'USD'))."\n".$item->getPrice()->getDiscountRate().' Discount'),
-	    		'dealer_profit' => array('text' => $this->app->number->currency($item->getTotal('margin'), array('currency' => 'USD'))."\nTotal Discount ".$item->getPrice()->getProfitRate())
+	    		'msrp' => array('text' => $item->getTotal('base')),
+	    		'markup_price' => array('text' => $this->app->number->currency($item->getTotal('markup'), array('currency' => 'USD'))."\n".$item->getPrice()->getMarkupRate(true).' Markup'),
+	    		'dealer_price' => array('text' => $this->app->number->currency($item->getTotal('reseller'), array('currency' => 'USD'))."\n".$item->getPrice()->getDiscountRate(true).' Discount'),
+	    		'dealer_profit' => array('text' => $this->app->number->currency($item->getTotal('margin'), array('currency' => 'USD'))."\nTotal Discount ".$item->getPrice()->getProfitRate(true))
 	    	);
 
 	    }
@@ -61,6 +67,7 @@ class WorkOrderFormPDF extends FormPDF {
 	    $order->set('po_number', $order->elements->get('payment.po_number'));
 	    $order->set('customer', $order->elements->get('payment.customer_name'));
 	    $order->set('terms', JText::_(($terms = $order->params->get('terms')) ? 'ACCOUNT_TERMS_'.$terms : ''));
+	    $order->set('balance_due', $order->params->get('payment.status') == 3 ? 0 : $order->total);
 
 	    $order->remove('app');
 

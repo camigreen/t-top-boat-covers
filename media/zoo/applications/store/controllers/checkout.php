@@ -258,19 +258,22 @@ class CheckoutController extends AppController {
         $terms = $this->app->customer->getAccountTerms();
         $order = $this->CR->processPayment($terms);
         $this->app->document->setMimeEncoding('application/json');
-        echo json_encode($order->result);
+        $result = array(
+            'approved' => $order->params->get('payment.approved'),
+            'orderID' => $order->id,
+            'message' => $order->params->get('payment.response_text')
+        );
+        echo json_encode($result);
     }
 
     public function getPDF() {
-        $type = $this->app->request->get('type','word');
-        if (!$this->app->path->path('classes:fpdf/scripts/'.$type.'.xml')) {
-            return $this->app->error->raiseError(500, JText::_('PDF template does not exist'));
-        }
+        $type = $this->app->request->get('type','string', 'default');
+        $form = $this->app->request->get('form', 'string');
         $this->app->document->setMimeEncoding('application/pdf');
-        
-        $pdf = $this->app->pdf->$type;
+        $pdf = $this->app->pdf->create($form, $type);
         $id = $this->app->request->get('id','int');
         $order = $this->app->orderdev->get($id);
+
         $pdf->setData($order)->generate()->toBrowser();
     }
 
@@ -300,6 +303,8 @@ class CheckoutController extends AppController {
                 }
             }
         }
+
+        $order->elements->set('payment.creditcard.', $post['creditcard']);
         
         if(isset($post['params'])) {
             foreach($post['params'] as $key => $value) {

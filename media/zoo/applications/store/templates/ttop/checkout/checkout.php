@@ -262,6 +262,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                             $('#back.ttop-checkout-step-button').unbind("click").on("click",function(e){
                                 e.preventDefault();
                                 $('[name="process"]').val(false);
+                                $('input[name="task"]').val($(e.target).data('next'));
                                 $('input[name="next"]').val($(e.target).data('next'));
                                 self.$element.find('input, select').addClass('ignore');
                                 $(this).closest('form').submit();
@@ -360,9 +361,9 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                             dfd.resolve(true);
                                         },5000);
                                     } else {
-                                        $( ".ttop-checkout-validation-errors" ).html( data.response.response_reason_text );
+                                        $( ".ttop-checkout-validation-errors" ).html( data.message );
                                         ProcessingModal('hide');
-                                        alert(data.response.response_reason_text);
+                                        alert(data.message);
                                         dfd.resolve(false);
                                     }
                                 });

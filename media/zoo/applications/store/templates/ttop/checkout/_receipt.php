@@ -7,10 +7,12 @@
  */
 $elements = $order->elements;
 $items = $order->elements->get('items.');
+$query = $order->params->get('terms') == 'DUR' ? '&form=receipt' : '&form=invoice';
+$query .= $order->getAccount()->isReseller() ? 'reseller' : 'default';
 ?>
 <div class='ttop-receipt'>
     <div class="uk-width-1-1 uk-container-center uk-text-right uk-margin-bottom">
-        <a href="/store/checkout?task=getPDF&type=invoice&id=<?php echo $order->id; ?>&format=raw" class="uk-button uk-button-primary" target="_blank"><i class="uk-icon-print"></i> Print Inovice</a>
+        <a href="/store/checkout?task=getPDF<?php echo $query; ?>&id=<?php echo $order->id; ?>&format=raw" class="uk-button uk-button-primary" target="_blank"><i class="uk-icon-print"></i> Print <?php echo $order->params->get('payment.status') == 3 ? 'Receipt' : 'Invoice'; ?></a>
     </div>
     <div class="uk-width-1-1 uk-container-center">
         <table class="uk-table uk-table-condensed">

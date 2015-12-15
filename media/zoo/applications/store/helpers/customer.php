@@ -50,8 +50,7 @@ class CustomerHelper extends AppHelper {
     }
 
     public function isReseller() {
-        $resellers = array('dealership');
-        return in_array($this->_account->type, $resellers);
+        return $this->getAccount()->isReseller();
     }
 
     public function getAccountTerms() {

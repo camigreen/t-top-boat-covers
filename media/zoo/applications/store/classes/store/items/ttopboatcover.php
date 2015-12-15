@@ -28,7 +28,6 @@ class ttopboatcoverStoreItem extends StoreItem {
 
     public function importItem($item = null) {
         parent::importItem($item);
-		
 
         $this->price_group = 'ttopboatcover.'.$this->attributes['boat_length']->get('value');
 

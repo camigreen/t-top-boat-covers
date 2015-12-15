@@ -47,26 +47,17 @@
 				<field name="created" type="textbox" x="170" y="20" h="5" w="35" align="R" >
 					<title align="L" text-align="R" text="Order Date:" />
 				</field>
-				<field name="id" type="textbox" x="170" y="25" h="5" w="35" align="C" >
-					<title align="L" text-align="R" text="Order Number:" />
+				<field name="salesperson" type="textbox" x="10" y="85" h="5" w="48.75" align="C" font-size="9" border="1">
+					<title align="T" border="1" text-align="C" text="Salesperson" font-size="8"/>
 				</field>
-				<field name="account_name" type="textbox" x="10" y="85" h="5" w="45" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Account Name" font-size="8"/>
-				</field>
-				<field name="account_number" type="textbox" x="55" y="85" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Account Number" font-size="8"/>
-				</field>
-				<field name="id" type="textbox" x="85" y="85" h="5" w="30" align="C" font-size="9" border="1">
+				<field name="id" type="textbox" x="58.75" y="85" h="5" w="48.75" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Order Number" font-size="8"/>
 				</field>
-				<field name="delivery_method" type="textbox" x="115" y="85" h="5" w="30" align="C" font-size="9" border="1">
+				<field name="delivery_method" type="textbox" x="107.5" y="85" h="5" w="48.75" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Delivery" font-size="8"/>
 				</field>
-				<field name="po_number" type="textbox" x="145" y="85" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="PO Number" font-size="8"/>
-				</field>
-				<field name="customer" type="textbox" x="175" y="85" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Customer" font-size="8"/>
+				<field name="transaction_id" type="textbox" x="156.25" y="85" h="5" w="48.75" align="C" font-size="9" border="1">
+					<title align="T" border="1" text-align="C" text="Transaction ID" font-size="8"/>
 				</field>
 				<field name="items" type="table" x="10" y="95" rows="34" w="195">
 					<columns>

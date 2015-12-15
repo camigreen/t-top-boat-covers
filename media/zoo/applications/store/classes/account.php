@@ -447,6 +447,11 @@ class Account {
         return (bool) !$this->elements->get('tax_exempt', true);
     }
 
+    public function isReseller() {
+        $resellers = array('dealership');
+        return in_array($this->type, $resellers);
+    }
+
     public function getConfigForm() {
         $template = $this->app->zoo->getApplication()->getTemplate();
         $type = $this->type;

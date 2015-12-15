@@ -189,12 +189,10 @@ class StoreController extends AppController {
 
     }
     public function getPDF() {
-        $type = $this->app->request->get('type','word');
-        if (!$this->app->path->path('classes:fpdf/scripts/'.$type.'.xml')) {
-            return $this->app->error->raiseError(500, JText::_('PDF template does not exist'));
-        }
+        $type = $this->app->request->get('type','string', 'default');
+        $form = $this->app->request->get('form', 'string');
         $this->app->document->setMimeEncoding('application/pdf');
-        $pdf = $this->app->pdf->$type;
+        $pdf = $this->app->pdf->create($form, $type);
         $id = $this->app->request->get('id','int');
         $order = $this->app->orderdev->get($id);
 

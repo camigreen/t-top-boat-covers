@@ -37,7 +37,7 @@
 				<field name="page_number" type="pageNumbers" x="179" y="5" h="5" w="30" align="R" />
 				<field name="companyname" type="textbox" x="35" y="10" h="5" w="80" font-size="12" font-style="B" />
 				<field name="companyaddress" type="textbox" x="35" y="15" h="35" w="80" line-height="4" />
-				<field name="totals_box" type="textbox" x="156.25" y="240" h="25" w="48.75" border="B,L,R" />
+				<field name="totals_box" type="textbox" x="152" y="240" h="30" w="53" border="B,L,R" />
 				<field name="billto" type="textbox" x="10" y="45" h="30" w="75" border="1">
 					<title align="T" text-align="C" border="1" font-style="B" text="Bill To" />
 				</field>
@@ -65,6 +65,9 @@
 				</field>
 				<field name="total" type="textbox" x="176" y="257" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Total"  font-size="10"/>
+				</field>
+				<field name="balance_due" type="textbox" x="176" y="262" h="5" w="29" align="R" font-size="10" mask="currency">
+					<title align="L" text-align="R" text="Balance Due"  font-size="10"/>
 				</field>
 				<field name="account_name" type="textbox" x="10" y="85" h="5" w="45" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Account Name" font-size="8"/>

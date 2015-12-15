@@ -11,3 +11,5 @@
 2015-12-05T21:50:04+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.132 Array ( ) 
 2015-12-05T21:50:37+00:00	INFO ::1	controller	Holding edit ID com_menus.edit.item.134 Array (     [0] => 134 ) 
 2015-12-05T21:50:40+00:00	INFO ::1	controller	Releasing edit ID com_menus.edit.item.134 Array ( ) 
+2015-12-15T03:06:08+00:00	INFO ::1	controller	Holding edit ID com_templates.edit.style.16 Array (     [0] => 16 ) 
+2015-12-15T03:06:09+00:00	INFO ::1	controller	Checking edit ID com_templates.edit.style.16: 1 Array (     [0] => 16 ) 

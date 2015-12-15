@@ -60,9 +60,14 @@ class OrderDev {
         } else {
         	$this->getTotal('retail');
         }
+
+        $this->elements->set('ip', $this->app->useragent->ip());
+
 		if($writeToDB) {
 			$this->table->save($this);
 		}
+
+		
         $this->app->session->set('order',(string) $this,'checkout');
 
 		return $this;
