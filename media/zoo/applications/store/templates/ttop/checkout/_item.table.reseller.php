@@ -91,7 +91,7 @@
             </td>
             <td>
                 <?php 
-                    $balance = $order->params->get('payment.status') > 3 ? 0 : $order->getTotal('reseller');
+                    $balance = $order->params->get('payment.status') >= 3 ? 0 : $order->getTotal('reseller');
                     echo $this->app->number->currency($balance,array('currency' => 'USD')); 
                 ?>
             </td>
