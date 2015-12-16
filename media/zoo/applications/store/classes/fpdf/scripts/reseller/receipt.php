@@ -67,7 +67,7 @@ class ReceiptFormPDF extends FormPDF {
 	    $order->set('po_number', $order->elements->get('payment.po_number'));
 	    $order->set('customer', $order->elements->get('payment.customer_name'));
 	    $order->set('terms', JText::_(($terms = $order->params->get('terms')) ? 'ACCOUNT_TERMS_'.$terms : ''));
-	    $order->set('balance_due', $order->params->get('payment.status') == 3 ? 0.00 : $order->total);
+	    $order->set('balance_due', $order->params->get('payment.status') == 3 ? '0.00' : $order->total);
 
 	    $order->remove('app');
 
