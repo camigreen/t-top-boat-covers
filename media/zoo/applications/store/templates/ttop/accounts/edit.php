@@ -29,11 +29,11 @@
 				<div>Created:</div>
 				<div class="uk-text-muted"><?php echo $this->account->created == null ? JText::_('Not created') : $this->app->html->_('date', $this->account->created, JText::_('DATE_FORMAT_LC2'), $this->app->date->getOffset()); ?></div>
 				<div>Created By:</div>
-				<div class="uk-text-muted"><?php echo $this->account->created_by ? $this->app->user->get($this->account->created_by)->name : null; ?></div>
+				<div class="uk-text-muted"><?php echo $this->account->created_by ? $this->app->account->get($this->account->created_by)->name : null; ?></div>
 				<div>Modified:</div>
 				<div class="uk-text-muted"><?php echo $this->account->modified == null ? JText::_('Not modified') : $this->app->html->_('date', $this->account->modified, JText::_('DATE_FORMAT_LC2'), $this->app->date->getOffset()); ?></div>
 				<div>Modified By:</div>
-				<div class="uk-text-muted"><?php echo $this->account->modified_by ? $this->app->user->get($this->account->modified_by)->name: null; ?></div>
+				<div class="uk-text-muted"><?php echo $this->account->modified_by ? $this->app->account->get($this->account->modified_by)->name: null; ?></div>
 
 			</div>
 		</div>

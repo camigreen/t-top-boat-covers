@@ -150,7 +150,7 @@ class AccountController extends AppController {
         
         $aid = $this->app->request->get('aid', 'int');
         $post = $this->app->request->get('post:', 'array', array());
-        $type = $this->app->request->get('type', 'word', 'default');
+        $type = $this->app->request->get('type', 'string', 'default');
         echo 'Post</br>';
         var_dump($post);
         // return;

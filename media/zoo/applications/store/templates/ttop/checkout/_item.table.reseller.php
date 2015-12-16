@@ -79,10 +79,21 @@
         </tr>
         <tr>
             <td colspan="4" class="uk-text-right">
-                Total Dealer's Balance Due:
+                Total:
             </td>
             <td>
                 <?php echo $this->app->number->currency($order->getTotal('reseller'),array('currency' => 'USD')); ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="uk-text-right">
+                Dealer's Balance Due:
+            </td>
+            <td>
+                <?php 
+                    $balance = $order->params->get('terms') == 'DUR' ? 0 : $order->getTotal('reseller');
+                    echo $this->app->number->currency($balance,array('currency' => 'USD')); 
+                ?>
             </td>
         </tr>
     </tfoot>

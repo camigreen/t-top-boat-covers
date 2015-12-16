@@ -37,7 +37,7 @@
 				<field name="page_number" type="pageNumbers" x="179" y="5" h="5" w="30" align="R" />
 				<field name="companyname" type="textbox" x="35" y="10" h="5" w="80" font-size="12" font-style="B" />
 				<field name="companyaddress" type="textbox" x="35" y="15" h="35" w="80" line-height="4" />
-				<field name="totals_box" type="textbox" x="155" y="250" h="20" w="50" border="B,L,R" />
+				<field name="totals_box" type="textbox" x="152" y="245" h="25" w="53" border="B,L,R" />
 				<field name="billto" type="textbox" x="10" y="45" h="30" w="75" border="1">
 					<title align="T" text-align="C" border="1" font-style="B" text="Bill To" />
 				</field>
@@ -54,17 +54,20 @@
 				<field name="terms" type="textbox" x="170" y="30" h="5" w="35" align="C" >
 					<title align="L" text-align="R" text="Terms:" />
 				</field>
-				<field name="subtotal" type="textbox" x="176" y="250" h="5" w="29" align="R" font-size="10" mask="currency">
+					<field name="subtotal" type="textbox" x="176" y="245" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Subtotal"  font-size="10"/>
 				</field>
-				<field name="ship_total" type="textbox" x="176" y="255" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="ship_total" type="textbox" x="176" y="250" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Shipping"  font-size="10"/>
 				</field>
-				<field name="tax_total" type="textbox" x="176" y="260" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="tax_total" type="textbox" x="176" y="255" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Sales Tax"  font-size="10"/>
 				</field>
-				<field name="total" type="textbox" x="176" y="265" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="total" type="textbox" x="176" y="260" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Total"  font-size="10"/>
+				</field>
+				<field name="balance_due" type="textbox" x="176" y="265" h="5" w="29" align="R" font-size="10" mask="currency">
+					<title align="L" text-align="R" text="Balance Due"  font-size="10"/>
 				</field>
 				<field name="account_name" type="textbox" x="10" y="85" h="5" w="45" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Account Name" font-size="8"/>

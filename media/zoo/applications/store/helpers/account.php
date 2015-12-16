@@ -28,6 +28,9 @@ class AccountHelper extends AppHelper {
 
 		if (!isset($this->_accounts[$id])) {
 			$account = $this->table->get($id);
+			if(!$account) {
+				$account = $this->create();
+			}
 			$this->_accounts[$id] = $account;
 		}
 		
@@ -38,14 +41,15 @@ class AccountHelper extends AppHelper {
 
 		if($type == 'default') {
 			$class = 'Account';
+			$classname = null;
 		} else {
-			list($_type) = explode('.', $type,2);
-			$class = $_type."Account";
-			$this->app->loader->register($class, 'classes:accounts/'.strtolower($_type).'.php');
+			list($classname, $type) = explode('.', $type.'.',3);
+			$class = $classname.'Account';
+			$this->app->loader->register($class, 'classes:accounts/'.strtolower(basename($class,'Account')).'.php');
 		}
 
 		$account = new $class();
-		$account->type = $type;
+		$account->type = $classname.'.'.$type;
 		$account->app = $this->app;
 
 		// trigger init event

@@ -24,9 +24,12 @@ class UserAccount extends Account {
     }
 
     public function save() {
-
-        parent::save();
+        
         $this->_user->save();
+        $this->params->set('user', $this->_user->id);
+        parent::save();
+        
+        return $this;
 
     }
 

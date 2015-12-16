@@ -418,7 +418,7 @@ jQuery(function($){
                         function(e, args) {
                             var items = args[0];
                             console.log(items);
-                            items[0].name = 'Custom fit '+items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.oem.text+' '+items[0].attributes.boat_model.text;
+                            items[0].name = items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.oem.text+' '+items[0].attributes.boat_model.text;
                             return items;
                         }
                     ],

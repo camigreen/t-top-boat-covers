@@ -64,6 +64,15 @@ class TestController extends AppController {
 		var_dump($user);
 	}
 
+	public function testList() {
+		$test = 'user.dealership';
+		list($class, $type) = explode('.',$test.'.',3);
+		echo 'Class:</br>';
+		var_dump($class);
+		echo 'Type:<?br>';
+		var_dump($type);
+	}
+
 
 }
 ?>

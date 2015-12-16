@@ -97,7 +97,7 @@ class Account {
 
         // Init vars
         $now = $this->app->date->create();
-        $cUser = $this->app->user->get()->id;
+        $cUser = $this->app->customer->getUser()->id;
         $tzoffset = $this->app->date->getOffset();
         
         // Set Created Date
@@ -106,6 +106,8 @@ class Account {
         } catch (Exception $e) {
             $this->created = $now->toSQL();
         }
+
+        $this->created_by = $this->created_by ? $this->created_by : $cUser;
 
         // Set Modified Date
         $this->modified = $now->toSQL();
@@ -387,25 +389,30 @@ class Account {
         $this->_mappedAccounts->remove('children.');
         if(isset($data['children'])) {
             foreach($data['children'] as $child) {
-                $account = $this->app->account->get($child);
-                $accounts[$account->id] = $account;
+                if($child) {
+                    $account = $this->app->account->get($child);
+                    $accounts[$account->id] = $account;
+                }
             }
-            $this->_mappedAccounts->set('children.', $accounts); 
+            if(!empty($accounts)) {
+                $this->_mappedAccounts->set('children.', $accounts);
+            }
         }
         // Deal with the parent accounts.
         $accounts = array();
         $this->_mappedAccounts->remove('parents.');
         if(isset($data['parents'])) {
             foreach($data['parents'] as $parent) {
-                $account = $this->app->account->get($parent);
-                $accounts[$account->id] = $account;
+                if($parent) {
+                    $account = $this->app->account->get($parent);
+                    $accounts[$account->id] = $account;
+                }
+            }
+            if(!empty($accounts)) {
+                $this->_mappedAccounts->set('parents.', $accounts);
             } 
-            $this->_mappedAccounts->set('parents.', $accounts);
         }
-
-
         return $this;
-
     }
 
     /**
