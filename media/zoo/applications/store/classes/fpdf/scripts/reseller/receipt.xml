@@ -54,7 +54,7 @@
 				<field name="terms" type="textbox" x="170" y="30" h="5" w="35" align="C" >
 					<title align="L" text-align="R" text="Terms:" />
 				</field>
-					<field name="subtotal" type="textbox" x="176" y="245" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="subtotal" type="textbox" x="176" y="245" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Subtotal"  font-size="10"/>
 				</field>
 				<field name="ship_total" type="textbox" x="176" y="250" h="5" w="29" align="R" font-size="10" mask="currency">
