@@ -188,16 +188,6 @@ class StoreController extends AppController {
         echo json_encode($data);
 
     }
-    public function getPDF() {
-        $type = $this->app->request->get('type','string', 'default');
-        $form = $this->app->request->get('form', 'string');
-        $this->app->document->setMimeEncoding('application/pdf');
-        $pdf = $this->app->pdf->create($form, $type);
-        $id = $this->app->request->get('id','int');
-        $order = $this->app->orderdev->get($id);
-
-        $pdf->setData($order)->generate()->toBrowser();
-    }
     
     public function checkout() {
             // set template and params
