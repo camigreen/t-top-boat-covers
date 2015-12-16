@@ -41,7 +41,7 @@ class AccountHelper extends AppHelper {
 
 		if($type == 'default') {
 			$class = 'Account';
-			$classname = null;
+			$classname = 'default';
 		} else {
 			list($classname, $type) = explode('.', $type.'.',3);
 			$class = $classname.'Account';
@@ -49,7 +49,7 @@ class AccountHelper extends AppHelper {
 		}
 
 		$account = new $class();
-		$account->type = $classname.'.'.$type;
+		$account->type = $classname.($type ? '.'.$type : '');
 		$account->app = $this->app;
 
 		// trigger init event

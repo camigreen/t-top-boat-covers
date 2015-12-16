@@ -189,7 +189,6 @@ class CheckoutController extends AppController {
         $layout = 'checkout';
         $this->page = 'confirm';
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
             
         }
         

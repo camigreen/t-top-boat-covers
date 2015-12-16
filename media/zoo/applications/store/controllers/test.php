@@ -73,6 +73,14 @@ class TestController extends AppController {
 		var_dump($type);
 	}
 
+	public function itemTest() {
+		$item = $this->app->table->item->get(5);
+		$item = $this->app->item->create($item, 'ttopboatcover');
+		var_dump($item->getPrice());
+		var_dump($item->getPrice()->get('discount'));
+
+	}
+
 
 }
 ?>

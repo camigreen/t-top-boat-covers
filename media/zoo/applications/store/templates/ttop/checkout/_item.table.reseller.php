@@ -35,18 +35,18 @@
                     </td>
                 <?php endif; ?>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $price->get('base', true); ?>
+                    <?php echo $item->getTotal('base', true); ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $price->get('markup', true); ?>
+                    <?php echo $item->getTotal('markup', true); ?>
                     <?php echo '<p class="uk-text-small">('.$price->getMarkupRate(true).' Markup)</p>'; ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $price->get('reseller', true); ?>
+                    <?php echo $item->getTotal('reseller', true); ?>
                     <?php echo '<p class="uk-text-small">('.$price->getDiscountRate(true).' Discount)</p>'; ?>
                 </td>
                 <td class="ttop-checkout-item-total">
-                    <?php echo $price->get('margin', true);; ?>
+                    <?php echo $item->getTotal('margin', true);; ?>
                     <?php echo '<p class="uk-text-small">(Total Discount '.$price->getProfitRate(true).')</p>'; ?>
                 </td>
             </tr>

@@ -10,35 +10,22 @@ $elements = $order->elements;
 $article = JTable::getInstance("content"); 
 $article->load(22); // Get Article ID  
 $salesperson = null;
+list($page) = explode('.',$this->page, 2);
 ?>
-<div class="uk-width-2-3 uk-container-center ttop-receipt">
+<div class="uk-width-1-1 uk-container-center ttop-receipt">
     <div class="uk-grid">
         <div class='uk-width-1-1'>
-            <p class='uk-text-center'>
-                Orders are shipped within <?php echo $this->app->customer->getAccount()->isReseller() ? ' 5-10 ' : ' 5-15 ' ?>business days.
-            </p>
+            <p class='uk-text-center'>Orders are shipped within 5-15 business days.</p>
 
         </div>
         <div class="uk-width-1-1 uk-margin-top">
             <div class="uk-grid">
-                <div class="uk-width-1-2">
-                    <h3>Bill To:</h3>
-                    <div><?php echo $elements->get('billing.firstname').' '.$elements->get('billing.lastname'); ?></div>
-                    <div><?php echo $elements->get('billing.address') ?></div>
-                    <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.postalCode') ?></div>
-                    <div>Phone: <?php echo $elements->get('billing.phoneNumber') ?></div>
-                    <div>Alternate Phone: <?php echo $elements->get('billing.altNumber') ?></div>
-                </div>
-                <?php if(!$order->elements->get('localPickup')) : ?>
-                    <div class="uk-width-1-2">
-                        <h3>Ship To:</h3>
-                        <div><?php echo $elements->get('shipping.firstname').' '.$elements->get('shipping.lastname'); ?></div>
-                        <div><?php echo $elements->get('shipping.address') ?></div>
-                        <div><?php echo $elements->get('shipping.city').', '.$elements->get('shipping.state').'  '.$elements->get('shipping.postalCode') ?></div>
-                        <div>Phone: <?php echo $elements->get('shipping.phoneNumber') ?></div>
-                        <div>Alternate Phone: <?php echo $elements->get('shipping.altNumber') ?></div>
-                    </div>
-                <?php endif; ?>
+                <?php echo $this->partial('billing',compact('elements')); ?>
+                <?php 
+                    if(!$order->elements->get('localPickup')) {
+                        echo $this->partial('shipping',compact('elements'));
+                    }
+                ?>
             </div>
         </div>
         
@@ -55,86 +42,24 @@ $salesperson = null;
         </div>
         <div class="uk-width-1-1 uk-margin-top">
             <h3>Payment</h3>
-            <div>Card Number: <?php echo $creditCard->maskCardNumber(); ?></div>
-            <div>Card Expiration: <?php echo $creditCard->getExpDate();?></div>
+            <div>Account Name:  <?php echo $elements->get('payment.account_name'); ?></div>
+            <div>Account Number:  <?php echo $elements->get('payment.account_number'); ?></div>
+            <div>Customer Name:  <?php echo $elements->get('payment.customer_name'); ?></div>
+            <div>Purchase Order Number:  <?php echo $elements->get('payment.po_number'); ?></div>
         </div>
-        <div class='uk-width1-1 items-table uk-margin-top'>
-            <table class="uk-table uk-table-condensed uk-table-striped uk-table-hover">
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-            <?php foreach ($items as $sku => $item) : ?>
-                        <tr>
-                            <td>
-                                <div class="ttop-checkout-item-name"><?php echo $item->name ?></div>
-                                <div class="ttop-checkout-item-description"><?php echo $item->description ?></div>
-                                <div class="ttop-checkout-item-options"><?php echo $item->getOptions(); ?></div>
-
-                            </td>
-                            <td class="ttop-checkout-item-qty">
-                                <?php echo $item->qty; ?>
-                            </td>
-                            <td class="ttop-checkout-item-total">
-                                <?php echo $item->getTotal(); ?>
-                            </td>
-                        </tr>
-            <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        <td class="uk-text-right">
-                            Subtotal:
-                        </td>
-                        <td>
-                            <?php echo $this->app->number->currency($order->subtotal,array('currency' => 'USD')); ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-
-                        </td>
-                        <td class="uk-text-right">
-                            Shipping:
-                        </td>
-                        <td>
-                            <?php echo $this->app->number->currency($order->ship_total,array('currency' => 'USD')); ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-
-                        </td>
-                        <td class="uk-text-right">
-                            Sales Tax:
-                        </td>
-                        <td>
-                            <?php echo $this->app->number->currency($order->tax_total,array('currency' => 'USD')); ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-
-                        </td>
-                        <td class="uk-text-right">
-                            Total:
-                        </td>
-                        <td>
-                            <?php echo $this->app->number->currency($order->total,array('currency' => 'USD')); ?>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class='uk-width1-1 uk-margin-top'>
+            <?php if($this->app->customer->isReseller()) : ?>
+            <div class='uk-width1-1 items-table'>
+                <?php echo $this->partial('item.table.reseller',compact('order', 'page')); ?>
+            </div>
+        <?php else : ?>
+            <div class='uk-width1-1 items-table'>
+                <?php echo $this->partial('item.table',compact('order', 'page')); ?>
+            </div>
+        <?php endif; ?>
         </div>
         <div class="uk-width-1-1">
-            <?php if($elements->get('localPickup')) : ?>
+            <?php if($elements->get('shipping_method') == 'LP') : ?>
                 You have chosen the Local Pickup option.  Your item will be available for pickup at our warehouse in North Charleston, SC.  It is located at
                 4651 Franchise Street, North Charleston, SC  29418.  Please call ahead during our normal business hours to ensure your items are ready for pickup.
             <?php endif; ?>
@@ -200,7 +125,3 @@ $salesperson = null;
         })
     })
 </script>
-
-
-
-

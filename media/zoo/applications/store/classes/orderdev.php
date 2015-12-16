@@ -149,7 +149,8 @@ class OrderDev {
 	}
 
 	public function getShippingTotal() {
-		if($this->ship_total || $this->isProcessed()) {
+		$this->ship_total = 0;
+		if($this->isProcessed()) {
 			return $this->ship_total;
 		}
         if(!$service = $this->elements->get('shipping_method')) {
@@ -168,7 +169,6 @@ class OrderDev {
                 $rate = $shippingMethod->getTotalCharges();
             }
         }
-
 		$this->ship_total = $rate += ($rate * $markup);
 
         return $this->ship_total;

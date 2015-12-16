@@ -66,6 +66,7 @@ class AccountController extends AppController {
             $conditions = "type = '$search'";
             $options['conditions'] = $conditions;
         }
+        $options['conditions'] = isset($options['conditions']) ? $options['conditions']." AND state != 3" : "state != 3";
 
         $this->accounts = $this->app->table->account->all($options);
         $this->title = "Accounts";
@@ -185,14 +186,17 @@ class AccountController extends AppController {
         $this->setRedirect($link, $msg);
     }
 
-    public function mapProfilesToAccount() {
-        $profiles = $this->app->request->get('profiles', 'array');
+    public function delete() {
+        // check for request forgeries
+        $this->app->session->checkToken() or jexit('Invalid Token');
+
+        // init vars
         $aid = $this->app->request->get('aid', 'int');
-        $map[$aid] = $profiles;
-        $this->app->account->mapProfilesToAccount($map);
-        $link = $this->baseurl.'&task=edit&aid='.$aid;
-        $msg = 'Profiles added successfully';
-        $this->setRedirect($link, $msg);
+
+        $account = $this->app->account->get($aid);
+        $account->delete();
+        $msg = 'The account was deleted successfully.';
+        $this->setRedirect($this->baseurl, $msg);
 
     }
 

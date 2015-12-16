@@ -13,7 +13,7 @@ $page = $this->page;
         <?php if($this->app->customer->isReseller()) : ?>
             <div class="uk-width-1-1">
                 <button class="uk-button uk-button-primary uk-width-1-3 uk-margin-bottom items-table uk-hidden" data-uk-toggle="{target:'.items-table'}">Hide Full Invoice</button>
-                <button class="uk-button uk-button-primary uk-width-1-3 uk-margin-bottom items-table" data-uk-toggle="{target:'.items-table', animation: 'uk-animation-fade'}">View Full Invoice</button>
+                <button class="uk-button uk-button-primary uk-width-1-3 uk-margin-bottom items-table" data-uk-toggle="{target:'.items-table'}">View Full Invoice</button>
             </div>
             <div class='uk-width1-1 items-table uk-hidden'>
                 <?php echo $this->partial('item.table.reseller',compact('order', 'page')); ?>

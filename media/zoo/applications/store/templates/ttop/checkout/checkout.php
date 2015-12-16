@@ -83,7 +83,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
             <div class="uk-width-1-1 uk-text-center uk-vertical-align-middle ttop-checkout-processing-modal-content">
                 <span><i class="uk-icon-spinner uk-icon-spin"></i>Processing</span>
                 <div class="uk-text small uk-text-center">Please be patient...</div>
-                <div class="uk-text-small uk-text-center">Processing your credit card may take up to a minute,</div>
+                <div class="uk-text-small uk-text-center">Processing your payment may take up to a minute,</div>
                 <div class="uk-text-small uk-text-center">please do not hit the back button.</div>
             </div>
         </div>
@@ -123,6 +123,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
 
 <script>
     jQuery(function($) {
+        var pModal;
         function sendTransactionToGoogle(data) {
             var trans = [
                 '_addTrans',
@@ -168,13 +169,20 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 
             });
         }
-        function ProcessingModal (state) {
-            var modal = UIkit.modal("#processing-modal",{center:true,bgclose: false});
+        function ProcessingModal (state, payment) {
+            var content = '<div class="uk-text-center uk-h2"><i class="uk-icon-spinner uk-icon-spin uk-margin-right"></i>Processing</div>';
+            if(payment) {
+                content = content + '<div class="uk-text small uk-text-center">Please be patient...</div> \
+                    <div class="uk-text-small uk-text-center">Processing your payment may take up to a minute,</div> \
+                    <div class="uk-text-small uk-text-center">please do not hit the back button.</div>'
+            }
+            if($.type(pModal) === 'undefined') {
+                pModal = UIkit.modal.blockUI(content);
+            }
                 
             if (state === 'hide') {
-                modal.hide();
-            } else {
-                modal.show();
+                pModal.hide();
+                pModal = null;
             }
         }
         function thankYouModal (state) {
@@ -224,7 +232,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 });
         }
         function processPayment() {
-                ProcessingModal('show');
+                ProcessingModal('show', true);
                 return $.ajax({
                     type: 'POST',
                     url: "?option=com_zoo&controller=checkout&task=processPayment&format=json",

@@ -40,9 +40,11 @@ $query .= $order->getAccount()->isReseller() ? '&type=reseller' : '&type=default
     <div class="uk-width-1-1 uk-container-center">
         <div class="uk-grid">
             <?php echo $this->partial('billing',compact('elements')); ?>
-            <?php if(!$order->elements->get('localPickup')) : ?>
-                <?php echo $this->partial('shipping',compact('elements')); ?>
-            <?php endif; ?>
+                <?php 
+                    if(!$order->elements->get('localPickup')) {
+                        echo $this->partial('shipping',compact('elements'));
+                    }
+                ?>
             <div class="uk-width-1-1 payment uk-margin-top">
                 <div class="uk-grid" data-uk-margin>
                     <div class="uk-width-1-1">

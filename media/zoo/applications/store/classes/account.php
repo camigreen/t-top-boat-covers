@@ -56,6 +56,14 @@ class Account {
      */
     public function bind($data = array()) {
 
+        if(isset($data['core'])) {
+            foreach($data['core'] as $key => $value) {
+                if(property_exists($this, $key)) {
+                    $this->$key = $value;
+                }  
+            }
+        }
+
         if(isset($data['elements'])) {
             $elements = $this->app->parameter->create();
            foreach($data['elements'] as $key => $value) {
@@ -117,6 +125,13 @@ class Account {
         $this->app->table->account->save($this);
 
         $this->_mapRelatedAccounts();
+
+        return $this;
+    }
+
+    public function delete() {
+        $this->setState(3, true);
+        //$this->_removeRelatedAccounts();
 
         return $this;
     }
@@ -422,7 +437,7 @@ class Account {
      *
      * @since 1.0
      */
-    protected function _mapRelatedAccounts() {
+    protected function _removeRelatedAccounts() {
 
         // Load all parent and child accounts into the cache.
         $this->_loadMappedAccounts();
@@ -434,6 +449,24 @@ class Account {
         // Remove all mappings where this account is the parent from the database.
         $query = 'DELETE FROM #__zoo_account_map WHERE parent = '.$this->id;
         $this->app->database->query($query);
+
+        return $this;
+    }
+
+    /**
+     * Map all related accounts to the database
+     *
+     * @return object $this Account object for chaining.
+     *
+     * @since 1.0
+     */
+    protected function _mapRelatedAccounts() {
+
+        // Load all parent and child accounts into the cache.
+        $this->_loadMappedAccounts();
+
+        // Remove all mappings from the database.
+        $this->_removeRelatedAccounts();
 
         // Map all of the parent accounts to the database.
         foreach($this->_mappedAccounts->get('parents.', array()) as $parent) {

@@ -2,7 +2,6 @@
 	"compression": "0",
 	"bootstrap": "0",
 	"warp_branding": "0",
-	"facebook": "1",
 	"panel_default": {
 		"top-a": {
 			"panel": "uk-panel uk-panel-box"
@@ -175,12 +174,11 @@
 				}
 			},
 			"assignment": {
-				"0": "206",
-				"1": "224",
-				"2": "204",
-				"3": "205",
-				"4": "208",
-				"5": "213"
+				"0": "224",
+				"1": "204",
+				"2": "205",
+				"3": "208",
+				"4": "213"
 			}
 		},
 		"Laportes Main": {
@@ -673,10 +671,6 @@
 			"icon": "",
 			"subtitle": ""
 		},
-		"238": {
-			"icon": "",
-			"subtitle": ""
-		},
 		"248": {
 			"columns": "1",
 			"columnwidth": "",
@@ -695,11 +689,13 @@
 			"icon": "",
 			"subtitle": ""
 		},
-		"255": {
+		"259": {
 			"icon": "",
 			"subtitle": ""
 		},
-		"257": {
+		"260": {
+			"columns": "1",
+			"columnwidth": "",
 			"icon": "",
 			"subtitle": ""
 		}

@@ -91,14 +91,18 @@ class ShipperHelper extends AppHelper {
         }
         if(UPS::isValidAddress($destination)) {
             
-        } 
+        }
+        //var_dump($destination); 
         $destination = UPS::getCorrectedAddress($destination);
-
+        
+        
         $this->destination = new \SimpleUPS\InstructionalAddress($destination);
         
         $this->destination->setAddressee($address->get('name'));
         $this->destination->setAddressLine2($address->get('street2', null));
         $this->destination->setAddressLine3($address->get('street3', null));
+        //var_dump($this->destination);
+        //die();
         return $this;
     }
 
@@ -138,7 +142,7 @@ class ShipperHelper extends AppHelper {
     }
 
     public function assemblePackages ($items) {
-
+        $this->packages = array();
         $newpackage = $this->app->parameter->create();
         $count = 1;
         foreach($items as $item) {
