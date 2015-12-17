@@ -50,7 +50,7 @@ class DealershipAccount extends Account {
         $children = $this->_mappedAccounts->get('children.');
 
         if(!empty($children)) {
-            foreach($this->_mappedAccounts->get('children.') as $child) {
+            foreach($children as $child) {
                 if($child->type == 'oem') {
                     $oems[$child->id] = $child;
                 }
