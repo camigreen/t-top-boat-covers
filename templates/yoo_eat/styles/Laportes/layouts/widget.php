@@ -42,7 +42,6 @@ if (in_array($widget->position, array('headerbar', 'toolbar-r' ,'toolbar-l', 'fo
 } elseif ($title && !($widget->position == 'menu')) {
 	$title = '<h3 class="uk-panel-title">'.$icon.$title.'</h3>';
 }
-
 // Render menu
 if ($widget->menu) {
 
@@ -63,7 +62,9 @@ if ($widget->menu) {
 		$widget->nav_settings["accordion"] = true;
 	}
 
+
 	$content = $this['menu']->process($widget, array('pre', 'subnav', $renderer, 'post'));
+
 }
 
 // Render widget

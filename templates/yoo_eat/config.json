@@ -1,6 +1,7 @@
 {
 	"compression": "0",
 	"bootstrap": "0",
+	"totop_scroller": "0",
 	"warp_branding": "0",
 	"panel_default": {
 		"top-a": {
@@ -428,8 +429,6 @@
 			"subtitle": ""
 		},
 		"120": {
-			"columns": "1",
-			"columnwidth": "",
 			"icon": "",
 			"subtitle": ""
 		},
@@ -468,8 +467,6 @@
 			"subtitle": ""
 		},
 		"143": {
-			"columns": "1",
-			"columnwidth": "",
 			"icon": "",
 			"subtitle": ""
 		},
@@ -480,8 +477,6 @@
 			"subtitle": ""
 		},
 		"145": {
-			"columns": "1",
-			"columnwidth": "",
 			"icon": "",
 			"subtitle": ""
 		},
@@ -528,8 +523,6 @@
 			"subtitle": ""
 		},
 		"176": {
-			"columns": "1",
-			"columnwidth": "",
 			"icon": "",
 			"subtitle": ""
 		},
@@ -558,10 +551,6 @@
 			"subtitle": ""
 		},
 		"201": {
-			"icon": "",
-			"subtitle": ""
-		},
-		"202": {
 			"icon": "",
 			"subtitle": ""
 		},
@@ -694,6 +683,30 @@
 			"subtitle": ""
 		},
 		"260": {
+			"columns": "1",
+			"columnwidth": "",
+			"icon": "",
+			"subtitle": ""
+		},
+		"261": {
+			"columns": "1",
+			"columnwidth": "",
+			"icon": "",
+			"subtitle": ""
+		},
+		"262": {
+			"columns": "1",
+			"columnwidth": "",
+			"icon": "",
+			"subtitle": ""
+		},
+		"263": {
+			"columns": "1",
+			"columnwidth": "",
+			"icon": "",
+			"subtitle": ""
+		},
+		"264": {
 			"columns": "1",
 			"columnwidth": "",
 			"icon": "",

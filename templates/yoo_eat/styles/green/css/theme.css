@@ -1,5 +1,3 @@
-/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
-
 @import 'https://fonts.googleapis.com/css?family=Lato:900,700,400,300';
 @import 'https://fonts.googleapis.com/css?family=Roboto+Slab:700,400,300';
 /* ========================================================================
@@ -1226,23 +1224,23 @@ h6 {
 .uk-grid-divider > [class*='uk-width-8-']:nth-child(n+2),
 .uk-grid-divider > [class*='uk-width-9-']:nth-child(n+2) {
   border-left-style: dotted;
-  -webkit-border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
-  border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
+  -webkit-border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
+  border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
 }
 /* Tablet and bigger */
 @media (min-width: 768px) {
   .uk-grid-divider > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) {
     border-left-style: dotted;
-    -webkit-border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
-    border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
+    -webkit-border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
+    border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
   }
 }
 /* Desktop and bigger */
 @media (min-width: 960px) {
   .uk-grid-divider > [class*='uk-width-large-']:not(.uk-width-large-1-1):nth-child(n+2) {
     border-left-style: dotted;
-    -webkit-border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
-    border-image: url('../../../less/uikit/images/border_dotted_vertical.svg') 0 0 0 2 repeat;
+    -webkit-border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
+    border-image: url("../../../less/uikit/images/border_dotted_vertical.svg") 0 0 0 2 repeat;
   }
 }
 /* ========================================================================
@@ -1415,7 +1413,7 @@ h6 {
   display: block;
   height: 10px;
   margin-top: 10px;
-  background: url('../../../less/uikit/images/default/border_striped_horizontal.png') 0 0 repeat-x;
+  background: url("../../../less/uikit/images/default/border_striped_horizontal.png") 0 0 repeat-x;
 }
 /* Modifier: `uk-panel-space`
  ========================================================================== */
@@ -10271,8 +10269,8 @@ button.uk-button {
 .uk-article + .uk-article {
   padding-top: 35px;
   border-top: 2px dotted #eaeaea;
-  -webkit-border-image: url('../../../less/uikit/images/border_dotted_horizontal.svg') 2 0 0 0 repeat;
-  border-image: url('../../../less/uikit/images/border_dotted_horizontal.svg') 2 0 0 0 repeat;
+  -webkit-border-image: url("../../../less/uikit/images/border_dotted_horizontal.svg") 2 0 0 0 repeat;
+  border-image: url("../../../less/uikit/images/border_dotted_horizontal.svg") 2 0 0 0 repeat;
 }
 /*
  * 2 or 3 columns
@@ -10293,8 +10291,8 @@ button.uk-button {
 .tm-leading-article + .uk-grid .uk-article:first-child {
   padding-top: 35px;
   border-top: 2px dotted #eaeaea;
-  -webkit-border-image: url('../../../less/uikit/images/border_dotted_horizontal.svg') 2 0 0 0 repeat;
-  border-image: url('../../../less/uikit/images/border_dotted_horizontal.svg') 2 0 0 0 repeat;
+  -webkit-border-image: url("../../../less/uikit/images/border_dotted_horizontal.svg") 2 0 0 0 repeat;
+  border-image: url("../../../less/uikit/images/border_dotted_horizontal.svg") 2 0 0 0 repeat;
 }
 /*
  * Space for pagnination
@@ -10658,8 +10656,8 @@ body {
 .tm-bottom .uk-grid-divider > [class*='uk-width-']:not(.uk-width-1-1):nth-child(n+2),
 .tm-bottom .uk-grid-divider > [class*='uk-width-']:nth-child(n+2),
 .tm-bottom .uk-grid-divider > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) {
-  -webkit-border-image: url('../../../less/uikit/images/border_dotted_vertical_white.svg') 0 0 2 repeat;
-  border-image: url('../../../less/uikit/images/border_dotted_vertical_white.svg') 0 0 0 2 repeat;
+  -webkit-border-image: url("../../../less/uikit/images/border_dotted_vertical_white.svg") 0 0 2 repeat;
+  border-image: url("../../../less/uikit/images/border_dotted_vertical_white.svg") 0 0 0 2 repeat;
 }
 /*
  * Default Style

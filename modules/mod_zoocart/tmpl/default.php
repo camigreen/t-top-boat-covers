@@ -4,16 +4,34 @@ $user = $zoo->customer->getUser();
 $testMode = $zoo->merchant->testMode();
 ?>
 
-
-<div id="cart-module" class="uk-vertical-align" data-cart="open">
-    <div class="uk-vertical-align-middle">
-        <span class="icon"></span>
-        <span class="currency">$</span>
-        <span data-cart="total">0.00</span>
-        <span class="items">(<span data-cart="quantity">0</span> Items)</span>
-        <div><?php if($user && $user->canCreate()) echo 'Salesman: '.$user->name; ?><?php echo $testMode ? ' - Test Mode -' : '' ?></div>
+<div class="uk-grid">
+    
+    <div class="uk-width-1-1">
+        <div id="cart-module" class="uk-vertical-align" data-cart="open">
+            <div class="uk-vertical-align-middle">
+                <span class="icon"></span>
+                <span class="currency">$</span>
+                <span data-cart="total">0.00</span>
+                <span class="items">(<span data-cart="quantity">0</span> Items)</span>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="uk-width-1-1">
+        <ul class="uk-subnav uk-subnav-line">
+            <li data-uk-dropdown="{mode:'click'}">
+                <a href="#"><?php echo $user->name; ?><i class="uk-icon-caret-down uk-margin-left"></i></a>
+                <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom" style="top: 26px; left: 0px;">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="#">Dealership Account</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
 <div id="cart-modal" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <div class="uk-panel uk-panel-box">

@@ -69,12 +69,6 @@ class AccountHelper extends AppHelper {
 
 	public function getByUser($user = null) {
 
-		if(!$user || !$user->id) {
-			$account = $this->app->object->create('account');
-			$this->app->event->dispatcher->notify($this->app->event->create($account, 'account:init'));
-			return $account;
-		}
-
 		$db = $this->app->database;
 
 		$id = $db->queryResult('SELECT parent FROM #__zoo_account_user_map WHERE child = '.$user->id);

@@ -54,21 +54,31 @@ class UserAccount extends Account {
     }
 
     public function loadUser() {
-        if(!$this->params->get('user')) {
-            $this->_user = new JUser();
-        }
 
         if(empty($this->_user)) {
-            $this->_user = $this->app->user->get($this->params->get('user'));
+            $db = $this->app->database;
+            if($this->id) {
+                $id = $db->queryResult('SELECT child FROM #__zoo_account_user_map WHERE parent = '.$this->id);
+                
+            } else {
+                $id = null;
+            }
+
+            if($id) {
+                $this->_user = $this->app->user->get($id);
+                $this->name = $this->_user->name;
+            } else {
+                $this->_user = new JUser();
+            }
+
             $this->_userGroups = $this->_user->getAuthorisedGroups();
         }
-        $this->name = $this->_user->name;
+        
         return $this;
     }
 
     public function getUser() {
-        $this->loadUser();
-        return $this->_user;
+        return $this->loadUser()->_user;
     }
 
     public function getParentAccount() {

@@ -13,6 +13,7 @@
 				<option value="user">All Users</option>
 				<option value="user.dealership">Dealership Users</option>
 				<option value="user.store">Store Users</option>
+				<option value="profile">My Profile</option>
 			</field>
 			<field name="controller" type="hidden" default="account" />        
 		</fieldset>
