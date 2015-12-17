@@ -12,7 +12,6 @@
 */
 class StoreController extends AppController {
 
-    public $version = '1.0.1';
     
     public function __construct($default = array()) {
         parent::__construct($default);

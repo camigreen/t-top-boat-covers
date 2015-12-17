@@ -91,6 +91,7 @@
 		</fieldset>
 		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1">
 			<field name="parents" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
+			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="1,12,13" multiple="true" size="10" label="Group" description="" />
 		</fieldset>
 	</type>
 	<type name="user.store">

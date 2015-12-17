@@ -48,7 +48,11 @@
 					</fieldset>
 				</div>
 			<?php endif; ?>
-			<?php $this->form->setValue('parents', $this->account->getParents()); ?>
+			<?php 
+				$values['parents'] = $this->account->getParents();
+				$values['groups'] = $this->account->getUser()->getAuthorisedGroups();
+				$this->form->setValues($values);
+			?>
 			<?php if($this->form->checkGroup('related')) : ?>
 				<div class="uk-form-row">
 					<fieldset id="related">

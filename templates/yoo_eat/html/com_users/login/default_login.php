@@ -39,7 +39,7 @@ JHtml::_('behavior.keepalive');
 	</div>
 	<?php endif; ?>
 
-	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well uk-form">
+	<form action="<?php echo JRoute::_('index.php?option=com_zoo&controller=user&task=login'); ?>" method="post" class="form-validate form-horizontal well uk-form">
 
 		<fieldset>
 			<div class="control-group" data-uk-margin>

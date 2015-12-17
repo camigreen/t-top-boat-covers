@@ -154,7 +154,7 @@ class AccountController extends AppController {
         $type = $this->app->request->get('type', 'string', 'default');
         echo 'Post</br>';
         var_dump($post);
-        // return;
+        //return;
 
         if($aid) {
             $account = $this->table->get($aid);

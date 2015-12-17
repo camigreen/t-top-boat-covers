@@ -32,205 +32,284 @@ class UserController extends AppController {
         // set base url
         $this->baseurl = $this->app->link(array('controller' => $this->controller), false);
 
-        $this->cUser = $this->app->user->get();
-
         // registers tasks
-        $this->registerTask('apply', 'save');
-        $this->registerTask('edit', 'edit');
-        $this->registerTask('save2new', 'save');
-        $this->registerTask('cancel', 'display');
-        $this->registerTask('view', 'edit');
-        $this->registerTask('select', 'display');
-        // $this->taskMap['display'] = null;
-        // $this->taskMap['__default'] = null;
+        //$this->registerTask('apply', 'save');
+    }
+
+    /**
+     * Method to log in a user.
+     *
+     * @return  void
+     *
+     * @since   1.6
+     */
+    public function login()
+    {
+        JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+
+        $app    = JFactory::getApplication();
+        $input  = $app->input;
+        $method = $input->getMethod();
+
+        // Populate the data array:
+        $data = array();
+
+        $data['return']    = base64_decode($app->input->post->get('return', '', 'BASE64'));
+        $data['username']  = $input->$method->get('username', '', 'USERNAME');
+        $data['password']  = $input->$method->get('password', '', 'RAW');
+        $data['secretkey'] = $input->$method->get('secretkey', '', 'RAW');
+
+        // Don't redirect to an external URL.
+        if (!JUri::isInternal($data['return']))
+        {
+            $data['return'] = '';
+        }
+
+        // Set the return URL if empty.
+        if (empty($data['return']))
+        {
+            $data['return'] = 'index.php?option=com_users&view=profile';
+        }
+
+        // Set the return URL in the user state to allow modification by plugins
+        $app->setUserState('users.login.form.return', $data['return']);
+
+        // Get the log in options.
+        $options = array();
+        $options['remember'] = $this->input->getBool('remember', false);
+        $options['return']   = $data['return'];
+
+        // Get the log in credentials.
+        $credentials = array();
+        $credentials['username']  = $data['username'];
+        $credentials['password']  = $data['password'];
+        $credentials['secretkey'] = $data['secretkey'];
+
+        // Perform the log in.
+        if (true === $app->login($credentials, $options))
+        {
+            // Success
+            if ($options['remember'] == true)
+            {
+                $app->setUserState('rememberLogin', true);
+            }
+
+            $app->setUserState('users.login.form.data', array());
+            $app->redirect(JRoute::_($app->getUserState('users.login.form.return'), false));
+        }
+        else
+        {
+            // Login failed !
+            $data['remember'] = (int) $options['remember'];
+            $app->setUserState('users.login.form.data', $data);
+            $app->redirect(JRoute::_('index.php?option=com_users&view=login', false));
+        }
+    }
+
+    /**
+     * Method to log out a user.
+     *
+     * @return  void
+     *
+     * @since   1.6
+     */
+    public function logout()
+    {
+        JSession::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
+
+        $app = JFactory::getApplication();
+
+        // Perform the log out.
+        $error  = $app->logout();
+        $input  = $app->input;
+        $method = $input->getMethod();
+
+        // Check if the log out succeeded.
+        if (!($error instanceof Exception))
+        {
+            // Get the return url from the request and validate that it is internal.
+            $return = $input->$method->get('return', '', 'BASE64');
+            $return = base64_decode($return);
+
+            if (!JUri::isInternal($return))
+            {
+                $return = '';
+            }
+
+            // Redirect the user.
+            $app->redirect(JRoute::_($return, false));
+        }
+        else
+        {
+            $app->redirect(JRoute::_('index.php?option=com_users&view=login', false));
+        }
+    }
+
+    /**
+     * Method to register a user.
+     *
+     * @return  boolean
+     *
+     * @since   1.6
+     */
+    public function register()
+    {
+        JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+
+        // Get the application
+        $app = JFactory::getApplication();
+
+        // Get the form data.
+        $data = $this->input->post->get('user', array(), 'array');
+
+        // Get the model and validate the data.
+        $model  = $this->getModel('Registration', 'UsersModel');
+
+        $form = $model->getForm();
+
+        if (!$form)
+        {
+            JError::raiseError(500, $model->getError());
+
+            return false;
+        }
+
+        $return = $model->validate($form, $data);
+
+        // Check for errors.
+        if ($return === false)
+        {
+            // Get the validation messages.
+            $errors = $model->getErrors();
+
+            // Push up to three validation messages out to the user.
+            for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+            {
+                if ($errors[$i] instanceof Exception)
+                {
+                    $app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+                }
+                else
+                {
+                    $app->enqueueMessage($errors[$i], 'notice');
+                }
+            }
+
+            // Save the data in the session.
+            $app->setUserState('users.registration.form.data', $data);
+
+            // Redirect back to the registration form.
+            $this->setRedirect('index.php?option=com_users&view=registration');
+
+            return false;
+        }
+
+        // Finish the registration.
+        $return = $model->register($data);
+
+        // Check for errors.
+        if ($return === false)
+        {
+            // Save the data in the session.
+            $app->setUserState('users.registration.form.data', $data);
+
+            // Redirect back to the registration form.
+            $message = JText::sprintf('COM_USERS_REGISTRATION_SAVE_FAILED', $model->getError());
+            $this->setRedirect('index.php?option=com_users&view=registration', $message, 'error');
+
+            return false;
+        }
+
+        // Flush the data from the session.
+        $app->setUserState('users.registration.form.data', null);
+
+        return true;
+    }
+
+    /**
+     * Method to login a user.
+     *
+     * @return  boolean
+     *
+     * @since   1.6
+     */
+    public function remind()
+    {
+        // Check the request token.
+        JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+
+        $app   = JFactory::getApplication();
+        $model = $this->getModel('User', 'UsersModel');
+        $data  = $this->input->post->get('jform', array(), 'array');
+
+        // Submit the username remind request.
+        $return = $model->processRemindRequest($data);
+
+        // Check for a hard error.
+        if ($return instanceof Exception)
+        {
+            // Get the error message to display.
+            if ($app->get('error_reporting'))
+            {
+                $message = $return->getMessage();
+            }
+            else
+            {
+                $message = JText::_('COM_USERS_REMIND_REQUEST_ERROR');
+            }
+
+            // Get the route to the next page.
+            $itemid = UsersHelperRoute::getRemindRoute();
+            $itemid = $itemid !== null ? '&Itemid=' . $itemid : '';
+            $route  = 'index.php?option=com_users&view=remind' . $itemid;
+
+            // Go back to the complete form.
+            $this->setRedirect(JRoute::_($route, false), $message, 'error');
+
+            return false;
+        }
+        elseif ($return === false)
+        {
+            // Complete failed.
+            // Get the route to the next page.
+            $itemid = UsersHelperRoute::getRemindRoute();
+            $itemid = $itemid !== null ? '&Itemid=' . $itemid : '';
+            $route  = 'index.php?option=com_users&view=remind' . $itemid;
+
+            // Go back to the complete form.
+            $message = JText::sprintf('COM_USERS_REMIND_REQUEST_FAILED', $model->getError());
+            $this->setRedirect(JRoute::_($route, false), $message, 'notice');
+
+            return false;
+        }
+        else
+        {
+            // Complete succeeded.
+            // Get the route to the next page.
+            $itemid = UsersHelperRoute::getLoginRoute();
+            $itemid = $itemid !== null ? '&Itemid=' . $itemid : '';
+            $route  = 'index.php?option=com_users&view=login' . $itemid;
+
+            // Proceed to the login form.
+            $message = JText::_('COM_USERS_REMIND_REQUEST_SUCCESS');
+            $this->setRedirect(JRoute::_($route, false), $message);
+
+            return true;
+        }
+    }
+
+    /**
+     * Method to login a user.
+     *
+     * @return  void
+     *
+     * @since   1.6
+     */
+    public function resend()
+    {
+        // Check for request forgeries
+        JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
     }
     
-    /*
-            Function: display
-                    View method for MVC based architecture
-
-            Returns:
-                    Void
-    */
-    public function display($cachable = false, $urlparams = false) {
-
-        if (!$this->template = $this->application->getTemplate()) {
-            return $this->app->error->raiseError(500, JText::_('No template selected'));
-        }
-
-        $this->title = 'User Search';
-
-        $this->profiles = $this->app->table->userprofile->all(array('conditions' => array('status != 4')));
-
-        $layout = 'search';
-
-        $this->getView()->addTemplatePath($this->template->getPath().'/user')->setLayout($layout)->display();
-    }
-
-    public function edit() {
-
-
-        if (!$this->template = $this->application->getTemplate()) {
-            return $this->app->error->raiseError(500, JText::_('No template selected'));
-        }
-
-        $uid = $this->app->request->get('uid', 'int');
-
-
-        if($uid) {
-            $this->profile = $this->app->userprofile->get($uid);
-            $type = $this->profile->elements->get('type');
-            $this->title = 'Edit User';
-        } else {
-            $type = $this->app->request->get('type', 'string');
-            $this->profile = $this->app->userprofile->get();
-            $this->title = 'New User';
-        }
-        $this->account = $this->profile->getAccount();
-        $this->user = $this->profile->getUser();
-
-        $this->form = $this->app->form->create(array($this->template->getPath().'/user/config.xml', compact('type')));
-        $this->form->setValues($this->user);
-
-        $layout = 'edit';
-
-        $this->getView()->addTemplatePath($this->template->getPath().'/user')->setLayout($layout)->display();
-
-    }
-
-    public function add () {
-        if (!$this->template = $this->application->getTemplate()) {
-            return $this->app->error->raiseError(500, JText::_('No template selected'));
-        }
-        $this->title = 'Choose a User Type';
-        $layout = 'add';
-
-        $this->getView()->addTemplatePath($this->template->getPath().'/user');
-
-        $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
-    }
-
-    public function save() {
-
-        // check for request forgeries
-        $this->app->session->checkToken() or jexit('Invalid Token');
-
-        // init vars
-        $now        = $this->app->date->create();
-        $cUser = $this->app->user->get()->id;
-        $uid = $this->app->request->get('uid', 'int');
-        $post = $this->app->request->get('post:', 'array', array());
-        $tzoffset   = $this->app->date->getOffset();
-        $new = $uid < 1;
-        $type = $this->app->request->get('type', 'string');
-
-        if($uid) {
-            $profile = $this->app->userprofile->get($uid);
-        } else {
-            $profile = $this->app->userprofile->get();
-        }
-
-        $profile->bind($post);
-
-        // var_dump($post);
-        // return;
-
-        $profile->save();
-
-        if(isset($post['assigned']['account'])) {
-            if($post['assigned']['account'] != 0) {
-                $map[] = $profile->id;
-                $this->app->account->mapProfilesToAccount($post['assigned']['account'], $map);    
-            } else {
-                $profile->removeAccountMap();
-            }
-            
-        }
-
-
-        // $_groups = JUserHelper::getUserGroups($profile->id);
-        // $emp_groups = array(10, 11);
-        // $groups = array();
-
-        // foreach($_groups as $group) {
-        //     if(!in_array($group, $emp_groups)) {
-        //         $groups[] = $group;
-        //     }
-        // }
-        // $groups[] = $profile['group'];
-
-
-        //JUserHelper::setUserGroups($profile->id, $groups);
-
-        if($new || !$profile->created || !$profile->created_by) {
-            $profile->created = $now->toSQL();
-            $profile->created_by = $cUser;
-        }
-
-        // Set Modified Date
-        $profile->modified = $now->toSQL();
-        $profile->modified_by = $cUser;
-
-        $profile->save();
-
-        $msg = $profile->getUser()->name.' has been successfully saved.';
-        $link = $this->baseurl;
-        switch ($this->getTask()) {
-            case 'apply' :
-                $link .= '&task=edit&uid='.$profile->id;
-                break;
-            case 'save2new':
-                $link .= '&task=add';
-                break;
-        }
-
-        $this->setRedirect($link, $msg);
-
-    }
-
-    public function delete() {
-        $uid = $this->app->request->get('uid', 'int');
-        $profile = $this->app->userprofile->get($uid);
-
-        $msg = $profile->getUser()->name.' was deleted successfully';
-
-        if($profile->getUser()->superadmin) {
-            $msg = 'The user is a super admin and cannot be deleted.';
-        }
-        
-        $profile->status = 4; 
-        $profile->getUser()->set('block', 1);
-
-
-        $profile->save();
-        
-        $link = $this->baseurl;
-
-        $this->setRedirect($link, $msg);
-
-    }
-
-    public function resetPassword() {
-
-        $uid = $this->app->request->get('uid','int');
-
-        if(!$user = $this->app->user->get($uid)) {
-            return $this->app->error->raiseError(500, JText::_('An error occured while resetting the password.'));
-        }
-        $new_pwd = JUserHelper::genRandomPassword();
-        $user->password = JUserHelper::hashPassword($new_pwd);
-        $user->requireReset = 1;
-        $user->save();
-        $email = $this->app->mail->create();
-        $email->setSubject("Password Reset");
-        $email->setBody($new_pwd);
-        $email->addRecipient($user->email);
-        $email->Send();
-
-        $msg = "The users password has been reset.\n The user should receive an email to change thier password.";
-        $link = $this->baseurl.'&task=edit&uid='.$uid;
-        $this->setRedirect($link,$msg);
-
-
-    }
+    
 }

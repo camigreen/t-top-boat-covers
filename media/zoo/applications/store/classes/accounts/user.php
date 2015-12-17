@@ -19,6 +19,8 @@ class UserAccount extends Account {
 
     protected $_user;
 
+    protected $_userGroups = array();
+
     public function __construct() {
         parent::__construct();
     }
@@ -26,6 +28,7 @@ class UserAccount extends Account {
     public function save() {
         
         $this->_user->save();
+        JUserHelper::setUserGroups($this->_user->id, $this->_userGroups);
         $this->params->set('user', $this->_user->id);
         parent::save();
         
@@ -41,6 +44,10 @@ class UserAccount extends Account {
             if(isset($data['user']['name'])) {
                 $this->name = $data['user']['name'];
             }
+            if(isset($data['user']['groups'])) {
+                $this->_userGroups = $data['user']['groups']; 
+            }
+            
         }
         parent::bind($data);
 
@@ -53,6 +60,7 @@ class UserAccount extends Account {
 
         if(empty($this->_user)) {
             $this->_user = $this->app->user->get($this->params->get('user'));
+            $this->_userGroups = $this->_user->getAuthorisedGroups();
         }
         $this->name = $this->_user->name;
         return $this;
