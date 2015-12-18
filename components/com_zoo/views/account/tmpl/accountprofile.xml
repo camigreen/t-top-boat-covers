@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+
+	<layout title="Account Profile">
+		<message><![CDATA[Account Profile]]></message>
+	</layout>
+	<fields name="request">
+		<fieldset name="request" addfieldpath="/administrator/components/com_zoo/joomla/fields">  
+			<field name="task" type="list" label="Display Accounts" default="all" required="true">
+				<option value="viewProfile">My Profile</option>
+			</field>
+			<field name="controller" type="hidden" default="account" />        
+		</fieldset>
+	</fields>
+
+</metadata>

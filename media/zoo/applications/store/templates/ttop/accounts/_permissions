@@ -1,0 +1,28 @@
+<ul>
+	<li>
+		<div class="label"><label class="hasTip" title="Permissions">&nbsp;</label></div>
+		<div class="field">
+		</div>
+	</li>
+	<li>
+		<div class="label"><label class="hasTip" title="Permissions"><?php echo JText::_('TYPES'); ?></label></div>
+		<div class="field">
+			<?php foreach ($this->assetPermissions as $permissionName => $permissions) : ?>
+					<a href="#<?php echo $permissionName; ?>-rules-modal" style="cursor:pointer" title="Show popup" rel="{handler: 'adopt', size: {x: 1000, y: 700}, onClose:function(){document.getElementById('<?php echo $permissionName; ?>-rules-modal-wrapper').adopt(this.content.firstChild);}}" class="modal"><?php echo ucfirst($permissionName); ?></a>
+					<div id="<?php echo $permissionName; ?>-rules-modal-wrapper" style="display:none">
+					<div id="<?php echo $permissionName; ?>-rules-modal">
+						<h3><?php echo ucfirst($permissionName); ?></h3>
+						<?php
+						if (!$this->app->joomla->isVersion('2.5')) {
+							echo str_replace('permission-', 'permission-' . $permissionName . '-', $permissions->getInput('rules_' . $permissionName));
+						} else {
+							echo str_replace('pane-sliders',  'pane-sliders zoo-' . $permissionName . '-permissions', $permissions->getInput('rules_' . $permissionName));
+						}
+						?>
+					</div>
+					</div>
+					</br>
+			<?php endforeach; ?>
+		</div>
+	</li>
+</ul>
