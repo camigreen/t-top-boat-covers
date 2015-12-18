@@ -70,6 +70,7 @@ if ($widget->menu) {
 // Render widget
 if (in_array($widget->position, array('breadcrumbs', 'logo', 'logo-small', 'search', 'fullscreen', 'top-image', 'bottom-image', 'debug')) || (($widget->position == 'offcanvas') && $widget->menu)) {
 	echo $content;
+
 } elseif ($widget->position == 'menu') {
 	if ($widget->menu) {
 		echo $content;
@@ -94,7 +95,6 @@ if (in_array($widget->position, array('breadcrumbs', 'logo', 'logo-small', 'sear
             }
         }
     }
-
 	if ($class)  $classes[] = $class;
 	if ($suffix) $classes[] = $suffix;
 

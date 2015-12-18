@@ -6,9 +6,13 @@
         Purpose of the stylesheet follows.
 */
 
+.cart {
+
+}
+
 #cart-module {
     height :60px;
-    color: #444444;
+    color: #F4FF54;
     cursor: pointer;
 }
 #cart-module .icon {
@@ -74,5 +78,16 @@
     background-color: white;
     border: 1px solid #eaeaea;
     padding: 5px;
+}
+
+.cart-module {
+  width:375px;
+}
+
+.account-menu a {
+  color:white;
+}
+.account-menu a:hover, .account-menu a:focus {
+  color:white;
 }
 

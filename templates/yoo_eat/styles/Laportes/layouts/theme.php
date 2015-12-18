@@ -18,8 +18,6 @@
 
 include($this['path']->path('layouts:theme.config.php'));
 
-
-
 ?>
 
 <!DOCTYPE HTML>

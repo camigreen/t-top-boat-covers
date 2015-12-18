@@ -4,9 +4,22 @@ $user = $zoo->customer->getUser();
 $testMode = $zoo->merchant->testMode();
 ?>
 
-<div class="uk-grid">
-    
-    <div class="uk-width-1-1">
+<div class="uk-grid cart-module"> 
+    <div class="uk-width-1-2 uk-vertical-align account-menu uk-text-center">
+        <ul class="uk-subnav uk-subnav-line uk-vertical-align-middle">
+            <li data-uk-dropdown="{mode:'click'}">
+                <a href="#"><?php echo $user->name; ?><i class="uk-icon-caret-down uk-margin-left"></i></a>
+                <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom uk-text-left" style="top: 26px; left: 0px;">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="#">Dealership Account</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="uk-width-1-2">
         <div id="cart-module" class="uk-vertical-align" data-cart="open">
             <div class="uk-vertical-align-middle">
                 <span class="icon"></span>
@@ -17,21 +30,6 @@ $testMode = $zoo->merchant->testMode();
         </div>
     </div>
 </div>
-
-<div class="uk-width-1-1">
-        <ul class="uk-subnav uk-subnav-line">
-            <li data-uk-dropdown="{mode:'click'}">
-                <a href="#"><?php echo $user->name; ?><i class="uk-icon-caret-down uk-margin-left"></i></a>
-                <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom" style="top: 26px; left: 0px;">
-                    <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="#">Dealership Account</a></li>
-                        <li><a href="#">Logout</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
 <div id="cart-modal" class="uk-modal">
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <div class="uk-panel uk-panel-box">
