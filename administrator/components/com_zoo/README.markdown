@@ -1,11 +1,41 @@
 # ZOO #
 
-- Version: 3.3.7
-- Date: July 2015
+- Version: 3.3.14
+- Date: December 2015
 - Author: YOOtheme GmbH
 - Website: <http://www.yootheme.com>
 
 ## Changelog
+
+    3.3.14
+    # Fixed shortcode plugin issues
+
+    3.3.13
+    + Added images and links to Joomla importer
+    ^ Removed index.html files from ZOO folders
+    # Fixed thumbnail cache
+
+	3.3.12
+	# Moved images cache folder to media
+
+	3.3.11
+	# Fixed App install security restriction introduced in Joomla! 3.4.5
+	# Fixed Item Feed date display
+
+	3.3.10
+	# Fixed canonical links
+
+	3.3.9
+	# Fixed item routing
+
+	3.3.8
+	# Removed open/unclosed </div> from cookbook UIkit template
+	# Fixed missing render layout warning
+	# Fixed use of protocol-relative urls in Google Maps and AddThis element
+	# Fixed Google Maps element HTML validation
+	# ZOO source files can now be symlinked
+	# Fixed frontpage editing for non super users
+    # Improved item routing fixing some potential issues
 
     3.3.7
     # Fixed application template switching

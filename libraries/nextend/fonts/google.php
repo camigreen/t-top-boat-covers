@@ -60,13 +60,12 @@ class NextendFontsGoogle {
                     }
                 }
                 if(count($style)){
-                    $url.= urlencode($family).':'.implode(',', $style).'|';
+                    $url.= urlencode($family).':'.implode(',', $style).'%7C';
                     $subset.= $font[1].',';
                 }
             }
         }
-        if($url == 'https://fonts.googleapis.com/css?family=') return '';
-        $url = substr($url, 0, -1);
+        if($url == 'https://fonts.googleapis.com/css?family=') return '';        
         $subset = explode(',',$subset);
         $subset = array_filter(array_unique($subset));
         $url.='&amp;subset='.implode(',', $subset);

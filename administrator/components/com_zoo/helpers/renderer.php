@@ -161,7 +161,7 @@ class AppRenderer {
 			$count--;
 
 			// raise warning, if layout was not found
-			JError::raiseWarning(0, 'Renderer Layout "'.$layout.'" not found. ('.$this->app->utility->debugInfo(debug_backtrace()).')');
+			JError::raiseWarning(0, 'Renderer Layout "'.$layout.'" not found. ('.$this->app->utility->debugInfo(debug_backtrace(), 1).')');
 
 			return null;
 		}

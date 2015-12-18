@@ -32,7 +32,7 @@ class NextendCache{
         $this->createCacheFolder($this->_path);
         $this->_url = NextendFilesystem::pathToAbsoluteURL($this->_path);
         $this->_files = array();
-        $this->_cacheTime = getNextend('cachetime', 900);
+        $this->_cacheTime = getNextend('cachetime', 'static');
         $this->_prename = 'n';
     }
     

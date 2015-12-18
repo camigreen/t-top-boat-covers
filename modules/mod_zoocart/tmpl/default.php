@@ -3,7 +3,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $user = $zoo->customer->getUser();
 $testMode = $zoo->merchant->testMode();
 ?>
-
 <div class="uk-grid cart-module"> 
     <div class="uk-width-1-2 uk-vertical-align account-menu uk-text-center">
         <ul class="uk-subnav uk-subnav-line uk-vertical-align-middle">
@@ -59,8 +58,6 @@ $testMode = $zoo->merchant->testMode();
         </div>
     </div>
 </div>
-
-
 
 
 

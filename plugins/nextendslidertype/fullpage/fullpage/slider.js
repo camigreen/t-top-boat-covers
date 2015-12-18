@@ -132,8 +132,8 @@
             var modechanged = this.refreshMode(); //this._currentmode
 
             var screenSize = {
-                w: window.innerWidth,
-                h: window.innerHeight
+                w: document.body.clientWidth || document.documentElement.clientWidth,
+                h: document.documentElement.clientHeight || document.body.clientHeight
             };
 
             if(this._lastResizeEvent == this._resizeEvent && is_touch_device && Math.abs(this._screenSize.h - screenSize.h) < 100){

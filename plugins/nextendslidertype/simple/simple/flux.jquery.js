@@ -385,14 +385,14 @@ window.flux = {
 
             this.image1.css(css1).children().remove();
 
-            this.image1img = $('<img src="' + img1.src + '" />').css({
+            this.image1img = $('<img src="' + img1.src + '" alt="' + img1.alt + '"/>').css({
                 width: this.width + 'px'
             });
 
             this.image1.append(this.image1img);
 
             this.image2.children().remove();
-            this.image2img = $('<img src="' + this.getImage(this.nextImageIndex).src + '" />').css({
+            this.image2img = $('<img src="' + this.getImage(this.nextImageIndex).src + '" alt="' + this.getImage(this.nextImageIndex).alt + '"/>').css({
                 width: this.width + 'px'
             });
             this.image2.append(this.image2img);

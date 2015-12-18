@@ -37,7 +37,7 @@ class NextendGeneratorInstagram_Myphotos extends NextendGeneratorAbstract {
 	
 	$username = NextendParse::parse($this->_data->get('Username', ''));	
 	
-	$user = json_decode($api->searchUser($username));
+	$user = json_decode($api->searchUser("%22".$username."%22"));
 	$userid = $user->data[0]->id;
 	
 	$result = json_decode($api->getUserRecent($userid), true);

@@ -14,11 +14,6 @@ defined('_JEXEC') or die('RESTRICTED');
 // try to set time limit
 @set_time_limit(0);
 
-// try to increase memory limit
-if ((int) ini_get('memory_limit') < 32) {
-    @ini_set('memory_limit', '32M');
-}
-
 abstract class WFInstall {
     public static function install($installer) {
         error_reporting(E_ERROR | E_WARNING);
@@ -960,6 +955,28 @@ abstract class WFInstall {
                     
                     $table->plugins = implode(',', $plugins);
                     
+                    $table->store();
+                }
+            }
+        }
+
+        // transfer hr to a plugin
+        if (version_compare($version, '2.5.8', '<')) {
+            $profiles = self::getProfiles();
+            $table = JTable::getInstance('Profiles', 'WFTable');
+
+            if (!empty($profiles)) {
+                foreach ($profiles as $item) {
+                    $table->load($item->id);
+
+                    $plugins = explode(',', $table->plugins);
+
+                    if (strpos($table->rows, 'hr') !== false) {
+                        $plugins[] = 'hr';
+                    }
+
+                    $table->plugins = implode(',', $plugins);
+
                     $table->store();
                 }
             }

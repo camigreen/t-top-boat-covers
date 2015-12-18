@@ -21,6 +21,7 @@ class NextendElementJoomshoppingmenuitems extends NextendElementList {
               LEFT JOIN #__jshopping_products_to_categories AS f
               ON m.category_id = f.category_id
               WHERE m.category_publish = 1
+              GROUP BY id 
               ORDER BY ordering";
 
         $db->setQuery($query);
