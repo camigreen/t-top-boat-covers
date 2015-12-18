@@ -27,9 +27,9 @@ define('ZOO_TABLE_VERSION', '#__zoo_version');
 
 // init vars
 $zoo = App::getInstance('zoo');
-$path = dirname(__FILE__);
-$cache_path = JPATH_ROOT.'/cache/com_zoo';
+$path = JPATH_ADMINISTRATOR.'/components/com_zoo';
 $media_path = JPATH_ROOT.'/media/zoo';
+$cache_path = JPATH_ROOT.'/cache/com_zoo';
 
 // register paths
 $zoo->path->register(JPATH_ROOT.'/modules', 'modules');
@@ -59,7 +59,6 @@ $zoo->path->register($path.'/views', 'views');
 // create cache folder if none existent
 if (!JFolder::exists($cache_path) && $zoo->request->get('option', 'cmd') != 'com_cache') {
 	JFolder::create($cache_path);
-	$zoo->zoo->putIndexFile($cache_path);
 }
 
 // register classes

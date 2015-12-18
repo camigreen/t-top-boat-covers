@@ -128,10 +128,10 @@ class DefaultController extends AppController {
 
 		// add canonical
 		if ($this->app->system->document instanceof JDocumentHTML) {
-			$this->app->system->document->addHeadLink(JRoute::_($this->app->route->item($this->item, false), true, -1), 'canonical');
+			$this->app->system->document->addHeadLink(JRoute::_($this->app->route->item($this->item, false), true, 2), 'canonical');
 			$headData = $this->app->system->document->getHeadData();
 				foreach ($headData['links'] as $key => $value) {
-					if($value['relation'] == 'canonical' && $key != JRoute::_($this->app->route->item($this->item, false), true, -1)) {
+					if ($value['relation'] == 'canonical' && $key != JRoute::_($this->app->route->item($this->item, false), true, 2)) {
 						unset($headData['links'][$key]);
 				}
 			}
@@ -488,7 +488,7 @@ class DefaultController extends AppController {
 			$item         	   = new JFeedItem();
 			$item->title  	   = html_entity_decode($this->getView()->escape($feed_item->name));
 			$item->link   	   = $this->app->route->item($feed_item);
-			$item->date 	   = $feed_item->created;
+			$item->date 	   = $feed_item->publish_up;
 			$item->author	   = $feed_item->getAuthor();
 			$item->description = $this->_relToAbs($renderer->render('item.feed', array('item' => $feed_item)));
 

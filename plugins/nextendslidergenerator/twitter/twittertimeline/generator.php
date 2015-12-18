@@ -22,17 +22,23 @@ class NextendGeneratorTwitter_Timeline extends NextendGeneratorAbstract {
             'user_name' => NextendText::_('Name_of_the_user'),
             'user_description' => NextendText::_('Description_of_the_user'),
             'user_location' => NextendText::_('Location_of_the_user'),
-	    'tweet_image' => 'Image from tweet'
+	          'tweet_image' => 'Image from tweet',
+            'tweet_author_name' => 'Screen name of the tweet author',
+            'tweet_author_image' => 'Image of the tweet author', 
         );
     }
 
     function getData($number) {
         $data = array();
+        $retweets = $this->_data->get('Twitter_retweets', '1');
+        $replies = $this->_data->get('Twitter_replies', '0');
 
         $twitter = getNextendTwitter();
         if (!$twitter) return $data;
         $result = $twitter->request('GET', 'https://api.twitter.com/1.1/statuses/user_timeline.json' , array(
-            'count' => $number
+            'count' => $number,
+            'include_rts' => $retweets,
+            'exclude_replies' => $replies
         ));
         
         if ($result == 200) {
@@ -51,7 +57,21 @@ class NextendGeneratorTwitter_Timeline extends NextendGeneratorAbstract {
                 $data[$i]['user_name'] = $tweet['user']['name'];
                 $data[$i]['user_description'] = $tweet['user']['description'];
                 $data[$i]['user_location'] = $tweet['user']['location'];
-		$data[$i]['tweet_image'] = $tweet['entities']['media'][0]['media_url'];
+                
+        				if (isset($item['entities']['media'][0]['media_url'])) {
+        					$data[$i]['tweet_image'] = $item['entities']['media'][0]['media_url'];
+        				} else {
+        					$data[$i]['tweet_image'] = "";
+        				}
+        
+                if(isset($tweet['retweeted_status'])){
+          				$data[$i]['tweet_author_name'] = $tweet['retweeted_status']['user']['screen_name'];
+          				$data[$i]['tweet_author_image'] = $tweet['retweeted_status']['user']['profile_image_url_https'];
+                } else {
+          				$data[$i]['tweet_author_name'] = $data[$i]['author_name'];
+          				$data[$i]['tweet_author_image'] = $data[$i]['user_image'];                
+                }
+                
                 $i++;
             }
         }

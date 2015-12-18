@@ -8,7 +8,7 @@
   <creationDate>2013-10-01</creationDate>
   <license>http://www.gnu.org/licenses/gpl-3.0.txt GNU/GPL</license>
   <releaseDate>2013-10-01</releaseDate>
-	<version>2.3.13</version>
+	<version>2.3.14</version>
 	<description>Component for Smart Slider 2 which allow you to create sliders and slides.</description>
   <files folder="site">
       <filename>index.html</filename>

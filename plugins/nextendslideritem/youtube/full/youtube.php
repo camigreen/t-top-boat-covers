@@ -16,7 +16,7 @@ class plgNextendSliderItemYoutube extends plgNextendSliderItemYoutubeFree {
         $js = NextendJavascript::getInstance();
         $js->addLibraryJsFile('jquery', $this->getPath() . 'youtube.js');
             
-        return '<div id="'.$id.'" data-youtubecode="'.$youtubeurl.'" data-autoplay="'.$data->get('autoplay').'" data-related="'.$data->get('related').'" data-loop="'.$data->get('loop', 0).'" data-mute="'.$data->get('mute', 1).'" data-cover="'.$data->get('cover').'" data-controls="'.$data->get('controls', 1).'" data-showinfo="'.$data->get('showinfo', 1).'" data-vq="'.$data->get('vq').'" data-theme="'.$data->get('theme').'" style="position: absolute; top:0; left: 0; display: none; width: 100%; height: 100%;"></div>
+        return '<div id="'.$id.'" data-youtubecode="'.$youtubeurl.'" data-reset="'.$data->get('reset', 0).'" data-autoplay="'.$data->get('autoplay').'" data-related="'.$data->get('related').'" data-loop="'.$data->get('loop', 0).'" data-mute="'.$data->get('mute', 1).'" data-cover="'.$data->get('cover').'" data-controls="'.$data->get('controls', 1).'" data-showinfo="'.$data->get('showinfo', 1).'" data-vq="'.$data->get('vq').'" data-theme="'.$data->get('theme').'" style="position: absolute; top:0; left: 0; display: none; width: 100%; height: 100%;"></div>
     <script type="text/javascript">
         njQuery(document).ready(function () {
             ssCreateYouTubePlayer("'.$id.'", "'.$sliderid.'");

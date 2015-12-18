@@ -30,6 +30,11 @@ class NextendGeneratorK2_Items extends NextendGeneratorAbstract {
             'author_name' => NextendText::_('Name_of_the_article_s_creator'),
             'image_caption' => NextendText::_('Image_caption_for_the_item'),
             'image_credits' => NextendText::_('Image_credits_for_the_item'),
+            'video' => 'Video',
+            'video_src' => 'The first src of the video',
+            'video_src_mp4' => 'The mp4 src of the video',
+            'video_src_ogg' => 'The ogg src of the video',
+            'video_src_webm' => 'The webm src of the video',
             'hits' => NextendText::_('Hits_of_the_item')
         );
 
@@ -79,13 +84,14 @@ class NextendGeneratorK2_Items extends NextendGeneratorAbstract {
         $query .= 'con.fulltext, ';
         $query .= 'con.catid, ';
         $query .= 'cat.name AS cat_title, ';
-	$query .= 'cat.description AS cat_description, ';
+        $query .= 'cat.description AS cat_description, ';
         $query .= 'cat.alias AS cat_alias, ';
         $query .= 'con.created_by, ';
         $query .= 'usr.name AS created_by_alias, ';
         $query .= 'con.hits, ';
         $query .= 'con.image_caption, ';
         $query .= 'con.image_credits, ';
+        $query .= 'con.video, ';
         $query .= 'con.extra_fields ';
 
         $query .= 'FROM #__k2_items AS con ';
@@ -151,6 +157,23 @@ class NextendGeneratorK2_Items extends NextendGeneratorAbstract {
             $result[$i]['url_label'] = 'View article'; 
             $result[$i]['author_name'] = $result[$i]['created_by_alias']; 
             $result[$i]['author_url'] = '#';
+            
+            if(!empty($result[$i]['video'])){
+	                preg_match_all('/(<source.*?src=[\'"](.*?)[\'"][^>]+>)/i', $result[$i]['video'], $r);		
+	                $result[$i]['video_src'] = $r[2][0];
+                  preg_match_all('/(<source.*?src=[\'"](.*mp4)[\'"][^>]+>)/i', $result[$i]['video'], $mp4);
+                  if(isset($mp4[2][0])){
+	                   $result[$i]['video_src_mp4'] = $mp4[2][0];
+                  }
+                  preg_match_all('/(<source.*?src=[\'"](.*ogg)[\'"][^>]+>)/i', $result[$i]['video'], $ogg);
+                  if(isset($ogg[2][0])){
+	                   $result[$i]['video_src_ogg'] = $ogg[2][0];
+                  }
+                  preg_match_all('/(<source.*?src=[\'"](.*webm)[\'"][^>]+>)/i', $result[$i]['video'], $webm);
+                  if(isset($webm[2][0])){
+	                   $result[$i]['video_src_webm'] = $webm[2][0];
+                  }
+	          }
             
             $item = (object)$result[$i];
             $extras = $k2item->getItemExtraFields($result[$i]['extra_fields'],$item);
