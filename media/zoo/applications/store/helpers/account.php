@@ -96,6 +96,47 @@ class AccountHelper extends AppHelper {
 
 	}
 
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param int $asset_id
+	 * @param int $created_by
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	public function canEditOwn($account, $asset_id = 0, $created_by = 0) {
+
+			$user = $account->getUser();
+
+		return $this->isAdmin($user, $asset_id) || $this->authorise($user, 'core.edit', $asset_id) || ($created_by === $user->id && $user->authorise('core.edit.own', $asset_id));
+	}
+
+
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param string $action
+	 * @param int $asset_id
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	protected function authorise($user, $action, $asset_id) {
+		if (!$asset_id) {
+			$asset_id = 'com_zoo';
+		}
+		if (is_null($user)) {
+			$user = $this->get();
+		}
+
+		return (bool) $user->authorise($action, $asset_id);
+	}
+
     
 
     

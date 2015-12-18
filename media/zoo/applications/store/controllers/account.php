@@ -78,6 +78,11 @@ class AccountController extends AppController {
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
     }
 
+    public function viewProfile() {
+        $this->app->request->set('aid', 9);
+        $this->edit();
+    }
+
     public function upload() {
         $path = 'media/zoo/applications/store/images/';
         $this->app->document->setMimeEncoding('application/json');
@@ -124,7 +129,7 @@ class AccountController extends AppController {
         $this->type = $type;
         $this->groups = $this->form->getGroups();
          
-        $this->getView()->addTemplatePath($this->template->getPath().'/accounts');
+        $this->getView()->addTemplatePath($this->template->getPath().'/accounts')->addTemplatePath($this->app->path->path('views:configuration/tmpl/'));
 
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
 

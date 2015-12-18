@@ -7,10 +7,11 @@ $testMode = $zoo->merchant->testMode();
     <div class="uk-width-1-2 uk-vertical-align account-menu uk-text-center">
         <ul class="uk-subnav uk-subnav-line uk-vertical-align-middle">
             <li data-uk-dropdown="{mode:'click'}">
-                <a href="#"><?php echo $user->name; ?><i class="uk-icon-caret-down uk-margin-left"></i></a>
+                <a href="#">My Account<i class="uk-icon-caret-down uk-margin-left"></i></a>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom uk-text-left" style="top: 26px; left: 0px;">
                     <ul class="uk-nav uk-nav-dropdown">
-                        <li><a href="#">My Profile</a></li>
+                        <li class="uk-nav-header uk-text-medium"><?php echo $user->name; ?></li>
+                        <li><a href="index.php?view=account&layout=accountprofile&task=viewProfile&controller=account">My Profile</a></li>
                         <li><a href="#">Dealership Account</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
