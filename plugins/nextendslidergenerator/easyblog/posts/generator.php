@@ -84,24 +84,14 @@ class NextendGeneratorEasyBlog_Posts extends NextendGeneratorAbstract {
             $result[$i]['url'] = 'index.php?option=com_easyblog&view=entry&id=' . $result[$i]['id'];
             $result[$i]['categoryurl'] = 'index.php?option=com_easyblog&view=categories&id=' . $result[$i]['category_id'];
             $result[$i]['blogger_avatar_picture'] = ($result[$i]['blogger_avatar_picture'] == "default_blogger.png" ? "components/com_easyblog/assets/images/" . $result[$i]['blogger_avatar_picture'] : "images/easyblog/avatar/" . $result[$i]['blogger_avatar_picture']);
-            $img = json_decode($result[$i]["image"], true);
-            if (is_array($img)) {
-                if (isset($img["url"])) {
-                    $result[$i]['blog_image'] = $img["url"];
-                } else
-                    $result[$i]['blog_image'] = "";
-                if (isset($img["icon"]) && isset($img["icon"]["url"])) {
-                    $result[$i]['blog_image_icon'] = $img["icon"]["url"];
-                } else
-                    $result[$i]['blog_image_icon'] = "";
-                if (isset($img["thumbnail"]) && isset($img["thumbnail"]["url"])) {
-                    $result[$i]['blog_image_thumbnail'] = $img["thumbnail"]["url"];
-                } else
-                    $result[$i]['blog_image_thumbnail'] = $result[$i]['blog_image'];
-                    
-                $result[$i]['image'] = $result[$i]['blog_image'];
-                $result[$i]['thumbnail'] = $result[$i]['blog_image_thumbnail'];
+            $img = explode('/', $result[$i]['image']);
+            if (isset($img[1])) {
+              $path     = explode(':', $img[0]);
+              $result[$i]['image']    = "images/easyblog_articles/" . $path[1] . "/".$img[1];
+            } else {
+              $result[$i]['image']    = '';
             }
+            $result[$i]['thumbnail'] = $result[$i]['image'];            
             $result[$i]['description'] = $result[$i]['main_content_of_post'];
             $result[$i]['url_label'] = 'View post';
             $result[$i]['author_name'] = $result[$i]['blogger'];

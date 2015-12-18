@@ -1,6 +1,6 @@
 <root>
     <params name="Twitter_timeline" label="Filter_by">
-
+    	<param name="Twitter_retweets" label="Include retweets" type="onoff" default="1"/>
+    	<param name="Twitter_replies" label="Exclude replies" type="onoff" default="0"/>
     </params>
-
 </root>

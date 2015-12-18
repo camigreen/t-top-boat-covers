@@ -18,11 +18,11 @@
                 parent = node.closest(".smart-slider-layer"),
                 autoplay = parseInt(node.data('autoplay')),
                 reset = parseInt(node.data('reset'));
-            var regExp = /http:\/\/(?:www\.|player\.)?(vimeo|youtube)\.com\/(?:embed\/|video\/)?(.*?)(?:\z|$|\?)/;
+            var regExp = /http(s?):\/\/(?:www\.|player\.)?(vimeo|youtube)\.com\/(?:embed\/|video\/)?(.*?)(?:\z|$|\?)/;
             var code = node.data('vimeocode')+'';
             var match = code.match(regExp);
-            if (match&&match[2]){
-                code = match[2];
+            if (match&&match[3]){
+                code = match[3];
             }
             
             var playerel = njQuery('<iframe id="'+id+'" src="//player.vimeo.com/video/'+code+'?api=1&player_id='+id+'&autoplay='+autoplay+'&title='+node.data('title')+'&byline='+node.data('byline')+'&portrait='+node.data('portrait')+'&color='+node.data('color')+'&loop='+node.data('loop')+'" width="400" height="225" style="position: absolute; top:0; left: 0; width: 100%; height: 100%;" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>');
