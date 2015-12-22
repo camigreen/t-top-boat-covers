@@ -3,6 +3,9 @@
 	$values = (array) $this->account;
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
+	$cUser = $this->app->customer->get()->getUser();
+
+	echo $this->app->account->canEdit($cUser, 0, $this->account->id) ? 'Allowed' : 'Not Allowed';
 ?>
 
 

@@ -225,6 +225,19 @@ class Account {
         return $this;
     }
 
+    /**
+     * Describe the Function
+     *
+     * @param     datatype        Description of the parameter.
+     *
+     * @return     datatype    Description of the value returned.
+     *
+     * @since 1.0
+     */
+    public function getAssetName() {
+        return 'com_zoo.order';   
+    }
+
         /**
      * Get the state account object
      *

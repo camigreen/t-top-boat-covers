@@ -101,17 +101,34 @@ class AccountHelper extends AppHelper {
 	 *
 	 * @param JUser $user User Object
 	 * @param int $asset_id
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	public function isAdmin($user = null, $asset_id = 0) {
+		return $this->authorise($user, 'core.admin', $asset_id);
+	}
+
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param int $asset_id
 	 * @param int $created_by
 	 *
 	 * @return boolean True if user has permission
 	 *
 	 * @since 3.2
 	 */
-	public function canEditOwn($account, $asset_id = 0, $created_by = 0) {
+	public function canEdit($user = null, $asset_id = 0, $created_by = 0) {
+		
+		if(!$user) {
+			$user = $this->app->customer->getUser();
+		}
+		$account = $this->app->customer->get();
 
-			$user = $account->getUser();
-
-		return $this->isAdmin($user, $asset_id) || $this->authorise($user, 'core.edit', $asset_id) || ($created_by === $user->id && $user->authorise('core.edit.own', $asset_id));
+		return $this->isAdmin($user, $asset_id) || $this->authorise($user, 'account.edit', $asset_id) || ($created_by === $account->id && $user->authorise('account.edit.own', $asset_id));
 	}
 
 

@@ -14,39 +14,40 @@
 class CustomerHelper extends AppHelper {
 
     protected $_account;
-    protected $_user;
     
-    
-    public function getAccount() {
-        if($this->isRegistered()) {
-            $this->_account = $this->_user->getParentAccount();
-        } else {
-            return $this->_user;
-        }
-
-        
-        return $this->_account;
-        
+    public function getParent() {
+        if(!$this->isRegistered()) {
+            return $this->_account;
+        } 
+        return $this->_account->getParentAccount();
     }
 
-    public function getUser() {
-        if(!$this->_user) {
+    public function get() {
+        if(!$this->_account) {
             $user = $this->app->user->get();
-            $accounts = $this->app->table->account->all(array('conditions' => "type LIKE 'user.%'"));
-            foreach($accounts as $account) {
-                if($account->params->get('user') == $user->id) {
-                    $this->_user = $this->app->account->get($account->id);
-                }
-            }
+            $this->_account = $this->app->account->getByUser($user);
         }
-        if(!$this->_user) {
-            $this->_user = $this->app->account->create('user.public');
+        if(!$this->_account) {
+            $this->_account = $this->app->account->create('user.public');
         }
-        return $this->_user;
+        return $this->_account;
+    }
+
+    /**
+     * Describe the Function
+     *
+     * @param     datatype        Description of the parameter.
+     *
+     * @return     datatype    Description of the value returned.
+     *
+     * @since 1.0
+     */
+    public function getUser() {
+        return $this->get()->getUser();
     }
 
     public function isRegistered() {
-        return $this->getUser()->type != 'user.public' ? true : false;
+        return ($this->get()->type != 'user.public');
     }
 
     public function isReseller() {
