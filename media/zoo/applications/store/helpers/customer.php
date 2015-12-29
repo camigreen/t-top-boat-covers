@@ -51,7 +51,7 @@ class CustomerHelper extends AppHelper {
     }
 
     public function isReseller() {
-        return $this->getAccount()->isReseller();
+        return $this->getParent()->isReseller();
     }
 
     public function getAccountTerms() {

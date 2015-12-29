@@ -33,7 +33,7 @@ class ElementPrice extends ElementStore {
         
     public function render($params = array())
     {
-        $account = $this->app->customer->getAccount();
+        $account = $this->app->customer->getParent();
         $layout = $account->type;
         $allowMarkups = $params['item']->getPrice()->allowMarkups();
         if(file_exists($this->app->path->path('elements:price/tmpl/'.$layout.'.php')) && $layout != 'default' && $allowMarkups) {

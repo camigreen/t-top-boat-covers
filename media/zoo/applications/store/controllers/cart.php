@@ -36,7 +36,7 @@ class CartController extends AppController {
         // registers tasks
         $this->registerTask('init', 'output');
 
-        $this->account = $this->app->customer->getAccount();
+        $this->account = $this->app->customer->getParent();
     }
     
     /*

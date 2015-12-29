@@ -19,7 +19,7 @@ class CartHelper extends AppHelper {
         parent::__construct($app);
 
         $items = $this->app->session->get('cart',array(),'checkout');
-
+        // var_dump($items);
         foreach($items as $key => $value) {
             if(is_string($value)) {
                 $value = $this->app->parameter->create($value);

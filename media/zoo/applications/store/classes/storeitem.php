@@ -184,7 +184,7 @@ class StoreItem {
 
         $this->app = $app;
 
-        $this->discount = $this->app->customer->getAccount()->params->get('discount', 0)/100;
+        $this->discount = $this->app->customer->getParent()->params->get('discount', 0)/100;
 
     }
 

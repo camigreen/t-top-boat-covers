@@ -94,7 +94,7 @@ class Price
 	public function __construct($app, StoreItem $item, $resource = null) {
 		$this->app = $app;
 		// Set the Markup
-		$account = $this->app->customer->getAccount();
+		$account = $this->app->customer->getParent();
 		$this->_markupRate = $account->params->get('markup')/100;
 
 		// Set the Discount
