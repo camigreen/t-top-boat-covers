@@ -3,9 +3,10 @@
 	$values = (array) $this->account;
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
-	$cUser = $this->app->customer->get()->getUser();
+	$cUser = $this->app->customer->canEdit('com_zoo.accounts');
+	var_dump($cUser);
 
-	echo $this->app->account->canEdit($cUser, 0, $this->account->id) ? 'Allowed' : 'Not Allowed';
+	//echo $this->app->account->canEdit($cUser, 0, $this->account->id) ? 'Allowed' : 'Not Allowed';
 ?>
 
 

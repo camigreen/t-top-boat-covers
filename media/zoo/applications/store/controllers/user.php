@@ -45,7 +45,7 @@ class UserController extends AppController {
      */
     public function login()
     {
-        //JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
+        JSession::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
 
         $app    = JFactory::getApplication();
         $input  = $app->input;
@@ -61,6 +61,9 @@ class UserController extends AppController {
         $data['secretkey'] = $input->$method->get('secretkey', '', 'RAW');
 
         // Don't redirect to an external URL.
+        var_dump($data['return']);
+        var_dump(JUri::isInternal($data['return']));
+        //die();
         if (!JUri::isInternal($data['return']))
         {
             $data['return'] = '';
@@ -69,11 +72,10 @@ class UserController extends AppController {
         // Set the return URL if empty.
         if (empty($data['return']))
         {
-            //$data['return'] = 'index.php?option=com_users&view=profile';
-            $data['return'] = '/';
+            $data['return'] = 'index.php?option=com_users&view=profile';
+            //$data['return'] = '/';
         }
-        var_dump($data['return']);
-        //die();
+
         // Set the return URL in the user state to allow modification by plugins
         $app->setUserState('users.login.form.return', $data['return']);
 

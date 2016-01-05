@@ -36,6 +36,8 @@ class PlgAuthenticationZooStore extends JPlugin
 		require_once(JPATH_ADMINISTRATOR.'/components/com_zoo/config.php');
 
 		$this->app = App::getInstance('zoo');
+
+		$this->application = $this->app->zoo->getApplication();
 	}
 
 	/**

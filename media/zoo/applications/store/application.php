@@ -36,7 +36,7 @@ class StoreApplication extends Application {
         $zoo->path->register($path.'/libraries', 'store.lib');
         $zoo->path->register($path.'/logs', 'logs');
         include_once $path.'/vendor/autoload.php';
-        
+
 //        Load Classes
         $zoo->loader->register('ElementStore','elements:element/element.php');
         $zoo->loader->register('ElementStore','elements:elementstore/elementstore.php');
@@ -58,6 +58,7 @@ class StoreApplication extends Application {
         
 //        Add Scripts
         $zoo->document->addScript('elements:cart/assets/js/storeitem.js');
+
         
     }
 

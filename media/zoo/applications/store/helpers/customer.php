@@ -14,6 +14,25 @@
 class CustomerHelper extends AppHelper {
 
     protected $_account;
+
+    protected $_user;
+
+    public function __construct($app) {
+        parent::__construct($app);
+        $this->userhelper = $this->app->user;
+        $this->_user = $this->userhelper->get();
+    }
+
+    /**
+     * Get the helper name
+     *
+     * @return string The name of the helper
+     *
+     * @since 1.0.0
+     */
+    public function getName() {
+        return 'customer';
+    }
     
     public function getParent() {
         if(!$this->isRegistered()) {
@@ -22,12 +41,12 @@ class CustomerHelper extends AppHelper {
         return $this->_account->getParentAccount();
     }
 
-    public function get() {
+    public function get($id = null) {
+
         if(!$this->_account) {
-            $user = $this->app->user->get();
-            $this->_account = $this->app->account->getByUser($user);
+            $this->_account = $this->app->account->getByUser($this->_user);
         }
-        if(!$this->_account) {
+        if($this->isGuest() || !$this->_account) {
             $this->_account = $this->app->account->create('user.public');
         }
         return $this->_account;
@@ -61,5 +80,211 @@ class CustomerHelper extends AppHelper {
     public function getDiscountRate() {
         return $this->app->number->toPercentage($this->_account->params->get('discount'),0);
     }
-    
+
+    public function isGuest() {
+        return (bool) $this->_user->guest;
+    }
+    /**
+     * Check if the user is a joomla super administrator
+     *
+     * @return boolean If the user is a super administrator
+     *
+     * @since 1.0.0
+     */
+    public function isJoomlaSuperAdmin() {
+        return $this->authorise('core.admin', 'root.1');
+    }
+    /**
+     * Check if a user is a joomla administrator
+     *
+     * @return boolean if the user is an administrator
+     *
+     * @since 1.0.0
+     */
+    public function isJoomlaAdmin() {
+        return $this->authorise('core.login.admin', 'root.1');
+    }
+        /**
+     * Check if a user can access a resource
+     *
+     * @param int $access The access level to check against
+     *
+     * @return boolean If the user have the rights to access that level
+     *
+     * @since 1.0.0
+     */
+    public function canAccess($access = 0) {
+
+        if (is_null($this->_user)) {
+            $this->_user = $this->get();
+        }
+
+        return in_array($access, $this->_user->getAuthorisedViewLevels());
+
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     * @param int $created_by
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEdit($asset_id = 0, $created_by = 0) {
+        if (is_null($this->_user)) {
+            $this->_user = $this->get();
+        }
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.edit', $asset_id) || ($created_by === $this->_user->id && $this->_user->authorise('core.edit.own', $asset_id));
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEditState($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.edit.state', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canCreate($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.create', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canDelete($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.delete', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canManage($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.manage', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function isAdmin($asset_id = 0) {
+        return $this->authorise($this->_user, 'core.admin', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canManageCategories($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.categories.manage', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canManageComments($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.comments.manage', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canManageFrontpage($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.frontpage.manage', $asset_id);
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canManageTags($asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'zoo.tags.manage', $asset_id);
+    }
+    /**
+     * Evaluates user permission
+     *
+     * @param JUser $user User Object
+     * @param string $action
+     * @param int $asset_id
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    protected function authorise($action, $asset_id) {
+        if (!$asset_id) {
+            $asset_id = 'com_zoo';
+        }
+        if (is_null($this->_user)) {
+            $this->_user = $this->get();
+        }
+
+        return (bool) $this->_user->authorise($action, $asset_id);
+    }
 }

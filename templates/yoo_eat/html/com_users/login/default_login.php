@@ -39,7 +39,7 @@ JHtml::_('behavior.keepalive');
 	</div>
 	<?php endif; ?>
 
-	<form action="<?php echo JRoute::_('index.php?option=com_zoo&controller=user&task=login'); ?>" method="post" class="form-validate form-horizontal well uk-form">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.login'); ?>" method="post" class="form-validate form-horizontal well uk-form">
 
 		<fieldset>
 			<div class="control-group" data-uk-margin>
@@ -80,7 +80,7 @@ JHtml::_('behavior.keepalive');
 					</button>
 				</div>
 			</div>
-			<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
+			<input type="text" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>
 	</form>
