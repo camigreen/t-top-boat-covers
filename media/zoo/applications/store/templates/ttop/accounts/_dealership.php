@@ -59,7 +59,6 @@
 		<fieldset id="subaccounts">
 			<legend>OEMS</legend>
 			<?php echo $this->form->render('subaccounts')?>
-			<?php echo $this->partial('applicationparams')?>
 		</fieldset>
 	</div>
 <?php endif; ?>

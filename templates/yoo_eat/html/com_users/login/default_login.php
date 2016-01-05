@@ -44,7 +44,7 @@ JHtml::_('behavior.keepalive');
 		<fieldset>
 			<div class="control-group" data-uk-margin>
 				<div class="control-label">
-					<label><?php echo JText::_("COM_USERS_LOGIN_USERNAME_LABEL") ?>*</label>
+					<label><?php echo JText::_("Email Address or Username") ?>*</label>
 				</div>
 				<div class="controls uk-width-1-1 uk-form-row">
 					<input name="username" id="username" value="" class="validate-username required uk-width-1-1" required="" aria-required="true" autofocus="" type="text">						
@@ -80,7 +80,6 @@ JHtml::_('behavior.keepalive');
 					</button>
 				</div>
 			</div>
-
 			<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>
