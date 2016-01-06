@@ -79,7 +79,8 @@ class AccountController extends AppController {
     }
 
     public function viewProfile() {
-        $this->app->request->set('aid', 9);
+        $aid = $this->app->customer->get()->id;
+        $this->app->request->set('aid', $aid);
         $this->edit();
     }
 

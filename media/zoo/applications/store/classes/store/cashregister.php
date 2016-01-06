@@ -53,7 +53,7 @@ class CashRegister {
         $this->order = $this->app->orderdev->create();
         $this->application = $this->app->zoo->getApplication();
 
-        $this->account = $this->app->customer->getAccount();
+        $this->account = $this->app->customer->get();
     }
     
     protected function updateItemQty() {
@@ -82,7 +82,7 @@ class CashRegister {
         }
         $order = $this->app->orderdev->get($oid);
         $email = $this->app->mail->create();
-        $formType = $order->getAccount()->isReseller() ? 'reseller' : 'default';
+        $formType = $order->getAccount()->getParentAccount()->isReseller() ? 'reseller' : 'default';
         $CR = $this;  
            if ($for == 'payment') {
                 $pdf = $this->app->pdf->create('workorder', $formType);
@@ -244,7 +244,7 @@ class CashRegister {
         $billing = $order->elements->get('billing.');
         $shipping = $order->elements->get('shipping.');
         $items = $this->app->cart->getAllItems();
-        $creditCard = $order->elements->get('payment.creditcard.');
+        $creditCard = $order->params->get('payment.creditcard.');
         $sale = $this->merchant;
         
         $sale->card_num = $creditCard['cardNumber'];

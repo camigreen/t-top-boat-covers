@@ -274,7 +274,10 @@ class PlgAuthenticationZooStore extends JPlugin
 
 	public function verifyZooStoreAccount($user, &$response) {
 		$account = $this->app->account->getByUser($user);
-		//var_dump($account->getState());
+		// var_dump($user);
+		// var_dump($account);
+		// var_dump($account->getParent());
+		// die();
 
 		// Bypass Account verification if the user is an administrator
 		if($this->app->user->isJoomlaAdmin($user)) {

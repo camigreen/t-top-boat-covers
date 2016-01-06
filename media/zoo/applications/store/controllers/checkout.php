@@ -78,7 +78,7 @@ class CheckoutController extends AppController {
         $this->app->document->addScript('assets:js/formhandler.js');
 
         $order = $this->CR->order;
-        $account = $order->getAccount();
+        $account = $order->getAccount()->getParentAccount();
         $user = $order->getUser();
         $this->page = 'customer';
         if($account && $account->type != 'store') {
@@ -302,8 +302,10 @@ class CheckoutController extends AppController {
                 }
             }
         }
-
-        $order->elements->set('payment.creditcard.', $post['creditcard']);
+        if(isset($post['creditcard'])) {
+            $order->params->set('payment.creditcard.', $post['creditcard']);
+        }
+        
         
         if(isset($post['params'])) {
             foreach($post['params'] as $key => $value) {

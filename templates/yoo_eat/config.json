@@ -1,5 +1,6 @@
 {
 	"compression": "0",
+	"bootstrap": "0",
 	"totop_scroller": "0",
 	"warp_branding": "0",
 	"panel_default": {
@@ -706,10 +707,6 @@
 			"subtitle": ""
 		},
 		"264": {
-			"icon": "",
-			"subtitle": ""
-		},
-		"272": {
 			"icon": "",
 			"subtitle": ""
 		}

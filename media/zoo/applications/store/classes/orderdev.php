@@ -54,7 +54,7 @@ class OrderDev {
         $this->modified = $now->toSQL();
         $this->modified_by = $cUser->id; 
 
-        $this->params->set('terms', $this->app->customer->getAccount()->params->get('terms'));
+        $this->params->set('terms', $this->app->customer->get()->getParentAccount()->params->get('terms'));
         if($this->app->customer->isReseller()) {
         	$this->getTotal('reseller');
         } else {
@@ -188,7 +188,7 @@ class OrderDev {
 			$this->_user = $this->app->account->get($this->created_by);
 		}
 		if(empty($this->_user)) {
-			$this->_user = $this->app->customer->getUser();
+			$this->_user = $this->app->customer->get();
 			$this->created_by = $this->_user->id;
 		}
 		
@@ -196,8 +196,8 @@ class OrderDev {
 	}
 
 	public function getAccount() {
-		$this->_account = $this->getUser()->getParentAccount();
-		$this->account = $this->_account->id;
+		$this->_account = $this->app->customer->get();
+		$this->account = $this->_account->getParentAccount()->id;
 		return $this->_account;
 	}
 

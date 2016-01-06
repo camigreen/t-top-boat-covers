@@ -8,7 +8,7 @@
 $elements = $order->elements;
 $items = $order->elements->get('items.');
 $query = $order->params->get('terms') == 'DUR' ? '&form=receipt' : '&form=invoice';
-$query .= $order->getAccount()->isReseller() ? '&type=reseller' : '&type=default';
+$query .= $order->getAccount()->getParentAccount()->isReseller() ? '&type=reseller' : '&type=default';
 ?>
 <div class='ttop-receipt'>
     <div class="uk-width-1-1 uk-container-center uk-text-right uk-margin-bottom">

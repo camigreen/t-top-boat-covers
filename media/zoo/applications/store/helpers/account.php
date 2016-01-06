@@ -72,7 +72,6 @@ class AccountHelper extends AppHelper {
 		$db = $this->app->database;
 
 		$id = $db->queryResult('SELECT parent FROM #__zoo_account_user_map WHERE child = '.$user->id);
-
 		if(!$id) {
 			return null;
 		} 
