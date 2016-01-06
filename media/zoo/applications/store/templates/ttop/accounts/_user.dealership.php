@@ -4,7 +4,16 @@
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
 	$cUser = $this->app->customer->canEdit('com_zoo.accounts');
-	var_dump($cUser);
+	//var_dump($cUser);
+
+		// get permission form
+		$xml = simplexml_load_file($this->app->path->path('component.admin:/models/forms/permissions.xml'));
+
+		$this->permissions = JForm::getInstance('com_zoo.new', $xml->asXML());
+		$this->permissions->bind(array('asset_id' => $this->application->asset_id));
+		echo str_replace('pane-sliders',  'pane-sliders zoo-application-permissions', $this->permissions->getInput('rules_orders'));
+
+		//echo $this->app->field->render('permissions', 'permissions', $this->permissions, $xml);
 
 	//echo $this->app->account->canEdit($cUser, 0, $this->account->id) ? 'Allowed' : 'Not Allowed';
 ?>

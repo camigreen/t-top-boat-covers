@@ -65,6 +65,7 @@ class ConfigurationController extends AppController {
 		foreach ($this->application->getTypes() as $typeName => $type) {
 			$xml->fieldset->field->attributes()->section = 'type';
 			$xml->fieldset->field->attributes()->name = 'rules_' . $typeName;
+			echo $typeName;
 			$this->assetPermissions[$typeName] = JForm::getInstance('com_zoo.new.' . $typeName, $xml->asXML());
 
 			if ($asset->loadByName($type->getAssetName())) {
