@@ -359,17 +359,30 @@ class AppForm {
 		$groups = is_array($group) ? $group : (array) $group;
 		foreach($groups as $group) {
 
+			
 			if (!isset($this->_xml[$group])) {
 				return false;
 			}
+			$html[] = '';
 			
+			
+			$access = ((bool) $this->_xml[$group]->attributes()->access ? (int) $this->_xml[$group]->attributes()->access : 1);
+			if(!$this->app->customer->canAccess($access)) {
+				continue;
+			}
+
+			$html[] = '<fieldset id="'.$group.'">';
+			$html[] = '<legend>'.JText::_((string)$this->_xml[$group]->attributes()->label).'</legend>';
 			$html[] = '<ul class="uk-grid parameter-form">';
 
 			$group_control_name = $this->_xml[$group]->attributes()->controlname ? $this->_xml[$group]->attributes()->controlname : $control_name;
 
 			// add params
 			foreach ($this->_xml[$group]->field as $field) {
-
+				$access = ((bool) $field->attributes()->access ? (int) $field->attributes()->access : 1);
+				if(!$this->app->customer->canAccess($access)) {
+					continue;
+				}
 				// init vars
 				$type = (string) $field->attributes()->type;
 				$name = (string) $field->attributes()->name;
@@ -393,7 +406,7 @@ class AppForm {
 							$attributes['class'] = 'hasTip';
 							$attributes['title'] = JText::_($field->attributes()->label).'::'.JText::_($field->attributes()->description);
 						}
-						$output = sprintf('<label %s>%s</label>', $this->app->field->attributes($attributes), JText::_($field->attributes()->label));
+						$output = sprintf('<label %s>%s</label>', JText::_($this->app->field->attributes($attributes)), JText::_($field->attributes()->label));
 					}
 
 					$html[] = "<div class=\"label\">$output</div>";

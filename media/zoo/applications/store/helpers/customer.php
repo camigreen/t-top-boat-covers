@@ -62,7 +62,7 @@ class CustomerHelper extends AppHelper {
      * @since 1.0
      */
     public function getUser() {
-        return $this->get()->getUser();
+        return $this->_user;
     }
 
     public function isRegistered() {
@@ -116,7 +116,7 @@ class CustomerHelper extends AppHelper {
     public function canAccess($access = 0) {
 
         if (is_null($this->_user)) {
-            $this->_user = $this->get();
+            $this->_user = $this->userhelper->get();
         }
 
         return in_array($access, $this->_user->getAuthorisedViewLevels());
@@ -126,7 +126,6 @@ class CustomerHelper extends AppHelper {
     /**
      * Evaluates user permission
      *
-     * @param JUser $user User Object
      * @param int $asset_id
      * @param int $created_by
      *
@@ -138,7 +137,23 @@ class CustomerHelper extends AppHelper {
         if (is_null($this->_user)) {
             $this->_user = $this->get();
         }
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.edit', $asset_id) || ($created_by === $this->_user->id && $this->_user->authorise('core.edit.own', $asset_id));
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.edit', $asset_id) || ($created_by === $this->_account->id && $this->_user->authorise('core.edit.own', $asset_id));
+    }
+    /**
+     * Evaluates user permission
+     *
+     * @param int $asset_id
+     * @param int $created_by
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEditOwn($asset_id = 0, $created_by = 0) {
+        if (is_null($this->_user)) {
+            $this->_user = $this->get();
+        }
+        return $this->isAdmin($this->_user, $asset_id) || ($created_by === $this->_account->id && $this->_user->authorise('core.edit.own', $asset_id));
     }
 
     /**
@@ -152,7 +167,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canEditState($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.edit.state', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.edit.state', $asset_id);
     }
 
     /**
@@ -166,7 +181,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canCreate($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.create', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.create', $asset_id);
     }
 
     /**
@@ -180,7 +195,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canDelete($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.delete', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.delete', $asset_id);
     }
 
     /**
@@ -194,7 +209,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canManage($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'core.manage', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.manage', $asset_id);
     }
 
     /**
@@ -222,7 +237,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canManageCategories($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.categories.manage', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise('zoo.categories.manage', $asset_id);
     }
 
     /**
@@ -236,7 +251,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canManageComments($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.comments.manage', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise('zoo.comments.manage', $asset_id);
     }
 
     /**
@@ -250,7 +265,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canManageFrontpage($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise($this->_user, 'zoo.frontpage.manage', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) ||  $this->authorise('zoo.frontpage.manage', $asset_id);
     }
 
     /**
@@ -264,7 +279,7 @@ class CustomerHelper extends AppHelper {
      * @since 3.2
      */
     public function canManageTags($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($this->_user, 'zoo.tags.manage', $asset_id);
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('zoo.tags.manage', $asset_id);
     }
     /**
      * Evaluates user permission
@@ -282,7 +297,7 @@ class CustomerHelper extends AppHelper {
             $asset_id = 'com_zoo';
         }
         if (is_null($this->_user)) {
-            $this->_user = $this->get();
+            $this->_user = $this->userhelper->get();
         }
 
         return (bool) $this->_user->authorise($action, $asset_id);

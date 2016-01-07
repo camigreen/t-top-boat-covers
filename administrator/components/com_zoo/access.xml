@@ -11,12 +11,6 @@
                 <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC"/>
                 <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC"/>
                 <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC"/>
-                <action name="account.create" title="Create Accounts" description="JACTION_CREATE_COMPONENT_DESC"/>
-                <action name="account.delete" title="Delete Accounts" description="JACTION_DELETE_COMPONENT_DESC"/>
-                <action name="account.edit" title="Edit Accounts" description="JACTION_EDIT_COMPONENT_DESC"/>
-                <action name="account.edit.state" title="Edit Account State" description="JACTION_EDITSTATE_COMPONENT_DESC"/>
-                <action name="account.edit.own" title="Edit Own Account" description="JACTION_EDITOWN_COMPONENT_DESC"/>
-                <action name="account.edit.parent" title="Edit Parent Account" description="JACTION_EDITOWN_COMPONENT_DESC"/>
         </section>
         <section name="application">
                 <action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC"/>

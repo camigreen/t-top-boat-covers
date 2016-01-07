@@ -296,3 +296,6 @@
 2016-01-06T16:41:14+00:00	INFO ::1	controller	Holding edit ID com_users.edit.user.812 Array (     [0] => 812 ) 
 2016-01-06T16:41:15+00:00	INFO ::1	controller	Checking edit ID com_users.edit.user.812: 1 Array (     [0] => 812 ) 
 2016-01-06T16:41:21+00:00	INFO ::1	controller	Releasing edit ID com_users.edit.user.812 Array ( ) 
+2016-01-07T16:51:53+00:00	INFO ::1	controller	Holding edit ID com_users.edit.level.8 Array (     [0] => 8 ) 
+2016-01-07T16:51:53+00:00	INFO ::1	controller	Checking edit ID com_users.edit.level.8: 1 Array (     [0] => 8 ) 
+2016-01-07T16:51:59+00:00	INFO ::1	controller	Releasing edit ID com_users.edit.level.8 Array ( ) 
