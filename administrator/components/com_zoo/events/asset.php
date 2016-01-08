@@ -80,10 +80,8 @@ class AssetEvent {
         $asset->parent_id = $parentId;
         $asset->name      = $name;
         $asset->title     = $title;
-        echo 'asset';
-        var_dump($asset);
         $error = $asset->getError();
-
+        var_dump($asset);
         if ($error) {
             return false;
         } else {
@@ -101,6 +99,7 @@ class AssetEvent {
             }
             $asset->rules = json_encode($temp);
             if (!$asset->check() || !$asset->store()) {
+                die();
                 return false;
             } else {
                 return $asset->id;

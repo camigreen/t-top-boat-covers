@@ -9,7 +9,12 @@
 // set attributes
 
 $id = $parent->getValue('id');
-$canEdit = $this->app->customer->canEdit('com_zoo', $id);
+$type = $parent->getValue('type');
+if($type == 'dealership') {
+	$canEdit = $this->app->customer->isAccountAdmin();
+} else {
+	$canEdit = $this->app->customer->canEdit('account','com_zoo', $id);
+}
 if($canEdit) {
 	$attributes = array('type' => 'text', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
 

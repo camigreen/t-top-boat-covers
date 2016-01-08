@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <account>
-	<type name="store">
+	<type name="store" >
 		<fieldset group="details" label="Details" controlname="core" >
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="state" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
@@ -14,7 +14,7 @@
 			<field name="rules" type="rules" label="Permissions" class="inputbox" validate="rules" filter="rules" component="com_zoo" section="component"		/>
 		</fieldset>
 	</type>
-	<type name="dealership">
+	<type name="dealership" class="account.parent">
 		<fieldset group="details" label="Details" controlname="core" >
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="account_number" controlname="elements" type="storetext" width="4-10" default="" label="Account Number"  description="The employee's identification number." />
@@ -49,10 +49,10 @@
 			<field name="postalCode" type="text" width="1-6" default="" label="Postal Code" />
 		</fieldset>
 		<fieldset group="settings" label="Account Settings" controlname="params" width="1-1">
-			<field name="discount" type="store.option" optionset="discount" width="1-4" default="" label="Dealer Price Discount" description="The dealer price discount." />
+			<field name="discount" type="store.option" optionset="discount" width="1-4" viewOnly="1" default="" label="Dealer Price Discount" description="The dealer price discount." />
 			<field name="markup" type="store.option" optionset="markup" width="1-4" default="" label="Dealer Markup" description="The dealer's additional markup to an item." />
 			<field name="terms" type="store.option" optionset="terms" width="1-4" default="DUR" label="Terms" description="The payment terms for the account." />
-			<field name="tax_exempt" type="radio" width="1-4" default="1" label="Tax Exemption" description="Is the dealer tax exempt?">
+			<field name="tax_exempt" type="radio" width="1-4" default="1" access="admin" label="Tax Exemption" description="Is the dealer tax exempt?">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
@@ -69,7 +69,7 @@
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." />
 			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." />
-			<field name="state" controlname="core" type="statuslist" width="2-10" access="8" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="state" controlname="core" type="statuslist" width="2-10" access="admin" default="" label="Account Status" value="account" description="The current status for the user." />
 		</fieldset>
 		<fieldset group="password" label="password" controlname="user">
 			<field name="password" type="password" width="1-4" default="" label="Password" description="Password the account." />
@@ -90,7 +90,7 @@
 			<field name="mobile_phone" type="text" width="1-3" default="" label="Mobile Phone" description="A mobile phone number for the point of contact." />
 			<field name="other_phone" type="text" width="1-3" default="" label="Other Phone" description="Another phone number for the point of contact." />
 		</fieldset>
-		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1" access="1">
+		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1" access="admin">
 			<field name="parents" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
 			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="1,12,13" multiple="true" size="10" label="Group" description="" />
 		</fieldset>

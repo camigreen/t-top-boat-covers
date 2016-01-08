@@ -140,7 +140,15 @@ class AppForm {
 	 * @since 2.0
 	 */
 	public function setValues($values) {
-		$this->_values = (array) $values;
+		if(empty($this->_values)) {
+			$this->_values = (array) $values;
+		} else {
+			foreach((array)$values as $key => $value) {
+				$this->_values[$key] = $value;
+			}
+		}
+
+		
 		return $this;
 	}
 
@@ -258,6 +266,8 @@ class AppForm {
 				}
 			}
 			if (isset($element->fieldset)) {
+				var_dump($element);
+				$this->setValue('class', (string) $element->attributes()->class);
 				foreach ($element->fieldset as $fieldset) {
 							$this->setXML($fieldset);
 					
@@ -366,8 +376,8 @@ class AppForm {
 			$html[] = '';
 			
 			
-			$access = ((bool) $this->_xml[$group]->attributes()->access ? (int) $this->_xml[$group]->attributes()->access : 1);
-			if(!$this->app->customer->canAccess($access)) {
+			$access = (string) $this->_xml[$group]->attributes()->access;
+			if($access == 'admin' && !$this->app->customer->isStoreAdmin()) {
 				continue;
 			}
 
@@ -379,8 +389,8 @@ class AppForm {
 
 			// add params
 			foreach ($this->_xml[$group]->field as $field) {
-				$access = ((bool) $field->attributes()->access ? (int) $field->attributes()->access : 1);
-				if(!$this->app->customer->canAccess($access)) {
+				$access = (string) $field->attributes()->access;
+				if($access == 'admin' && !$this->app->customer->isStoreAdmin()) {
 					continue;
 				}
 				// init vars

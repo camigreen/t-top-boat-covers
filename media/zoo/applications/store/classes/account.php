@@ -105,7 +105,7 @@ class Account {
 
         // Init vars
         $now = $this->app->date->create();
-        $cUser = $this->app->customer->getUser()->id;
+        $cUser = $this->app->customer->get()->id;
         $tzoffset = $this->app->date->getOffset();
         
         // Set Created Date

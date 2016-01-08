@@ -123,6 +123,28 @@ class CustomerHelper extends AppHelper {
 
     }
 
+        /**
+     * Check if a user is a joomla administrator
+     *
+     * @return boolean if the user is an administrator
+     *
+     * @since 1.0.0
+     */
+    public function isAccountAdmin() {
+        return $this->authorise('account.admin', 'com_zoo');
+    }
+
+    /**
+     * Check if a user is a joomla administrator
+     *
+     * @return boolean if the user is an administrator
+     *
+     * @since 1.0.0
+     */
+    public function isStoreAdmin() {
+        return $this->authorise('store.admin', 'com_zoo');
+    }
+
     /**
      * Evaluates user permission
      *
@@ -133,11 +155,11 @@ class CustomerHelper extends AppHelper {
      *
      * @since 3.2
      */
-    public function canEdit($asset_id = 0, $created_by = 0) {
+    public function canEdit($action, $asset_id = 0, $created_by = 0) {
         if (is_null($this->_user)) {
             $this->_user = $this->get();
         }
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.edit', $asset_id) || ($created_by === $this->_account->id && $this->_user->authorise('core.edit.own', $asset_id));
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($action.'.edit', $asset_id) || ($created_by === $this->_account->id && $this->authorise($action.'.edit.own', $asset_id));
     }
     /**
      * Evaluates user permission
@@ -149,11 +171,47 @@ class CustomerHelper extends AppHelper {
      *
      * @since 3.2
      */
-    public function canEditOwn($asset_id = 0, $created_by = 0) {
+    public function canEditOwn($action, $asset_id = 0, $created_by = 0) {
         if (is_null($this->_user)) {
             $this->_user = $this->get();
         }
-        return $this->isAdmin($this->_user, $asset_id) || ($created_by === $this->_account->id && $this->_user->authorise('core.edit.own', $asset_id));
+        return $this->isAdmin($this->_user, $asset_id) || ($created_by === $this->_account->id && $this->authorise($action.'.edit.own', $asset_id));
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param int $asset_id
+     * @param int $created_by
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEditParentAccount($asset_id = 0) {
+        if (is_null($this->_user)) {
+            $this->_user = $this->get();
+        }
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('account.parent.edit.own', $asset_id);
+    }
+
+    public function checkPermissions($access= null) {
+        if(!$access) {
+            return true;
+        }
+        switch($access) {
+            case 'user':
+                
+                break;
+            case 'admin':
+                break;
+            case 'storeadmin':
+                break;
+            default:
+                $result = false;
+        }
+
+        return $result;
     }
 
     /**
@@ -166,8 +224,8 @@ class CustomerHelper extends AppHelper {
      *
      * @since 3.2
      */
-    public function canEditState($asset_id = 0) {
-        return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.edit.state', $asset_id);
+    public function canEditState($action, $asset_id = 0) {
+        return $this->isAdmin($this->_user, $asset_id) || $this->authorise($action.'.edit.state', $asset_id);
     }
 
     /**
