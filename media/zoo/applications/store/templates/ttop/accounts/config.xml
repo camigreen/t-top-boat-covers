@@ -11,6 +11,7 @@
 		</fieldset>	
 		<fieldset group="settings" label="Account Settings" controlname="params">
 			<field name="notify_emails" type="textarea" rows="5" cols="40" width="1-2" default="" label="New Order Notification Emails" description="An email will be sent to the listed emails. Enter a new line between each email." />
+			<field name="rules" type="rules" label="Permissions" class="inputbox" validate="rules" filter="rules" component="com_zoo" section="component"		/>
 		</fieldset>
 	</type>
 	<type name="dealership">
@@ -92,7 +93,6 @@
 		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1" access="1">
 			<field name="parents" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
 			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="1,12,13" multiple="true" size="10" label="Group" description="" />
-			<field name="rules" type="rules" label="Permissions" class="inputbox" validate="rules" filter="rules" component="com_zoo" section="component"		/>
 		</fieldset>
 	</type>
 	<type name="user.store">

@@ -80,7 +80,8 @@ class AssetEvent {
         $asset->parent_id = $parentId;
         $asset->name      = $name;
         $asset->title     = $title;
-
+        echo 'asset';
+        var_dump($asset);
         $error = $asset->getError();
 
         if ($error) {

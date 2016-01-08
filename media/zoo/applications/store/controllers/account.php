@@ -178,6 +178,22 @@ class AccountController extends AppController {
         var_dump($account);
         //return;
 
+        // add ACL rules to aplication object
+        if(isset($post['rules'])) {
+            $this->application->rules = $post['rules'];
+        }
+        
+        foreach ($post as $key => $value) {
+            if (stripos($key, 'rules_') === 0) {
+                $this->application->assetRules[substr($key, 6)] = $value;
+            }
+        }
+        var_dump($this->application->assetRules);
+
+
+        // save application
+        $this->app->table->application->save($this->application);
+        return;
         $msg = 'The account was saved successfully.';
         $link = $this->baseurl;
         switch ($this->getTask()) {
