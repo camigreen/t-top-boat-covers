@@ -74,22 +74,21 @@ class ConfigurationController extends AppController {
 			}
 			$this->assetPermissions[$typeName]->bind(array('asset_id' => $assetName));
 		}
-		$store = array('account');
-		// Get Store Account permission form
-		foreach($store as $section) {
+
+		$section = 'account';
+
 			$xml->fieldset->field->attributes()->section = 'account';
 			$xml->fieldset->field->attributes()->name = 'rules_'.$section;
-			$this->storePermissions[$section] = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
-
-			$assetName = 'com_zoo.application.'.$this->application->id.'.'.$section;
+			$this->storePermissions = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
 			
+			$assetName = 'com_zoo.application.1.account';
+
 			if(!$asset->loadByName($assetName)) {
-				$assetName = $this->application->asset_id;
-			}
+				$assetName = 79;
+			} 
+
 			var_dump($assetName);
-			$this->storePermissions[$section]->bind(array('asset_id' => $assetName));
-		}
-		
+			$this->storePermissions->bind(array('asset_id' => $assetName));
 
 
 		// manipulate js in J25
@@ -116,7 +115,6 @@ class ConfigurationController extends AppController {
 	}
 
 	public function save() {
-		die();
 		// check for request forgeries
 		$this->app->session->checkToken() or jexit('Invalid Token');
 
@@ -150,9 +148,10 @@ class ConfigurationController extends AppController {
 					$this->application->assetRules[substr($key, 6)] = $value;
 				}
 			}
-			die();
 			// save application
 			$this->table->save($this->application);
+
+			die();
 
 			// set redirect message
 			$msg = JText::_('Application Saved');

@@ -40,13 +40,18 @@ class AssetEvent {
                 $application->updateAssetId($asset_id);
             }
             $parentId = $asset_id;
+            var_dump($application->assetRules);
+            die();
             foreach ($application->assetRules as $assetName => $rules) {
                 $childName = strtolower(preg_replace('#[\s\-]+#', '.', trim($name . '.' . $assetName)));
                 $asset = JTable::getInstance('Asset');
                 $asset->loadByName($childName);
+                echo $childName;
                 self::saveAsset($asset, $childName, $parentId, $title . ' (' . ucfirst($assetName) . ')', $rules);
             }
         }
+        // echo 'Test';
+        // die();
     }
 
     /**
@@ -81,7 +86,6 @@ class AssetEvent {
         $asset->name      = $name;
         $asset->title     = $title;
         $error = $asset->getError();
-        var_dump($asset);
         if ($error) {
             return false;
         } else {
