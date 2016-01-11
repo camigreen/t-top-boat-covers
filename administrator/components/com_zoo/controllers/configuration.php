@@ -77,18 +77,18 @@ class ConfigurationController extends AppController {
 
 		$section = 'account';
 
-			$xml->fieldset->field->attributes()->section = 'account';
-			$xml->fieldset->field->attributes()->name = 'rules_'.$section;
-			$this->storePermissions = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
-			
-			$assetName = 'com_zoo.application.1.account';
+		$xml->fieldset->field->attributes()->section = 'account';
+		$xml->fieldset->field->attributes()->name = 'rules_'.$section;
+		$this->storePermissions = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
+		
+		$assetName = 'com_zoo.application.1.account';
 
-			if(!$asset->loadByName($assetName)) {
-				$assetName = 79;
-			} 
+		if(!$asset->loadByName($assetName)) {
+			$assetName = $this->application->id;
+		} 
 
-			var_dump($assetName);
-			$this->storePermissions->bind(array('asset_id' => $assetName));
+		var_dump($assetName);
+		$this->storePermissions->bind(array('asset_id' => $assetName));
 
 
 		// manipulate js in J25

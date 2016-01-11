@@ -87,9 +87,9 @@
 					<h3>Store</h3>
 					<?php
 					if (!$this->app->joomla->isVersion('2.5')) {
-						echo $this->storePermissions->getInput('rules');
+						echo $this->storePermissions->getInput('rules_account');
 					} else {
-						echo str_replace('pane-sliders',  'pane-sliders zoo-application-permissions', $this->storePermissions->getInput('rules'));
+						echo str_replace('pane-sliders',  'pane-sliders zoo-application-permissions', $this->storePermissions->getInput('rules_account'));
 					}
 					?>
 				</div>
