@@ -78,22 +78,25 @@
 				<?php endforeach; ?>
 			</div>
 		</li>
-		<li class="parameter">
+		<li>
 			<div class="label"><label class="hasTip" title="Permissions"><?php echo JText::_('Store'); ?></label></div>
 			<div class="field">
-				<a href="#rules-modal" style="cursor:pointer" title="Show popup" rel="{handler: 'adopt', size: {x: 1000, y: 700}, onClose:function(){document.getElementById('rules-modal-wrapper').adopt(this.content.firstChild);} }" class="modal">Store</a>
-				<div id="rules-modal-wrapper" style="display:none">
-				<div id="rules-modal">
-					<h3>Store</h3>
-					<?php
-					if (!$this->app->joomla->isVersion('2.5')) {
-						echo $this->storePermissions->getInput('rules_account');
-					} else {
-						echo str_replace('pane-sliders',  'pane-sliders zoo-application-permissions', $this->storePermissions->getInput('rules_account'));
-					}
-					?>
-				</div>
-				</div>
+				<?php foreach ($this->storePermissions as $permissionName => $permissions) : ?>
+						<a href="#<?php echo $permissionName; ?>-rules-modal" style="cursor:pointer" title="Show popup" rel="{handler: 'adopt', size: {x: 1000, y: 700}, onClose:function(){document.getElementById('<?php echo $permissionName; ?>-rules-modal-wrapper').adopt(this.content.firstChild);}}" class="modal"><?php echo ucfirst($permissionName); ?></a>
+						<div id="<?php echo $permissionName; ?>-rules-modal-wrapper" style="display:none">
+						<div id="<?php echo $permissionName; ?>-rules-modal">
+							<h3><?php echo ucfirst($permissionName); ?></h3>
+							<?php
+							if (!$this->app->joomla->isVersion('2.5')) {
+								echo str_replace('permission-', 'permission-' . $permissionName . '-', $permissions->getInput('rules_' . $permissionName));
+							} else {
+								echo str_replace('pane-sliders',  'pane-sliders zoo-' . $permissionName . '-permissions', $permissions->getInput('rules_' . $permissionName));
+							}
+							?>
+						</div>
+						</div>
+						</br>
+				<?php endforeach; ?>
 			</div>
 		</li>
 	</ul>

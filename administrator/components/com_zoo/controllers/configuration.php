@@ -34,6 +34,8 @@ class ConfigurationController extends AppController {
 		// register tasks
 		$this->registerTask('applyassignelements', 'saveassignelements');
 		$this->registerTask('apply', 'save');
+		// var_dump('asdfasdf');
+		// die();
 	}
 
 	public function display($cachable = false, $urlparams = false) {
@@ -75,22 +77,20 @@ class ConfigurationController extends AppController {
 			$this->assetPermissions[$typeName]->bind(array('asset_id' => $assetName));
 		}
 
-		$section = 'account';
+		$sections = array('account');
+		foreach($sections as $section) {
+			$xml->fieldset->field->attributes()->section = 'account';
+			$xml->fieldset->field->attributes()->name = 'rules_'.$section;
+			var_dump($section);
+			$this->storePermissions[$section] = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
+			$assetName = 'com_zoo.application.'.$this->application->id.'.'.$section;
+			if (!$asset->loadByName($assetName)) {
+				$assetName = $this->application->asset_id.'.'.$section;
+			}
 
-		$xml->fieldset->field->attributes()->section = 'account';
-		$xml->fieldset->field->attributes()->name = 'rules_'.$section;
-		$this->storePermissions = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
+			$this->storePermissions[$section]->bind(array('asset_id' => $assetName));
+		}
 		
-		$assetName = 'com_zoo.application.1.account';
-
-		if(!$asset->loadByName($assetName)) {
-			$assetName = $this->application->id;
-		} 
-
-		var_dump($assetName);
-		$this->storePermissions->bind(array('asset_id' => $assetName));
-
-
 		// manipulate js in J25
 		if ($this->app->joomla->isVersion('2.5')) {
 			JDispatcher::getInstance()->attach(array('event' => 'onAfterDispatch', 'handler' => array($this, 'eventCallback')));
@@ -151,7 +151,6 @@ class ConfigurationController extends AppController {
 			// save application
 			$this->table->save($this->application);
 
-			die();
 
 			// set redirect message
 			$msg = JText::_('Application Saved');

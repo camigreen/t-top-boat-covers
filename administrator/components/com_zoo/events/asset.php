@@ -40,8 +40,6 @@ class AssetEvent {
                 $application->updateAssetId($asset_id);
             }
             $parentId = $asset_id;
-            var_dump($application->assetRules);
-            die();
             foreach ($application->assetRules as $assetName => $rules) {
                 $childName = strtolower(preg_replace('#[\s\-]+#', '.', trim($name . '.' . $assetName)));
                 $asset = JTable::getInstance('Asset');
