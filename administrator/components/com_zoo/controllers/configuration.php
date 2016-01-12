@@ -81,7 +81,7 @@ class ConfigurationController extends AppController {
 		foreach($sections as $section) {
 			$xml->fieldset->field->attributes()->section = 'account';
 			$xml->fieldset->field->attributes()->name = 'rules_'.$section;
-			var_dump($section);
+			//var_dump($section);
 			$this->storePermissions[$section] = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
 			$assetName = 'com_zoo.application.'.$this->application->id.'.'.$section;
 			if (!$asset->loadByName($assetName)) {
