@@ -135,12 +135,50 @@ class AccountController extends AppController {
         $layout = 'edit';
         $this->type = $type;
         $this->groups = $this->form->getGroups();
+        $permissions['canEdit'] = $this->account->canEdit();
+        $this->form->setValue('permissions', $permissions);
          
         $this->getView()->addTemplatePath($this->template->getPath().'/accounts')->addTemplatePath($this->app->path->path('views:configuration/tmpl/'));
 
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
 
     }
+
+    public function edit2() {
+
+
+        if (!$this->template = $this->application->getTemplate()) {
+            return $this->app->error->raiseError(500, JText::_('No template selected'));
+        }
+
+        $aid = $this->app->request->get('aid', 'int');
+        $edit = $aid > 0;
+        if($edit) {
+            if(!$this->account = $this->table->get($aid)) {
+                $this->app->error->raiseError(500, JText::sprintf('Unable to access an account with the id of %s', $aid));
+                return;
+            }
+            $type = $this->account->type;
+            $this->title = 'Edit '.$this->account->getClassName().' Account';
+        } else {
+            $type = $this->app->request->get('type', 'string');
+            $this->account = $this->app->account->create($type);
+            $this->title = $type == 'default' ? "Create a New $template Account" : "Create a New $type Account";
+
+        }
+        $xml = simplexml_load_file($this->template->getPath().'/accounts/config2.xml');
+        $this->form = JForm::getInstance('com_zoo.new.'.$type, $xml->asXML());
+        $this->form->bind(array('test' => 'test'));
+        $layout = 'edit2';
+        $this->type = $type;
+         
+        $this->getView()->addTemplatePath($this->template->getPath().'/accounts');
+
+        $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
+
+    }
+
+
 
     public function add () {
         if (!$this->template = $this->application->getTemplate()) {

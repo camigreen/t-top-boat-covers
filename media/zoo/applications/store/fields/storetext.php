@@ -10,12 +10,9 @@
 
 $id = $parent->getValue('id');
 $type = $parent->getValue('type');
-if($type == 'dealership') {
-	$canEdit = $this->app->customer->isAccountAdmin();
-} else {
-	$canEdit = $this->app->customer->canEdit('account','com_zoo', $id);
-}
-if($canEdit) {
+$permissions = $parent->getValue('permissions');
+
+if($permissions['canEdit']) {
 	$attributes = array('type' => 'text', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
 
 	$disabled = (bool) $node->attributes()->disabled ? 'disabled' : ''; 

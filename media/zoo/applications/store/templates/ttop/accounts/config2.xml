@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+  <fields name="dealership-user">
+    <fieldset name="details">
+		<field name="test" type="text" label="Test" filter="unset" class="uk-width-1-2"/>
+		<field name="name" type="text" width="6-10" default="" label="Name" description="Name of the account." />
+		<field name="username" type="text" width="4-10" default="" label="Username" description="Username for the account." />
+		<field name="email" type="text" width="4-10" default="" label="Email" description="An email address for the user." />
+		<field name="state" type="statuslist" width="2-10" access="admin" default="" label="Account Status" value="account" description="The current status for the user." />
+    </fieldset>
+  </fields>
+</form>

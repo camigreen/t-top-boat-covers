@@ -91,10 +91,6 @@ class UserAccount extends Account {
         return $parent;
     }
 
-    public function getAssetName() {
-        return 'com_zoo';
-    }
-
     /**
      * Evaluates user permission
      *
@@ -106,9 +102,8 @@ class UserAccount extends Account {
      *
      * @since 3.2
      */
-    public function canEdit($user = null) {
-        $superadmin = $this->_user->superadmin ? $user->superadmin : true;
-        return $superadmin && $this->app->user->canEdit($user, $this->getAssetName());
+    public function canEdit() {
+        return $this->app->customer->canEdit($this->getAssetName(), $this->getUser()->id);
     }
 
     /**
