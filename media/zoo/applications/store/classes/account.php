@@ -45,6 +45,7 @@ class Account {
 
     public function __construct() {
 
+
     }
 
     /**
@@ -154,6 +155,18 @@ class Account {
      *
      * @since 1.0
      */
+    public function getAssetName() {
+        $application = $this->app->zoo->getApplication();
+        return 'com_zoo.application.'.$application->id.'.account';
+    }
+
+    /**
+     * Get the account type
+     *
+     * @return string       The account type.
+     *
+     * @since 1.0
+     */
     public function getClassName() {
         list($class) = explode('.', $this->type, 2);
 
@@ -225,20 +238,7 @@ class Account {
         return $this;
     }
 
-    /**
-     * Describe the Function
-     *
-     * @param     datatype        Description of the parameter.
-     *
-     * @return     datatype    Description of the value returned.
-     *
-     * @since 1.0
-     */
-    public function getAssetName() {
-        return 'com_zoo.order';   
-    }
-
-        /**
+     /**
      * Get the state account object
      *
      * @return string  The human readable value of the account state.
@@ -516,6 +516,21 @@ class Account {
     public function getNotificationEmails() {
         $email = $this->elements->get('poc.order_notification') ? array($this->elements->get('poc.email')) : array();
         return $email;
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param int $asset_id
+     * @param int $created_by
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEdit() {
+
+        return $this->app->customer->canEdit($this->getAssetName(), $this->created_by);
     }
 
 }

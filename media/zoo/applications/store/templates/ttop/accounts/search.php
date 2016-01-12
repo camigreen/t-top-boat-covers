@@ -9,7 +9,9 @@
 	</div>
 	<form id="account_form" method="post" action="<?php echo $this->baseurl; ?>">
 		<div class="uk-width-1-1 uk-margin-bottom">	
-			<button id="add_new" class="uk-button uk-button-success"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
+			<?php if($this->app->customer->canCreate('account')) : ?>
+				<button id="add_new" class="uk-button uk-button-success"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
+			<?php endif; ?>
 		</div>
 
 		<div class="uk-width-1-1">

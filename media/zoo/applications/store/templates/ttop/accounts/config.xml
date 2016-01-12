@@ -80,7 +80,7 @@
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
-			<field name="sendEmail" type="radio" width="2-10" default="0" label="Allow System Emails" description="Can this user recieve system emails?">
+			<field name="sendEmail" type="radio" width="2-10" default="0" label="Allow System Emails" description="Can this user recieve system emails?" access="admin">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
@@ -92,7 +92,7 @@
 		</fieldset>
 		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1" access="admin">
 			<field name="parents" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
-			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="1,12,13" multiple="true" size="10" label="Group" description="" />
+			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="26" multiple="true" size="10" label="Group" description="" />
 		</fieldset>
 	</type>
 	<type name="user.store">
