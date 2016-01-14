@@ -38,13 +38,12 @@ class AccountController extends AppController {
 
 
         // registers tasks
-        $this->registerTask('apply', 'save');
-        $this->registerTask('edit', 'edit');
-        $this->registerTask('save2new', 'save');
-        $this->registerTask('cancel', 'display');
-        $this->registerTask('upload', 'upload');
-        // $this->taskMap['display'] = null;
-        // $this->taskMap['__default'] = null;
+        // $this->registerTask('apply', 'save');
+        // $this->registerTask('edit', 'edit');
+        // $this->registerTask('save2new', 'save');
+        // $this->registerTask('cancel', 'display');
+        // $this->registerTask('upload', 'upload');
+        $this->registerDefaultTask('gateway');
     }
     
     /*
@@ -56,26 +55,63 @@ class AccountController extends AppController {
     */
     public function display($cachable = false, $urlparams = false) {
 
+        
+    }
+
+    public function gateway() {
+        if (!$this->app->customer->isAccountAdmin() || !$this->app->customer->isStoreAdmin()) {
+            return $this->app->error->raiseError(500, JText::_('You are not authorized to view this page.<p><a href="/">Click Here</a> to return to the home page.</p>'));
+        }
+        $this->execute($this->getTask());
+    }
+
+    public function search() {
+
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
         }
 
         $options = array();
         $search = $this->app->request->get('search', 'string');
-        if($search != 'all') {
-            $conditions = "type = '$search'";
-            $options['conditions'] = $conditions;
-        }
-        $options['conditions'] = isset($options['conditions']) ? $options['conditions']." AND state != 3" : "state != 3";
 
-        $this->accounts = $this->app->table->account->all($options);
-        $this->title = "Accounts";
+        switch($search) {
+            case "all-users":
+                $title = "User Accounts";
+                $conditions[] = "substring_index(type,'.',1) = 'user'";
+                break;
+            case "all":
+                $title = "All Accounts";
+                break;
+            case "oem": 
+                $title = "OEM Accounts";
+                $conditions[] = "type = '$search'";
+                break;
+            case "dealership":
+                $title = "Dealership Accounts";
+                $conditions[] = "type = '$search'";
+                break;
+            default:
+            $title = 'Accounts';
+            $conditions[] = "type = '$search'";
+        }
+
+        $conditions[] = 'state != 3';
+
+        if($this->app->request->get('parent','int', null)) {
+            $parent = $this->app->account->get(8);
+            $this->accounts = $this->app->account->getUsersByParent($parent, $conditions);
+        } else {
+            $this->accounts = $this->app->table->account->all($options);
+        }
+        
+        $this->title = $title;
         $this->record_count = count($this->accounts);
 
         $layout = 'search';
         $this->getView()->addTemplatePath($this->template->getPath().'/accounts');
 
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
+
     }
 
     public function viewProfile() {
@@ -125,6 +161,10 @@ class AccountController extends AppController {
             $this->title = 'Edit '.$this->account->getClassName().' Account';
         } else {
             $type = $this->app->request->get('type', 'string');
+            $parent = $this->app->request->get('parent', 'int', null);
+            if($parent) {
+                $args['related']['parent'] = $parent;
+            }
             $this->account = $this->app->account->create($type);
             $this->title = $type == 'default' ? "Create a New $template Account" : "Create a New $type Account";
 
@@ -135,9 +175,7 @@ class AccountController extends AppController {
         $layout = 'edit';
         $this->type = $type;
         $this->groups = $this->form->getGroups();
-        $permissions['canEdit'] = $this->account->canEdit();
-        $this->form->setValue('permissions', $permissions);
-         
+        $this->form->setValue('canEdit', $this->account->canEdit());
         $this->getView()->addTemplatePath($this->template->getPath().'/accounts')->addTemplatePath($this->app->path->path('views:configuration/tmpl/'));
 
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();
@@ -183,6 +221,11 @@ class AccountController extends AppController {
     public function add () {
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
+        }
+        if(!$this->app->customer->isStoreAdmin()) {
+            $this->app->request->set('parent', $this->app->customer->getParent()->id);
+            $link = $this->baseurl.'&task=edit&aid='.$account->id.'&type='.'user.'.$this->app->customer->getParent()->type;
+            $this->setRedirect($link);
         }
         $this->title = 'Choose an Account Type';
         $layout = 'add';

@@ -23,7 +23,7 @@
 			<?php if($this->form->checkGroup('password')) : ?>
 				<div class="uk-form-row">
 					<?php 
-						if($this->app->customer->get()->id == $this->account->id) {
+						if($this->app->customer->get()->id == $this->account->id || $this->app->customer->isAccountAdmin()) {
 							echo $this->form->render('password');
 						} else {
 							echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';

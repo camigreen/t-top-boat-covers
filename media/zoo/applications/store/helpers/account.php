@@ -37,7 +37,7 @@ class AccountHelper extends AppHelper {
 		return $this->_accounts[$id]; 
 	}
 
-	public function create($type = 'default') {
+	public function create($type = 'default', $args = array()) {
 
 		if($type == 'default') {
 			$class = 'Account';
@@ -51,9 +51,13 @@ class AccountHelper extends AppHelper {
 		$account = new $class();
 		$account->type = $classname.($type ? '.'.$type : '');
 		$account->app = $this->app;
-
+		
 		// trigger init event
 		$this->app->event->dispatcher->notify($this->app->event->create($account, 'account:init'));
+		
+		if(!empty($args)) {
+			$account->bind($args);
+		}
 
 		return $account;
 
@@ -79,6 +83,24 @@ class AccountHelper extends AppHelper {
 		$account = $this->get($id);
 
 		return $account;
+	}
+
+	public function getUsersByParent($parent = null, $conditions = array()) {
+
+		$db = $this->app->database;
+		
+		$query = 'SELECT child FROM #__zoo_account_map WHERE parent = '.$parent->id;
+
+		$users = $db->queryResultArray($query);
+
+		$conditions[] = 'id IN ('.implode(',',$users).')';
+		
+		$options['conditions'] = implode(' AND ',$conditions);
+		// var_dump($options);
+		// return;
+
+		$accounts = $this->table->all($options);
+		return $accounts;
 	}
 
 	public function getUnassignedOEMs($options = null) {

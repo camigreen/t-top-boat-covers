@@ -266,7 +266,6 @@ class AppForm {
 				}
 			}
 			if (isset($element->fieldset)) {
-				var_dump($element);
 				$this->setValue('class', (string) $element->attributes()->class);
 				foreach ($element->fieldset as $fieldset) {
 							$this->setXML($fieldset);
@@ -376,8 +375,8 @@ class AppForm {
 			$html[] = '';
 			
 			
-			$access = (string) $this->_xml[$group]->attributes()->access;
-			if($access == 'admin' && !$this->app->customer->isStoreAdmin()) {
+			$adminOnly = (bool) $this->_xml[$group]->attributes()->admin;
+			if($adminOnly && (!$this->app->customer->isStoreAdmin() || !$this->app->customer->isAccountAdmin())) {
 				continue;
 			}
 
@@ -389,8 +388,8 @@ class AppForm {
 
 			// add params
 			foreach ($this->_xml[$group]->field as $field) {
-				$access = (string) $field->attributes()->access;
-				if($access == 'admin' && !$this->app->customer->isStoreAdmin()) {
+				$adminOnly = (bool) $field->attributes()->admin;
+				if($adminOnly && (!$this->app->customer->isStoreAdmin() && !$this->app->customer->isAccountAdmin())) {
 					continue;
 				}
 				// init vars
@@ -403,9 +402,9 @@ class AppForm {
 				$value = $this->getValue($name, $default);
 				$class = 'uk-width-1-1' . ($required ? ' required' : '');
 				$control_name = $field->attributes()->controlname ? $field->attributes()->controlname : $group_control_name;
-
+				
 				$_field = '<div class="field">'.$this->app->field->render($type, $name, $value, $field, array('control_name' => $control_name, 'parent' => $this, 'class' => $class)).'</div>';
-
+				
 				if ($type != 'hidden') {
 					$html[] = '<li id="'.$group.'-'.$name.'" class="parameter uk-width-'.$width.'">';
 

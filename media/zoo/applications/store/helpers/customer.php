@@ -132,7 +132,7 @@ class CustomerHelper extends AppHelper {
      * @since 1.0.0
      */
     public function isAccountAdmin() {
-        return $this->authorise('account.admin', 'com_zoo');
+        return $this->authorise('account.admin', 'com_zoo.application.'.$this->application->id.'.account');
     }
 
     /**
@@ -143,7 +143,7 @@ class CustomerHelper extends AppHelper {
      * @since 1.0.0
      */
     public function isStoreAdmin() {
-        return $this->authorise('store.admin', 'com_zoo.application.'.$this->application->id.'store');
+        return $this->authorise('store.admin', 'com_zoo.application.'.$this->application->id.'.store');
     }
 
     /**
@@ -160,6 +160,10 @@ class CustomerHelper extends AppHelper {
         if (is_null($this->_user)) {
             $this->_user = $this->getUser();
         }
+        // var_dump($created_by);
+        // var_dump($this->_user->id);
+        // var_dump($this->authorise('core.edit.own', $asset_id));
+        // var_dump($asset_id);
         return $this->isAdmin($this->_user, $asset_id) || $this->authorise('core.edit', $asset_id) || ($created_by === $this->_user->id && $this->authorise('core.edit.own', $asset_id));
     }
     /**
@@ -354,9 +358,7 @@ class CustomerHelper extends AppHelper {
     protected function authorise($action, $asset_id) {
         if(!$asset_id) {
             $asset_id = 'com_zoo';
-        } else {
-            $asset_id = 'com_zoo.application'.$this->application->id.'.'.$asset_id;
-        }
+        } 
         if (is_null($this->_user)) {
             $this->_user = $this->userhelper->get();
         }

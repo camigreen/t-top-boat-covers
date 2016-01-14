@@ -10,9 +10,10 @@
 
 $id = $parent->getValue('id');
 $type = $parent->getValue('type');
-$permissions = $parent->getValue('permissions');
+$canEdit = $parent->getValue('canEdit');
+$viewOnly = (bool) $node->attributes()->viewOnly;
 
-if($permissions['canEdit']) {
+if($this->app->customer->isStoreAdmin() || ($canEdit && !$viewOnly)) {
 	$attributes = array('type' => 'text', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
 
 	$disabled = (bool) $node->attributes()->disabled ? 'disabled' : ''; 

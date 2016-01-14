@@ -9,8 +9,8 @@
 	</div>
 	<form id="account_form" method="post" action="<?php echo $this->baseurl; ?>">
 		<div class="uk-width-1-1 uk-margin-bottom">	
-			<?php if($this->app->customer->canCreate('account')) : ?>
-				<button id="add_new" class="uk-button uk-button-success"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
+			<?php if($this->app->customer->canCreate($this->application->getAssetName().'.account')) : ?>
+				<button id="add_new" class="uk-button uk-button-success" data-task="add"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
 			<?php endif; ?>
 		</div>
 
@@ -55,18 +55,7 @@
 		jQuery(function($) {
 
 			$(document).ready(function(){
-				$('#add_new').on('click', function() {
-					var form = document.getElementById('account_form');
-					form.task.value = 'add';
-					var button = document.createElement('input');
-					button.style.display = 'none';
-					button.type = 'submit';
-
-					form.appendChild(button).click();
-
-					//form.removeChild(button);
-				})
-				$('table button').on('click', function(e) {
+				$('button').on('click', function(e) {
 					var button = $(e.target);
 					var form = $('#account_form');
 

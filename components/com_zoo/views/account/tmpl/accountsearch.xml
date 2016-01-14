@@ -10,7 +10,7 @@
 				<option value="all">All Accounts</option>
 				<option value="dealership">Dealerships</option>
 				<option value="oem">OEMS</option>
-				<option value="user">All Users</option>
+				<option value="all-users">All Users</option>
 				<option value="user.dealership">Dealership Users</option>
 				<option value="user.store">Store Users</option>
 			</field>

@@ -11,12 +11,7 @@
 	<div class="uk-width-1-1">
 			<?php $this->form->setValues($values); ?>
 			<?php if($this->form->checkGroup('details')) : ?>
-				<div class="uk-form-row">
-					<fieldset id="details">
-						<legend>Details</legend>
-						<?php echo $this->form->render('details')?>
-					</fieldset>
-				</div>
+				<?php echo $this->form->render('details')?>
 			<?php endif; ?>
 			<?php if($this->form->checkGroup('password')) : ?>
 				<div class="uk-form-row">
@@ -34,21 +29,11 @@
 			<?php endif; ?>
 			<?php $this->form->setValues($this->account->params); ?>
 			<?php if($this->form->checkGroup('settings')) : ?>
-				<div class="uk-form-row">
-					<fieldset id="settings">
-						<legend>User Settings</legend>
-						<?php echo $this->form->render('settings')?>
-					</fieldset>
-				</div>
+				<?php echo $this->form->render('settings')?>
 			<?php endif; ?>
 			<?php $this->form->setValues($this->account->elements); ?>
 			<?php if($this->form->checkGroup('contact')) : ?>
-				<div class="uk-form-row">
-					<fieldset id="contact">
-						<legend>Contact Info</legend>
-						<?php echo $this->form->render('contact')?>
-					</fieldset>
-				</div>
+				<?php echo $this->form->render('contact')?>
 			<?php endif; ?>
 		<input type="hidden" name="params[user]" value="<?php echo $user->id; ?>" />
 		<input type="hidden" name="related[parents][]" value="<?php echo $store->id; ?>" />
