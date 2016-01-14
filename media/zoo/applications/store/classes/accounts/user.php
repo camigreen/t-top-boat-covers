@@ -29,7 +29,11 @@ class UserAccount extends Account {
         
         $this->_user->save();
         JUserHelper::setUserGroups($this->_user->id, $this->_userGroups);
-        $this->params->set('user', $this->_user->id);
+        if($this->params->get('user') != $this->_user->id) {
+            $this->params->set('user', $this->_user->id);
+            $this->mapUser();
+        }
+        
         parent::save();
         
         return $this;
@@ -56,16 +60,12 @@ class UserAccount extends Account {
     public function loadUser() {
 
         if(empty($this->_user)) {
-            $db = $this->app->database;
-            if($this->id) {
-                $id = $db->queryResult('SELECT child FROM #__zoo_account_user_map WHERE parent = '.$this->id);
-                
-            } else {
-                $id = null;
-            }
 
-            if($id) {
-                $this->_user = $this->app->user->get($id);
+            $db = $this->app->database;
+
+            $uid = $db->queryResult('SELECT child FROM #__zoo_account_user_map WHERE parent = '.$this->id);
+            if($uid) {
+                $this->_user = $this->app->user->get($uid);
                 $this->name = $this->_user->name;
             } else {
                 $this->_user = new JUser();
@@ -81,8 +81,20 @@ class UserAccount extends Account {
         return $this->loadUser()->_user;
     }
 
+    public function mapUser() {
+
+        // Remove all mappings where this account is the child from the database.
+        $query = 'DELETE FROM #__zoo_account_user_map WHERE parent = '.$this->id;
+        $this->app->database->query($query);
+
+        // Map joomla user to the user accounts in the database.
+        $query = 'INSERT INTO #__zoo_account_user_map (parent, child) VALUES ('.$this->id.','.$this->params->get('user').')';
+        $this->app->database->query($query);
+    }
+
     public function getParentAccount() {
         $parents = array_values($this->getParents());
+        
         if(empty($parents)) {
             return $this;
         } else {

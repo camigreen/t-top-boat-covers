@@ -94,9 +94,11 @@ class Account {
         }
 
         // Bind the related accounts.
-        if(isset($data['related'])) {
+        if($this->app->customer->isAccountAdmin()) {
+            $related = isset($data['related']) ? $data['related'] : array();
             $this->_bindMappedAccounts($data['related']);
         }
+        
         
 
         return $this;

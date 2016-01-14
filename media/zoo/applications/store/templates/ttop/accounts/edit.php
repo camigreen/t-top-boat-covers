@@ -15,9 +15,11 @@
 	    	<div class="uk-width-1-6">
 	    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save">Save and Close</button>
 	    	</div>
-	    	<div class="uk-width-1-6">
-	    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save2new">Save and New</button>
-	    	</div>
+	    	<?php if($this->app->customer->canCreate()) : ?>
+		    	<div class="uk-width-1-6">
+		    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save2new">Save and New</button>
+		    	</div>
+	    	<?php endif; ?>
 	    	<div class="uk-width-1-6">
 	    		<button class="uk-width-1-1 uk-button uk-button-default uk-margin-small-bottom task-button" data-task="cancel">Cancel</button>
 	    	</div>

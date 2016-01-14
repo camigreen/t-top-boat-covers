@@ -12,12 +12,7 @@ $elements = $this->order->elements;
     <div class="uk-width-1-1">
         <?php $this->form->setValues($elements->get('billing.')); ?>
         <?php if($this->form->checkGroup('billing')) : ?>
-            <div class="uk-form-row">
-                <fieldset id="billing">
-                    <legend>Billing Address</legend>
                     <?php echo $this->form->render('billing')?>
-                </fieldset>
-            </div>
         <?php endif; ?>
         <?php $this->form->setValues($elements->get('shipping.')); ?>
         <?php if($this->form->checkGroup('shipping')) : ?>
@@ -38,21 +33,11 @@ $elements = $this->order->elements;
         <?php endif; ?>
         <?php $this->form->setValues($elements); ?>
         <?php if($this->form->checkGroup('email')) : ?>
-            <div class="uk-form-row">
-                <fieldset id="email">
-                    <legend>E-Mail Address</legend>
-                    <?php echo $this->form->render('email')?>
-                </fieldset>
-            </div>
+            <?php echo $this->form->render('email')?>
         <?php endif; ?>    
         <?php $this->form->setValues($elements); ?>
         <?php if($this->form->checkGroup('shipping_method')) : ?>
-            <div class="uk-form-row">
-                <fieldset id="shipping_method">
-                    <legend>Shipping Method</legend>
-                    <?php echo $this->form->render('shipping_method')?>
-                </fieldset>
-            </div>
+            <?php echo $this->form->render('shipping_method')?>
         <?php endif; ?> 
     </div>
 </div>

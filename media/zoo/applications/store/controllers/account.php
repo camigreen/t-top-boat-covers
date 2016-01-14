@@ -96,10 +96,10 @@ class AccountController extends AppController {
         }
 
         $conditions[] = 'state != 3';
+        $conditions[] = "type != 'store'";
 
         if($this->app->customer->isStoreAdmin()) {
             $options['conditions'] = implode(' AND ', $conditions);
-            var_dump($options);
             $this->accounts = $this->app->table->account->all($options);
         } else {
             $parent = $this->app->customer->getParent();
@@ -285,7 +285,12 @@ class AccountController extends AppController {
                 $link .= '&task=add';
                 break;
             default:
-                $link .= '&task=search';
+                if($this->app->customer->isAccountAdmin()) {
+                    $link .= '&task=search';
+                } else {
+                    $link = '/';
+                }
+                
         }
 
         $this->setRedirect($link, $msg);
