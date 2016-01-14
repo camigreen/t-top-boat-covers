@@ -38,12 +38,11 @@ class AccountController extends AppController {
 
 
         // registers tasks
-        // $this->registerTask('apply', 'save');
+        $this->registerTask('apply', 'save');
         // $this->registerTask('edit', 'edit');
         // $this->registerTask('save2new', 'save');
-        // $this->registerTask('cancel', 'display');
+        $this->registerTask('cancel', 'search');
         // $this->registerTask('upload', 'upload');
-        $this->registerDefaultTask('gateway');
     }
     
     /*
@@ -59,10 +58,10 @@ class AccountController extends AppController {
     }
 
     public function gateway() {
-        if (!$this->app->customer->isAccountAdmin() || !$this->app->customer->isStoreAdmin()) {
+        if (!$this->app->customer->isAccountAdmin() && !$this->app->customer->isStoreAdmin()) {
             return $this->app->error->raiseError(500, JText::_('You are not authorized to view this page.<p><a href="/">Click Here</a> to return to the home page.</p>'));
         }
-        $this->execute($this->getTask());
+        $task = $this->getTask();
     }
 
     public function search() {
@@ -72,7 +71,8 @@ class AccountController extends AppController {
         }
 
         $options = array();
-        $search = $this->app->request->get('search', 'string');
+        $search = $this->app->request->get('s', 'string', $this->app->session->get('return'));
+        $this->app->session->set('return', $search);
 
         switch($search) {
             case "all-users":
@@ -97,11 +97,13 @@ class AccountController extends AppController {
 
         $conditions[] = 'state != 3';
 
-        if($this->app->request->get('parent','int', null)) {
-            $parent = $this->app->account->get(8);
-            $this->accounts = $this->app->account->getUsersByParent($parent, $conditions);
-        } else {
+        if($this->app->customer->isStoreAdmin()) {
+            $options['conditions'] = implode(' AND ', $conditions);
+            var_dump($options);
             $this->accounts = $this->app->table->account->all($options);
+        } else {
+            $parent = $this->app->customer->getParent();
+            $this->accounts = $this->app->account->getUsersByParent($parent, $conditions);
         }
         
         $this->title = $title;
@@ -161,19 +163,27 @@ class AccountController extends AppController {
             $this->title = 'Edit '.$this->account->getClassName().' Account';
         } else {
             $type = $this->app->request->get('type', 'string');
-            $parent = $this->app->request->get('parent', 'int', null);
+            $parent = $this->app->request->get('p', 'int', null);
             if($parent) {
                 $args['related']['parent'] = $parent;
             }
             $this->account = $this->app->account->create($type);
-            $this->title = $type == 'default' ? "Create a New $template Account" : "Create a New $type Account";
+            
 
         }
-
+        $parts = explode('.',$type,2);
+        $count = count($parts);
+        $kind = '';
+        if($count == 1) {
+            list($class) = $parts;
+        } else {
+            list($class, $kind) = $parts;
+        }
+        $this->title = $type == 'default' ? "Create a New $template Account" : 'Create a New '.ucfirst($class).' Account';
         $this->form = $this->app->form->create(array($this->template->getPath().'/accounts/config.xml', compact('type')));
         $this->form->setValues($this->account);
         $layout = 'edit';
-        $this->type = $type;
+        $this->partialLayout = $type;
         $this->groups = $this->form->getGroups();
         $this->form->setValue('canEdit', $this->account->canEdit());
         $this->getView()->addTemplatePath($this->template->getPath().'/accounts')->addTemplatePath($this->app->path->path('views:configuration/tmpl/'));
@@ -274,6 +284,8 @@ class AccountController extends AppController {
             case 'save2new':
                 $link .= '&task=add';
                 break;
+            default:
+                $link .= '&task=search';
         }
 
         $this->setRedirect($link, $msg);

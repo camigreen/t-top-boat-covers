@@ -132,7 +132,7 @@ class CustomerHelper extends AppHelper {
      * @since 1.0.0
      */
     public function isAccountAdmin() {
-        return $this->authorise('account.admin', 'com_zoo.application.'.$this->application->id.'.account');
+        return $this->isStoreAdmin() || $this->authorise('account.admin', 'com_zoo.application.'.$this->application->id.'.account');
     }
 
     /**

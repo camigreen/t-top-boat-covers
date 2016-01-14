@@ -15,7 +15,7 @@
 	</type>
 	<type name="dealership" class="account.parent">
 		<fieldset group="details" label="Details" controlname="core" >
-			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
+			<field name="name" type="storetext" width="6-10" default="" label="Name" viewOnly="1" description="Name of the account." />
 			<field name="account_number" controlname="elements" type="storetext" width="4-10" default="" viewOnly="1" label="Account Number"  description="The employee's identification number." />
 			<field name="state" type="statuslist" admin="1" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
 		</fieldset>

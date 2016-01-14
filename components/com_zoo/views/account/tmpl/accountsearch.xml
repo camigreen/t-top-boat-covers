@@ -6,7 +6,7 @@
 	</layout>
 	<fields name="request">
 		<fieldset name="request" addfieldpath="/administrator/components/com_zoo/joomla/fields">  
-			<field name="search" type="list" label="Display Accounts" default="all" required="true">
+			<field name="s" type="list" label="Display Accounts" default="all" required="true">
 				<option value="all">All Accounts</option>
 				<option value="dealership">Dealerships</option>
 				<option value="oem">OEMS</option>
@@ -14,6 +14,7 @@
 				<option value="user.dealership">Dealership Users</option>
 				<option value="user.store">Store Users</option>
 			</field>
+			<field name="task" type="hidden" default="search" />
 			<field name="controller" type="hidden" default="account" />        
 		</fieldset>
 	</fields>

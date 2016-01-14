@@ -18,8 +18,8 @@ $testMode = $zoo->merchant->testMode();
                                 $parent = $zoo->customer->getParent(); 
                             ?>
                             <li><a href="/parent-account"><?php echo $parent->name; ?> Account</a></li>
-                            <li><a href="?option=com_zoo&controller=account&search=all-users&parent=<?php echo $parent->id; ?>"><?php echo $parent->name; ?> Users</a></li>
-                            <li><a href="?option=com_zoo&task=edit&type=<?php echo $parent->type; ?>&parent=<?php echo $parent->id ?>">Add User</a></li>
+                            <li><a href="/account-users?p=<?php echo $parent->id; ?>"><?php echo $parent->name; ?> Users</a></li>
+                            <li><a href="?option=com_zoo&controller=account&task=edit&type=<?php echo 'user.'.$parent->type; ?>&p=<?php echo $parent->id ?>">Add User</a></li>
                         <?php endif; ?>
                         <li>
                             <a href="#" class="logout_btn"><?php echo JText::_('JLOGOUT'); ?></a>

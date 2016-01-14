@@ -376,7 +376,7 @@ class AppForm {
 			
 			
 			$adminOnly = (bool) $this->_xml[$group]->attributes()->admin;
-			if($adminOnly && (!$this->app->customer->isStoreAdmin() || !$this->app->customer->isAccountAdmin())) {
+			if($adminOnly && (!$this->app->customer->isStoreAdmin())) {
 				continue;
 			}
 
@@ -389,7 +389,7 @@ class AppForm {
 			// add params
 			foreach ($this->_xml[$group]->field as $field) {
 				$adminOnly = (bool) $field->attributes()->admin;
-				if($adminOnly && (!$this->app->customer->isStoreAdmin() && !$this->app->customer->isAccountAdmin())) {
+				if($adminOnly && (!$this->app->customer->isStoreAdmin())) {
 					continue;
 				}
 				// init vars

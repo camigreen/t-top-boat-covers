@@ -19,7 +19,7 @@ class UserAccount extends Account {
 
     protected $_user;
 
-    protected $_userGroups = array();
+    protected $_userGroups = array(26);
 
     public function __construct() {
         parent::__construct();
