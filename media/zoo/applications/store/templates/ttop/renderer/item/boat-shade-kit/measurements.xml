@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<measurements>
+	<type name="store">
+		<fieldset group="" label="Details" controlname="core" >
+			<field name="boatmakeBSK" type="list" width="6-10" default="" label="Boat Make" description="">
+				<option value="0">- Select -</option>
+				<option value="americat">Americat</option>
+				<option value="angler">Angler</option>
+				<option value="bluewater">Bluewater</option>
+				<option value="boston_whaler">Boston Whaler</option>
+				<option value="caravelle">Caravelle</option>
+				<option value="carolina_cat">Carolina Cat</option>
+				<option value="chris_craft">Chris Craft</option>
+				<option value="cobia">Cobia</option>
+				<option value="contender">Contender</option>
+				<option value="donzi">Donzi</option>
+				<option value="edgewater">Edgewater</option>
+				<option value="everglades">Everglades</option>
+				<option value="glacier_bay">Glacier Bay</option>
+				<option value="grady_white">Grady White</option>
+				<option value="hydra-sport">Hydra-Sport</option>
+				<option value="jupiter">Jupiter</option>
+				<option value="key_west">Key West</option>
+				<option value="mako">Mako</option>
+				<option value="mckee_craft">McKee Craft</option>
+				<option value="nautic_star">Nautic Star</option>
+				<option value="pathfinder">Pathfinder</option>
+				<option value="polar_kraft">Polar Kraft</option>
+				<option value="pro_line">Pro Line</option>
+				<option value="pursuit">Pursuit</option>
+				<option value="ranger">Ranger</option>
+				<option value="regulator">Regulator</option>
+				<option value="robalo">Robalo</option>
+				<option value="sailfish">Sailfish</option>
+				<option value="scout">Scout</option>
+				<option value="sea_fox">Sea Fox</option>
+				<option value="sea_hunt">Sea Hunt</option>
+				<option value="sea_pro">Sea Pro</option>
+				<option value="seacraft">Seacraft</option>
+				<option value="seaswirl">Seaswirl</option>
+				<option value="sportsman">Sportsman</option>
+				<option value="tidewater">Tidewater</option>
+				<option value="triton">Triton</option>
+				<option value="triumph">Triumph</option>
+				<option value="wellcraft">Wellcraft</option>
+				<option value="world_cat">World Cat</option>
+				<option value="yellowfin">Yellowfin</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="americat" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="81,60,84,D">27 Gen II</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="angler" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="84,60,48,A">2600</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="bluewater" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="80,70,28,A">21</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="boston_whaler" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="76,61,34,A">200 Dauntless</option>
+				<option value="76,61,34,A">210 Montauk</option>
+				<option value="81,72,24,A">240 Outrage</option>
+				<option value="95,95,54,B">270 Vantage</option>
+				<option value="95,71,63,B">270 Dauntless</option>
+				<option value="108,77,50,B">28 Conquest</option>
+				<option value="105,107,41,A">350 Outrage</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="caravelle" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="90,70,53,B">25 Bay</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="chris_craft" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="78,88,44,A">25</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="cobia" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="91,76,29,A">237</option>
+				<option value="91,72,44,A">256</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="contender" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="86,60,43,A">31 FS</option>
+				<option value="105,75,106,D">38</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="donzi" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="108,85,59,B">38</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="edgewater" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="86,63,29,A">225</option>
+				<option value="85,68,24,A">245</option>
+				<option value="99,78,27,A">265</option>
+				<option value="100,76,45,A">280</option>
+				<option value="97,78,52,B">318</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="everglades" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="81,54,30,A">243 SS</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="glacier_bay" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="83,78,42,A">2685 Coastal Runner</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="grady_white" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="87,68,24,A">251 Coastal Explorer</option>
+				<option value="94,74,62,B">272 Sailfish</option>
+				<option value="90,72,60,B">275 Freedom</option>
+				<option value="94,74,62,B">272 Sailfish</option>
+				<option value="93,87,36,A">283 Release</option>
+				<option value="114,90,72,C">33 Express</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="hydra-sport" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="90,71,24,A">23 Bay</option>
+				<option value="94,75,62,B">2900</option>
+				<option value="95,55,71,C">30</option>
+				<option value="110,75,85,D">3300 VX</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="jupiter" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="99,71,43,A">31</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="key_west" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="81,56,24,A">189 FS</option>
+				<option value="84,61,48,A">2020</option>
+				<option value="82,56,55,B">230 Bay Reef</option>
+				<option value="97,74,47,A">268</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="mako" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="81,66,36,A">221</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="mckee_craft" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="102,72,78,C">28</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="nautic_star" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,74,44,A">2200 XS</option>
+				<option value="90,70,42,A">2500</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="pathfinder" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,64,57,B">2200</option>
+				<option value="88,65,57,B">2400</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="polar_kraft" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="85,70,56,B">2300</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="pro_line" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,58,64,B">21</option>
+				<option value="89,78,71,C">22 Sport</option>
+				<option value="98,92,60,C">29 Express</option>
+				<option value="109,73,80,C">30 Walk Around</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="pursuit" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="81,61,44,A">2470 Walk Around</option>
+				<option value="87,83,50,B">265 Dual Console</option>
+				<option value="94,64,64,B">OS 285</option>
+				<option value="101,85,59,B">3070 Express</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="ranger" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="89,67,26,A">2510</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="regulator" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="90,66,30,A">23</option>
+				<option value="94,85,31,A">29 FS</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="robalo" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="85,70,25,A">R200</option>
+				<option value="91,65,41,A">R220</option>
+				<option value="90,70,41,A">R222</option>
+				<option value="90,84,36,A">R240</option>
+				<option value="92,69,38,A">R242</option>
+				<option value="89,69,62,B">246 Cayman</option>
+				<option value="90,84,30,A">247</option>
+				<option value="111,86,54,B">305 Walk Around</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="sailfish" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="74,62,43,A">206</option>
+				<option value="98,74,57,B">2660</option>
+				<option value="83,68,83,C">320</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="scout" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="84,67,37,A">185</option>
+				<option value="87,61,24,A">195 SF</option>
+				<option value="87,60,41,A">210 XSF</option>
+				<option value="89,67,41,A">225 XSF</option>
+				<option value="91,61,28,A">240 Bay</option>
+				<option value="96,78,54,B">251 XS</option>
+				<option value="89,74,24,A">255 LXF</option>
+				<option value="90,75,51,B">260 SF</option>
+				<option value="100,87,44,A">300 LXF</option>
+				<option value="102,87,32,A">350 LXF</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="sea_fox" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="84,65,48,A">206</option>
+				<option value="82,64,31,A">209 Commander</option>
+				<option value="90,63,34,A">225 Bay Fisher</option>
+				<option value="88,65,76,C">237</option>
+				<option value="86,65,26,A">246 Commander</option>
+				<option value="86,78,25,A">249 Avenger</option>
+				<option value="93,41,24,A">266 Commander</option>
+				<option value="96,78,38,A">286</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="sea_hunt" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="78,60,53,B">21 XP</option>
+				<option value="81,60,34,A">210 Ultra</option>
+				<option value="81,60,24,A">211 Ultra</option>
+				<option value="83,62,48,A">225 Triton</option>
+				<option value="83,63,32,A">225 Ultra</option>
+				<option value="80,64,53,B">234 Ultra</option>
+				<option value="79,63,52,B">235</option>
+				<option value="84,63,43,A">24 BX BR</option>
+				<option value="86,62,33,A">24 RZR</option>
+				<option value="80,89,24,A">24 Edge</option>
+				<option value="92,69,46,A">27 Gamefish</option>
+				<option value="92,84,54,B">30 Gamefish</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="sea_pro" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,61,24,A">210</option>
+				<option value="87,63,24,A">220</option>
+				<option value="87,62,40,A">2300 SV</option>
+				<option value="86,60,31,A">238</option>
+				<option value="84,69,70,C">255 Walk Around</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="seacraft" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="90,70,56,B">SC-25</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="seaswirl" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,54,72,C">2601 Striper</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="sportsman" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="87,65,24,A">211 Heritage</option>
+				<option value="87,62,24,A">247 Platinum</option>
+				<option value="87,60,24,A">247 Masters</option>
+				<option value="92,70,27,A">251 Heritage</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="tidewater" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="88,62,24,A">220</option>
+				<option value="87,63,24,A">250</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="triton" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="89,67,26,A">2501</option>
+				<option value="94,79,76,C">2690 Walk Around</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="triumph" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="86,52,26,A">190 Bay</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="wellcraft" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="108,84,83,C">290 Coastal</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="world_cat" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="84,70,92,D">295</option>
+				<option value="126,90,83,C">320</option>
+			</field>
+			<field name="boatmodelBSK" boatmake="yellowfin" type="list" width="6-10" default="" label="Boat Model" description="">
+				<option value="0">- Select -</option>
+				<option value="91,76,69,C">295</option>
+			</field>
+		</fieldset>
+	</type>
+</measurements>
+
+
