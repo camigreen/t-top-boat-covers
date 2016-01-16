@@ -51,6 +51,9 @@
 				<div class="uk-form-row">
 					<?php echo $this->form->render('related')?>
 				</div>
+				<?php if(!$this->app->customer->isStoreAdmin()) : ?>
+					<input type="text" name="related[parents][]" value="<?php echo $this->app->customer->getParent()->id; ?>" />
+				<?php endif; ?>
 			<?php endif; ?>
 		<input type="hidden" name="[params]user" value="<?php echo $user->id; ?>" />
 		<?php echo $this->app->html->_('form.token'); ?>

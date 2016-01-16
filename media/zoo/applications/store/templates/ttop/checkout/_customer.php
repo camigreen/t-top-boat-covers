@@ -19,6 +19,12 @@ $elements = $this->order->elements;
         <?php $this->form->setValues($elements->get('shipping.')); ?>
         <?php if($this->form->checkGroup('shipping')) : ?>
             <div class="uk-form-row">
+<!--                 <div class="uk-form-controls uk-form-controls-text" style="float:right"> -->
+                    <p class="uk-form-controls-condensed">
+                        <input type="checkbox" id="same_as_billing" class="ttop-checkout-field" name="same_as_billing" style="height:15px; width:15px;" />
+                        <label class="uk-text-small uk-margin-left" >Same as billing</label> 
+                    </p>
+                <!-- </div> -->
                 <?php echo $this->form->render('shipping')?>
             </div>
         <?php endif; ?>

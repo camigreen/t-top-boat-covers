@@ -381,7 +381,9 @@ class AppForm {
 			}
 
 			$html[] = '<fieldset id="'.$group.'">';
-			$html[] = '<legend>'.JText::_((string)$this->_xml[$group]->attributes()->label).'</legend>';
+			if((string)$this->_xml[$group]->attributes()->label) {
+				$html[] = '<legend>'.JText::_((string)$this->_xml[$group]->attributes()->label).'</legend>';
+			}
 			$html[] = '<ul class="uk-grid parameter-form">';
 
 			$group_control_name = $this->_xml[$group]->attributes()->controlname ? $this->_xml[$group]->attributes()->controlname : $control_name;

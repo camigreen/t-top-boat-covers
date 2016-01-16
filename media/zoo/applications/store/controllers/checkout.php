@@ -78,7 +78,7 @@ class CheckoutController extends AppController {
         $this->app->document->addScript('assets:js/formhandler.js');
 
         $order = $this->CR->order;
-        $account = $order->getAccount()->getParentAccount();
+        $account = $order->getAccount();
         $user = $order->getUser();
         $this->page = 'customer';
         if($account && $account->type != 'store') {

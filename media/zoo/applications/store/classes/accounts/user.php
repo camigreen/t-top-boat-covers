@@ -29,12 +29,13 @@ class UserAccount extends Account {
         
         $this->_user->save();
         JUserHelper::setUserGroups($this->_user->id, $this->_userGroups);
-        if($this->params->get('user') != $this->_user->id) {
+        
+        parent::save();
+        $uid = $this->params->get('user');
+        if(!$uid || $uid != $this->_user->id) {
             $this->params->set('user', $this->_user->id);
             $this->mapUser();
         }
-        
-        parent::save();
         
         return $this;
 
@@ -59,7 +60,7 @@ class UserAccount extends Account {
 
     public function loadUser() {
 
-        if(empty($this->_user)) {
+        if(empty($this->_user) && $this->id) {
 
             $db = $this->app->database;
 
@@ -72,6 +73,8 @@ class UserAccount extends Account {
             }
 
             $this->_userGroups = $this->_user->getAuthorisedGroups();
+        } else {
+            $this->_user = new JUser();
         }
         
         return $this;

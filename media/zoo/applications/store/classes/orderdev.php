@@ -196,8 +196,8 @@ class OrderDev {
 	}
 
 	public function getAccount() {
-		$this->_account = $this->app->customer->get();
-		$this->account = $this->_account->getParentAccount()->id;
+		$this->_account = $this->app->customer->getParent();
+		$this->account = $this->_account->id;
 		return $this->_account;
 	}
 

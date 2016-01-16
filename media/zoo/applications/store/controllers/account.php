@@ -160,16 +160,11 @@ class AccountController extends AppController {
                 return;
             }
             $type = $this->account->type;
-            $this->title = 'Edit '.$this->account->getClassName().' Account';
+            $this->title[] = 'Edit';
         } else {
+            $this->title[] = 'Create a New';
             $type = $this->app->request->get('type', 'string');
-            $parent = $this->app->request->get('p', 'int', null);
-            if($parent) {
-                $args['related']['parent'] = $parent;
-            }
             $this->account = $this->app->account->create($type);
-            
-
         }
         $parts = explode('.',$type,2);
         $count = count($parts);
@@ -179,13 +174,14 @@ class AccountController extends AppController {
         } else {
             list($class, $kind) = $parts;
         }
-        $this->title = $type == 'default' ? "Create a New $template Account" : 'Create a New '.ucfirst($class).' Account';
+        $this->title[] = ucfirst($class). ' Account';
+        $this->title = implode(' ', $this->title);
         $this->form = $this->app->form->create(array($this->template->getPath().'/accounts/config.xml', compact('type')));
         $this->form->setValues($this->account);
         $layout = 'edit';
         $this->partialLayout = $type;
         $this->groups = $this->form->getGroups();
-        $this->form->setValue('canEdit', $this->account->canEdit());
+        $this->form->setValue('canEdit', $this->app->customer->canEdit());
         $this->getView()->addTemplatePath($this->template->getPath().'/accounts')->addTemplatePath($this->app->path->path('views:configuration/tmpl/'));
 
         $this->getView()->addTemplatePath($this->template->getPath())->setLayout($layout)->display();

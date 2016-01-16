@@ -71,6 +71,7 @@ class CustomerHelper extends AppHelper {
     }
 
     public function isReseller() {
+        
         return $this->getParent()->isReseller();
     }
 

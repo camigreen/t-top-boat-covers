@@ -51,6 +51,7 @@ class AccountHelper extends AppHelper {
 		$account = new $class();
 		$account->type = $classname.($type ? '.'.$type : '');
 		$account->app = $this->app;
+
 		
 		// trigger init event
 		$this->app->event->dispatcher->notify($this->app->event->create($account, 'account:init'));
@@ -58,7 +59,6 @@ class AccountHelper extends AppHelper {
 		if(!empty($args)) {
 			$account->bind($args);
 		}
-
 		return $account;
 
 	}

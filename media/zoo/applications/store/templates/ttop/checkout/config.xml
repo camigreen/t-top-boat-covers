@@ -30,7 +30,7 @@
 		</fieldset>
 	</type>
 	<type name="payment">
-		<fieldset group="purchase_order" label="Billing Address" controlname="elements[payment]" noLabel="1" >
+		<fieldset group="purchase_order" controlname="elements[payment]" >
 			<field name="account_name" type="text" width="1-1" default="" label="Account Name" description="" disabled="1"/>
 			<field name="account_number" type="text" width="1-1" default="" label="Account Number" description="" disabled="1"/>
 			<field name="customer_name" type="text" width="1-1" default="" label="Customer Name" description=""  required="1" />
