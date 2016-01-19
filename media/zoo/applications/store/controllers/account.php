@@ -119,6 +119,8 @@ class AccountController extends AppController {
     public function viewProfile() {
         $aid = $this->app->customer->get()->id;
         $this->app->request->set('aid', $aid);
+        var_dump($this->app->customer->get());
+        return;
         $this->edit();
     }
 

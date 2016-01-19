@@ -11,29 +11,32 @@
 	<div class="uk-width-1-1">
 			<?php $this->form->setValues($values); ?>
 			<?php if($this->form->checkGroup('details')) : ?>
-				<?php echo $this->form->render('details')?>
+				<div class="uk-form-row">
+					<?php echo $this->form->render('details')?>
+				</div>
 			<?php endif; ?>
 			<?php if($this->form->checkGroup('password')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="password">
-						<legend>Password</legend>
-						<?php 
-							if($this->app->user->isJoomlaAdmin($this->cUser)) {
-								echo $this->form->render('password');
-							} else {
-								echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';
-							}
-						?>
-					</fieldset>
+					<?php 
+						if($this->app->user->isJoomlaAdmin($this->cUser)) {
+							echo $this->form->render('password');
+						} else {
+							echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';
+						}
+					?>
 				</div>
 			<?php endif; ?>
 			<?php $this->form->setValues($this->account->params); ?>
 			<?php if($this->form->checkGroup('settings')) : ?>
-				<?php echo $this->form->render('settings')?>
+				<div class="uk-form-row">
+					<?php echo $this->form->render('settings')?>
+				</div>
 			<?php endif; ?>
 			<?php $this->form->setValues($this->account->elements); ?>
 			<?php if($this->form->checkGroup('contact')) : ?>
-				<?php echo $this->form->render('contact')?>
+				<div class="uk-form-row">
+					<?php echo $this->form->render('contact')?>
+				</div>
 			<?php endif; ?>
 		<input type="hidden" name="params[user]" value="<?php echo $user->id; ?>" />
 		<input type="hidden" name="related[parents][]" value="<?php echo $store->id; ?>" />

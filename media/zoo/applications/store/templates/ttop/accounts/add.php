@@ -9,7 +9,7 @@
 	    <li><button class="uk-button uk-button-primary uk-width-1-1" data-type="user.dealership">Dealership User</button></li>
 	    <li><button class="uk-button uk-button-primary uk-width-1-1" data-type="oem">OEM</button></li>
 	    <li><button class="uk-button uk-button-primary uk-width-1-1" data-type="user.oem" disabled>OEM User</button></li>
-	    <li><button class="uk-button uk-button-primary uk-width-1-1" data-type="user.employee" disabled>Employee</button></li>
+	    <li><button class="uk-button uk-button-primary uk-width-1-1" data-type="user.store">Store User</button></li>
 	</ul>
 	<form id="account_type" method="post" action="<?php echo $this->baseurl; ?>">
 		<input type="hidden" name="task" value="edit" />

@@ -139,7 +139,7 @@
 			<field name="commission" type="store.option" optionset="oemcommission" label="Commission" width="1-4" default="" description="The OEM's Commission." />
 			<field name="category" type="categorylist" label="Item Category" width="1-4" default="" description="Items in this category will be credited to this OEM." />
 		</fieldset>
-		<fieldset group="parents" label="Assigned Parent Accounts" controlname="related" width="1-1">
+		<fieldset group="parents" label="Assigned Dealerships" controlname="related" width="1-1">
 			<field name="parents" type="accountselect" width="1-2"/>
 		</fieldset>
 	</type>
