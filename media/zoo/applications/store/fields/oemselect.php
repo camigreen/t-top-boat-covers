@@ -5,7 +5,7 @@
 
 	if($id = $parent->getValue('id')) {
 		$account = $this->app->account->get($id);
-		$available = $this->app->table->account->getUnassignedAccountsByType('oem');
+		$available = $this->app->table->account->getAccountsByType('oem');
 		$selected = $account->getAllOEMs();
 	}
 

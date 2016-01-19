@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <account>
-	<type name="store">
+	<type name="store" >
 		<fieldset group="details" label="Details" controlname="core" >
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="state" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
@@ -13,11 +13,11 @@
 			<field name="notify_emails" type="textarea" rows="5" cols="40" width="1-2" default="" label="New Order Notification Emails" description="An email will be sent to the listed emails. Enter a new line between each email." />
 		</fieldset>
 	</type>
-	<type name="dealership">
+	<type name="dealership" class="account.parent">
 		<fieldset group="details" label="Details" controlname="core" >
-			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
-			<field name="account_number" controlname="elements" type="storetext" width="4-10" default="" label="Account Number"  description="The employee's identification number." />
-			<field name="state" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="name" type="storetext" width="6-10" default="" label="Name" viewOnly="1" description="Name of the account." />
+			<field name="account_number" controlname="elements" type="storetext" width="4-10" default="" viewOnly="1" label="Account Number"  description="The employee's identification number." />
+			<field name="state" type="statuslist" admin="1" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
 		</fieldset>
 		<fieldset group="poc" label="Contact Info" controlname="elements[poc]">
 			<field name="name" type="text" width="2-3" default="" label="Name" description="A name for the point of contact." />
@@ -48,10 +48,10 @@
 			<field name="postalCode" type="text" width="1-6" default="" label="Postal Code" />
 		</fieldset>
 		<fieldset group="settings" label="Account Settings" controlname="params" width="1-1">
-			<field name="discount" type="store.option" optionset="discount" width="1-4" default="" label="Dealer Price Discount" description="The dealer price discount." />
+			<field name="discount" type="store.option" optionset="discount" width="1-4" viewOnly="1" default="" label="Dealer Price Discount" description="The dealer price discount." />
 			<field name="markup" type="store.option" optionset="markup" width="1-4" default="" label="Dealer Markup" description="The dealer's additional markup to an item." />
-			<field name="terms" type="store.option" optionset="terms" width="1-4" default="DUR" label="Terms" description="The payment terms for the account." />
-			<field name="tax_exempt" type="radio" width="1-4" default="1" label="Tax Exemption" description="Is the dealer tax exempt?">
+			<field name="terms" type="store.option" optionset="terms" width="1-4" viewOnly="1" default="DUR" label="Terms" description="The payment terms for the account." />
+			<field name="tax_exempt" type="radio" width="1-4" default="1" admin="1" label="Tax Exemption" description="Is the dealer tax exempt?">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
@@ -59,16 +59,16 @@
 		<fieldset group="users" label="Assigned Users" controlname="related" width="1-1">
 			<field name="children" type="userselect" width="1-2" default="" label="Account Users" description="" />
 		</fieldset>
-		<fieldset group="subaccounts" label="Assigned Sub-Accounts" controlname="related" width="1-1">
+		<fieldset group="subaccounts" label="Assigned Sub-Accounts" controlname="related" width="1-1" admin="1">
 			<field name="children" type="oemselect" multiple="1" width="1-2" label="Assigned OEMs" description="" />
 		</fieldset>
 	</type>
 	<type name="user.dealership">
-		<fieldset group="details" label="Details" controlname="user" >
+		<fieldset group="details" name="details" label="Details" controlname="user">
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." />
 			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." />
-			<field name="state" controlname="core" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="state" controlname="core" type="statuslist" width="2-10" admin="1" edit="core.edit.state" default="" label="Account Status" value="account" description="The current status for the user." />
 		</fieldset>
 		<fieldset group="password" label="password" controlname="user">
 			<field name="password" type="password" width="1-4" default="" label="Password" description="Password the account." />
@@ -79,7 +79,7 @@
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
-			<field name="sendEmail" type="radio" width="2-10" default="0" label="Allow System Emails" description="Can this user recieve system emails?">
+			<field name="sendEmail" type="radio" width="2-10" default="0" label="Allow System Emails" description="Can this user recieve system emails?" admin="1">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
 			</field>
@@ -89,8 +89,9 @@
 			<field name="mobile_phone" type="text" width="1-3" default="" label="Mobile Phone" description="A mobile phone number for the point of contact." />
 			<field name="other_phone" type="text" width="1-3" default="" label="Other Phone" description="Another phone number for the point of contact." />
 		</fieldset>
-		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1">
+		<fieldset group="related" label="User Account Elements" controlname="related" width="1-1" admin="1">
 			<field name="parents" type="accountlist" account_type="dealership" width="1-3" default="" label="Assigned to" description="An account that this user is assigned to." />
+			<field name="groups" type="usergrouplist" controlname="user" width="1-3" default="26" multiple="true" size="10" label="Group" description="" />
 		</fieldset>
 	</type>
 	<type name="user.store">
@@ -105,7 +106,7 @@
 			<field name="password2" type="password" width="1-4" default="" label="Confirm Password" description="Confirm the password for the account." />
 		</fieldset>
 		<fieldset group="settings" label="User Settings" controlname="params">
-			<field name="commission" type="store.option" optionset="empcommission" label="Commission" width="1-4" default="" description="The Employee's Commission." />
+			<field name="commission" type="store.option" optionset="empcommission" viewOnly="1" label="Commission" width="1-4" default="" description="The Employee's Commission." />
 			<field name="invoices" type="radio" width="2-10" default="1" label="Email Invoices" description="Send invoices of orders made by this user?">
 				<option value="0">No</option>
 				<option value="1">Yes</option>
@@ -138,7 +139,7 @@
 			<field name="commission" type="store.option" optionset="oemcommission" label="Commission" width="1-4" default="" description="The OEM's Commission." />
 			<field name="category" type="categorylist" label="Item Category" width="1-4" default="" description="Items in this category will be credited to this OEM." />
 		</fieldset>
-		<fieldset group="parents" label="Assigned Parent Accounts" controlname="related" width="1-1">
+		<fieldset group="parents" label="Assigned Dealerships" controlname="related" width="1-1">
 			<field name="parents" type="accountselect" width="1-2"/>
 		</fieldset>
 	</type>

@@ -19,14 +19,25 @@ class UserAccount extends Account {
 
     protected $_user;
 
+    protected $_userGroups = array(26);
+
     public function __construct() {
         parent::__construct();
     }
 
     public function save() {
-
-        parent::save();
+        
         $this->_user->save();
+        JUserHelper::setUserGroups($this->_user->id, $this->_userGroups);
+        
+        parent::save();
+        $uid = $this->params->get('user');
+        if(!$uid || $uid != $this->_user->id) {
+            $this->params->set('user', $this->_user->id);
+            $this->mapUser();
+        }
+        
+        return $this;
 
     }
 
@@ -38,36 +49,61 @@ class UserAccount extends Account {
             if(isset($data['user']['name'])) {
                 $this->name = $data['user']['name'];
             }
+            if(isset($data['user']['groups'])) {
+                $this->_userGroups = $data['user']['groups']; 
+            }
+            
         }
         parent::bind($data);
 
     }
 
     public function loadUser() {
-        if(!$this->params->get('user')) {
+
+        if(empty($this->_user) && $this->id) {
+
+            $db = $this->app->database;
+
+            $uid = $db->queryResult('SELECT child FROM #__zoo_account_user_map WHERE parent = '.$this->id);
+            if($uid) {
+                $this->_user = $this->app->user->get($uid);
+                $this->name = $this->_user->name;
+            } else {
+                $this->_user = new JUser();
+            }
+
+            $this->_userGroups = $this->_user->getAuthorisedGroups();
+        } else {
             $this->_user = new JUser();
         }
-
-        if(empty($this->_user)) {
-            $this->_user = $this->app->user->get($this->params->get('user'));
-        }
-        $this->name = $this->_user->name;
+        
         return $this;
     }
 
     public function getUser() {
-        $this->loadUser();
-        return $this->_user;
+        return $this->loadUser()->_user;
+    }
+
+    public function mapUser() {
+
+        // Remove all mappings where this account is the child from the database.
+        $query = 'DELETE FROM #__zoo_account_user_map WHERE parent = '.$this->id;
+        $this->app->database->query($query);
+
+        // Map joomla user to the user accounts in the database.
+        $query = 'INSERT INTO #__zoo_account_user_map (parent, child) VALUES ('.$this->id.','.$this->params->get('user').')';
+        $this->app->database->query($query);
     }
 
     public function getParentAccount() {
         $parents = array_values($this->getParents());
-        list($account) = $parents;
-        return $account;
-    }
-
-    public function getAssetName() {
-        return 'com_zoo';
+        
+        if(empty($parents)) {
+            return $this;
+        } else {
+            list($parent) = $parents;
+        }
+        return $parent;
     }
 
     /**
@@ -81,9 +117,8 @@ class UserAccount extends Account {
      *
      * @since 3.2
      */
-    public function canEdit($user = null) {
-        $superadmin = $this->_user->superadmin ? $user->superadmin : true;
-        return $superadmin && $this->app->user->canEdit($user, $this->getAssetName());
+    public function canEdit() {
+        return $this->app->customer->canEdit($this->getAssetName(), $this->getUser()->id);
     }
 
     /**

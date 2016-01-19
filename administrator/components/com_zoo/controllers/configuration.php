@@ -34,6 +34,8 @@ class ConfigurationController extends AppController {
 		// register tasks
 		$this->registerTask('applyassignelements', 'saveassignelements');
 		$this->registerTask('apply', 'save');
+		// var_dump('asdfasdf');
+		// die();
 	}
 
 	public function display($cachable = false, $urlparams = false) {
@@ -75,6 +77,19 @@ class ConfigurationController extends AppController {
 			$this->assetPermissions[$typeName]->bind(array('asset_id' => $assetName));
 		}
 
+		$sections = array('account', 'order', 'store');
+		foreach($sections as $section) {
+			$xml->fieldset->field->attributes()->section = $section;
+			$xml->fieldset->field->attributes()->name = 'rules_'.$section;
+			$this->storePermissions[$section] = JForm::getInstance('com_zoo.new.'.$section, $xml->asXML());
+			$assetName = 'com_zoo.'.$section;
+			if (!$asset->loadByName($assetName)) {
+				$assetName = 'com_zoo';
+			}
+
+			$this->storePermissions[$section]->bind(array('asset_id' => $assetName));
+		}
+		
 		// manipulate js in J25
 		if ($this->app->joomla->isVersion('2.5')) {
 			JDispatcher::getInstance()->attach(array('event' => 'onAfterDispatch', 'handler' => array($this, 'eventCallback')));
@@ -99,7 +114,6 @@ class ConfigurationController extends AppController {
 	}
 
 	public function save() {
-
 		// check for request forgeries
 		$this->app->session->checkToken() or jexit('Invalid Token');
 
@@ -133,9 +147,9 @@ class ConfigurationController extends AppController {
 					$this->application->assetRules[substr($key, 6)] = $value;
 				}
 			}
-
 			// save application
 			$this->table->save($this->application);
+
 
 			// set redirect message
 			$msg = JText::_('Application Saved');

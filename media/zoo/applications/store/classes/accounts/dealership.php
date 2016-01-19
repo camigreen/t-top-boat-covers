@@ -40,17 +40,20 @@ class DealershipAccount extends Account {
      *
      * @since 1.0
      */
-    public function getAllOEMs() {
+    public function getAllOEMs($activeOnly = true) {
 
         if($this->id) {
             $this->_loadMappedAccounts();
         }
 
         $oems = array();
+        $children = $this->_mappedAccounts->get('children.');
 
-        foreach($this->_mappedAccounts->get('children.') as $child) {
-            if($child->type == 'oem') {
-                $oems[$child->id] = $child;
+        if(!empty($children)) {
+            foreach($children as $child) {
+                if($child->type == 'oem' && ($activeOnly && $child->state != 3)) {
+                    $oems[$child->id] = $child;
+                }
             }
         }
 

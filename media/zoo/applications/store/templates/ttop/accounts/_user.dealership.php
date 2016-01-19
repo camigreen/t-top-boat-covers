@@ -3,6 +3,13 @@
 	$values = (array) $this->account;
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
+	var_dump($this->app->customer->getParent()->getNotificationEmails());
+	// var_dump($this->app->user->get());
+	// echo 'Can Edit -> ' . ($this->app->customer->canEdit('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
+	// echo 'Can EditState -> ' . ($this->app->customer->canEditState('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
+	// echo 'Can Create -> ' . ($this->app->customer->canCreate('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
+	// echo 'Can Delete -> ' . ($this->app->customer->canDelete('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
+	// echo 'Can Access - 1 -> ' . ($this->app->customer->canAccess(1) ? 'True' : 'False').'</br>';
 ?>
 
 
@@ -11,51 +18,43 @@
 			<?php $this->form->setValues($values); ?>
 			<?php if($this->form->checkGroup('details')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="details">
-						<legend>Details</legend>
-						<?php echo $this->form->render('details')?>
-					</fieldset>
+					<?php echo $this->form->render('details')?>
 				</div>
 			<?php endif; ?>
 			<?php if($this->form->checkGroup('password')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="password">
-						<legend>Password</legend>
-						<?php 
-							if($this->app->user->isJoomlaAdmin($this->cUser)) {
-								echo $this->form->render('password');
-							} else {
-								echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';
-							}
-						?>
-					</fieldset>
+					<?php 
+						if($this->app->customer->get()->id == $this->account->id || $this->app->customer->isAccountAdmin()) {
+							echo $this->form->render('password');
+						} else {
+							echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';
+						}
+					?>
 				</div>
 			<?php endif; ?>
 			<?php if($this->form->checkGroup('notifications')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="notifications">
-						<legend>Notifications</legend>
-						<?php echo $this->form->render('notifications')?>
-					</fieldset>
+					<?php echo $this->form->render('notifications')?>
 				</div>
 			<?php endif; ?>
 			<?php $this->form->setValues($this->account->elements); ?>
 			<?php if($this->form->checkGroup('contact')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="contact">
-						<legend>Contact Info</legend>
-						<?php echo $this->form->render('contact')?>
-					</fieldset>
+					<?php echo $this->form->render('contact')?>
 				</div>
 			<?php endif; ?>
-			<?php $this->form->setValue('parents', $this->account->getParents()); ?>
+			<?php 
+				$values['parents'] = $this->account->getParents();
+				$values['groups'] = $this->account->getUser()->getAuthorisedGroups();
+				$this->form->setValues($values);
+			?>
 			<?php if($this->form->checkGroup('related')) : ?>
 				<div class="uk-form-row">
-					<fieldset id="related">
-						<legend>User Assignments</legend>
-						<?php echo $this->form->render('related')?>
-					</fieldset>
+					<?php echo $this->form->render('related')?>
 				</div>
+				<?php if(!$this->app->customer->isStoreAdmin()) : ?>
+					<input type="text" name="related[parents][]" value="<?php echo $this->app->customer->getParent()->id; ?>" />
+				<?php endif; ?>
 			<?php endif; ?>
 		<input type="hidden" name="[params]user" value="<?php echo $user->id; ?>" />
 		<?php echo $this->app->html->_('form.token'); ?>

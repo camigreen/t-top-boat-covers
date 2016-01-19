@@ -8,5 +8,7 @@
 
 // set attributes
 $attributes = array('type' => 'text', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
-
+if((bool) $node->attributes()->disabled) {
+	$attributes['disabled'] = true;
+}
 printf('<input %s />', $this->app->field->attributes($attributes, array('label', 'description', 'default')));

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.0" type="plugin" group="authentication" method="upgrade">
+	<name>Authentication - Zoo Store Plugin</name>
+	<author>Shawn Gibbons</author>
+	<creationDate>December 2015</creationDate>
+	<copyright>(C) 2005 - 2015 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>sgibbons@palmettoimages.com</authorEmail>
+	<authorUrl>www.palmettoimages.com</authorUrl>
+	<version>1.0.0</version>
+	<description></description>
+	<files>
+		<filename plugin="zoostore">zoostore.php</filename>
+	</files>
+</extension>

@@ -27,14 +27,12 @@ class OrderEvent {
         $order->table = $app->table->orderdev;
         $order->params = $app->parameter->create($order->params);
         $order->elements = $app->parameter->create($order->elements);
-       	$app->loader->register('OrderItem', 'classes:orderitem.php');
         $items = $order->elements->get('items.', array());
         foreach($items as $key => $item) {
-        	$item = new OrderItem($app, $item);
+        	$item = $app->item->create($item);
          	$order->elements->set('items.'.$key, $item);
          }
         //$order->elements->set('items', $app->parameter->create($items));
-        $order->calculateTotals();
 
 	}
 
@@ -122,7 +120,7 @@ class OrderEvent {
 				$value = is_bool($value) ? ($value ? 'True' : 'False') : $value;
 				$data[] = $key.': '.$value;
 		}
-		foreach ($order->items as $key => $value) {
+		foreach ($order->elements->get('items.', array()) as $key => $value) {
 				$data[] = $value->name."\n";
 		}
 		$message = implode("\n", $data);

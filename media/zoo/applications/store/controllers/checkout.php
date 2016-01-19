@@ -38,15 +38,14 @@ class CheckoutController extends AppController {
         $this->baseurl = $this->app->link(array('controller' => $this->controller), false);
 
 
-        $this->cart = $this->app->cart->create();
+        $this->cart = $this->app->cart;
 
         // registers tasks
-        $this->registerTask('receipt', 'display');
         $this->registerTask('customer', 'display');
         $this->registerTask('payment', 'display');
         $this->registerTask('confirm', 'display');
         $this->registerTask('save', 'display');
-        $this->registerTask('processPO', 'display');
+        $this->registerTask('processPayment', 'display');
         // $this->taskMap['display'] = null;
         // $this->taskMap['__default'] = null;
     }
@@ -83,7 +82,6 @@ class CheckoutController extends AppController {
         $user = $order->getUser();
         $this->page = 'customer';
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
             if(!$order->elements->get('billing.')) {
                 $order->elements->set('billing.', $account->elements->get('billing.'));
                 $order->elements->set('billing.phoneNumber', $user->elements->get('office_phone'));
@@ -100,13 +98,12 @@ class CheckoutController extends AppController {
             }
             
         }
-
         $type = 'customer';
 
         $this->form = $this->app->form->create(array($this->template->getPath().'/checkout/config.xml', compact('type')));
 
         $layout = 'checkout';
-        
+        $this->task = 'save';
         $this->title = 'Customer Information';
         $this->subtitle = 'Please enter your information below.';
         $this->buttons = array(
@@ -132,15 +129,15 @@ class CheckoutController extends AppController {
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
         }
-
+ 
         $this->page = 'payment';
 
         $order = $this->CR->order;
         $account = $order->getAccount();
         $user = $order->getUser();
+        $this->task = 'save';
 
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
             $order->elements->set('payment.account_name', $account->name);
             $order->elements->set('payment.account_number', $account->elements->get('account_number'));
             $this->app->session->set('order',(string) $order,'checkout');
@@ -150,6 +147,9 @@ class CheckoutController extends AppController {
 
         $layout = 'checkout';
 
+        $type = $this->page;
+
+        $this->form = $this->app->form->create(array($this->template->getPath().'/checkout/config.xml', compact('type')));
         
         $this->title = 'Payment Information';
         $this->subtitle = 'Please enter your payment information below.';
@@ -184,13 +184,11 @@ class CheckoutController extends AppController {
         $order = $this->CR->order;
         $account = $order->getAccount();
         $user = $order->getUser();
-        $next = 'processCC';
+        $next = 'processPayment';
+        $this->task = 'processPayment';
         $layout = 'checkout';
         $this->page = 'confirm';
         if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
-            $this->processCC = 'false';
-            $next = 'processPO';
             
         }
         
@@ -226,19 +224,15 @@ class CheckoutController extends AppController {
         if (!$this->template = $this->application->getTemplate()) {
             return $this->app->error->raiseError(500, JText::_('No template selected'));
         }
-        if(!$id = $this->app->request->get('oid', 'int', 0)) {
+        if(!$id = $this->app->request->get('orderID', 'int', 0)) {
             return $this->app->error->raiseError(500, JText::_('Unable to locate that order.'));
         }
-        
+        $this->app->document->addScript('assets:js/formhandler.js');
         $order = $this->app->orderdev->get($id);
         $account = $order->getAccount();
         $layout = 'checkout';
         $this->page = 'receipt';
-        if($account && $account->type != 'store') {
-            $this->page .= '.'.$account->type;
-            
-        }
-
+        $this->task = 'home';
         $this->title = 'Order Receipt';
         $this->subtitle = 'Thank you for your purchase.';
         $this->buttons = array(
@@ -259,23 +253,26 @@ class CheckoutController extends AppController {
         $this->getView()->addTemplatePath($this->template->getPath().'/checkout')->setLayout($layout)->display();
     }
 
-    public function processPO () {
-        $order = $this->CR->processPayment('PO');
-        $link = $this->baseurl.'&task=receipt&oid='.$order->id;
-        $this->setRedirect($link);
-
+    public function processPayment () {
+        $terms = $this->app->customer->getAccountTerms();
+        $order = $this->CR->processPayment($terms);
+        $this->app->document->setMimeEncoding('application/json');
+        $result = array(
+            'approved' => $order->params->get('payment.approved'),
+            'orderID' => $order->id,
+            'message' => $order->params->get('payment.response_text')
+        );
+        echo json_encode($result);
     }
 
     public function getPDF() {
-        $type = $this->app->request->get('type','word');
-        if (!$this->app->path->path('classes:fpdf/scripts/'.$type.'.xml')) {
-            return $this->app->error->raiseError(500, JText::_('PDF template does not exist'));
-        }
+        $type = $this->app->request->get('type','string', 'default');
+        $form = $this->app->request->get('form', 'string');
         $this->app->document->setMimeEncoding('application/pdf');
-        
-        $pdf = $this->app->pdf->$type;
+        $pdf = $this->app->pdf->create($form, $type);
         $id = $this->app->request->get('id','int');
         $order = $this->app->orderdev->get($id);
+
         $pdf->setData($order)->generate()->toBrowser();
     }
 
@@ -284,6 +281,10 @@ class CheckoutController extends AppController {
 
         $CR->sendNotificationEmail(6371, 'invoice');
         $CR->sendNotificationEmail(6371, 'payment');
+    }
+
+    public function home() {
+        $this->setRedirect('/');
     }
 
     public function save() {
@@ -301,6 +302,10 @@ class CheckoutController extends AppController {
                 }
             }
         }
+        if(isset($post['creditcard'])) {
+            $order->params->set('payment.creditcard.', $post['creditcard']);
+        }
+        
         
         if(isset($post['params'])) {
             foreach($post['params'] as $key => $value) {

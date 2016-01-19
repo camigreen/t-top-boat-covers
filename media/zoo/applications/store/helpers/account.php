@@ -28,29 +28,37 @@ class AccountHelper extends AppHelper {
 
 		if (!isset($this->_accounts[$id])) {
 			$account = $this->table->get($id);
+			if(!$account) {
+				$account = $this->create();
+			}
 			$this->_accounts[$id] = $account;
 		}
 		
 		return $this->_accounts[$id]; 
 	}
 
-	public function create($type = 'default') {
+	public function create($type = 'default', $args = array()) {
 
 		if($type == 'default') {
 			$class = 'Account';
+			$classname = 'default';
 		} else {
-			list($_type) = explode('.', $type,2);
-			$class = $_type."Account";
-			$this->app->loader->register($class, 'classes:accounts/'.strtolower($_type).'.php');
+			list($classname, $type) = explode('.', $type.'.',3);
+			$class = $classname.'Account';
+			$this->app->loader->register($class, 'classes:accounts/'.strtolower(basename($class,'Account')).'.php');
 		}
 
 		$account = new $class();
-		$account->type = $type;
+		$account->type = $classname.($type ? '.'.$type : '');
 		$account->app = $this->app;
 
+		
 		// trigger init event
 		$this->app->event->dispatcher->notify($this->app->event->create($account, 'account:init'));
-
+		
+		if(!empty($args)) {
+			$account->bind($args);
+		}
 		return $account;
 
 	}
@@ -65,23 +73,33 @@ class AccountHelper extends AppHelper {
 
 	public function getByUser($user = null) {
 
-		if(!$user || !$user->id) {
-			$account = $this->app->object->create('account');
-			$this->app->event->dispatcher->notify($this->app->event->create($account, 'account:init'));
-			return $account;
-		}
-
 		$db = $this->app->database;
-
 		$id = $db->queryResult('SELECT parent FROM #__zoo_account_user_map WHERE child = '.$user->id);
-
 		if(!$id) {
 			return null;
 		} 
-
+		
 		$account = $this->get($id);
 
 		return $account;
+	}
+
+	public function getUsersByParent($parent = null, $conditions = array()) {
+
+		$db = $this->app->database;
+		
+		$query = 'SELECT child FROM #__zoo_account_map WHERE parent = '.$parent->id;
+
+		$users = $db->queryResultArray($query);
+
+		$conditions[] = 'id IN ('.implode(',',$users).')';
+		
+		$options['conditions'] = implode(' AND ',$conditions);
+		// var_dump($options);
+		// return;
+
+		$accounts = $this->table->all($options);
+		return $accounts;
 	}
 
 	public function getUnassignedOEMs($options = null) {
@@ -96,6 +114,64 @@ class AccountHelper extends AppHelper {
         }
         return $assignments;
 
+	}
+
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param int $asset_id
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	public function isAdmin($user = null, $asset_id = 0) {
+		return $this->authorise($user, 'core.admin', $asset_id);
+	}
+
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param int $asset_id
+	 * @param int $created_by
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	public function canEdit($user = null, $asset_id = 0, $created_by = 0) {
+		
+		if(!$user) {
+			$user = $this->app->customer->getUser();
+		}
+		$account = $this->app->customer->get();
+
+		return $this->isAdmin($user, $asset_id) || $this->authorise($user, 'account.edit', $asset_id) || ($created_by === $account->id && $user->authorise('account.edit.own', $asset_id));
+	}
+
+
+	/**
+	 * Evaluates user permission
+	 *
+	 * @param JUser $user User Object
+	 * @param string $action
+	 * @param int $asset_id
+	 *
+	 * @return boolean True if user has permission
+	 *
+	 * @since 3.2
+	 */
+	protected function authorise($user, $action, $asset_id) {
+		if (!$asset_id) {
+			$asset_id = 'com_zoo';
+		}
+		if (is_null($user)) {
+			$user = $this->get();
+		}
+
+		return (bool) $user->authorise($action, $asset_id);
 	}
 
     

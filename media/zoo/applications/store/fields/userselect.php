@@ -22,7 +22,6 @@
 		<li class="empty uk-text-small">There are no users assigned to this account.</li>
 	<?php endif; ?>
 	<?php foreach($selected as $id => $profile) : ?>
-		
 		<li id="<?php echo $profile->id; ?>" data-name="<?php echo $profile->getUser()->name; ?>">
 			<input type="text" name="<?php echo $name; ?>" value="<?php echo $profile->id; ?>" />
 			<?php echo $profile->getUser()->name.'<a href="#" class="uk-close uk-float-right uk-text-muted"></a>'; ?>

@@ -14,9 +14,10 @@
 class PDFHelper extends AppHelper {
     //put your code here
     
+    
     public function __construct($app) {
         parent::__construct($app);
-
+        $this->_path = $this->app->object->create('PathHelper', array($app));
         // load class
         $this->app->loader->register('FPDF', 'classes:fpdf/fpdf.php');
         $this->app->loader->register('GridPDF', 'classes:fpdf/scripts/grid.php');
@@ -24,11 +25,12 @@ class PDFHelper extends AppHelper {
                 
     }
 
-    public function create($type) {
+    public function create($form, $type = 'default') {
+
         
-        if (file_exists($this->app->path->path('classes:fpdf/scripts/'.$type.'.php'))) {
-            $class = $type.'FormPDF';
-            $this->app->loader->register($class, 'classes:fpdf/scripts/'.$type.'.php');
+        if (file_exists($this->app->path->path('classes:fpdf/scripts/'.$type.'/'.$form.'.xml')) && file_exists($this->app->path->path('classes:fpdf/scripts/'.$type.'/'.$form.'.xml'))) {
+            $class = $form.'FormPDF';
+            $this->app->loader->register($class, 'classes:fpdf/scripts/'.$type.'/'.$form.'.php');
         } else {
             $class = 'FormFPDF';
         }

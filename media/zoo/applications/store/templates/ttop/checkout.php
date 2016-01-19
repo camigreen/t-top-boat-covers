@@ -359,6 +359,10 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                         dfd.resolve(false);
                                     }
                                 });
+                            } else if ($(e.target).data('task') === 'processPO') {
+                                ProcessingModal();
+                                $('input[name="next"]').val($(e.target).data('next'));
+                                return true;
                             } else {
                                 $('input[name="next"]').val($(e.target).data('next'));
                                 console.log($(e.target).data('next'));

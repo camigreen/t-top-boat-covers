@@ -12,7 +12,6 @@
 */
 class StoreController extends AppController {
 
-    public $version = '1.0.1';
     
     public function __construct($default = array()) {
         parent::__construct($default);
@@ -187,18 +186,6 @@ class StoreController extends AppController {
         $this->app->document->setMimeEncoding('application/json');
         echo json_encode($data);
 
-    }
-    public function getPDF() {
-        $type = $this->app->request->get('type','word');
-        if (!$this->app->path->path('classes:fpdf/scripts/'.$type.'.xml')) {
-            return $this->app->error->raiseError(500, JText::_('PDF template does not exist'));
-        }
-        $this->app->document->setMimeEncoding('application/pdf');
-        $pdf = $this->app->pdf->$type;
-        $id = $this->app->request->get('id','int');
-        $order = $this->app->orderdev->get($id);
-
-        $pdf->setData($order)->generate()->toBrowser();
     }
     
     public function checkout() {
@@ -571,12 +558,26 @@ class StoreController extends AppController {
     }
 
     public function getPrice() {
-        $pricing = $this->app->request->get('post:pricing','array', array());
-        $pricing = $this->app->parameter->create($pricing);
-        $prices = $this->app->prices->get($pricing->get('group'), $pricing->get('markup'));
-        $result['price'] = $prices;
+        $post = $this->app->request->get('post:item','array', array());
+        $markup = $this->app->request->get('post:markup', 'float', null);
+        $post = $this->app->parameter->create($post);
+        $item = $this->app->item->create($post);
+        $price = $item->getPrice();
+        $result['price'] = $price->get('markup');
+        $result['markup'] = $price->getMarkupRate();
         $this->outputToJSON($result);
 
+    }
+
+    public function priceMarkupModal() {
+        $item = $this->app->request->get('post:item', 'array', array());
+        $_item = $this->app->item->create($item);
+        $price = $_item->getPrice();
+        $data = array(
+            'html' => $this->app->renderer->create()->addPath(array($this->app->path->path('store.lib:/price')))->render('modal.markup_select', compact('price')),
+            'markup' => $price->getMarkupRate()
+        );
+        $this->outputToJSON($data);
     }
 
     public function outputToJSON($output = null) {

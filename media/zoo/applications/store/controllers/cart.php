@@ -16,7 +16,7 @@ class CartController extends AppController {
     public function __construct($default = array()) {
         parent::__construct($default);
 
-        $this->cart = $this->app->cart->create();
+        $this->cart = $this->app->cart;
 
         // get application
         $this->application = $this->app->zoo->getApplication();
@@ -36,7 +36,7 @@ class CartController extends AppController {
         // registers tasks
         $this->registerTask('init', 'output');
 
-        $this->account = $this->app->customer->getAccount();
+        $this->account = $this->app->customer->getParent();
     }
     
     /*
@@ -49,7 +49,9 @@ class CartController extends AppController {
     public function add() {
 
         $items = $this->app->request->get('cartitems','array');
+
         $this->cart->add($items);
+        
         $this->output();
 
     }
@@ -74,9 +76,13 @@ class CartController extends AppController {
 
     public function output() {
         $this->app->document->setMimeEncoding('application/json');
+        $items = $this->cart->getAllItems();
+        foreach($items as $key => $item) {
+            $items[$key] = $item->toSession();
+        }
         $result = array(
             'result' => true,
-            'items' => $this->cart->getAllItems(),
+            'items' => $items,
             'item_count' => $this->cart->getItemCount(),
             'total' => $this->cart->getCartTotal()
         );

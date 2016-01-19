@@ -19,8 +19,8 @@ class PricesHelper extends AppHelper {
     public function __construct($app) {
         parent::__construct($app);
         include $this->app->path->path('prices:prices.php');
-        $this->items = $this->app->parameter->create($item);
-        $this->shipping = $this->app->parameter->create($shipping);
+        $this->items = $this->app->parameter->create($price);
+        $this->shipping = $this->app->parameter->create();
         $this->account = $this->app->customer->getAccount();
     }
 

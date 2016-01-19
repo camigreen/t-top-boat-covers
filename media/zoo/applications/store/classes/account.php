@@ -45,6 +45,7 @@ class Account {
 
     public function __construct() {
 
+
     }
 
     /**
@@ -55,6 +56,14 @@ class Account {
      * @since 1.0
      */
     public function bind($data = array()) {
+
+        if(isset($data['core'])) {
+            foreach($data['core'] as $key => $value) {
+                if(property_exists($this, $key)) {
+                    $this->$key = $value;
+                }  
+            }
+        }
 
         if(isset($data['elements'])) {
             $elements = $this->app->parameter->create();
@@ -85,9 +94,11 @@ class Account {
         }
 
         // Bind the related accounts.
-        if(isset($data['related'])) {
+        if($this->app->customer->isAccountAdmin()) {
+            $related = isset($data['related']) ? $data['related'] : array();
             $this->_bindMappedAccounts($data['related']);
         }
+        
         
 
         return $this;
@@ -97,7 +108,7 @@ class Account {
 
         // Init vars
         $now = $this->app->date->create();
-        $cUser = $this->app->user->get()->id;
+        $cUser = $this->app->customer->get()->id;
         $tzoffset = $this->app->date->getOffset();
         
         // Set Created Date
@@ -106,6 +117,8 @@ class Account {
         } catch (Exception $e) {
             $this->created = $now->toSQL();
         }
+
+        $this->created_by = $this->created_by ? $this->created_by : $cUser;
 
         // Set Modified Date
         $this->modified = $now->toSQL();
@@ -119,6 +132,13 @@ class Account {
         return $this;
     }
 
+    public function delete() {
+        $this->setState(3, true);
+        //$this->_removeRelatedAccounts();
+
+        return $this;
+    }
+
     /**
      * Get the account type
      *
@@ -128,6 +148,18 @@ class Account {
      */
     public function getType() {
         return JText::_('ACCOUNT_TYPE_'.$this->type);
+    }
+
+    /**
+     * Get the account type
+     *
+     * @return string       The account type.
+     *
+     * @since 1.0
+     */
+    public function getAssetName() {
+        $application = $this->app->zoo->getApplication();
+        return 'com_zoo.application.'.$application->id.'.account';
     }
 
     /**
@@ -208,7 +240,7 @@ class Account {
         return $this;
     }
 
-        /**
+     /**
      * Get the state account object
      *
      * @return string  The human readable value of the account state.
@@ -326,7 +358,7 @@ class Account {
      */
     public function getParents() {
 
-        return $this->_loadMappedAccounts()->_mappedAccounts->get('parents.');
+        return $this->_loadMappedAccounts()->_mappedAccounts->get('parents.', array());
 
     }
 
@@ -387,25 +419,53 @@ class Account {
         $this->_mappedAccounts->remove('children.');
         if(isset($data['children'])) {
             foreach($data['children'] as $child) {
-                $account = $this->app->account->get($child);
-                $accounts[$account->id] = $account;
+                if($child) {
+                    $account = $this->app->account->get($child);
+                    $accounts[$account->id] = $account;
+                }
             }
-            $this->_mappedAccounts->set('children.', $accounts); 
+            if(!empty($accounts)) {
+                $this->_mappedAccounts->set('children.', $accounts);
+            }
         }
         // Deal with the parent accounts.
         $accounts = array();
         $this->_mappedAccounts->remove('parents.');
         if(isset($data['parents'])) {
             foreach($data['parents'] as $parent) {
-                $account = $this->app->account->get($parent);
-                $accounts[$account->id] = $account;
+                if($parent) {
+                    $account = $this->app->account->get($parent);
+                    $accounts[$account->id] = $account;
+                }
+            }
+            if(!empty($accounts)) {
+                $this->_mappedAccounts->set('parents.', $accounts);
             } 
-            $this->_mappedAccounts->set('parents.', $accounts);
         }
+        return $this;
+    }
 
+    /**
+     * Map all related accounts to the database
+     *
+     * @return object $this Account object for chaining.
+     *
+     * @since 1.0
+     */
+    protected function _removeRelatedAccounts() {
+
+        // Load all parent and child accounts into the cache.
+        $this->_loadMappedAccounts();
+
+        // Remove all mappings where this account is the child from the database.
+        $query = 'DELETE FROM #__zoo_account_map WHERE child = '.$this->id;
+        $this->app->database->query($query);
+
+        // Remove all mappings where this account is the parent from the database.
+        $query = 'DELETE FROM #__zoo_account_map WHERE parent = '.$this->id;
+        $this->app->database->query($query);
 
         return $this;
-
     }
 
     /**
@@ -420,13 +480,8 @@ class Account {
         // Load all parent and child accounts into the cache.
         $this->_loadMappedAccounts();
 
-        // Remove all mappings where this account is the child from the database.
-        $query = 'DELETE FROM #__zoo_account_map WHERE child = '.$this->id;
-        $this->app->database->query($query);
-
-        // Remove all mappings where this account is the parent from the database.
-        $query = 'DELETE FROM #__zoo_account_map WHERE parent = '.$this->id;
-        $this->app->database->query($query);
+        // Remove all mappings from the database.
+        $this->_removeRelatedAccounts();
 
         // Map all of the parent accounts to the database.
         foreach($this->_mappedAccounts->get('parents.', array()) as $parent) {
@@ -447,6 +502,11 @@ class Account {
         return (bool) !$this->elements->get('tax_exempt', true);
     }
 
+    public function isReseller() {
+        $resellers = array('dealership');
+        return in_array($this->type, $resellers);
+    }
+
     public function getConfigForm() {
         $template = $this->app->zoo->getApplication()->getTemplate();
         $type = $this->type;
@@ -458,6 +518,21 @@ class Account {
     public function getNotificationEmails() {
         $email = $this->elements->get('poc.order_notification') ? array($this->elements->get('poc.email')) : array();
         return $email;
+    }
+
+    /**
+     * Evaluates user permission
+     *
+     * @param int $asset_id
+     * @param int $created_by
+     *
+     * @return boolean True if user has permission
+     *
+     * @since 3.2
+     */
+    public function canEdit() {
+
+        return $this->app->customer->canEdit($this->getAssetName(), $this->created_by);
     }
 
 }

@@ -13,25 +13,20 @@
  */
 class CartHelper extends AppHelper {
     
-    protected $_items;
-    
+    protected $_items = array();
+
     public function __construct($app) {
         parent::__construct($app);
-        $this->_items = array();
-        //$this->app->loader->register('CartItem','classes:cartitem.php');
 
-    }
-
-    public function create() {
-
-        $this->_items = array();
-
-        $items = $this->app->parameter->create($this->app->session->get('cart',array(),'checkout'));
-
-        $this->add($items);
-
-
-        return $this;
+        $items = $this->app->session->get('cart',array(),'checkout');
+        // var_dump($items);
+        foreach($items as $key => $value) {
+            if(is_string($value)) {
+                $value = $this->app->parameter->create($value);
+            }
+            $item = $this->app->item->create($value, $value['type']);
+            $this->_items[$item->sku] = $item;
+        }
 
     }
 
@@ -44,14 +39,15 @@ class CartHelper extends AppHelper {
     }
 
     public function add($items) {
-
-    	foreach($items as $key => $item) {
-    		$_item = new CartItem($this->app, $item);
-            $sku = $_item->sku;
-            if (isset($this->_items[$sku])) {
-                $this->_items[$sku]->qty += $_item->qty;
+    	foreach($items as $key => $value) {
+            if(is_string($value)) {
+                $value = $this->app->parameter->create($value);
+            }
+            $item = $this->app->item->create($value, $value['type']);
+            if (isset($this->_items[$item->sku])) {
+                $this->_items[$item->sku]->qty += $item->qty;
             } else {
-                $this->_items[$sku] = $_item;
+                $this->_items[$item->sku] = $item;
             }
     	}
         return $this->updateSession();
@@ -89,7 +85,7 @@ class CartHelper extends AppHelper {
 
     public function emptyCart() {
         $this->_items = array();
-        return $this->updateSession();
+        $this->updateSession();
     }
 
     public function updateQuantity($sku, $qty) {
@@ -104,8 +100,16 @@ class CartHelper extends AppHelper {
     }
 
     public function updateSession() {
-        $data = $this->app->data->create($this->_items);
-        $this->app->session->set('cart',(string) $data,'checkout');
+        if(empty($this->_items)) {
+            $this->app->session->clear('cart', 'checkout');
+        } else {
+            $items = array();
+            foreach($this->_items as $key => $item) {
+                $items[$key] = (string) $item->toSession();
+            }
+            $this->app->session->set('cart',$items,'checkout');
+        }
+
         return $this;
     }
     

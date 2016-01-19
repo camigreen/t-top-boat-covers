@@ -3,15 +3,56 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $user = $zoo->customer->getUser();
 $testMode = $zoo->merchant->testMode();
 ?>
-
-
-<div id="cart-module" class="uk-vertical-align" data-cart="open">
-    <div class="uk-vertical-align-middle">
-        <span class="icon"></span>
-        <span class="currency">$</span>
-        <span data-cart="total">0.00</span>
-        <span class="items">(<span data-cart="quantity">0</span> Items)</span>
-        <div><?php if($user && $user->canCreate()) echo 'Salesman: '.$user->name; ?><?php echo $testMode ? ' - Test Mode -' : '' ?></div>
+<div class="uk-grid cart-module"> 
+    <div class="uk-width-1-2 uk-vertical-align account-menu uk-text-center">
+        <?php if($zoo->user->canAccess($user, 2)) :?>
+        <ul class="uk-subnav uk-subnav-line uk-vertical-align-middle">
+            <li data-uk-dropdown="{mode:'click'}">
+                <a href="#">My Account<i class="uk-icon-caret-down uk-margin-left"></i></a>
+                <div class="uk-dropdown uk-dropdown-small uk-dropdown-bottom uk-text-left" style="top: 26px; left: 0px;">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li class="uk-nav-header uk-text-medium"><?php echo $user->name; ?></li>
+                        <li><a href="/my-profile">My Profile</a></li>
+                        <?php if($zoo->customer->isAccountAdmin()) : ?>
+                            <?php 
+                                $parent = $zoo->customer->getParent(); 
+                            ?>
+                            <li><a href="/parent-account"><?php echo $parent->name; ?> Account</a></li>
+                            <li><a href="/all-users?p=<?php echo $parent->id; ?>"><?php echo $parent->name; ?> Users</a></li>
+                            <li><a href="?option=com_zoo&controller=account&task=edit&type=<?php echo 'user.'.$parent->type; ?>&p=<?php echo $parent->id ?>">Add User</a></li>
+                        <?php endif; ?>
+                        <li>
+                            <a href="#" class="logout_btn"><?php echo JText::_('JLOGOUT'); ?></a>
+                            <form id="logout_form" action="<?php echo JRoute::_('index.php?option=com_users&task=user.logout'); ?>" method="post" class="form-horizontal well">
+                                <input type="hidden" name="return" value="<?php echo base64_encode('/'); ?>" />
+                                <?php echo JHtml::_('form.token'); ?>
+                            </form>
+                            <script>
+                                jQuery(function($){
+                                    $(document).ready(function(){
+                                        $('a.logout_btn').on('click', function(e) {
+                                            e.preventDefault();
+                                            $('form#logout_form').submit();
+                                        })
+                                    })
+                                })
+                            </script>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <?php endif; ?>
+    </div>
+    <div class="uk-width-1-2">
+        <div id="cart-module" class="uk-vertical-align" data-cart="open">
+            <div class="uk-vertical-align-middle">
+                <span class="icon"></span>
+                <span class="currency">$</span>
+                <span data-cart="total">0.00</span>
+                <span class="items">(<span data-cart="quantity">0</span> Items)</span>
+            </div>
+        </div>
     </div>
 </div>
 <div id="cart-modal" class="uk-modal">

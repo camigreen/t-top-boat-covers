@@ -109,7 +109,7 @@
                                     var self = this;
                                     $.ajax({
                                         type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=cart&job=init&format=json",
+                                        url: "?option=com_zoo&controller=cart&task=init&format=json",
                                         data: {},
                                         success: function(data){
                                             console.log(data);
@@ -183,7 +183,7 @@
                                         
                                 },
                                 _createCartRow: function (key,data) {
-                                    var price = data.qty*data.price;
+                                    var price = data.total;
                                     var row = $('<tr id="'+key+'" />').append('<td><div class="item-name">'+data.name+'</div></td>')
                                         .append('<td class="item-qty"><input type="number" name="item-qty" class="uk-width-1-3" value="'+data.qty+'" /><a class="item-update uk-link-muted uk-text-small uk-margin-left" href="#">update</a></td>')
                                         .append('<td class="item-price">'+this.settings.currency+price.toFixed(2)+'<a href="#" class="item-remove"><i class="uk-icon-trash-o"></i></a></td>')
@@ -237,7 +237,7 @@
                                         var self = this;
                                     $.ajax({
                                         type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=cart&job=emptyCart&format=json",
+                                        url: "?option=com_zoo&controller=cart&task=emptyCart&format=json",
                                         data: {},
                                         success: function(data){
                                             console.log(data);
@@ -269,7 +269,7 @@
                                     }
                                     $.ajax({
                                         type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=cart&job=updateQty&format=json",
+                                        url: "?option=com_zoo&controller=cart&task=updateQty&format=json",
                                         data: {sku: sku, qty: qty},
                                         success: function(data){
                                             console.log(data);
@@ -298,7 +298,7 @@
                                     console.log(sku);
                                     $.ajax({
                                         type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=cart&job=remove&format=json",
+                                        url: "?option=com_zoo&controller=cart&task=remove&format=json",
                                         data: {sku: sku},
                                         success: function(data){
                                             console.log(data);
@@ -318,7 +318,7 @@
                                     var self = this;
                                     $.ajax({
                                         type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=cart&job=add&format=json",
+                                        url: "?option=com_zoo&controller=cart&task=add&format=json",
                                         data: {cartitems: items},
                                         success: function(data){
                                             console.log(data);

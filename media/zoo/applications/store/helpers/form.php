@@ -140,7 +140,15 @@ class AppForm {
 	 * @since 2.0
 	 */
 	public function setValues($values) {
-		$this->_values = (array) $values;
+		if(empty($this->_values)) {
+			$this->_values = (array) $values;
+		} else {
+			foreach((array)$values as $key => $value) {
+				$this->_values[$key] = $value;
+			}
+		}
+
+		
 		return $this;
 	}
 
@@ -258,6 +266,7 @@ class AppForm {
 				}
 			}
 			if (isset($element->fieldset)) {
+				$this->setValue('class', (string) $element->attributes()->class);
 				foreach ($element->fieldset as $fieldset) {
 							$this->setXML($fieldset);
 					
@@ -359,17 +368,32 @@ class AppForm {
 		$groups = is_array($group) ? $group : (array) $group;
 		foreach($groups as $group) {
 
+			
 			if (!isset($this->_xml[$group])) {
 				return false;
 			}
+			$html[] = '';
 			
+			
+			$adminOnly = (bool) $this->_xml[$group]->attributes()->admin;
+			if($adminOnly && (!$this->app->customer->isStoreAdmin())) {
+				continue;
+			}
+
+			$html[] = '<fieldset id="'.$group.'">';
+			if((string)$this->_xml[$group]->attributes()->label) {
+				$html[] = '<legend>'.JText::_((string)$this->_xml[$group]->attributes()->label).'</legend>';
+			}
 			$html[] = '<ul class="uk-grid parameter-form">';
 
 			$group_control_name = $this->_xml[$group]->attributes()->controlname ? $this->_xml[$group]->attributes()->controlname : $control_name;
 
 			// add params
 			foreach ($this->_xml[$group]->field as $field) {
-
+				$adminOnly = (bool) $field->attributes()->admin;
+				if($adminOnly && (!$this->app->customer->isStoreAdmin())) {
+					continue;
+				}
 				// init vars
 				$type = (string) $field->attributes()->type;
 				$name = (string) $field->attributes()->name;
@@ -380,9 +404,9 @@ class AppForm {
 				$value = $this->getValue($name, $default);
 				$class = 'uk-width-1-1' . ($required ? ' required' : '');
 				$control_name = $field->attributes()->controlname ? $field->attributes()->controlname : $group_control_name;
-
+				
 				$_field = '<div class="field">'.$this->app->field->render($type, $name, $value, $field, array('control_name' => $control_name, 'parent' => $this, 'class' => $class)).'</div>';
-
+				
 				if ($type != 'hidden') {
 					$html[] = '<li id="'.$group.'-'.$name.'" class="parameter uk-width-'.$width.'">';
 
@@ -393,7 +417,7 @@ class AppForm {
 							$attributes['class'] = 'hasTip';
 							$attributes['title'] = JText::_($field->attributes()->label).'::'.JText::_($field->attributes()->description);
 						}
-						$output = sprintf('<label %s>%s</label>', $this->app->field->attributes($attributes), JText::_($field->attributes()->label));
+						$output = sprintf('<label %s>%s</label>', JText::_($this->app->field->attributes($attributes)), JText::_($field->attributes()->label));
 					}
 
 					$html[] = "<div class=\"label\">$output</div>";

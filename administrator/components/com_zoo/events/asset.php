@@ -44,9 +44,12 @@ class AssetEvent {
                 $childName = strtolower(preg_replace('#[\s\-]+#', '.', trim($name . '.' . $assetName)));
                 $asset = JTable::getInstance('Asset');
                 $asset->loadByName($childName);
+                echo $childName;
                 self::saveAsset($asset, $childName, $parentId, $title . ' (' . ucfirst($assetName) . ')', $rules);
             }
         }
+        // echo 'Test';
+        // die();
     }
 
     /**
@@ -80,9 +83,7 @@ class AssetEvent {
         $asset->parent_id = $parentId;
         $asset->name      = $name;
         $asset->title     = $title;
-
         $error = $asset->getError();
-
         if ($error) {
             return false;
         } else {
@@ -100,6 +101,7 @@ class AssetEvent {
             }
             $asset->rules = json_encode($temp);
             if (!$asset->check() || !$asset->store()) {
+                die();
                 return false;
             } else {
                 return $asset->id;

@@ -6,10 +6,15 @@
 		<div class="uk-article-title uk-text-center">
 			<?php echo $this->title; ?>
 		</div>
+		<div class="uk-article-lead uk-text-center">
+			<?php echo '('.$this->app->customer->getParent()->name.')'; ?>
+		</div>
 	</div>
 	<form id="account_form" method="post" action="<?php echo $this->baseurl; ?>">
 		<div class="uk-width-1-1 uk-margin-bottom">	
-			<button id="add_new" class="uk-button uk-button-success"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
+			<?php if($this->app->customer->canCreate($this->application->getAssetName().'.account') || $this->app->customer->isAccountAdmin()) : ?>
+				<button id="add_new" class="uk-button uk-button-success" data-task="add"><span class="uk-icon uk-icon-plus-circle"></span>New</button>
+			<?php endif; ?>
 		</div>
 
 		<div class="uk-width-1-1">
@@ -31,14 +36,18 @@
 					<?php foreach($this->accounts as $account) : ?>
 					<tr>
 						<td class="uk-text-center" >
-							<button id="<?php echo $account->id; ?>" data-task="edit" data-type="<?php echo $account->type; ?>" class="uk-button uk-button-mini" >Edit</button>
-							<button id="<?php echo $account->id; ?>" data-task="delete" data-type="<?php echo $account->type; ?>" class="uk-button uk-button-mini" >Delete</button>
+							<?php if($this->app->customer->canDelete($this->application->getAssetName().'.account') || $this->app->customer->isAccountAdmin()) : ?>
+								<button id="<?php echo $account->id; ?>" data-task="edit" data-type="<?php echo $account->type; ?>" class="uk-button uk-button-mini" >Edit</button>
+							<?php endif; ?>
+							<?php if($this->app->customer->canDelete($this->application->getAssetName().'.account') || $this->app->customer->isAccountAdmin()) : ?>
+								<button id="<?php echo $account->id; ?>" data-task="delete" data-type="<?php echo $account->type; ?>" class="uk-button uk-button-mini" >Delete</button>
+							<?php endif; ?>
 						</td>
 						<td><?php echo $account->id; ?></td>
 						<td><?php echo $account->name; ?></td>
 						<td><?php echo $account->elements->get('account_number'); ?></td>
 						<td><?php echo $account->getType(); ?></td>
-						<td><?php echo $account->getState(); ?></td>
+						<td><?php echo JText::_($this->app->status->get('account', $account->state)); ?></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>
@@ -53,18 +62,7 @@
 		jQuery(function($) {
 
 			$(document).ready(function(){
-				$('#add_new').on('click', function() {
-					var form = document.getElementById('account_form');
-					form.task.value = 'add';
-					var button = document.createElement('input');
-					button.style.display = 'none';
-					button.type = 'submit';
-
-					form.appendChild(button).click();
-
-					//form.removeChild(button);
-				})
-				$('table button').on('click', function(e) {
+				$('button').on('click', function(e) {
 					var button = $(e.target);
 					var form = $('#account_form');
 

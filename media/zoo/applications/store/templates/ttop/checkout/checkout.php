@@ -18,6 +18,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
     </div>
     <div id="variables" class="uk-width-1-1 uk-hidden">
         <?php var_dump($order); ?>
+        <?php var_dump($this->cart->getAllItems()); ?>
     </div>
 </div>
 <?php endif; ?>
@@ -68,10 +69,10 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
             <?php endif; ?>
         </div>
     </div>
-    <input type="text" name="task" value="save" />
+    <input type="hidden" name="task" value="<?php echo $this->task; ?>" />
     <input type="hidden" name="updated" value="false" />
     <input type="hidden" name="process" value="true" />
-    <input type="text" name="next" />
+    <input type="hidden" name="next" />
     <input type="hidden" name="orderID" />
     <input type="hidden" name="bypass" value="0" />
 </form>
@@ -82,7 +83,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
             <div class="uk-width-1-1 uk-text-center uk-vertical-align-middle ttop-checkout-processing-modal-content">
                 <span><i class="uk-icon-spinner uk-icon-spin"></i>Processing</span>
                 <div class="uk-text small uk-text-center">Please be patient...</div>
-                <div class="uk-text-small uk-text-center">Processing your credit card may take up to a minute,</div>
+                <div class="uk-text-small uk-text-center">Processing your payment may take up to a minute,</div>
                 <div class="uk-text-small uk-text-center">please do not hit the back button.</div>
             </div>
         </div>
@@ -122,6 +123,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
 
 <script>
     jQuery(function($) {
+        var pModal;
         function sendTransactionToGoogle(data) {
             var trans = [
                 '_addTrans',
@@ -167,13 +169,20 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 
             });
         }
-        function ProcessingModal (state) {
-            var modal = UIkit.modal("#processing-modal",{center:true,bgclose: false});
+        function ProcessingModal (state, payment) {
+            var content = '<div class="uk-text-center uk-h2"><i class="uk-icon-spinner uk-icon-spin uk-margin-right"></i>Processing</div>';
+            if(payment) {
+                content = content + '<div class="uk-text small uk-text-center">Please be patient...</div> \
+                    <div class="uk-text-small uk-text-center">Processing your payment may take up to a minute,</div> \
+                    <div class="uk-text-small uk-text-center">please do not hit the back button.</div>'
+            }
+            if($.type(pModal) === 'undefined') {
+                pModal = UIkit.modal.blockUI(content);
+            }
                 
             if (state === 'hide') {
-                modal.hide();
-            } else {
-                modal.show();
+                pModal.hide();
+                pModal = null;
             }
         }
         function thankYouModal (state) {
@@ -223,10 +232,10 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 });
         }
         function processPayment() {
-                ProcessingModal('show');
+                ProcessingModal('show', true);
                 return $.ajax({
                     type: 'POST',
-                    url: "?option=com_zoo&controller=store&task=processPayment&format=json",
+                    url: "?option=com_zoo&controller=checkout&task=processPayment&format=json",
                     data: $('form#ttop-checkout').serialize(),
                     dataType: 'json'
                 }).promise();
@@ -261,6 +270,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                             $('#back.ttop-checkout-step-button').unbind("click").on("click",function(e){
                                 e.preventDefault();
                                 $('[name="process"]').val(false);
+                                $('input[name="task"]').val($(e.target).data('next'));
                                 $('input[name="next"]').val($(e.target).data('next'));
                                 self.$element.find('input, select').addClass('ignore');
                                 $(this).closest('form').submit();
@@ -343,7 +353,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                     beforeSubmit: [
                         function (e) {
                             var dfd = $.Deferred();
-                            if ($(e.target).data('task') === 'processPayment') {
+                            if ($(e.target).data('next') === 'processPayment') {
                                 if (!$('[name="TC_Agree"]').prop('checked')) {
                                     alert('Please read and agree to the terms and conditions.');
                                     return false;
@@ -351,7 +361,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                 $.when(processPayment()).done(function(data){   
                                     if (data.approved) {
 //                                        sendTransactionToGoogle(data);
-                                        $('input[name="step"]').val('receipt');
+                                        $('input[name="task"]').val('receipt');
                                         $('input[name="orderID"]').val(data.orderID);
                                         ProcessingModal('hide');
                                         thankYouModal('show');
@@ -359,9 +369,9 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                             dfd.resolve(true);
                                         },5000);
                                     } else {
-                                        $( ".ttop-checkout-validation-errors" ).html( data.response.response_reason_text );
+                                        $( ".ttop-checkout-validation-errors" ).html( data.message );
                                         ProcessingModal('hide');
-                                        alert(data.response.response_reason_text);
+                                        alert(data.message);
                                         dfd.resolve(false);
                                     }
                                 });

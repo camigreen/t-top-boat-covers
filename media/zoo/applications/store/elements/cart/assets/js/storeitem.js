@@ -78,14 +78,17 @@
         subitem: false,
         fields: null,
         init: function () {
-            this.item = this.$element.data('item');
+            this.item.name = $('[name="item-name"]').val();
+            this.item.id = $('[name="item-id"]').val();
+            this.item.type = $('[name="item-type"]').val();
             this.subitem = this.$element.hasClass('sub-item');
             this.$element.find('#price').remove();
             this.$retail = this.$element.find('#retail-price');
             this.$dealer = this.$element.find('#dealer-price');
             this.$atc = $('#atc-' + this.item.id);
             this.$qty = $('#qty-' + this.item.id);
-            
+            this.item.price_group = $('[name="price_group"]').val();
+            this.item.markup = $('[name="markup"]').val();
             this._getFields();
             this._getOptions();
             this._createConfirmModal();
@@ -258,13 +261,15 @@
             var items = [{
                 id: this.item.id,
                 name: this.item.name,
-                pricing: this._getPricing(),
+                type: this.item.type,
+                //pricing: this._getPricing(),
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
                 qty: this.qty,
                 shipping: this.shipping,
                 attributes: this._getAttributes(),
                 options: this._getOptions()
             }];
-
             
 //            Add item to the Cart.    
             items = this.trigger('beforeAddToCart', items);
@@ -277,6 +282,19 @@
             }
             $('body').ShoppingCart('addToCart', items);
             this.trigger('afterAddToCart');
+        },
+        getItem: function() {
+            var item = {
+                id: this.item.id,
+                name: this.item.name,
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
+                qty: this.qty,
+                shipping: this.shipping,
+                attributes: this._getAttributes(),
+                options: this._getOptions()
+            };
+            return item;
         },
         _confirm: function() {
             var modal = this.confirm.elem;
@@ -325,14 +343,23 @@
             return pricing;
         },
         _publishPrice: function () {
+            var item = {
+                id: this.item.id,
+                name: this.item.name,
+                price_group: this.item.price_group,
+                markup: $('[name="markup"]').val(),
+                qty: this.qty,
+                shipping: this.shipping,
+                attributes: this._getAttributes(),
+                options: this._getOptions()
+            };
             this._debug('Publishing Price');
             var self = this;
-            var pricing = this._getPricing();
-            console.log(pricing);
+            //var pricing = this._getPricing();
             $.ajax({
                 type: 'POST',
                 url: "?option=com_zoo&controller=store&task=getPrice&format=json",
-                data: {pricing: pricing},
+                data: {item: item},
                 success: function(data){
                     var elem = $('#'+self.item.id+'-price span');
                     price = self.trigger('onPublishPrice', data.price);
@@ -370,11 +397,10 @@
             $.each(this.fields, function(k, v){
                 var elem = $(this);
                 itemOptions[elem.prop('name')] = {
-                    field: elem.prop('name'),
                     name: elem.data('name'),
                     value: elem.val(),
                     text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
-                };
+                }
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);
@@ -390,8 +416,8 @@
                 itemAttributes[elem.prop('name')] = {
                     name: elem.data('name'),
                     value: elem.val(),
-                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.val())
-                };
+                    text: (elem.find('option:selected, input').text() ? elem.find('option:selected, input').text() : elem.data('text'))
+                }
             });
 //            this._debug('Options Collected.');
 //            this._debug(itemOptions);
@@ -406,11 +432,7 @@
         _refresh: function (e) {
             this._updateQuantity();
             var self = this;
-            $.each(this.settings.pricePoints.options, function(k,v) {
-                if($(e.target).prop("name") == v) {
-                    self._publishPrice();
-                }
-            });
+            self._publishPrice();
             
             if (this.validation.status === 'failed') {
                 this._validate();

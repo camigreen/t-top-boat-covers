@@ -33,8 +33,10 @@ class StoreApplication extends Application {
         $zoo->path->register($path.'/classes/data', 'data');
         $zoo->path->register($path.'/events', 'events');
         $zoo->path->register($path.'/fields', 'fields');
+        $zoo->path->register($path.'/libraries', 'store.lib');
+        $zoo->path->register($path.'/logs', 'logs');
         include_once $path.'/vendor/autoload.php';
-        
+
 //        Load Classes
         $zoo->loader->register('ElementStore','elements:element/element.php');
         $zoo->loader->register('ElementStore','elements:elementstore/elementstore.php');
@@ -48,13 +50,15 @@ class StoreApplication extends Application {
         $zoo->event->register('UserProfileEvent');
         $zoo->event->dispatcher->connect('userprofile:init', array('UserProfileEvent', 'init'));
         $zoo->event->dispatcher->connect('userprofile:saved', array('UserProfileEvent', 'saved'));
-        
+        $zoo->event->register('StoreItemEvent');
+        $zoo->event->dispatcher->connect('storeitem:init', array('StoreItemEvent', 'init'));
 //        Add CSS
         $zoo->document->addStyleSheet('assets:css/ttop.css');
 
         
 //        Add Scripts
         $zoo->document->addScript('elements:cart/assets/js/storeitem.js');
+
         
     }
 

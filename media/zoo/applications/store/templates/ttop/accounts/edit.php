@@ -15,9 +15,11 @@
 	    	<div class="uk-width-1-6">
 	    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save">Save and Close</button>
 	    	</div>
-	    	<div class="uk-width-1-6">
-	    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save2new">Save and New</button>
-	    	</div>
+	    	<?php if($this->app->customer->canCreate()) : ?>
+		    	<div class="uk-width-1-6">
+		    		<button class="uk-width-1-1 uk-button uk-button-primary uk-margin-small-bottom task-button" data-task="save2new">Save and New</button>
+		    	</div>
+	    	<?php endif; ?>
 	    	<div class="uk-width-1-6">
 	    		<button class="uk-width-1-1 uk-button uk-button-default uk-margin-small-bottom task-button" data-task="cancel">Cancel</button>
 	    	</div>
@@ -29,11 +31,11 @@
 				<div>Created:</div>
 				<div class="uk-text-muted"><?php echo $this->account->created == null ? JText::_('Not created') : $this->app->html->_('date', $this->account->created, JText::_('DATE_FORMAT_LC2'), $this->app->date->getOffset()); ?></div>
 				<div>Created By:</div>
-				<div class="uk-text-muted"><?php echo $this->account->created_by ? $this->app->user->get($this->account->created_by)->name : null; ?></div>
+				<div class="uk-text-muted"><?php echo $this->account->created_by ? $this->app->account->get($this->account->created_by)->name : null; ?></div>
 				<div>Modified:</div>
 				<div class="uk-text-muted"><?php echo $this->account->modified == null ? JText::_('Not modified') : $this->app->html->_('date', $this->account->modified, JText::_('DATE_FORMAT_LC2'), $this->app->date->getOffset()); ?></div>
 				<div>Modified By:</div>
-				<div class="uk-text-muted"><?php echo $this->account->modified_by ? $this->app->user->get($this->account->modified_by)->name: null; ?></div>
+				<div class="uk-text-muted"><?php echo $this->account->modified_by ? $this->app->account->get($this->account->modified_by)->name: null; ?></div>
 
 			</div>
 		</div>
@@ -41,7 +43,7 @@
 	<div class="uk-width-8-10">
 		<div class="uk-width-1-1">
 			<form id="account_admin_form" class="uk-form" method="post" action="<?php echo $this->baseurl; ?>">
-				<?php echo $this->partial($this->type, array('id' => $this->account->id)); ?>
+				<?php echo $this->partial($this->partialLayout, array('id' => $this->account->id)); ?>
 				<input type="hidden" name="task" />
 				<input type="hidden" name="aid" value="<?php echo $this->account->id; ?>" />
 				<input type="hidden" name="type" value="<?php echo $this->account->type; ?>" />

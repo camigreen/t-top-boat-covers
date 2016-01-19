@@ -4,6 +4,7 @@ class FormPDF extends GridPDF {
 	public $form;
 	public $app;
 	public $_pages;
+	public $resource = 'default';
 	public $type;
 	public $table_x = 0;
 
@@ -62,7 +63,7 @@ class FormPDF extends GridPDF {
 	}
 
 	public function setData($order) {
-		$path = $this->app->path->path('classes:fpdf/scripts/'.$this->type.'.xml');
+		$path = $this->app->path->path('classes:fpdf/scripts/'.$this->resource.'/'.$this->type.'.xml');
 	    $this->form = $this->xml2obj(simplexml_load_file($path));
 	    $fields = $this->getFields();
 	    $data = array();

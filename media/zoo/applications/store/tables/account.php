@@ -140,6 +140,11 @@ class AccountTable extends AppTable {
 		$query = 'SELECT b.parent, a.* FROM #__zoo_account a LEFT JOIN (SELECT * FROM #__zoo_account_map) b ON a.id = b.child WHERE b.parent IS NULL AND a.type = "'.$type.'"';
         return $this->_queryObjectList($query);
 	}
+
+	public function getAccountsByType($type) {
+		$query = 'SELECT * FROM #__zoo_account WHERE type = "'.$type.'"';
+        return $this->_queryObjectList($query);
+	}
 }
 
 /*

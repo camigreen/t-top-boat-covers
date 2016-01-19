@@ -91,14 +91,18 @@ class ShipperHelper extends AppHelper {
         }
         if(UPS::isValidAddress($destination)) {
             
-        } 
+        }
+        //var_dump($destination); 
         $destination = UPS::getCorrectedAddress($destination);
-
+        
+        
         $this->destination = new \SimpleUPS\InstructionalAddress($destination);
         
         $this->destination->setAddressee($address->get('name'));
         $this->destination->setAddressLine2($address->get('street2', null));
         $this->destination->setAddressLine3($address->get('street3', null));
+        //var_dump($this->destination);
+        //die();
         return $this;
     }
 
@@ -138,22 +142,22 @@ class ShipperHelper extends AppHelper {
     }
 
     public function assemblePackages ($items) {
-
+        $this->packages = array();
         $newpackage = $this->app->parameter->create();
         $count = 1;
         foreach($items as $item) {
-            $shipping = $this->app->prices->getShipping('t-top-boat-cover.24');
+            $shipWeight = $item->getPrice()->getShippingWeight();
             $qty = $item->qty;
             while($qty >= 1) {
-                if(($newpackage->get('weight', 0) + $shipping) > $this->packageWeightMax) {
+                if(($newpackage->get('weight', 0) + $shipWeight) > $this->packageWeightMax) {
                     $package = new \SimpleUPS\Rates\Package();
                     $package->setWeight($newpackage->get('weight'))->setDeclaredValue($newpackage->get('insurance'), 'USD');
                     $this->packages[] = $package;
                     $newpackage = $this->app->parameter->create();
                     $count = 1;
                 }
-                $newpackage->set('weight', $newpackage->get('weight', 0) + $shipping);
-                $newpackage->set('insurance', $newpackage->get('insurance', 0.00) + $item->getPrice()*$this->packageInsuredValuePercentage);
+                $newpackage->set('weight', $newpackage->get('weight', 0) + $shipWeight);
+                $newpackage->set('insurance', $newpackage->get('insurance', 0.00) + $item->getPrice()->retail*$this->packageInsuredValuePercentage);
                 $count++;
                 $qty--;
             }
