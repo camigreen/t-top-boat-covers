@@ -27,8 +27,7 @@ class MerchantHelper extends AppHelper {
         
     }
 
-    
-    public function anet() {
+    protected function loadCreds() {
         if($this->testMode) {
             define("AUTHORIZENET_API_LOGIN_ID", $this->params->get('sandbox_api_login_id'));
             define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('sandbox_api_transaction_key'));
@@ -38,9 +37,25 @@ class MerchantHelper extends AppHelper {
             define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('api_transaction_key'));
             define("AUTHORIZENET_SANDBOX", false);
         }
+    }
 
+    
+    public function anet() {
+        $this->loadCreds();
         $this->merchant['anet'] = new \AuthorizeNetAIM;
 
+    }
+
+    public function createProfile($profile) {
+        $this->loadCreds();
+        $request = new AuthorizeNetCIM;
+        return $request->createCustomerProfile($profile);
+    }
+
+    public function getProfile($id) {
+        $this->loadCreds();
+        $request = new AuthorizeNetCIM;
+        return $request->getCustomerProfile($id);
     }
 
     public function testMode() {

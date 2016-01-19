@@ -57,6 +57,24 @@ class AccountController extends AppController {
         
     }
 
+    public function testCC() {
+        // $customerProfile = new AuthorizeNetCustomer;
+        // $customerProfile->description = "Gibbons Marine";
+        // $customerProfile->merchantCustomerId = 8;
+        // $customerProfile->email = "sgibbons@palmettoimages.com";
+
+        // $paymentProfile = new AuthorizeNetPaymentProfile;
+        // $paymentProfile->customerType = "business";
+        // $paymentProfile->payment->creditCard->cardNumber = "6011000000000012";
+        // $paymentProfile->payment->creditCard->expirationDate = "02-2016";
+        // $paymentProfile->payment->creditCard->cardCode = '554';
+        // $customerProfile->paymentProfiles[] = $paymentProfile;
+
+        $profile = $this->app->merchant->getProfile(39004222);
+        
+        var_dump($profile->xml);
+    }
+
     public function gateway() {
         if (!$this->app->customer->isAccountAdmin() && !$this->app->customer->isStoreAdmin()) {
             return $this->app->error->raiseError(500, JText::_('You are not authorized to view this page.<p><a href="/">Click Here</a> to return to the home page.</p>'));
