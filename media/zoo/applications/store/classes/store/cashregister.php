@@ -82,7 +82,7 @@ class CashRegister {
         }
         $order = $this->app->orderdev->get($oid);
         $email = $this->app->mail->create();
-        $formType = $order->getAccount()->getParentAccount()->isReseller() ? 'reseller' : 'default';
+        $formType = $order->getAccount()->isReseller() ? 'reseller' : 'default';
         $CR = $this;  
            if ($for == 'payment') {
                 $pdf = $this->app->pdf->create('workorder', $formType);
@@ -96,11 +96,13 @@ class CashRegister {
                 unlink($path);
             } 
             if($for == 'receipt') {
+                $recipients = $order->getAccount()->getNotificationEmails();
+                $recipients[] = $order->elements->get('email');
                 $filename = $this->app->pdf->create('receipt', $formType)->setData($order)->generate()->toFile();
                 $path = $this->app->path->path('assets:pdfs/'.$filename);
                 $email->setSubject("Thank you for your order.");
                 $email->setBodyFromTemplate($this->application->getTemplate()->resource.'mail.checkout.receipt.php');
-                $email->addRecipient($order->elements->get('email'));
+                $email->addRecipient($recipients);
                 $email->addAttachment($path,'Receipt-'.$this->order->id.'.pdf');
                 $email->Send();
                 unlink($path);

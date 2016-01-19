@@ -128,6 +128,7 @@ $price['sandbags.shipping.weight'] = 8;
 $price['sandbags.shipping.price'] = 7.5;
 
 $price['tie-down-set.item.base'] = 25;
+$price['tie-down-set.item.allowMarkup'] = false;
 $price['tie-down-set.shipping.weight'] = 2;
 $price['tie-down-set.shipping.price'] = 0;
 
