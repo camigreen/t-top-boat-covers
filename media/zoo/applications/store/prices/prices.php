@@ -76,6 +76,17 @@ $price['t-top-boat-cover.2022.shipping.price'] = 30;
 // $item['t-top-boat-cover.3234.8oz'] = 2350;
 // $item['t-top-boat-cover.3234.9oz'] = 2500;
 
+$item['t-top-boat-cover.33Freeman.7oz'] = 2800;
+$item['t-top-boat-cover.33Freeman.8oz'] = 3000;
+$item['t-top-boat-cover.33Freeman.9oz'] = 3150;
+
+$item['t-top-boat-cover.37Freeman.7oz'] = 3250;
+$item['t-top-boat-cover.37Freeman.8oz'] = 3450;
+$item['t-top-boat-cover.37Freeman.9oz'] = 3600;
+
+
+    // Shipping
+
 // $item['t-top-boat-cover.35.7oz'] = 2250;
 // $item['t-top-boat-cover.35.8oz'] = 2450;
 // $item['t-top-boat-cover.35.9oz'] = 2600;

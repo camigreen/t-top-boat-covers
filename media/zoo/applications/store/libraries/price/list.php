@@ -119,6 +119,20 @@ $price['ttopboatcover.38.item.option.fabric.9oz'] = 3350;
 $price['ttopboatcover.38.shipping.weight'] = 41;
 $price['ttopboatcover.38.shipping.price'] = 45;
 
+$price['ttopboatcover.33Freeman.item.base'] = 0;
+$price['ttopboatcover.33Freeman.item.option.fabric.7oz'] = 2800;
+$price['ttopboatcover.33Freeman.item.option.fabric.8oz'] = 3000;
+$price['ttopboatcover.33Freeman.item.option.fabric.9oz'] = 3150;
+$price['ttopboatcover.33Freeman.shipping.weight'] = 37;
+$price['ttopboatcover.33Freeman.shipping.price'] = 45;
+
+$price['ttopboatcover.37Freeman.item.base'] = 0;
+$price['ttopboatcover.37Freeman.item.option.fabric.7oz'] = 3250;
+$price['ttopboatcover.37Freeman.item.option.fabric.8oz'] = 3450;
+$price['ttopboatcover.37Freeman.item.option.fabric.9oz'] = 3600;
+$price['ttopboatcover.37Freeman.shipping.weight'] = 40;
+$price['ttopboatcover.37Freeman.shipping.price'] = 45;
+
 // //TTop Accessories
 
 $price['sandbags.item.base'] = 15;
