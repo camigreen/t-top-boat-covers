@@ -119,10 +119,8 @@ class AccountController extends AppController {
         if($this->app->customer->isStoreAdmin()) {
             $options['conditions'] = implode(' AND ', $conditions);
             $this->accounts = $this->app->table->account->all($options);
-            var_dump($this->accounts);
         } else {
             $parent = $this->app->customer->getParent();
-            var_dump($parent);
             $this->accounts = $this->app->account->getUsersByParent($parent, $conditions);
         }
         

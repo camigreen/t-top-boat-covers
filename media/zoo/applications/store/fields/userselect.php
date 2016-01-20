@@ -4,8 +4,10 @@
 
 	if($id = $parent->getValue('id')) {
 		$account = $this->app->account->get($id);
-		$available = $this->app->table->account->getUnassignedAccountsByType('user.dealership');
-		$selected = $account->getChildrenByType('user.dealership');
+		//var_dump($node->attributes);
+		$uType = (string) $node->attributes()->usertype;
+		$available = $this->app->table->account->getUnassignedAccountsByType($uType);
+		$selected = $account->getChildrenByType($uType);
 	}
 
 	$name = $control_name."[$name][]";

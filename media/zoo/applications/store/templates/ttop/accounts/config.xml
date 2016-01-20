@@ -4,13 +4,15 @@
 		<fieldset group="details" label="Details" controlname="core" >
 			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
 			<field name="state" type="statuslist" width="2-10" default="" label="Account Status" value="account" description="The current status for the user." />
-			<field name="users" type="userselect" width="1-2" default="" label="Account Users" description="The current status for the user." />
 		</fieldset>
 		<fieldset group="elements" label="Account Elements" controlname="elements">
 			<field name="sales_manager_commission" type="store.option" optionset="smcommission" width="1-2" default="0" label="Sales Manager Commission" description="The additional commission given to sales managers." />
 		</fieldset>	
 		<fieldset group="settings" label="Account Settings" controlname="params">
 			<field name="notify_emails" type="textarea" rows="5" cols="40" width="1-2" default="" label="New Order Notification Emails" description="An email will be sent to the listed emails. Enter a new line between each email." />
+		</fieldset>
+		<fieldset group="users" label="Assigned Users" controlname="related" width="1-1">
+			<field name="children" type="userselect" width="1-2" default="" usertype="user.store" label="Account Users" description="" />
 		</fieldset>
 	</type>
 	<type name="dealership" class="account.parent">
@@ -57,7 +59,7 @@
 			</field>
 		</fieldset>
 		<fieldset group="users" label="Assigned Users" controlname="related" width="1-1">
-			<field name="children" type="userselect" width="1-2" default="" label="Account Users" description="" />
+			<field name="children" type="userselect" width="1-2" default="" usertype="user.dealership" label="Account Users" description="" />
 		</fieldset>
 		<fieldset group="subaccounts" label="Assigned Sub-Accounts" controlname="related" width="1-1" admin="1">
 			<field name="children" type="oemselect" multiple="1" width="1-2" label="Assigned OEMs" description="" />
