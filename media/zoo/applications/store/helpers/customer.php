@@ -50,6 +50,7 @@ class CustomerHelper extends AppHelper {
         if($this->isGuest() || !$this->_account) {
             $this->_account = $this->app->account->create('user.public');
         }
+        var_dump($this->_account);
         return $this->_account;
     }
 
@@ -76,7 +77,7 @@ class CustomerHelper extends AppHelper {
     }
 
     public function getAccountTerms() {
-        return $this->_account->params->get('terms', 'DUR');
+        return $this->getParent()->params->get('terms', 'DUR');
     }
 
     public function getDiscountRate() {

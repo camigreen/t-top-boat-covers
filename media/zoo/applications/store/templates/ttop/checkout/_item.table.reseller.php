@@ -14,7 +14,6 @@
     </thead>
     <tbody>
     <?php foreach ($items as $sku => $item) : ?>
-            <?php echo $item->make; ?>
             <?php $price = $item->getPrice(); ?>
             <tr id="<?php echo $sku; ?>">
                 <td>

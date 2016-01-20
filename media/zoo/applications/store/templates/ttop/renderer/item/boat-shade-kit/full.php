@@ -8,11 +8,12 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$prices = $this->app->prices->getRetail('bsk');
 $priceOptions = $this->app->parameter->create();
 $priceOptions->set('group', 'bsk')->set('options.', array('A', 'full'));
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
+$storeItem = $this->app->item->create($item, 'bsk');
+var_dump($storeItem);
 ?>
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
@@ -269,7 +270,7 @@ $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
         <div class="uk-width-1-3 uk-margin-top">
             <div class="uk-width-1-1 uk-grid price-container">
                     <?php if ($this->checkPosition('pricing')) : ?>
-                            <?php echo $this->renderPosition('pricing', array('id' => $item->id, 'priceOptions' => $priceOptions)); ?>
+                            <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                     <?php endif; ?>
                 </div>
             <div class="uk-width-1-1">
