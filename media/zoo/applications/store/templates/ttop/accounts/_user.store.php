@@ -4,7 +4,6 @@
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
 	$store = $this->app->account->getStoreAccount();
-	$this->app->customer->getParent();
 ?>
 
 
