@@ -80,7 +80,7 @@ JHtml::_('behavior.keepalive');
 					</button>
 				</div>
 			</div>
-			<input type="text" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
+			<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('login_redirect_url', $this->form->getValue('return'))); ?>" />
 			<?php echo JHtml::_('form.token'); ?>
 		</fieldset>
 	</form>
