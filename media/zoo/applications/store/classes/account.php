@@ -394,9 +394,8 @@ class Account {
                 }
             }
         }
-
         $this->_mappedAccountsLoaded = true;
-
+        var_dump($this->_mappedAccounts);
         return $this;
 
     }
