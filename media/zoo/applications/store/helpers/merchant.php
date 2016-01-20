@@ -31,25 +31,17 @@ class MerchantHelper extends AppHelper {
         
     }
 
-    protected function loadCreds() {
-
-        // Common setup for API credentials (merchant)
-        $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
-        if($this->testMode) {
-            $merchantAuthentication->setName($this->params->get('sandbox_api_login_id'));
-            $merchantAuthentication->setTransactionKey($this->params->get('sandbox_api_transaction_key'));
-            //define("AUTHORIZENET_SANDBOX", true);
-        } else {
-            $merchantAuthentication->setName($this->params->get('api_login_id'));
-            $merchantAuthentication->setTransactionKey($this->params->get('api_transaction_key'));
-            //define("AUTHORIZENET_SANDBOX", false);
-        }
-        return $merchantAuthentication;
-    }
-
-    
     public function anet() {
-        $this->loadCreds();
+        if($this->testMode) {
+            define("AUTHORIZENET_API_LOGIN_ID", $this->params->get('sandbox_api_login_id'));
+            define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('sandbox_api_transaction_key'));
+            define("AUTHORIZENET_SANDBOX", true);
+        } else {
+            define("AUTHORIZENET_API_LOGIN_ID", $this->params->get('api_login_id'));
+            define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('api_transaction_key'));
+            define("AUTHORIZENET_SANDBOX", false);
+        }
+
         $this->merchant['anet'] = new \AuthorizeNetAIM;
 
     }
