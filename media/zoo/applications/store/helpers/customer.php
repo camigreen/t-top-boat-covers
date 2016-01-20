@@ -36,9 +36,10 @@ class CustomerHelper extends AppHelper {
     }
     
     public function getParent() {
-        if(!$this->isRegistered()) {
-            return $this->_account;
-        } 
+        // var_dump($this->isRegistered());
+        // if(!$this->isRegistered()) {
+        //     return $this->_account;
+        // } 
         return $this->_account->getParentAccount();
     }
 
@@ -50,7 +51,6 @@ class CustomerHelper extends AppHelper {
         if($this->isGuest() || !$this->_account) {
             $this->_account = $this->app->account->create('user.public');
         }
-        var_dump($this->_account);
         return $this->_account;
     }
 
