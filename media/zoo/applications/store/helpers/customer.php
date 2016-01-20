@@ -38,8 +38,10 @@ class CustomerHelper extends AppHelper {
     public function getParent() {
         // var_dump($this->isRegistered());
         if(!$this->isRegistered()) {
+            var_dump('Not Registered');
             return $this->_account;
         } 
+        var_dump('Registered');
         return $this->_account->getParentAccount();
     }
 
