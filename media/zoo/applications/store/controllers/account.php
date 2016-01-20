@@ -58,6 +58,7 @@ class AccountController extends AppController {
     }
 
     public function testCC() {
+        var_dump($this->app->customer->get()->getParentAccount());
         // $customerProfile = new AuthorizeNetCustomer;
         // $customerProfile->description = "Gibbons Marine";
         // $customerProfile->merchantCustomerId = 8;
@@ -70,7 +71,7 @@ class AccountController extends AppController {
         // $paymentProfile->payment->creditCard->cardCode = '554';
         // $customerProfile->paymentProfiles[] = $paymentProfile;
 
-        $this->app->merchant->getProfile(39004222);
+        //$this->app->merchant->getProfile(39004222);
         
     }
 
