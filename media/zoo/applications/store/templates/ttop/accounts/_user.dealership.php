@@ -3,7 +3,6 @@
 	$values = (array) $this->account;
 	$values['email'] = $user->email;
 	$values['username'] = $user->username;
-	var_dump($this->app->customer->getParent()->getNotificationEmails());
 	// var_dump($this->app->user->get());
 	// echo 'Can Edit -> ' . ($this->app->customer->canEdit('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
 	// echo 'Can EditState -> ' . ($this->app->customer->canEditState('com_zoo', $this->account->id) ? 'True' : 'False').'</br>';
