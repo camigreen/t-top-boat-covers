@@ -11,6 +11,10 @@
  *
  * @author Shawn
  */
+
+use net\authorize\api\contract\v1 as AnetAPI;
+use net\authorize\api\controller as AnetController;
+
 class MerchantHelper extends AppHelper {
 
     protected $merchant;
@@ -28,15 +32,19 @@ class MerchantHelper extends AppHelper {
     }
 
     protected function loadCreds() {
+
+        // Common setup for API credentials (merchant)
+        $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
         if($this->testMode) {
-            define("AUTHORIZENET_API_LOGIN_ID", $this->params->get('sandbox_api_login_id'));
-            define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('sandbox_api_transaction_key'));
-            define("AUTHORIZENET_SANDBOX", true);
+            $merchantAuthentication->setName($this->params->get('sandbox_api_login_id'));
+            $merchantAuthentication->setTransactionKey($this->params->get('sandbox_api_transaction_key'));
+            //define("AUTHORIZENET_SANDBOX", true);
         } else {
-            define("AUTHORIZENET_API_LOGIN_ID", $this->params->get('api_login_id'));
-            define("AUTHORIZENET_TRANSACTION_KEY", $this->params->get('api_transaction_key'));
-            define("AUTHORIZENET_SANDBOX", false);
+            $merchantAuthentication->setName($this->params->get('api_login_id'));
+            $merchantAuthentication->setTransactionKey($this->params->get('api_transaction_key'));
+            //define("AUTHORIZENET_SANDBOX", false);
         }
+        return $merchantAuthentication;
     }
 
     
@@ -49,13 +57,34 @@ class MerchantHelper extends AppHelper {
     public function createProfile($profile) {
         $this->loadCreds();
         $request = new AuthorizeNetCIM;
-        return $request->createCustomerProfile($profile);
+        $profile = $request->createCustomerProfile($profile)->xml->profile->customerProfileID;
+        return $profile; 
     }
 
     public function getProfile($id) {
         $this->loadCreds();
-        $request = new AuthorizeNetCIM;
-        return $request->getCustomerProfile($id);
+        $request = new AnetAPI\GetCustomerPaymentProfileRequest();
+        $request->setRefId($id);
+        $request->setMerchantAuthentication($this->loadCreds());
+        $controller = new AnetController\GetCustomerPaymentProfileController($request);
+        $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+        if(($response != null)){
+            if ($response->getMessages()->getResultCode() == "Ok")
+            {
+                echo "GetCustomerPaymentProfile SUCCESS: " . "\n";
+                echo "Customer Payment Profile Id: " . $response->getPaymentProfile()->getCustomerPaymentProfileId() . "\n";
+                echo "Customer Payment Profile Billing Address: " . $response->getPaymentProfile()->getbillTo()->getAddress(). "\n";
+                echo "Customer Payment Profile Card Last 4 " . $response->getPaymentProfile()->getPayment()->getCreditCard()->getCardNumber(). "\n";
+            }
+            else
+            {
+                echo "GetCustomerPaymentProfile ERROR :  Invalid response\n";
+                echo "Response : " . $response->getMessages()->getMessage()[0]->getCode() . "  " .$response->getMessages()->getMessage()[0]->getText() . "\n";
+            }
+        }
+        else{
+            echo "NULL Response Error";
+        }
     }
 
     public function testMode() {

@@ -70,9 +70,8 @@ class AccountController extends AppController {
         // $paymentProfile->payment->creditCard->cardCode = '554';
         // $customerProfile->paymentProfiles[] = $paymentProfile;
 
-        $profile = $this->app->merchant->getProfile(39004222);
+        $this->app->merchant->getProfile(39004222);
         
-        var_dump($profile->xml);
     }
 
     public function gateway() {
