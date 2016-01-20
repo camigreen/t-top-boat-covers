@@ -52,7 +52,7 @@
 					<?php echo $this->form->render('related')?>
 				</div>
 				<?php if(!$this->app->customer->isStoreAdmin()) : ?>
-					<input type="text" name="related[parents][]" value="<?php echo $this->app->customer->getParent()->id; ?>" />
+					<input type="hidden" name="related[parents][]" value="<?php echo $this->app->customer->getParent()->id; ?>" />
 				<?php endif; ?>
 			<?php endif; ?>
 		<input type="hidden" name="[params]user" value="<?php echo $user->id; ?>" />
