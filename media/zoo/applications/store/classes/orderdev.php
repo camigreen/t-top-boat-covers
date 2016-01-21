@@ -40,7 +40,7 @@ class OrderDev {
 
 		$tzoffset = $this->app->date->getOffset();
 		$now        = $this->app->date->create();
-		$cUser = $this->app->customer->getUser();
+		$cUser = $this->app->customer->get();
 
     	// set created date
 		try {
