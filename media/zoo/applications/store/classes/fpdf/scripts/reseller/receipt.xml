@@ -87,7 +87,7 @@
 				<field name="customer" type="textbox" x="175" y="85" h="5" w="30" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Customer" font-size="8"/>
 				</field>
-				<field name="items" type="table" x="10" y="95" rows="30" w="195">
+				<field name="items" type="table" x="10" y="95" rows="29" w="195">
 					<columns>
 						<column name="item_description" w=".50">
 							<header text="Item Description" />
