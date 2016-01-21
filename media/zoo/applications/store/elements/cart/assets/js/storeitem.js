@@ -78,17 +78,16 @@
         subitem: false,
         fields: null,
         init: function () {
-            this.item.name = $('[name="item-name"]').val();
-            this.item.id = $('[name="item-id"]').val();
-            this.item.type = $('[name="item-type"]').val();
+            console.log();
+            this.item.name = this.$element.find('[name="item-name"]').val();
+            this.item.id = this.$element.find('[name="item-id"]').val();
+            this.item.type = this.$element.find('[name="item-type"]').val();
             this.subitem = this.$element.hasClass('sub-item');
             this.$element.find('#price').remove();
-            this.$retail = this.$element.find('#retail-price');
-            this.$dealer = this.$element.find('#dealer-price');
-            this.$atc = $('#atc-' + this.item.id);
-            this.$qty = $('#qty-' + this.item.id);
-            this.item.price_group = $('[name="price_group"]').val();
-            this.item.markup = $('[name="markup"]').val();
+            this.$atc = this.$element.find('#atc-' + this.item.id);
+            this.$qty = this.$element.find('#qty-' + this.item.id);
+            this.item.price_group = this.$element.find('[name="price_group"]').val();
+            this.item.markup = this.$element.find('[name="markup"]').val();
             this._getFields();
             this._getOptions();
             this._createConfirmModal();
@@ -129,6 +128,7 @@
             ],
             beforeAddToCart: [
                 function (e, args) {
+                    console.log(this.$atc);
                     this._debug('beforeAddToCart Callback');
                     return args[0];
                 }
@@ -250,6 +250,8 @@
             return result;
         },
         addToCart: function () {
+            console.log(this);
+            return;
             if (!this.trigger('validate')) {
                 this.trigger('validation_fail');
                 return;
@@ -270,6 +272,7 @@
                 attributes: this._getAttributes(),
                 options: this._getOptions()
             }];
+
             
 //            Add item to the Cart.    
             items = this.trigger('beforeAddToCart', items);
@@ -465,11 +468,12 @@
     $.fn.StoreItem = function (option) {
         var args = Array.prototype.slice.call(arguments, 1);
         var methodReturn;
-        var plugin = 'StoreItem_'+$(this).prop('id');
+        var plugin = 'StoreItem';
+        console.log(this);
         var $set = this.each(function () {
             var $this = $(this);
-            
             var data = $this.data(plugin);
+            console.log(data);
             var options = typeof option === 'object' && option;
             if (!data)
                 $this.data(plugin, (data = new StoreItem(this, options)));
@@ -479,7 +483,6 @@
                 
         });
         return (methodReturn === undefined) ? $set : methodReturn;
-        
     };
 })(jQuery, window, document);
 

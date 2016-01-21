@@ -167,16 +167,7 @@ $category = $item->getPrimaryCategory()->getParent();
                         <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
                     </div>
                 </div>
-                <?php if ($this->checkPosition('accessories') && !$embed && false) : ?>
-                <div class="uk-width-1-1 uk-margin-top">
-                        <fieldset>
-                            <legend>Essential Accessories</legend>
-                                <ul class="uk-list" data-uk-grid-margin>
-                                <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
-                                </ul>
-                        </fieldset>
-                </div>
-                <?php endif; ?>
+
                 <?php if ($this->checkPosition('item_attributes')) : ?>
                     <div class="uk-width-1-1 uk-margin-top item-attribute-container">
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
@@ -238,6 +229,16 @@ $category = $item->getPrimaryCategory()->getParent();
         </div>
     </div>
 </div>
+                <?php if ($this->checkPosition('accessories')) : ?>
+                <div class="uk-width-1-1 uk-margin-top">
+                        <fieldset>
+                            <legend>Essential Accessories</legend>
+                                <ul class="uk-list" data-uk-grid-margin>
+                                <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
+                                </ul>
+                        </fieldset>
+                </div>
+                <?php endif; ?>
 <script>
     jQuery(document).ready(function($) { 
         $('button.tm-yes').on('click', function() {

@@ -10,6 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => $item->name);
+$storeItem = $this->app->item->create($item);
 ?>
 <div class="uk-modal-dialog uk-modal-dialog-large ttop-related-modal ">
     <a class="uk-modal-close uk-close uk-close-alt"></a>
@@ -39,7 +40,8 @@ $data_item = array('id' => $item->id, 'name' => $item->name);
                 <div class="uk-width-1-3 uk-margin-top">
                     <div class="uk-width-1-1 uk-grid price-container">
                     <?php if ($this->checkPosition('pricing')) : ?>
-                            <?php echo $this->renderPosition('pricing', array('type' => $item->type)); ?>
+                            <p>price</p>
+                            <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                     <?php endif; ?>
                 </div>
                     <div class="uk-width-1-1 options-container uk-margin-top">
@@ -62,6 +64,14 @@ $data_item = array('id' => $item->id, 'name' => $item->name);
             </div>
             <div class="ttop-related-modal-footer uk-text-right">
             </div>
+            <div class="item-details">
+                <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
+                <input type="hidden" name="item-name" value="<?php echo $storeItem->name; ?>" />  
+                <input type="hidden" name="item-id" value="<?php echo $storeItem->id; ?>" />
+                <input type="hidden" name="item-type" value="<?php echo $storeItem->type; ?>" />
+                <input type="hidden" name="make" value="<?php echo $storeItem->make; ?>" /> 
+                <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />    
+            </div>
     </div>
 </div>
 <div class="modals">
@@ -69,37 +79,19 @@ $data_item = array('id' => $item->id, 'name' => $item->name);
         <?php echo $this->renderPosition('modals'); ?>
     <?php endif; ?>
 </div>
-<?php
-$pp = '{}';
-if (isset($item->params['content.price_point']) && $item->params['content.price_point'] != '') {
-    $pp = array(
-        'item' => array($item->params['content.price_point']),
-        'shipping' => array()
-    );
-    $pp = json_encode($pp);
-}
-//echo json_encode($storeItem->getPrices()); 
-//echo $pp;
-?>
 
 <script>
     jQuery(function($) {
         
         $(document).ready(function($){
-
-            $('#<?php echo $item->id; ?>').not('.main-item').StoreItem({
+            $('#<?php echo $storeItem->id; ?>').not('.main-item').StoreItem({
                 name: 'Accessories',
                 validate: true,
                 confirm: false,
-                debug: false,
+                debug: true,
                 events: {
                     onInit: []
-                },
-                pricePoints: <?php echo $pp; ?>
-
-
-
-
+                }
             });
         });
         
