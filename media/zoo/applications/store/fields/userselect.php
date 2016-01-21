@@ -8,7 +8,6 @@
 		$uType = (string) $node->attributes()->usertype;
 		$available = $this->app->table->account->getUnassignedAccountsByType($uType);
 		$selected = $account->getChildrenByType($uType);
-		var_dump($selected);
 	}
 
 	$name = $control_name."[$name][]";
