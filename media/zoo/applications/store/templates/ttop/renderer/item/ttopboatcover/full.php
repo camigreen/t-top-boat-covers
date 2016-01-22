@@ -10,8 +10,9 @@ $embed = $this->app->request->get('embed','bool');
 defined('_JEXEC') or die('Restricted access');
 $storeItem = $this->app->item->create($item, 'ttopboatcover');
 $category = $item->getPrimaryCategory()->getParent();
+
 ?>
-<div id="<?php echo $storeItem->id ?>" class="t-top-boat-cover">
+<div id="<?php echo $storeItem->id ?>" class="t-top-boat-cover" data-attributes='<?php echo $storeItem->getAttributesJSON(); ?>'>
     <div class="uk-grid <?php echo $storeItem->getPriceGroup(); ?>">
         <div class="uk-width-1-2">
             <p class="uk-article-title"><?php echo $storeItem->name; ?></p>
@@ -167,7 +168,16 @@ $category = $item->getPrimaryCategory()->getParent();
                         <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
                     </div>
                 </div>
-
+                <?php if ($this->checkPosition('accessories') && false) : ?>
+                <div class="uk-width-1-1 uk-margin-top">
+                        <fieldset>
+                            <legend>Essential Accessories</legend>
+                                <ul class="uk-list" data-uk-grid-margin>
+                                <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
+                                </ul>
+                        </fieldset>
+                </div>
+                <?php endif; ?>
                 <?php if ($this->checkPosition('item_attributes')) : ?>
                     <div class="uk-width-1-1 uk-margin-top item-attribute-container">
                         <fieldset id="<?php echo $item->id; ?>-item-attributes">
@@ -184,7 +194,7 @@ $category = $item->getPrimaryCategory()->getParent();
                     <input type="hidden" name="item-id" value="<?php echo $storeItem->id; ?>" />
                     <input type="hidden" name="item-type" value="<?php echo $storeItem->type; ?>" />
                     <input type="hidden" name="make" value="<?php echo $storeItem->make; ?>" /> 
-                    <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />    
+                    <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />  
                 </div>
             </div>
             <?php if ($this->checkPosition('bottom')) : ?>
@@ -229,16 +239,6 @@ $category = $item->getPrimaryCategory()->getParent();
         </div>
     </div>
 </div>
-                <?php if ($this->checkPosition('accessories')) : ?>
-                <div class="uk-width-1-1 uk-margin-top">
-                        <fieldset>
-                            <legend>Essential Accessories</legend>
-                                <ul class="uk-list" data-uk-grid-margin>
-                                <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
-                                </ul>
-                        </fieldset>
-                </div>
-                <?php endif; ?>
 <script>
     jQuery(document).ready(function($) { 
         $('button.tm-yes').on('click', function() {

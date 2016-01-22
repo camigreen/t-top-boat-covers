@@ -14,10 +14,6 @@
 class ttopboatcoverStoreItem extends StoreItem {
 
     public $type = "ttopboatcover";
-    /**
-     * @var [string]
-     */
-    public $make = "LaPorte's T-Top Boat Covers";
 
    	/**
    	 * @var [string]
@@ -37,12 +33,10 @@ class ttopboatcoverStoreItem extends StoreItem {
 	        $this->attributes['boat_model']->set('name', 'Boat Model');
 	        $this->attributes['boat_model']->set('value', $item->name);
           $this->attributes['boat_model']->set('text', $item->name);
-	        list($oem) = $item->getRelatedCategories();
-	        $this->attributes['oem'] = $this->app->data->create();
-	        $this->attributes['oem']->set('name', 'OEM');
-	        $this->attributes['oem']->set('value', $oem->id);
-          $this->attributes['oem']->set('text', $oem->name);
         }
+
+        $this->make = "LaPorte's T-Top Boat Covers";
+        $this->model = 'T-Top Boat Cover '.$this->attributes['oem']->get('name').' '.$this->attributes['boat_length']->get('value');
         
 
         

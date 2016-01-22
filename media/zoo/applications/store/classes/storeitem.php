@@ -341,6 +341,28 @@ class StoreItem {
     }
 
     /**
+     * Get the JSON String for the attributes for the item.
+     *
+     * @return     string    the price group.
+     *
+     * @since 1.0
+     */
+    public function getAttributesJSON() {
+        $attributes = array();
+        foreach($this->attributes as $key => $value) {
+            $attributes[$key] = $value->get('value');
+        } 
+        $attributes['id'] = $this->id;
+        $attributes['name'] = $this->name;
+        $attributes['type'] = $this->type;
+        $attributes['model'] = $this->model;
+        $attributes['make'] = $this->make;
+        $attributes['price_group'] = $this->price_group;    
+        return htmlspecialchars(json_encode($attributes), ENT_QUOTES, 'UTF-8');
+        
+    }
+
+    /**
      * Set the price group.
      *
      * @param   String  $value  The price group.

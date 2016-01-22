@@ -58,7 +58,7 @@ class AccountController extends AppController {
     }
 
     public function testCC() {
-        var_dump($this->app->customer->get()->getParentAccount());
+        var_dump(explode("\n", $this->app->account->getStoreAccount()->params->get('notify_emails')));
         // $customerProfile = new AuthorizeNetCustomer;
         // $customerProfile->description = "Gibbons Marine";
         // $customerProfile->merchantCustomerId = 8;

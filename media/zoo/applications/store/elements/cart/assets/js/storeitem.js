@@ -33,22 +33,21 @@
             button: null,
             cancel: null
         };
-        this.item = {};
+        this.items = {};
+        this.total = 0;
+        this.qty = 1;
         this.init();
         
 //         Set the event handlers
-        this.$atc.on('click', $.proxy(this, 'addToCart'));
-        this.$qty.on('change', $.proxy(this, 'trigger', 'onChanged'));
-        this.$element.on('input','.item-option:not(select)', $.proxy(this, 'trigger', 'onChanged'));
-        this.$element.on('change','select.item-option', $.proxy(this, 'trigger', 'onChanged'));
-        this.trigger('onComplete');
+        // this.$atc.on('click', $.proxy(this, 'addToCart'));
+        // this.$qty.on('change', $.proxy(this, 'trigger', 'onChanged'));
+        // this.$element.on('input','.item-option:not(select)', $.proxy(this, 'trigger', 'onChanged'));
+        // this.$element.on('change','select.item-option', $.proxy(this, 'trigger', 'onChanged'));
+        // this.trigger('onComplete');
 
     };
 
     StoreItem.prototype = {
-        shipping: 0,
-        qty: 1,
-        total: 0,
         validation: {
             status: null,
             message: null,
@@ -74,22 +73,29 @@
         subitem: false,
         fields: null,
         init: function () {
-            console.log();
-            this.item.name = this.$element.find('[name="item-name"]').val();
-            this.item.id = this.$element.find('[name="item-id"]').val();
-            this.item.type = this.$element.find('[name="item-type"]').val();
-            this.subitem = this.$element.hasClass('sub-item');
+            this.loadItems();
+            // this.item.name = this.$element.find('[name="item-name"]').val();
+            // this.item.id = this.$element.find('[name="item-id"]').val();
+            // this.item.type = this.$element.find('[name="item-type"]').val();
             this.$element.find('#price').remove();
-            this.$atc = this.$element.find('#atc-' + this.item.id);
-            this.$qty = this.$element.find('#qty-' + this.item.id);
-            this.item.price_group = this.$element.find('[name="price_group"]').val();
-            this.item.markup = this.$element.find('[name="markup"]').val();
+            // this.$atc = this.$element.find('#atc-' + this.item.id);
+            // this.$qty = this.$element.find('#qty-' + this.item.id);
+            // this.item.price_group = this.$element.find('[name="price_group"]').val();
+            // this.item.markup = this.$element.find('[name="markup"]').val();
             this._getFields();
             this._getOptions();
             this._createConfirmModal();
             //this._publishPrice();
             this.trigger('onInit');
             
+        },
+        loadItems: function() {
+            var attributes = this.$element.data('attributes');
+            var id = attributes.id;
+            // console.log(attributes);
+            // this.items[attributes.id] = {};
+            this.items[id] = attributes;
+            console.log(this.items);
         },
         _createConfirmModal: function () {
             this.confirm.elem = this.$element.find('#confirm-modal');
@@ -246,8 +252,6 @@
             return result;
         },
         addToCart: function () {
-            console.log(this);
-            return;
             if (!this.trigger('validate')) {
                 this.trigger('validation_fail');
                 return;
@@ -260,11 +264,9 @@
                 id: this.item.id,
                 name: this.item.name,
                 type: this.item.type,
-                //pricing: this._getPricing(),
                 price_group: this.item.price_group,
                 markup: this.$element.find('[name="markup"]').val(),
                 qty: this.qty,
-                shipping: this.shipping,
                 attributes: this._getAttributes(),
                 options: this._getOptions()
             }];
@@ -283,17 +285,16 @@
             this.trigger('afterAddToCart');
         },
         getItem: function() {
-            var item = {
+            var items = [{
                 id: this.item.id,
                 name: this.item.name,
+                type: this.item.type,
                 price_group: this.item.price_group,
-                markup: $('[name="markup"]').val(),
+                markup: this.$element.find('[name="markup"]').val(),
                 qty: this.qty,
-                shipping: this.shipping,
                 attributes: this._getAttributes(),
                 options: this._getOptions()
-            };
-            return item;
+            }];
         },
         _confirm: function() {
             var modal = this.confirm.elem;
@@ -465,11 +466,9 @@
         var args = Array.prototype.slice.call(arguments, 1);
         var methodReturn;
         var plugin = 'StoreItem';
-        console.log(this);
         var $set = this.each(function () {
             var $this = $(this);
             var data = $this.data(plugin);
-            console.log(data);
             var options = typeof option === 'object' && option;
             if (!data)
                 $this.data(plugin, (data = new StoreItem(this, options)));
