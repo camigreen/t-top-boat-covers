@@ -33,6 +33,7 @@
             button: null,
             cancel: null
         };
+        this.item = {};
         this.init();
         
 //         Set the event handlers
@@ -45,14 +46,9 @@
     };
 
     StoreItem.prototype = {
-        item: {},
         shipping: 0,
         qty: 1,
         total: 0,
-        test: {
-            test1: 'Test 1',
-            test2: 'Test 2'
-        },
         validation: {
             status: null,
             message: null,
@@ -266,7 +262,7 @@
                 type: this.item.type,
                 //pricing: this._getPricing(),
                 price_group: this.item.price_group,
-                markup: $('[name="markup"]').val(),
+                markup: this.$element.find('[name="markup"]').val(),
                 qty: this.qty,
                 shipping: this.shipping,
                 attributes: this._getAttributes(),
