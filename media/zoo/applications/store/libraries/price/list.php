@@ -12,7 +12,7 @@
  *  For Shipping: $price['ITEM-NAME.shipping.OPTION'] = (price) 0.00
 
  */
-$price['ttopboatcover.global.option.trolling_motor'] = 175;
+$price['ttopboatcover.global.option.trolling_motor.ffff'] = 175;
 
 $price['ttopboatcover.1819.item.base'] = 0;
 $price['ttopboatcover.1819.item.option.fabric.7oz'] = 599;

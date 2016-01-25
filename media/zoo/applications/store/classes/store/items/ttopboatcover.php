@@ -34,7 +34,7 @@ class ttopboatcoverStoreItem extends StoreItem {
 	        $this->attributes['boat_model']->set('value', $item->name);
           $this->attributes['boat_model']->set('text', $item->name);
         }
-
+        $this->confirm = true;
         $this->make = "LaPorte's T-Top Boat Covers";
         $this->model = 'T-Top Boat Cover '.$this->attributes['oem']->get('name').' '.$this->attributes['boat_length']->get('value');
         

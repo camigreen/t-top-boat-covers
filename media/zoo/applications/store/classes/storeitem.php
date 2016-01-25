@@ -149,6 +149,14 @@ class StoreItem {
      * @since 1.0.0
      */
     protected $price;
+
+        /**
+     * String that identifies the pricing group of an item.
+     *
+     * @var [string]
+     * @since 1.0.0
+     */
+    protected $confirm = false;
     
     
     /**
@@ -347,18 +355,25 @@ class StoreItem {
      *
      * @since 1.0
      */
-    public function getAttributesJSON() {
-        $attributes = array();
-        foreach($this->attributes as $key => $value) {
-            $attributes[$key] = $value->get('value');
-        } 
-        $attributes['id'] = $this->id;
-        $attributes['name'] = $this->name;
-        $attributes['type'] = $this->type;
-        $attributes['model'] = $this->model;
-        $attributes['make'] = $this->make;
-        $attributes['price_group'] = $this->price_group;    
-        return htmlspecialchars(json_encode($attributes), ENT_QUOTES, 'UTF-8');
+    public function getItemsJSON() {
+        $item = array();
+        // foreach($this->attributes as $key => $value) {
+        //     $item[$key] = array(
+        //         'value' => $value->get('value'),
+        //         'name' => $value->get('name'),
+        //         'text' => $value->get('text')
+        //         );
+        // } 
+        $item['id'] = $this->id;
+        $item['name'] = $this->name;
+        $item['type'] = $this->type;
+        $item['model'] = $this->model;
+        $item['make'] = $this->make;
+        $item['confirm'] = $this->confirm;
+        $item['price_group'] = $this->price_group;
+        $item['attributes'] = $this->attributes;
+        $items[] = $item;    
+        return htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
         
     }
 
