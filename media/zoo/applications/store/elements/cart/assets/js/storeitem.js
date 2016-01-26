@@ -44,6 +44,7 @@
         this.$qty.on('change', $.proxy(this, '_updateQuantity'));
         this.$element.on('input','.item-option:not(select)', $.proxy(this, 'trigger', 'onChanged'));
         this.$element.on('change','select.item-option', $.proxy(this, 'trigger', 'onChanged'));
+        this.$element.on('refresh',$.proxy(this, '_refresh'));
         this.trigger('onComplete');
 
     };
@@ -262,6 +263,7 @@
             }
                     
             var events = this.getEvents(event, type);
+            console.log(events);
             var result = true;
             $.each(events, function (k, v) {
                 self._debug('Starting ' + event + ' ['+k+']');
@@ -397,7 +399,7 @@
                     elem.html(price.toFixed(2));
                 },
                 error: function(data, status, error) {
-                    var elem = $('#'+self.item.id+'-price span');
+                    var elem = $('#'+id+'-price span');
                     elem.html('ERROR');
                     self._debug('Error');
                     self._debug(status);
