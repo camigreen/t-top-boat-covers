@@ -330,7 +330,7 @@ jQuery(function($){
 
             $('#storeOrderForm').StoreItem({
                 name: 'T-Top Boat Cover',
-                validate: true,
+                validate: false,
                 debug: true,
                 events: {
                     ttopboatcover: {

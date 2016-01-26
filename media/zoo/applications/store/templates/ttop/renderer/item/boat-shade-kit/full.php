@@ -13,344 +13,343 @@ $priceOptions->set('group', 'bsk')->set('options.', array('A', 'full'));
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
 $storeItem = $this->app->item->create($item, 'bsk');
-var_dump($storeItem);
+
 ?>
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
-<div id="<?php echo $item->id; ?>" data-item='<?php echo json_encode($data_item); ?>' class="uk-form uk-margin main-item" >
-    <div class="uk-grid">
-
-        <div class="uk-width-2-3">
-            <div class="uk-width-1-1">
-                <div class="uk-grid uk-text-center bsk-chooser">
+<div id="storeOrderForm" class="<?php echo $item->type; ?>">
+    <div id="<?php echo $item->id; ?>-aft" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid bsk-type bsk-type-Aft active storeItem">
+    <div class="uk-form uk-margin main-item" >
+        <div class="uk-grid">
+                <div class="uk-width-2-3">
                     <div class="uk-width-1-1">
-                        <ul class="uk-list full-pic">
-                            <li class="active"><img src="<?php echo JURI::root(); ?>images/bsk/order_form/aft.jpg" /></li>
-                            <li><img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow.jpg" /></li>
-                            <li><img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow_aft.jpg" /></li>
-                        </ul>  
-                    </div>
-                    <div class="uk-width-1-1 uk-text-center">
-                        <p>Please choose how you will be using your T-Top Covers Boat Shade Kit by clicking on one of the pictures below.</p>
-                    </div>
-                    <div class="uk-width-1-1">
-                        <ul class="uk-grid uk-grid-width-1-4 bsk-chooser-buttons">
-                            <li class="active" data-value="Aft">
-                                <div class="bsk-button">
-                                    <img src="<?php echo JURI::root(); ?>images/bsk/order_form/aft.jpg" />
-                                    <p>Aft Only<br/>(One Shade)</p>
-                                </div>
-                            </li>
-                            <li data-value="Bow">
-                                <div class="bsk-button">
-                                    <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow.jpg" />
-                                    <p>Bow Only<br/>(One Shade)</p>
-                                </div>
-                            </li>
-                            <li data-value="Bow|Aft">
-                                <div class="bsk-button">
-                                    <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow_aft.jpg" />
-                                    <p>Bow and Aft<br/>(Two Shades)</p>
-                                </div>
-                            </li>
-                        </ul> 
-                    </div> 
-                </div>
-            </div>
-            <div class="uk-width-1-1">
-                <ul class="uk-tab" data-uk-tab="{connect:'#tabs'}">
-                    <li>
-                        <a href="#">Order Form</a>
-                    </li>
-                    <?php if ($this->checkPosition('measurement_info')) : ?>
-                    <li>
-                        <a href="#">Measurements</a>
-                    </li>
-                    <?php endif; ?>
-                    <?php if ($this->checkPosition('tabs')) : ?>
-                        <?php echo $this->renderPosition('tabs', array('style' => 'tab')); ?>
-                    <?php endif; ?>
-                </ul>
-                <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin">
-                    <li>
-                        <?php if ($this->checkPosition('boat_options')) : ?>
-                            <div class="uk-width-1-1 uk-margin-top">
-                                <fieldset> 
-                                    <legend>
-                                        <?php echo JText::_('Boat Information'); ?>
-                                    </legend>
-                                    <div class="uk-grid">
-                                        <?php echo $this->renderPosition('boat_options', array('style' => 'options')); ?>
-                                    </div>
-                                </fieldset>
+                        <div class="uk-grid uk-text-center bsk-chooser">
+                            <div class="uk-width-1-1">
+                                <ul class="uk-list full-pic">
+                                    <li class="active"><img src="<?php echo JURI::root(); ?>images/bsk/order_form/aft.jpg" /></li>
+                                    <li><img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow.jpg" /></li>
+                                    <li><img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow_aft.jpg" /></li>
+                                </ul>  
                             </div>
-                            <div class="uk-width-1-1 options-container uk-margin-top">
-                                <?php if ($this->checkPosition('options')) : ?>
-                                    <div class="uk-panel uk-panel-box">
-                                        <h3><?php echo JText::_('Options'); ?></h3>
-                                        <div class="validation-errors"></div>
-                                        <?php echo $this->renderPosition('options', array('style' => 'user_options')); ?>
+                            <div class="uk-width-1-1 uk-text-center">
+                                <p>Please choose how you will be using your T-Top Covers Boat Shade Kit by clicking on one of the pictures below.</p>
+                            </div>
+                            <div class="uk-width-1-1">
+                                <ul class="uk-grid uk-grid-width-1-4 bsk-chooser-buttons">
+                                    <li class="active" data-value="Aft">
+                                        <div class="bsk-button">
+                                            <img src="<?php echo JURI::root(); ?>images/bsk/order_form/aft.jpg" />
+                                            <p>Aft Only<br/>(One Shade)</p>
+                                        </div>
+                                    </li>
+                                    <li data-value="Bow">
+                                        <div class="bsk-button">
+                                            <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow.jpg" />
+                                            <p>Bow Only<br/>(One Shade)</p>
+                                        </div>
+                                    </li>
+                                    <li data-value="Bow|Aft">
+                                        <div class="bsk-button">
+                                            <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow_aft.jpg" />
+                                            <p>Bow and Aft<br/>(Two Shades)</p>
+                                        </div>
+                                    </li>
+                                </ul> 
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1">
+                        <ul class="uk-tab" data-uk-tab="{connect:'#tabs'}">
+                            <li>
+                                <a href="#">Order Form</a>
+                            </li>
+                            <?php if ($this->checkPosition('measurement_info')) : ?>
+                            <li>
+                                <a href="#">Measurements</a>
+                            </li>
+                            <?php endif; ?>
+                            <?php if ($this->checkPosition('tabs')) : ?>
+                                <?php echo $this->renderPosition('tabs', array('style' => 'tab')); ?>
+                            <?php endif; ?>
+                        </ul>
+                        <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin">
+                            <li>
+                                <?php if ($this->checkPosition('boat_options')) : ?>
+                                    <div class="uk-width-1-1 uk-margin-top">
+                                        <fieldset> 
+                                            <legend>
+                                                <?php echo JText::_('Boat Information'); ?>
+                                            </legend>
+                                            <div class="uk-grid">
+                                                <?php echo $this->renderPosition('boat_options', array('style' => 'options')); ?>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="uk-width-1-1 options-container uk-margin-top">
+                                        <?php if ($this->checkPosition('options')) : ?>
+                                            <div class="uk-panel uk-panel-box">
+                                                <h3><?php echo JText::_('Options'); ?></h3>
+                                                <div class="validation-errors"></div>
+                                                <?php echo $this->renderPosition('options', array('style' => 'user_options')); ?>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
-                            </div>
+                                <p class="uk-text-danger">Please refer to the note and maintenance section in the Info and Video Tab above.</p>
+                                    <?php if ($this->checkPosition('aft_measurements')) : ?>
+                                    <div class="uk-width-1-2">
+                                        <div class="uk-margin-top">
+                                            <a href="<?php echo JURI::root(); ?>/images/bsk/order_form/aft_diagram.png" data-lightbox title="">
+                                                <img src="<?php echo JURI::root(); ?>/images/bsk/order_form/aft_diagram.png" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2">
+                                        <i class="currency"></i>
+                                            <span class="price">0.00</span>
+
+                                    </div>
+                                    <div class="uk-width-1-2">
+                                        <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
+                                    </div>
+                                    <div class="uk-width-1-2 uk-margin-top">
+                                        <label><input type="checkbox" id="use_on_bow" name="use_on_bow" /> I want to use this shade on my bow also.<a href="#multipositional-modal" class="uk-icon-button uk-icon-info-circle" data-uk-tooltip="" title="Click here for more info!" data-uk-modal=""></a></label>
+                                        <fieldset class="aft-measurements"> 
+                                            <legend>
+                                                <?php echo JText::_('Aft Measurements'); ?>
+                                            </legend>
+                                            <div class="uk-grid">
+                                                <div class="uk-width-1-1 beam-measurement">
+                                                    <label>1) From Rod Holder to Rod Holder</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="beam-width-ft" name="beam-width-ft" class="item-option required" data-location="beam" data-unit="ft" min="5" value="6" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="item-option required" data-location="beam" data-unit="in" min="0" max="11" value="0" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-1 ttop-measurement">
+                                                    <label>2) T-Top Width Measurement</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="ttop-width-ft" name="ttop-width-ft" class="item-option required" data-location="ttop" data-unit="ft" min="3" value="4" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="ttop-width-in" name="ttop-width-in" class="item-option required" data-location="ttop" data-unit="in" min="0" max="11" value="6" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-1 ttop-rod-measurement">
+                                                    <label>3) T-Top to Rod Holders Measurement</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="ttop2rod-ft" name="ttop2rod-ft" class="item-option required" data-location="ttop2rod" data-unit="ft" min="1" value="2" disabled />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="ttop2rod-in" name="ttop2rod-in" class="item-option required" data-location="ttop2rod" data-unit="in" min="0" max="11" value="0" disabled />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <?php endif; ?>
+                                    <?php if ($this->checkPosition('bow_measurements')) : ?>
+                                    <div class="uk-width-1-2 ">
+                                        <div class="uk-margin-top">
+                                            <a href="<?php echo JURI::root(); ?>/images/bsk/order_form/bow_diagram.png" data-lightbox title="">
+                                                <img src="<?php echo JURI::root(); ?>/images/bsk/order_form/bow_diagram.png" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="uk-width-1-2">
+                                        <i class="currency"></i>
+                                            <span class="price">0.00</span>
+
+                                    </div>
+                                    <div class="uk-width-1-2 uk-margin-top">
+                                        <fieldset class="bow-measurements"> 
+                                            <legend>
+                                                <?php echo JText::_('Bow Measurements'); ?>
+                                            </legend>
+                                            <div class="uk-grid">
+                                                <div class="uk-width-1-1 measurement">
+                                                    <label>1) From Rod Holder to Rod Holder</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="beam-width-ft" name="beam-width-ft" class="item-option required" data-location="beam" data-unit="ft" min="5" value="6" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="item-option required" data-location="beam" data-unit="in" min="0" max="11" value="0" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-1 measurement">
+                                                    <label>2) T-Top Width Measurement</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="ttop-width-ft" name="ttop-width-ft" class="item-option required" data-location="ttop" data-unit="ft" min="3" value="4" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="ttop-width-in" name="ttop-width-in" class="item-option required" data-location="ttop" data-unit="in" min="0" max="11" value="6" />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-1-1 measurement">
+                                                    <label>3) T-Top to Rod Holders Measurement</label>
+                                                    <div class="uk-grid">
+                                                        <div class="uk-width-2-6">
+                                                            <input type="number" id="ttop2rod-ft" name="ttop2rod-ft" class="item-option required" data-location="ttop2rod" data-unit="ft" min="1" value="2" disabled />
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            ft
+                                                        </div>
+                                                        <div class="uk-width-2-6">
+                                                           <input type="number" id="ttop2rod-in" name="ttop2rod-in" class="item-option required" data-location="ttop2rod" data-unit="in" min="0" max="11" value="6" disabled/>
+                                                        </div>
+                                                        <div class="uk-width-1-6">
+                                                            in
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <?php endif; ?>
+                            </li>
+                            <?php if ($this->checkPosition('measurement_info')) : ?>
+                            <li>
+                                <?php echo $this->renderPosition('measurement_info', array('style' => 'bsk-measure-info')); ?>
+                            </li>
+                            <?php endif; ?>
+                            <?php if ($this->checkPosition('tabs')) : ?>
+                                <?php echo $this->renderPosition('tabs', array('style' => 'tab_content')); ?>
+                            <?php endif; ?>
+                        </ul>
+                    </div>
+                <div class="uk-width-1-3">
+                </div>
+                </div>
+                <div class="uk-width-1-3 uk-margin-top">
+                    <div class="uk-width-1-1 uk-grid price-container">
+                            <?php if ($this->checkPosition('pricing')) : ?>
+                                    <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
+                            <?php endif; ?>
+                        </div>
+                    <div class="uk-width-1-1">
+                        <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
+                    </div>
+                    <div class="uk-width-1-1 addtocart-container uk-margin-top">
+                        <label>Quantity</label>
+                        <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1 qty" name="qty" min="1" value ="1" />
+                        <div class="uk-margin-top">
+                            <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger atc"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-container-center uk-margin-top">
+                        <?php if ($this->checkPosition('product_info')) : ?>
+                                <?php echo $this->renderPosition('product_info', array('style' => 'blank')); ?>
                         <?php endif; ?>
-                        <p class="uk-text-danger">Please refer to the note and maintenance section in the Info and Video Tab above.</p>
-                        <div class="uk-grid bsk-type bsk-type-Aft active">
-                            <?php if ($this->checkPosition('aft_measurements')) : ?>
-                            <div class="uk-width-1-2">
-                                <div class="uk-margin-top">
-                                    <a href="<?php echo JURI::root(); ?>/images/bsk/order_form/aft_diagram.png" data-lightbox title="">
-                                        <img src="<?php echo JURI::root(); ?>/images/bsk/order_form/aft_diagram.png" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="uk-width-1-2">
-                                <i class="currency"></i>
-                                    <span class="price">0.00</span>
-
-                            </div>
-                            <div class="uk-width-1-2">
-                                <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
-                            </div>
-                            <div class="uk-width-1-2 uk-margin-top">
-                                <label><input type="checkbox" id="use_on_bow" name="use_on_bow" /> I want to use this shade on my bow also.<a href="#multipositional-modal" class="uk-icon-button uk-icon-info-circle" data-uk-tooltip="" title="Click here for more info!" data-uk-modal=""></a></label>
-                                <fieldset class="aft-measurements"> 
-                                    <legend>
-                                        <?php echo JText::_('Aft Measurements'); ?>
-                                    </legend>
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-1 beam-measurement">
-                                            <label>1) From Rod Holder to Rod Holder</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="beam-width-ft" name="beam-width-ft" class="item-option required" data-location="beam" data-unit="ft" min="5" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="beam-width-in" name="beam-width-in" class="item-option required" data-location="beam" data-unit="in" min="0" max="11" value="0" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-1 ttop-measurement">
-                                            <label>2) T-Top Width Measurement</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop-width-ft" name="ttop-width-ft" class="item-option required" data-location="ttop" data-unit="ft" min="3" value="4" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop-width-in" name="ttop-width-in" class="item-option required" data-location="ttop" data-unit="in" min="0" max="11" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-1 ttop-rod-measurement">
-                                            <label>3) T-Top to Rod Holders Measurement</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop2rod-ft" name="ttop2rod-ft" class="item-option required" data-location="ttop2rod" data-unit="ft" min="1" value="2" disabled />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop2rod-in" name="ttop2rod-in" class="item-option required" data-location="ttop2rod" data-unit="in" min="0" max="11" value="0" disabled />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="uk-grid bsk-type bsk-type-Bow">
-                            <?php if ($this->checkPosition('bow_measurements')) : ?>
-                            <div class="uk-width-1-2 ">
-                                <div class="uk-margin-top">
-                                    <a href="<?php echo JURI::root(); ?>/images/bsk/order_form/bow_diagram.png" data-lightbox title="">
-                                        <img src="<?php echo JURI::root(); ?>/images/bsk/order_form/bow_diagram.png" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="uk-width-1-2">
-                                <i class="currency"></i>
-                                    <span class="price">0.00</span>
-
-                            </div>
-                            <div class="uk-width-1-2 uk-margin-top">
-                                <fieldset class="bow-measurements"> 
-                                    <legend>
-                                        <?php echo JText::_('Bow Measurements'); ?>
-                                    </legend>
-                                    <div class="uk-grid">
-                                        <div class="uk-width-1-1 measurement">
-                                            <label>1) From Rod Holder to Rod Holder</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="beam-width-ft" name="beam-width-ft" class="item-option required" data-location="beam" data-unit="ft" min="5" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="beam-width-in" name="beam-width-in" class="item-option required" data-location="beam" data-unit="in" min="0" max="11" value="0" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-1 measurement">
-                                            <label>2) T-Top Width Measurement</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop-width-ft" name="ttop-width-ft" class="item-option required" data-location="ttop" data-unit="ft" min="3" value="4" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop-width-in" name="ttop-width-in" class="item-option required" data-location="ttop" data-unit="in" min="0" max="11" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-1-1 measurement">
-                                            <label>3) T-Top to Rod Holders Measurement</label>
-                                            <div class="uk-grid">
-                                                <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop2rod-ft" name="ttop2rod-ft" class="item-option required" data-location="ttop2rod" data-unit="ft" min="1" value="2" disabled />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop2rod-in" name="ttop2rod-in" class="item-option required" data-location="ttop2rod" data-unit="in" min="0" max="11" value="6" disabled/>
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    in
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                            <?php endif; ?>
-                        </div> 
-                    </li>
-                    <?php if ($this->checkPosition('measurement_info')) : ?>
-                    <li>
-                        <?php echo $this->renderPosition('measurement_info', array('style' => 'bsk-measure-info')); ?>
-                    </li>
+                    </div>
+                    <?php if ($this->checkPosition('accessories')) : ?>
+                    <div class="uk-width-1-1 uk-margin-top">
+                            <fieldset>
+                                <legend>Essential Accessories</legend>
+                                    <ul class="uk-list" data-uk-grid-margin>
+                                    <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
+                                    </ul>
+                            </fieldset>
+                    </div>
                     <?php endif; ?>
-                    <?php if ($this->checkPosition('tabs')) : ?>
-                        <?php echo $this->renderPosition('tabs', array('style' => 'tab_content')); ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        <div class="uk-width-1-3">
-
-        </div>
-        </div>
-        <div class="uk-width-1-3 uk-margin-top">
-            <div class="uk-width-1-1 uk-grid price-container">
-                    <?php if ($this->checkPosition('pricing')) : ?>
-                            <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
-                    <?php endif; ?>
+                    
                 </div>
-            <div class="uk-width-1-1">
-                <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
-            </div>
-            <div class="uk-width-1-1 addtocart-container uk-margin-top">
-                <label>Quantity</label>
-                <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1" name="qty" min="1" value ="1" />
-                <div class="uk-margin-top">
-                    <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
-                </div>
-            </div>
-            <div class="uk-width-1-1 uk-container-center uk-margin-top">
-                <?php if ($this->checkPosition('product_info')) : ?>
-                        <?php echo $this->renderPosition('product_info', array('style' => 'blank')); ?>
-                <?php endif; ?>
-            </div>
-            <?php if ($this->checkPosition('accessories')) : ?>
-            <div class="uk-width-1-1 uk-margin-top">
-                    <fieldset>
-                        <legend>Essential Accessories</legend>
-                            <ul class="uk-list" data-uk-grid-margin>
-                            <?php echo $this->renderPosition('accessories', array('style' => 'related')); ?>
-                            </ul>
-                    </fieldset>
-            </div>
-            <?php endif; ?>
-            
-        </div> 
+            </div> 
+        </div>
     </div>
-    <div class="modals">
-        <div id="confirm-modal" class="uk-modal">
-            <div class="uk-modal-dialog">
-                <div class="uk-grid" data-uk-grid-margin="">
-                    <div class="uk-width-1-1">
-                        <div class="uk-article-title uk-text-center">Confirmation</div>
-                        <div class="uk-text-center uk-margin">By typing "yes" in the box below, I certify that the options that I have chosen are correct. I understand that a Boat Shade is a custom made product and that if I have chosen an option incorrectly it may lead to the Boat Shade not fitting my boat correctly.</div>
-                        <div class="uk-text-center uk-margin">Your measurement will calculate the proper size of shade, because of the stretch of the fabric your shade will be sized down. This will allow tension on the shade to prevent any sag and to give your BSK a custom fit.</div>
-                    </div>
-                    <div class="uk-width-1-1"> 
-                        <div class="item"></div>
-                    </div>
-                    <div class="uk-width-1-1">
-                        <span>Type "yes" in the box below to confirm that your options have been chosen correctly.</span><br />
-                        <span class="confirm-error uk-text-danger uk-text-small"></span><br />
-                        <input type="text" name="accept" />
-                    </div>
-                    <div class="uk-width-1-1">
-                        <div class="uk-grid">
-                            <div class="uk-width-1-2">
-                                <button class="uk-width-1-1 uk-button uk-button-danger confirm">Confirm</button>
-                            </div>
-                            <div class="uk-width-1-2">
-                                <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
+        <div class="modals">
+            <div id="confirm-modal" class="uk-modal">
+                <div class="uk-modal-dialog">
+                    <div class="uk-grid" data-uk-grid-margin="">
+                        <div class="uk-width-1-1">
+                            <div class="uk-article-title uk-text-center">Confirmation</div>
+                            <div class="uk-text-center uk-margin">By typing "yes" in the box below, I certify that the options that I have chosen are correct. I understand that a Boat Shade is a custom made product and that if I have chosen an option incorrectly it may lead to the Boat Shade not fitting my boat correctly.</div>
+                            <div class="uk-text-center uk-margin">Your measurement will calculate the proper size of shade, because of the stretch of the fabric your shade will be sized down. This will allow tension on the shade to prevent any sag and to give your BSK a custom fit.</div>
+                        </div>
+                        <div class="uk-width-1-1"> 
+                            <div class="item"></div>
+                        </div>
+                        <div class="uk-width-1-1">
+                            <span>Type "yes" in the box below to confirm that your options have been chosen correctly.</span><br />
+                            <span class="confirm-error uk-text-danger uk-text-small"></span><br />
+                            <input type="text" name="accept" />
+                        </div>
+                        <div class="uk-width-1-1">
+                            <div class="uk-grid">
+                                <div class="uk-width-1-2">
+                                    <button class="uk-width-1-1 uk-button uk-button-danger confirm">Confirm</button>
+                                </div>
+                                <div class="uk-width-1-2">
+                                    <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php if ($this->checkPosition('modals')) : ?>
-            <?php echo $this->renderPosition('modals'); ?>
-        <?php endif; ?>
-        <div id="toUBSK" class="uk-modal">
-            <div class="uk-modal-dialog">
-                <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-1-1">
-                        <div class="uk-article-title uk-text-center uk-text-danger">Attention</div>
-                        <p class="uk-text-center uk-margin ttop-modal-title"></p><p class="uk-text-center ttop-modal-subtitle" ></p>
-                    </div>
-                    <div class="uk-width-1-1">
-<!--                        <img src="/images/ubs/ubs2.png" />-->
-                    </div>
-                    <div class="uk-width-1-1">
-                        <div class="uk-grid">
-                            <div class="uk-width-1-2">
-                                <button class="uk-width-1-1 uk-button uk-button-danger confirm">Show Me</button>
-                            </div>
-                            <div class="uk-width-1-2">
-                                <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
+            <?php if ($this->checkPosition('modals')) : ?>
+                <?php echo $this->renderPosition('modals'); ?>
+            <?php endif; ?>
+            <div id="toUBSK" class="uk-modal">
+                <div class="uk-modal-dialog">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-1-1">
+                            <div class="uk-article-title uk-text-center uk-text-danger">Attention</div>
+                            <p class="uk-text-center uk-margin ttop-modal-title"></p><p class="uk-text-center ttop-modal-subtitle" ></p>
+                        </div>
+                        <div class="uk-width-1-1">
+    <!--                        <img src="/images/ubs/ubs2.png" />-->
+                        </div>
+                        <div class="uk-width-1-1">
+                            <div class="uk-grid">
+                                <div class="uk-width-1-2">
+                                    <button class="uk-width-1-1 uk-button uk-button-danger confirm">Show Me</button>
+                                </div>
+                                <div class="uk-width-1-2">
+                                    <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -455,7 +454,7 @@ var_dump($storeItem);
         }
     } 
     jQuery(document).ready(function($){
-        $('#<?php echo $item->id; ?>').not('.related').StoreItem({
+        $('#storeOrderForm').StoreItem({
             name: 'BoatShadeKit',
             validate: true,
             confirm: true,
@@ -488,7 +487,6 @@ var_dump($storeItem);
                                 
                                 self.trigger('measure',e);
                         })
-                        this.item.name = "Boat Shade Kit";
 
                         $('.bow-measurements input').on('input',function(){
                             measurements.Bow.measurements_changed = true;
@@ -534,7 +532,10 @@ var_dump($storeItem);
                             getBSKClass(v);
                         });
                         function getMeasurements(type) {
-                            $('.bsk-type-' + type + ' input[type="number"]').each(function(k,v) {
+
+                            $('.bsk-type-' + type + ' input[type="number"]:not(.qty)').each(function(k,v) {
+                                console.log($(this));
+                                console.log($(this).data('location'));
                                 var location = $(this).data('location'), unit = $(this).data('unit'), val = parseInt($(this).val());
                                 m[type].location[location].units[unit] = val;
                             });
@@ -591,7 +592,6 @@ var_dump($storeItem);
                                     
                             }
                             m[type].kit.class = kit_class;
-                            getPrice(type);
                         }
                         function getPrice(type) {
                             var BSK_class = m[type].kit.class;

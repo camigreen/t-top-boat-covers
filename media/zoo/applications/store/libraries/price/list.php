@@ -12,7 +12,7 @@
  *  For Shipping: $price['ITEM-NAME.shipping.OPTION'] = (price) 0.00
 
  */
-$price['ttopboatcover.global.option.trolling_motor.ffff'] = 175;
+$price['ttopboatcover.global.option.trolling_motor.y'] = 175;
 
 $price['ttopboatcover.1819.item.base'] = 0;
 $price['ttopboatcover.1819.item.option.fabric.7oz'] = 599;
@@ -170,12 +170,14 @@ $price['tie-down-set.shipping.price'] = 0;
 $price['suction-cups.item.base'] = 38;
 $price['suction-cups.shipping.weight'] = 1;
 $price['suction-cups.shipping.price'] = 0;
+$price['suction-cups.item.allowMarkup'] = false;
 
 $price['storage-bag.item.base'] = 0;
 $price['storage-bag.item.option.size.l'] = 30;
 $price['storage-bag.item.option.size.xl'] = 45;
 $price['storage-bag.shipping.weight'] = 2;
 $price['storage-bag.shipping.price'] = 0;
+$price['storage-bag.item.allowMarkup'] = false;
 
 // // Boat Shade Kit
 $price['bsk.A.item.base'] = 280;
@@ -204,22 +206,27 @@ $price['bsk.C.shipping.option.full.price'] = 0;
 $price['telescoping-poles-2.item.base'] = 122.50;
 $price['telescoping-poles-2.shipping.weight'] = 4;
 $price['telescoping-poles-2.shipping.price'] = 0;
+$price['telescoping-poles-2.item.allowMarkup'] = false;
 
 $price['velcro-clean-up-tabs-2.item.base'] = 5;
 $price['velcro-clean-up-tabs-2.shipping.weight'] = 1;
 $price['velcro-clean-up-tabs-2.shipping.price'] = 0;
+$price['velcro-clean-up-tabs-2.item.allowMarkup'] = false;
 
 $price['shade-kit-bag.item.base'] = 30;
 $price['shade-kit-bag.shipping.weight'] = 1;
 $price['shade-kit-bag.shipping.price'] = 0;
+$price['shade-kit-bag.item.allowMarkup'] = false;
 
 $price['pole-securing-straps.item.base'] = 10;
 $price['pole-securing-straps.shipping.weight'] = 1;
 $price['pole-securing-straps.shipping.price'] = 0;
+$price['pole-securing-straps.item.allowMarkup'] = false;
 
 $price['bsk-webbing-straps.item.base'] = 15;
 $price['bsk-webbing-straps.shipping.weight'] = 2;
 $price['bsk-webbing-straps.shipping.price'] = 0;
+$price['bsk-webbing-straps.item.allowMarkup'] = false;
 
 //Ultimate Boat Shade Kit
 

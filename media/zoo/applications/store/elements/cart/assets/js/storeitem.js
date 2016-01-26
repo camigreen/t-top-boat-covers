@@ -105,6 +105,11 @@
             
             console.log(this.items);
         },
+        setMarkup: function(args) {
+            var id = args[0];
+            var markup = args[1];
+            this.items[id].markup = markup;
+        },
         _createConfirmModal: function () {
             this.confirm.elem = this.$element.find('#confirm-modal');
             this.confirm.button = this.confirm.elem.find('button.confirm');
@@ -252,6 +257,7 @@
             var self = this, args = Array.prototype.slice.call(arguments, 2);
             if(typeof e === 'object') {
                 var id = $(e.target).closest('.storeItem').prop('id');
+                console.log(id);
                 var type = this.items[id].type; 
             }
                     
@@ -317,17 +323,8 @@
             this.cart.validated = false;
             this.cart.confirmed = false;
         },
-        getItem: function() {
-            var items = [{
-                id: this.item.id,
-                name: this.item.name,
-                type: this.item.type,
-                price_group: this.item.price_group,
-                markup: this.$element.find('[name="markup"]').val(),
-                qty: this.qty,
-                attributes: this._getAttributes(),
-                options: this._getOptions()
-            }];
+        getItem: function(id) {
+            return this.items[id];
         },
         _confirm: function() {
             var modal = this.confirm.elem;
@@ -379,7 +376,12 @@
             return pricing;
         },
         _publishPrice: function (e) {
-            var id = $(e.target).closest('.storeItem').prop('id');
+            if(typeof e === 'object') {
+                var id = $(e.target).closest('.storeItem').prop('id');
+            } else {
+                var id = e;
+            }
+            console.log(e);
             var item = this.items[id];
             this._debug('Publishing Price');
             var self = this;
@@ -391,6 +393,7 @@
                 success: function(data){
                     var elem = $('#'+id+'-price span');
                     price = self.trigger('onPublishPrice', e, data.price);
+                    console.log(elem);
                     elem.html(price.toFixed(2));
                 },
                 error: function(data, status, error) {
@@ -441,8 +444,10 @@
             this.prices = this.$element.data('prices');
         },
         _updateQuantity: function (e) {
+            this._debug('Updating Quantity');
             var elem = $(e.target);
             var id = elem.data('item');
+            console.log(id);
             this.items[id].qty = elem.val();
             this.trigger('onChanged', e);
         },

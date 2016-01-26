@@ -106,7 +106,9 @@ class Price
 		}
 		$prices = $this->app->parameter->create($price);
 		$this->_price_options = $this->app->parameter->create($prices->get($this->_group.'.item.option.'));
-		$this->_price_options->loadArray($prices->get($this->_item->type.'.global.option.', array()));
+		foreach($prices->get($this->_item->type.'.global.option.', array()) as $k => $global) {
+			$this->_price_options->set($k, $global);
+		}
 		$this->allowMarkup = $prices->get($this->_group.'.item.allowMarkup', true);
 		$this->_base = $prices->get($this->_group.'.item.base');
 		$this->_shipWeight = $prices->get($this->_group.'.shipping.weight');
@@ -170,7 +172,9 @@ class Price
 	public function getCalculatedOptions() {
 		$total = 0;
 		foreach($this->getItemOptions() as $key => $value) {
-			$total += $this->_price_options->get($key.'.'.$value->get('value'), 0);
+			if($value->get('value')) {
+				$total += $this->_price_options->get($key.'.'.$value->get('value'), 0);
+			}
 		}
 		return $total;		
 	}
