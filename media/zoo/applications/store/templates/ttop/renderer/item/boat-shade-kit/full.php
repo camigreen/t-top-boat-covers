@@ -19,7 +19,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
 <div id="storeOrderForm" class="<?php echo $item->type; ?>">
-    <div id="<?php echo $item->id; ?>" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid bsk-type bsk-type-Aft active storeItem">
+    <div id="<?php echo $item->id; ?>" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid storeItem">
     <div class="uk-form uk-margin main-item" >
         <div class="uk-grid">
                 <div class="uk-width-2-3">
@@ -37,19 +37,19 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             </div>
                             <div class="uk-width-1-1">
                                 <ul class="uk-grid uk-grid-width-1-4 bsk-chooser-buttons">
-                                    <li class="active" data-value="Aft">
+                                    <li class="active" data-value="aft">
                                         <div class="bsk-button">
                                             <img src="<?php echo JURI::root(); ?>images/bsk/order_form/aft.jpg" />
                                             <p>Aft Only<br/>(One Shade)</p>
                                         </div>
                                     </li>
-                                    <li data-value="Bow">
+                                    <li data-value="bow">
                                         <div class="bsk-button">
                                             <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow.jpg" />
                                             <p>Bow Only<br/>(One Shade)</p>
                                         </div>
                                     </li>
-                                    <li data-value="Bow|Aft">
+                                    <li data-value="bow|aft">
                                         <div class="bsk-button">
                                             <img src="<?php echo JURI::root(); ?>images/bsk/order_form/bow_aft.jpg" />
                                             <p>Bow and Aft<br/>(Two Shades)</p>
@@ -97,7 +97,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                     </div>
                                 <?php endif; ?>
                                 <p class="uk-text-danger">Please refer to the note and maintenance section in the Info and Video Tab above.</p>
-                                <div class="uk-grid bsk-type bsk-type-Aft active">
+                                <div class="uk-grid bsk-type bsk-type-aft active">
                                     <?php if ($this->checkPosition('aft_measurements')) : ?>
                                     <div class="uk-width-1-2">
                                         <div class="uk-margin-top">
@@ -106,7 +106,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="uk-width-1-2">
+                                    <div id="bsk-aft-price"class="uk-width-1-2">
                                         <i class="currency"></i>
                                             <span class="price">0.00</span>
 
@@ -125,7 +125,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                                     <label>1) From Rod Holder to Rod Holder</label>
                                                     <div class="uk-grid">
                                                         <div class="uk-width-2-6">
-                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="required" data-location="beam" data-unit="in" min="0" value="74" />
+                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="required" data-location="beam" data-unit="in" min="0" value="72" />
                                                         </div>
                                                         <div class="uk-width-1-6">
                                                             in
@@ -159,7 +159,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                     </div>
                                     <?php endif; ?>
                                 </div>
-                                <div class="uk-grid bsk-type bsk-type-Bow">
+                                <div class="uk-grid bsk-type bsk-type-bow">
                                     <?php if ($this->checkPosition('bow_measurements')) : ?>
                                     <div class="uk-width-1-2 ">
                                         <div class="uk-margin-top">
@@ -168,10 +168,9 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="uk-width-1-2">
+                                    <div id="bsk-bow-price" class="uk-width-1-2">
                                         <i class="currency"></i>
                                             <span class="price">0.00</span>
-
                                     </div>
                                     <div class="uk-width-1-2 uk-margin-top">
                                         <fieldset class="bow-measurements"> 
@@ -183,7 +182,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                                     <label>1) From Rod Holder to Rod Holder</label>
                                                     <div class="uk-grid">
                                                         <div class="uk-width-2-6">
-                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="required" data-location="beam" data-unit="in" min="0" value="74" />
+                                                           <input type="number" id="beam-width-in" name="beam-width-in" class="required" data-location="beam" data-unit="in" min="0" value="72" />
                                                         </div>
                                                         <div class="uk-width-1-6">
                                                             in
@@ -228,15 +227,14 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             <?php endif; ?>
                         </ul>
                     </div>
-                <div class="uk-width-1-3">
-                </div>
+                    <div class="uk-width-1-3">
+                    </div>
                 </div>
                 <div class="uk-width-1-3 uk-margin-top">
-                    <div class="uk-width-1-1 uk-grid price-container">
-                            <?php if ($this->checkPosition('pricing')) : ?>
-                                    <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
-                            <?php endif; ?>
-                        </div>
+                    <div id="bsk-total-price"class="uk-width-1-1">
+                        <i class="currency"></i>
+                        <span class="price">0.00</span>
+                    </div>
                     <div class="uk-width-1-1">
                         <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
                     </div>
@@ -328,14 +326,11 @@ $storeItem = $this->app->item->create($item, 'bsk');
 </div>
 <script>
     var toUBSK_modal = jQuery.UIkit.modal('#toUBSK');
+    var total = {};
+    var tempItem = {};
     var measurements = {
-        type: 'Aft',
-        id: null,
-        option: {
-            text: null,
-            value: null
-        },
-        Aft: {
+        type: ['aft'],
+        aft: {
             name: 'Boat Shade Kit',
             price: 0.00,
             shipping: 0.00,
@@ -366,7 +361,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                 tapered: false
             }
         },
-        Bow: {
+        bow: {
             name: 'Boat Shade Kit',
             price: 0.00,
             shipping: 0.00,
@@ -405,14 +400,24 @@ $storeItem = $this->app->item->create($item, 'bsk');
             confirm: true,
             debug: true,
             events: {
-                bsk: {
                     onInit: [
                         function (e) {
                             var self = this;
-                            this.trigger('measure');
-                            $('#use_on_bow').on('change',function(e){
-                                self.trigger('measure',e);
+                            $.each(self.items, function(k,v) {
+                                if(v.type === 'bsk') {
+                                    tempItem = v;
+                                    createItems();
+                                }
                             });
+
+                            var type = measurements.type;
+
+                            self.type = 'bsk';
+
+                            $('#use_on_bow').on('change',function(e){
+                                self.trigger('measure', {type: ['aft']});
+                            });
+
                             $('.bsk-chooser .bsk-chooser-buttons li').on('click',function(e){
                                     var index = $(this).index();
                                     var type = $('.bsk-chooser .bsk-chooser-buttons li:eq('+index+')').data('value');
@@ -420,46 +425,60 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                     $('.bsk-chooser .bsk-chooser-buttons li:eq('+index+')').addClass('active');
                                     $('.bsk-chooser .full-pic li').removeClass('active');
                                     $('.bsk-chooser .full-pic li:eq('+index+')').addClass('active');
-                                    measurements.type = type;
-                                    measurements.option.name = 'bsk_kit';
-                                    measurements.option.value = $('[name="bsk_kit"]').val();
-                                    measurements.option.text = $('[name="bsk_kit"]').find('option:selected').text();
                                     $('.bsk-type').removeClass('active');
 
-                                    if(type === 'Bow|Aft') {
+                                    if(type === 'bow|aft') {
                                         $('.bsk-type').addClass('active');
+                                        type = ['aft','bow'];
                                     } else {
                                         $('.bsk-type-'+type).addClass('active');
+                                        type = [type];
                                     }
-                                    
-                                    self.trigger('measure',e);
+                                    measurements.type = type;
+                                    createItems();
+                                    self.trigger('measure', {type: type});
                             })
 
-                            $('.bow-measurements input').on('input',function(){
-                                measurements.Bow.measurements_changed = true;
-
-
-                            });
-                            $('.aft-measurements input').on('input',function(){
-                                measurements.Aft.measurements_changed = true;
-                                console.log(measurements);
+                            $('.bow-measurements input').on('change',function(){
+                                measurements.bow.measurements_changed = true;
+                                self.current_item = [self.items['bsk-bow']];
+                                self.trigger('measure', {type: ['bow']});
+                                
 
                             });
+                            $('.aft-measurements input').on('change',function(e){
+                                measurements.aft.measurements_changed = true;
+                                self.current_item = [self.items['bsk-aft']];
+                                self.trigger('measure', {type: ['aft']});
+
+                            });
+
+                            this.trigger('measure', {type: type});
+
+                            function createItems() {
+                                var item = tempItem;
+                                delete self.items[item.id];
+                                var fields = self.fields[item.id];
+                                delete self.fields[item.id];
+                                self.current_items = [];
+                                $.each(measurements.type, function(k, type) {
+                                    self.items['bsk-'+type] = item;
+                                    self.items['bsk-'+type].price_group = 'bsk.'+measurements.aft.kit.class
+                                    self.items['bsk-'+type].id = 'bsk-'+type;
+                                    self.fields['bsk-'+type] = fields;
+                                    self.current_items.push(self.items['bsk-'+type]);
+                                });
+                            }
                             
                         }
                             
                             
-                    ],
-                    onChanged: [
-                        function (e) {
-                            console.log('test');
-                            this.trigger('measure',e);
-                            
-                        }
                     ],
                     measure: [
-                        function (e) {
-                            if(measurements.type === 'Bow|Aft') {
+                        function (args) {
+                            var types = args.type;
+                            console.log(measurements.type.length);
+                            if(measurements.type.length > 1) {
                                 $('#use_on_bow').closest('label').hide();
                                 $('#use_on_bow').prop('checked',false);
                             } else {
@@ -468,18 +487,17 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             
                             this.$atc.prop('disabled',true);
                             // Collect values from all of the inputs to calculate the measurements.
-                            var self = this, m = measurements, type = m.type.split('|'), calc = $('.calc');
-                            m.option.value = $('[name="bsk_kit_options"]').val();
-                            m.option.text = $('[name="bsk_kit_options"]').find('option:selected').text();
-                            $.each(type, function(k,v) {
-                                getMeasurements(v);
-                                if (checkMinAndMax(v)) {
-                                    $('.bsk-type-'+v+' input').prop('disabled', false);
+                            var self = this, m = measurements;
+                            $.each(types, function(k, type) {
+                                getMeasurements(type);
+                                if (checkMinAndMax(type)) {
+                                    $('.bsk-type-'+type+' input').prop('disabled', false);
                                 } else {
                                     return false;
                                 };
-                                getBSKClass(v);
-                            });
+                                getBSKClass(type);
+                            })
+
                             function getMeasurements(type) {
 
                                 $('.bsk-type-' + type + ' input[type="number"]:not(.qty)').each(function(k,v) {
@@ -490,14 +508,14 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             
                             function checkMinAndMax(type) {
                                 var result = true;
+                                var args = {type: type};
                                 $.each(m[type].location, function(k,v){
-                                    console.log(k+' => '+v.total);
                                     if (v.total < v.min) {
-                                        self.trigger(k+'TooSmall',type);
+                                        self.trigger(k+'TooSmall',args);
                                         result =  false;
                                     }
                                     if(v.total > v.max) {
-                                        self.trigger(k+'TooLarge',type);
+                                        self.trigger(k+'TooLarge',args);
                                         result = false;
                                     }
                                 });
@@ -508,81 +526,55 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             }
                             
                             function getBSKClass(type) {
-                                var BSK_class = $('[name="'+type+'_kit_class"]'), kit_class;
+                                var kit_class;
                                 switch(true) {
                                     case (m[type].location.ttop2rod.total >= 24 && m[type].location.ttop2rod.total <= 48):
                                         self.$atc.prop('disabled',false);
-                                        kit_class = ($('#use_on_bow').is(':checked') ? 'B' : 'A')
-                                        BSK_class.val(kit_class);
+                                        kit_class = ($('#use_on_bow').is(':checked') ? 'B' : 'A');
                                         break;
                                     case (m[type].location.ttop2rod.total >= 49 && m[type].location.ttop2rod.total <= 65):
                                         self.$atc.prop('disabled',false);
-                                        kit_class = ($('#use_on_bow').is(':checked') ? 'C' : 'B')
-                                        BSK_class.val(kit_class);
+                                        kit_class = ($('#use_on_bow').is(':checked') ? 'C' : 'B');
                                         break;
                                     case (m[type].location.ttop2rod.total >= 66 && m[type].location.ttop2rod.total <= 83):
                                         self.$atc.prop('disabled',false);
-                                        kit_class = ($('#use_on_bow').is(':checked') ? 'D' : 'C')
-                                        BSK_class.val(kit_class);
+                                        kit_class = ($('#use_on_bow').is(':checked') ? 'D' : 'C');
                                         break;
     								case (m[type].location.ttop2rod.total >= 84 && m[type].location.ttop2rod.total <= 96):
                                         self.$atc.prop('disabled',false);
-                                        kit_class = ($('#use_on_bow').is(':checked') ? 'E' : 'D')
-                                        BSK_class.val(kit_class);
+                                        kit_class = ($('#use_on_bow').is(':checked') ? 'E' : 'D');
                                         break;
                                     default:
                                         kit_class = 'Unknown';
-                                        BSK_class.val(kit_class);
                                         
                                 }
+                                console.log(kit_class);
                                 m[type].kit.class = kit_class;
+                                self.items['bsk-'+type].price_group = 'bsk.'+kit_class;
+                                self._publishPrice(self.items['bsk-'+type]);
                             }
 
-                            function getPrice(type) {
-                                var BSK_class = m[type].kit.class;
-                                var BSK_package = m.option.value;
-                                var priceData = {group: 'bsk', options: [BSK_class, BSK_package]};
-                                console.log(priceData);
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "?option=com_zoo&controller=store&task=getPrice&format=json",
-                                        data: priceData,
-                                        success: function(data){
-                                            m[type].price = data.price;
-                                            var elem = $('#'+self.item.id+'-price span');
-                                            console.log(elem)
-                                            var price = 0;
-                                            if(m.type === 'Bow|Aft') {
-                                                price = m.Aft.price + m.Bow.price;
-                                            } else {
-                                                price = m[type].price;
-                                            }
-                                            $('.bsk-type-Aft span.price').html(m.Aft.price.toFixed(2));
-                                            $('.bsk-type-Bow span.price').html(m.Aft.price.toFixed(2));
-                                            price = self.trigger('onPublishPrice', price);
-                                            console.log(price);
-                                            elem.html(price.toFixed(2));
-                                            
-                                        },
-                                        error: function(data, status, error) {
-                                            var elem = $('#'+self.item.id+'-price span');
-                                            elem.html('ERROR');
-                                            console.log('Error');
-                                            console.log(status);
-                                            console.log(error);
-                                        },
-                                        dataType: 'json'
-                                });
-                            }
 
                             console.log(measurements);
                             console.log(this.items);
                         }
                     ],
+                    onChanged: [
+                    ],
+                    onPublishPrice: [
+                        function (args) {
+                            total[args.id] = args.price;
+                            var t = 0;
+                            $.each(total, function(k, v){
+                                t = t+v;
+                            })
+                            $('#bsk-total-price span').html(t.toFixed(2));
+                        }
+                    ],
                     beamTooLarge: [
-                        function (e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a beam measurement over 10\' 6" are too big for our Boat Shade Kit.');
+                        function (args) {
+                            var type = args.type;
+                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a beam measurement over '+measurements[type].location.beam.max+' inches are too big for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Please check out our Ultimate Boat Shade Kit for larger boats.');
                             
                             $('#toUBSK button.confirm').click(function(){
@@ -590,8 +582,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             }).html('Ultimate Boat Shade Kit');
                             
                             $('#toUBSK button.cancel').click(function(){
-                                $('.bsk-type-'+type+' #beam-width-ft').val(10);
-                                $('.bsk-type-'+type+' #beam-width-in').val(6).trigger('input');
+                                $('.bsk-type-'+type+' #beam-width-in').val(measurements[type].location.beam.max).trigger('input');
                                 $('#toUBSK button').off();
                                 $('#toUBSK button.confirm').html('Show Me');
                                 toUBSK_modal.hide();
@@ -604,9 +595,9 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     ttopTooLarge: [
-                        function (e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a T-Top width measurement over 7\' 6" are too big for our Boat Shade Kit.');
+                        function (args) {
+                            var type = args.type;
+                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a T-Top width measurement over '+measurements[type].location.ttop.max+' inches are too big for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Please check out our Ultimate Boat Shade Kit for larger boats.');
                             
                             $('#toUBSK button.confirm').click(function(){
@@ -614,8 +605,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             }).html('Ultimate Boat Shade Kit');
                             
                             $('#toUBSK button.cancel').click(function(){
-                                $('.bsk-type-'+type+' #ttop-width-ft').val(7);
-                                $('.bsk-type-'+type+' #ttop-width-in').val(6).trigger('input');
+                                $('.bsk-type-'+type+' #ttop-width-in').val(measurements[type].location.ttop.max).trigger('input');
                                 $('#toUBSK button').off();
                                 toUBSK_modal.hide();
 
@@ -627,13 +617,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     ttop2rodTooSmall: [
-                        function(e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Boat Shade Kit.');
+                        function(args) {
+                            var type = args.type;
+                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but boats with a T-Top to Rod Holder measurement less than '+measurements[type].location.ttop2rod.min+' inches are too small for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Contact us and we may be able to make a custom shade kit for your boat.  Click the contact us button below for send us an email.');
 
-                            $('.bsk-type-'+type+' #ttop2rod-ft').val(2);
-                            $('.bsk-type-'+type+' #ttop2rod-in').val(0).trigger('input');
+                            $('.bsk-type-'+type+' #ttop2rod-in').val(measurements[type].location.ttop2rod.min).trigger('change');
                             $('#toUBSK button.confirm').click(function(){
                                 window.location = '/contact-us';
                             }).html('Contact Us');
@@ -650,9 +639,10 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     ttop2rodTooLarge: [
-                        function (e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a T-Top to Rod Holder measurement over 6\' 11" on the aft are too big for our Boat Shade Kit. Boats with a T-Top to Rod Holder measurement over 8\' on the bow are too big for our Boat Shade Kit.');
+                        function (args) {
+                            var type = args.type;
+                            console.log(type);
+                            $('#toUBSK').find('.ttop-modal-title').html('Boats with a T-Top to Rod Holder measurement over '+measurements[type].location.ttop2rod.max+' inches on the '+type+' are too big for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Please check out our Ultimate Boat Shade Kit for larger boats.');
                             
                             $('#toUBSK button.confirm').click(function(){
@@ -660,8 +650,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             }).html('Ultimate Boat Shade Kit');
                             
                             $('#toUBSK button.cancel').click(function(){
-                                $('.bsk-type-'+type+' #ttop2rod-ft').val(6);
-                                $('.bsk-type-'+type+' #ttop2rod-in').val(11).trigger('input');
+                                $('.bsk-type-'+type+' #ttop2rod-in').val(measurements[type].location.ttop2rod.max).trigger('change');
                                 $('#toUBSK button').off();
                                 toUBSK_modal.hide();
 
@@ -672,13 +661,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     beamTooSmall: [
-                        function (e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Boat Shade Kit.');
+                        function (args) {
+                            var type = args.type;
+                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but boats with a beam measurement less than '+measurements[type].location.beam.min+' inches are too small for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Contact us and we may be able to make a custom shade kit for your boat.  Click the contact us button below to send us an email.');
                             
-                            $('.bsk-type-'+type+' #beam-width-ft').val(6);
-                            $('.bsk-type-'+type+' #beam-width-in').val(0).trigger('input');
+                            $('.bsk-type-'+type+' #beam-width-in').val(measurements[type].location.beam.min).trigger('input');
                             $('#toUBSK button.confirm').click(function(){
                                 window.location = '/contact-us';
                             }).html('Contact Us');
@@ -695,13 +683,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     ttopTooSmall: [
-                        function (e, args) {
-                            var type = args[0];
-                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Boat Shade Kit.');
+                        function (args) {
+                            var type = args.type;
+                            $('#toUBSK').find('.ttop-modal-title').html('We are sorry, but boats with a beam measurement less than '+measurements[type].location.ttop.min+' inches are too small for our Boat Shade Kit.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('Contact us and we may be able to make a custom shade kit for your boat.  Click the contact us button below for send us an email.');
                             
-                            $('.bsk-type-'+type+' #ttop-width-ft').val(4);
-                            $('.bsk-type-'+type+' #ttop-width-in').val(6).trigger('input');
+                            $('.bsk-type-'+type+' #ttop-width-in').val(measurements[type].location.ttop.min).trigger('input');
                             $('#toUBSK button.confirm').click(function(){
                                 window.location = '/contact-us';
                             }).html('Contact Us');
@@ -718,8 +705,8 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     measurementsNotChanged: [
-                        function (e, args) {
-                            var self = this, type = args[0];
+                        function (args) {
+                            var self = this, type = args.type;
                             $('#toUBSK').find('.ttop-modal-title').html('The order form measurements for the '+type+' Shade Kit have not been changed.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('The measurements on the order form are initially set to the lowest sizes that will work with the Boat Shade Kit. Please make sure that the measurements entered match the measurements of your boat.  If the measurements in the order form are correct click Continue or click Back to correct them.');
                             
@@ -743,77 +730,54 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         }
                     ],
                     beforeAddToCart: [
-                        function(e, args) {
+                        function (args) {
+                            console.log(args);
+                            var items = args.items;
                             var boat_options = this._getOptions();
-                            var m = measurements, type = m.type.split('|'), item = [], self = this;
-                            $.each(type, function(k,v){
+                            var m = measurements, types = m.type, item = [], self = this, proceed = true;
+                            $.each(types, function(k,v){
                                 if(!m[v].measurements_changed) {
-                                    self.trigger('measurementsNotChanged', v);
-                                    item = false;
+                                    self.trigger('measurementsNotChanged', {type: v});
+                                    proceed = false;
+                                }
+                                if(!proceed) {
+                                    items = false;
+                                    return false;
                                 }
                                 var kit = m[v];
-                                item.push({
-                                    name: m.option.text + ' - ' + v,
-                                    id: self.item.id,
-                                    qty: self.qty,
-                                    price: kit.price,
-                                    shipping: kit.shipping,
-                                    options: {
-                                        boat_make: {
-                                            name: 'Boat Make',
-                                            text: boat_options.boat_make.value,
-                                        },
-                                        boat_model: {
-                                            name: 'Boat Model',
-                                            text: boat_options.boat_model.value
-                                        },
-                                        boat_style: {
-                                            name: 'Boat Style',
-                                            text: boat_options.boat_style.text
-                                        },
-                                        boat_year: {
-                                            name: 'Boat Year',
-                                            text: boat_options.year.text
-                                        },
-                                        ttop_type: {
-                                            name: 'TTop Type',
-                                            text: boat_options.top_type.text
-                                        },
-                                        tapered: {
-                                            name: 'Tapered',
-                                            text: (kit.kit.tapered ? 'Yes' : 'No'),
-                                            visible: false
-                                        },
-                                        kit_type: {
-                                            name: 'Kit Type',
-                                            text: v
-                                        },
-                                        kit_class: {
-                                            name: 'Class',
-                                            text: kit.kit.class,
-                                            visible: false
-                                        },
-                                        beam_width: {
-                                            name: 'Beam Width',
-                                            text: kit.location.beam.total+' in'
-                                        },
-                                        ttop_width: {
-                                            name: 'T-Top Width',
-                                            text: kit.location.ttop.total+' in'
-                                        },
-                                        ttop2rod: {
-                                            name: 'T-Top to Rod Holders',
-                                            text: kit.location.ttop2rod.total+' in'
-                                        }
-                                    }
-                                });
-                                
+                                var _item = items['bsk-'+v];
+                                _item.name = 'Boat Shade Kit - '+v;
+                                _item.options.tapered = {
+                                        name: 'Tapered',
+                                        text: (kit.kit.tapered ? 'Yes' : 'No'),
+                                        visible: false
+                                    };
+                                _item.options.kit_type = {
+                                        name: 'Kit Type',
+                                        text: v
+                                    };
+                                _item.options.kit_class = {
+                                        name: 'Class',
+                                        text: kit.kit.class,
+                                        visible: false
+                                    };
+                                _item.options.beam_width = {
+                                        name: 'Beam Width',
+                                        text: kit.location.beam.total+' in'
+                                    };
+                                _item.options.ttop_width = {
+                                        name: 'T-Top Width',
+                                        text: kit.location.ttop.total+' in'
+                                    };
+                                _item.options.ttop2rod = {
+                                        name: 'T-Top to Rod Holders',
+                                        text: kit.location.ttop2rod.total+' in'
+                                    };  
                             })
-                            
-                            return item;
+                            console.log(items);
+                            return items;
                         }
                     ]
-                }
             },
             removeValues: true,
             pricePoints: {

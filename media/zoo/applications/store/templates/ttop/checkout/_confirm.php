@@ -38,7 +38,7 @@ list($page) = explode('.',$this->page, 2);
             </div>
         <?php endif; ?>
         <div class="uk-width-1-1 uk-margin-top">
-            <div>Delivery Method: <?php echo $elements->get('localPickup') ? 'Local Pickup' : 'UPS Ground' ?></div>
+            <div>Delivery Method: <?php echo $elements->get('shipping_method') == 'LP' ? 'Local Pickup' : 'UPS Ground' ?></div>
         </div>
         <div class="uk-width-1-1 uk-margin-top">
             <h3>Payment</h3>
