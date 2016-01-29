@@ -329,7 +329,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
     var total = {};
     var tempItem = {};
     var measurements = {
-        type: ['aft'],
+        types: ['aft'],
         aft: {
             name: 'Boat Shade Kit',
             price: 0.00,
@@ -410,7 +410,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                 }
                             });
 
-                            var type = measurements.type;
+                            var type = measurements.types;
 
                             self.type = 'bsk';
 
@@ -434,21 +434,21 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                         $('.bsk-type-'+type).addClass('active');
                                         type = [type];
                                     }
-                                    measurements.type = type;
+                                    measurements.types = type;
                                     createItems();
                                     self.trigger('measure', {type: type});
                             })
 
                             $('.bow-measurements input').on('change',function(){
                                 measurements.bow.measurements_changed = true;
-                                self.current_item = [self.items['bsk-bow']];
+                                self.current_items['bsk-bow'] = self.items['bsk-bow'];
                                 self.trigger('measure', {type: ['bow']});
                                 
 
                             });
                             $('.aft-measurements input').on('change',function(e){
                                 measurements.aft.measurements_changed = true;
-                                self.current_item = [self.items['bsk-aft']];
+                                self.current_items['bsk-aft'] = self.items['bsk-aft'];
                                 self.trigger('measure', {type: ['aft']});
 
                             });
@@ -460,13 +460,13 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                 delete self.items[item.id];
                                 var fields = self.fields[item.id];
                                 delete self.fields[item.id];
-                                self.current_items = [];
-                                $.each(measurements.type, function(k, type) {
+                                self.current_items = {};
+                                $.each(measurements.types, function(k, type) {
                                     self.items['bsk-'+type] = item;
                                     self.items['bsk-'+type].price_group = 'bsk.'+measurements.aft.kit.class
                                     self.items['bsk-'+type].id = 'bsk-'+type;
                                     self.fields['bsk-'+type] = fields;
-                                    self.current_items.push(self.items['bsk-'+type]);
+                                    self.current_items['bsk-'+type] = self.items['bsk-'+type];
                                 });
                             }
                             
@@ -477,8 +477,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     measure: [
                         function (args) {
                             var types = args.type;
-                            console.log(measurements.type.length);
-                            if(measurements.type.length > 1) {
+                            if(measurements.types.length > 1) {
                                 $('#use_on_bow').closest('label').hide();
                                 $('#use_on_bow').prop('checked',false);
                             } else {
@@ -488,6 +487,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             this.$atc.prop('disabled',true);
                             // Collect values from all of the inputs to calculate the measurements.
                             var self = this, m = measurements;
+                            console.log(types)
                             $.each(types, function(k, type) {
                                 getMeasurements(type);
                                 if (checkMinAndMax(type)) {
@@ -527,6 +527,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             
                             function getBSKClass(type) {
                                 var kit_class;
+                                var old_class = m[type].kit.class;
                                 switch(true) {
                                     case (m[type].location.ttop2rod.total >= 24 && m[type].location.ttop2rod.total <= 48):
                                         self.$atc.prop('disabled',false);
@@ -548,15 +549,13 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                         kit_class = 'Unknown';
                                         
                                 }
-                                console.log(kit_class);
+
                                 m[type].kit.class = kit_class;
-                                self.items['bsk-'+type].price_group = 'bsk.'+kit_class;
-                                self._publishPrice(self.items['bsk-'+type]);
+                                if(old_class !== kit_class) {
+                                    self.items['bsk-'+type].price_group = 'bsk.'+kit_class;
+                                    self._publishPrice(self.items['bsk-'+type]);
+                                }
                             }
-
-
-                            console.log(measurements);
-                            console.log(this.items);
                         }
                     ],
                     onChanged: [
@@ -569,6 +568,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                 t = t+v;
                             })
                             $('#bsk-total-price span').html(t.toFixed(2));
+                            return args;
                         }
                     ],
                     beamTooLarge: [
@@ -731,49 +731,52 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     ],
                     beforeAddToCart: [
                         function (args) {
-                            console.log(args);
-                            var items = args.items;
                             var boat_options = this._getOptions();
-                            var m = measurements, types = m.type, item = [], self = this, proceed = true;
+                            var m = measurements, types = m.types, self = this;
+                            var items = [];
                             $.each(types, function(k,v){
                                 if(!m[v].measurements_changed) {
                                     self.trigger('measurementsNotChanged', {type: v});
-                                    proceed = false;
-                                }
-                                if(!proceed) {
                                     items = false;
                                     return false;
                                 }
                                 var kit = m[v];
-                                var _item = items['bsk-'+v];
-                                _item.name = 'Boat Shade Kit - '+v;
-                                _item.options.tapered = {
+                                var item = self.items['bsk-'+v];
+                                item.name = 'Boat Shade Kit - '+v;
+                                item.options.tapered = {
                                         name: 'Tapered',
+                                        value: 'y',
                                         text: (kit.kit.tapered ? 'Yes' : 'No'),
                                         visible: false
                                     };
-                                _item.options.kit_type = {
+                                item.options.kit_type = {
                                         name: 'Kit Type',
+                                        value: v,
                                         text: v
                                     };
-                                _item.options.kit_class = {
+                                item.options.kit_class = {
                                         name: 'Class',
+                                        value: kit.kit.class,
                                         text: kit.kit.class,
                                         visible: false
                                     };
-                                _item.options.beam_width = {
+                                item.options.beam_width = {
                                         name: 'Beam Width',
+                                        value: kit.location.beam.total,
                                         text: kit.location.beam.total+' in'
                                     };
-                                _item.options.ttop_width = {
+                                item.options.ttop_width = {
                                         name: 'T-Top Width',
+                                        value: kit.location.ttop.total,
                                         text: kit.location.ttop.total+' in'
                                     };
-                                _item.options.ttop2rod = {
+                                item.options.ttop2rod = {
                                         name: 'T-Top to Rod Holders',
+                                        value: kit.location.ttop2rod.total,
                                         text: kit.location.ttop2rod.total+' in'
                                     };  
-                            })
+                                items.push(item);
+                            });
                             console.log(items);
                             return items;
                         }

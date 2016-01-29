@@ -301,6 +301,7 @@ class StoreItem {
         }
         $options .= $this->getPrice()->getMarkupRate();
         $options .= $this->getPrice()->getDiscountRate();
+        $options .= $this->id;
         
         $this->sku = hash('md5', $this->id.$options);
         return $this->sku;

@@ -52,7 +52,7 @@ self = this;
 
     StoreItem.prototype = {
         type: null,
-        current_items: [],
+        current_items: {},
         fields: {},
         cart: {
             validated: false,
@@ -149,8 +149,9 @@ self = this;
             ],
             beforeAddToCart: [
                 function (args) {
+                    // The beforeAddToCart must return an array of item objects
                     this._debug('beforeAddToCart Callback');
-                    return args[0];
+                    return args.items;
                 }
             ],
             afterAddToCart: [
@@ -181,10 +182,11 @@ self = this;
                     return true;
                 },
                 function (args) {
-                    var self = this, validated = true, id = args[0];
+                    var self = this, validated = true;
+                    var item = args.item;
                     console.log(id);
                     self.$element.find('.validation-fail').removeClass('validation-fail');
-                    var fields = typeof this.fields[id] === 'undefined' ? {} : this.fields[id];
+                    var fields = typeof this.fields[item.id] === 'undefined' ? {} : this.fields[item.id];
                     $.each(fields, function (k, v) {
                         if($(this).hasClass('required') && ($(this).val() === 'X' || $(this).val() === '')) {
                             $(this).addClass('validation-fail');
@@ -214,7 +216,7 @@ self = this;
             confirmation: [
                 function (args) {
                     var result = false;
-                    $.each(args[0], function(key, item){
+                    $.each(args.items, function(key, item){
                         result = item.confirm;
                     });
                     console.log(result);
@@ -248,7 +250,7 @@ self = this;
                 }
             ],
             onPublishPrice: [
-                function(e, args){
+                function(args){
                     return args;
                 }
             ]
@@ -264,7 +266,9 @@ self = this;
             if(args.target) {
                 console.log('target');
             }
-            args['items'] = this.current_items;
+            args.data = {};
+            args.data.items = this.current_items;
+            args.previousResult = false;
             var events = this.getEvents(event, type);
             var result = true;
             $.each(events, function (k, v) {
@@ -276,12 +280,12 @@ self = this;
                     result = true;
                     return false;
                 }
-                if(result === false) {
-                    self._debug('Trigger is returning false from '+event+' event.');
+                if(typeof(result) === 'boolean') {
+                    args.previousResult = result;
+                } else if(typeof(result) !== 'undefined') {
+                    args = result;
                 }
-                if(result === true) {
-                    self._debug('Trigger is returning true from '+event+' event.');
-                }
+                console.log(args);
                 self._debug(event + ' Complete. ['+k+']');
             });
             return result;
@@ -289,36 +293,32 @@ self = this;
         addToCart: function () {
             var self = this;
 
-            if(!this.cart.validated) {
-                if (!this.trigger('validate', {id: this.cart.id})) {
-                    this.trigger('validation_fail');
-                    this.clearCart();
-                    return;
-                }
-                this.cart.validated = true;
-                this.trigger('validation_pass');
-            }
-            
-
-            // Get the items
-            $.each(this.current_items, function(k,v){
-                self.cart.items[v.id] = v;
-            }) 
-            this.cart.items[this.cart.id] = this.items[this.cart.id];
-
             // trigger beforeAddToCart
-            this.cart.items = this.trigger('beforeAddToCart', {items: this.cart.items});
+            this.cart.items = this.trigger('beforeAddToCart');
             if (!this.cart.items) {
                 return;
             }
-
+            if(!this.cart.validated) {
+                var validate = true;
+                $.each(this.cart.items, function(key,item) {       
+                    validate = this.trigger('validate', {id: key});
+                });
+                this.cart.validated = validate;
+                if(validate) {
+                    this.trigger('validation_pass');
+                } else {
+                    this.trigger('validation_fail');
+                    this.clearCart();
+                }
+            }
+            
             // Trigger the confirmation.
             if(!this.cart.confirmed) {
                 if (!this.trigger('confirmation', {items: this.cart.items})) {
                     return;
                 }
             }
-            $('body').ShoppingCart('addToCart', {items: this.cart.items});
+            $('body').ShoppingCart('addToCart', this.cart.items);
             this.clearCart();
             this.trigger('afterAddToCart', {items: this.cart.items});
         },
@@ -384,6 +384,7 @@ self = this;
             this._debug('Publishing Price');
             var self = this;
             //var pricing = this._getPricing();
+            console.log(item);
             $.ajax({
                 type: 'POST',
                 url: "?option=com_zoo&controller=store&task=getPrice&format=json",
