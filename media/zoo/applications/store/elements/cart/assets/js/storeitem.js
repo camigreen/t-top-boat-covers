@@ -40,12 +40,10 @@
 
         
 //         Set the event handlers
-self = this;
         this.$atc.on('click', $.proxy(this, 'addToCart'));
         this.$qty.on('change', $.proxy(this, '_updateQuantity'));
-        this.$element.on('input','.item-option:not(select)', $.proxy(this, 'trigger', 'onChanged'));
-        this.$element.on('change','select.item-option', $.proxy(this, 'trigger', 'onChanged'));
-        this.$element.on('refresh',$.proxy(this, '_refresh'));
+        this.$element.on('input','.item-option:not(select)', $.proxy(this, '_refresh'));
+        this.$element.on('change','select.item-option', $.proxy(this, '_refresh'));
         this.trigger('onComplete');
 
     };
@@ -86,7 +84,6 @@ self = this;
             this.loadItems();
             this.$element.find('#price').remove();
             this._createConfirmModal();
-            //this._publishPrice();
             this.trigger('onInit');
             
         },
@@ -98,7 +95,6 @@ self = this;
                 var items = elem.data('item');
                 $.each(items, function(key, item) {
                     self.items[id] = item;
-                    console.log(item.name + ' Added.');
                 }); 
             });
             
@@ -143,49 +139,54 @@ self = this;
         },
         _events: {
             onInit: [
-                function () {
+                function (data) {
                     this._debug('StoreItem Plugin Initialized.', false);
+                    return data;
                 }
             ],
             beforeAddToCart: [
-                function (args) {
+                function (data) {
                     // The beforeAddToCart must return an array of item objects
                     this._debug('beforeAddToCart Callback');
-                    return args.items;
+                    return data;
                 }
             ],
             afterAddToCart: [
-                function (args) {
+                function (data) {
                     this._clearConfirm();
                     this.$qty.val(1);
                     this.validation.status = null;
+                    return data;
                 }
             ],
-            onChanged: [
-                function (args) {
-                    this._debug('onChanged Callback', true);
-                    this._refresh(args);
-                    //this._debug(this.item.name + ' StoreItem Plugin Change Detected.');
-                    //this._debug('Field {' + $(e.target).prop("name") + '} changed to ' + $(e.target).val() + '.');
+            beforeChange: [
+                function (data) {
+                    return data;
                 }            
             ],
+            afterchange: [
+                function (data) {
+                    return data;
+                }
+            ],
             onComplete: [
-                function (args) {
+                function (data) {
                     this._debug('StoreItem Plugin Complete.', true);
+                    return data;
                 }
             ],
             validate: [
-                function (args) {
+                function (data) {
                     if (!this.settings.validate) {
-                        return 'break';
+                        data.triggerResult = 'break';
                     }
-                    return true;
+                    return data;
                 },
-                function (args) {
+                function (data) {
                     var self = this, validated = true;
-                    var item = args.item;
+                    var id = data.args.id;
                     self.$element.find('.validation-fail').removeClass('validation-fail');
-                    var fields = typeof this.fields[item.id] === 'undefined' ? {} : this.fields[item.id];
+                    var fields = typeof this.fields[id] === 'undefined' ? {} : this.fields[id];
                     $.each(fields, function (k, v) {
                         if($(this).hasClass('required') && ($(this).val() === 'X' || $(this).val() === '')) {
                             $(this).addClass('validation-fail');
@@ -194,41 +195,43 @@ self = this;
                             
                         }; 
                     });
-                    return validated;
+                    data.triggerResult = validated;
+                    return data;
                 }
                 
             ],
             validation_pass: [
-                function () {
+                function (data) {
                     this._debug('Validation Passed!');
                     this.validation.status = 'passed';
                     this.validation.closeMessage();
+                    return data;
                 }
             ],
             validation_fail: [
-                function () {
+                function (data) {
                     this._debug('Validation Failed!');
                     this.validation.status = 'failed';
                     this.validation.sendMessage();
+                    return data;
                 }
             ],
             confirmation: [
-                function (args) {
+                function (data) {
                     var result = false;
-                    $.each(args.items, function(key, item){
+                    $.each(data.args.items, function(key, item){
                         result = item.confirm;
                     });
-                    console.log(result);
                     this._debug('Starting Confirmation');
                     if (!result) {
-                        return 'break';
+                        data.triggerResult = 'break';
+                        return data;
                     }
 
 
                     if (this.cart.confirmed === false) {
-                        
                             var self = this, container;
-                            var items = args[0];
+                            var items = data.items.args;
                             $.each(items, function(k,item) {
                                 var title = typeof item.title === 'undefined' ? item.name : item.title;
                                 container = $('<div id="'+item.id+'" class="uk-width-1-1"></div>').append('<div class="item-name uk-width-1-1 uk-margin-top uk-text-large">'+title+'</div>').append('<div class="item-options uk-width-1-1 uk-margin-top"><table class="uk-width-1-1"></table></div>');
@@ -243,16 +246,14 @@ self = this;
                             
                             });
                             this.confirm.modal.show();
-                            return false;
+                            data.triggerResult = false;
+                            return data;
                     }
-                    return true;
+                    return data;
                 }
             ],
-            onPublishPrice: [
-                function(args){
-                    return args;
-                }
-            ]
+            beforePublishPrice: [],
+            afterPublishPrice: []
         },
         trigger: function (event, args) {
             
@@ -262,45 +263,37 @@ self = this;
             if(typeof args === 'undefined') {
                 args = {};
             }
-            if(args.target) {
-                console.log('target');
-            }
-            args.data = {};
-            args.data.items = this.current_items;
-            args.previousResult = false;
+            
+            result = {}
+            result.args = args;
+            result.triggerResult = true;
             var events = this.getEvents(event, type);
-            var result = true;
             $.each(events, function (k, v) {
                 self._debug('Starting ' + event + ' ['+k+']');
-                result = v.call(self,args);
-
-                if (result === 'break') {
+                result = v.call(self,result);
+                if (result.triggerResult === 'break') {
                     self._debug('Breaking from '+event+' event.');
-                    result = true;
                     return false;
                 }
-                if(typeof(result) === 'boolean') {
-                    args.previousResult = result;
-                } else if(typeof(result) !== 'undefined') {
-                    args = result;
-                }
-                console.log(args);
                 self._debug(event + ' Complete. ['+k+']');
             });
             return result;
         },
-        addToCart: function () {
+        addToCart: function (items) {
             var self = this;
-
+            items = typeof items === 'undefined' ? [] : items;
             // trigger beforeAddToCart
-            this.cart.items = this.trigger('beforeAddToCart');
-            if (!this.cart.items) {
+            var triggerData = this.trigger('beforeAddToCart', {items: items});
+            
+            if (!triggerData.triggerResult) {
                 return;
             }
+            this.cart.items = triggerData.args.items;
             if(!this.cart.validated) {
                 var validate = true;
                 $.each(this.cart.items, function(key,item) {       
-                    validate = self.trigger('validate', {id: key});
+                    triggerData = self.trigger('validate', {id: key});
+                    validate = triggerData.triggerResult;
                 });
                 this.cart.validated = validate;
                 if(validate) {
@@ -313,7 +306,8 @@ self = this;
             
             // Trigger the confirmation.
             if(!this.cart.confirmed) {
-                if (!this.trigger('confirmation', {items: this.cart.items})) {
+                var confirm = this.trigger('confirmation', {items: this.cart.items});
+                if (!confirm) {
                     return;
                 }
             }
@@ -381,18 +375,17 @@ self = this;
         },
         _publishPrice: function (item) {
             this._debug('Publishing Price');
+            var triggerData = this.trigger('beforePublishPrice', {item: item});
+            item = triggerData.args.item;
             var self = this;
-            //var pricing = this._getPricing();
-            console.log(item);
             $.ajax({
                 type: 'POST',
                 url: "?option=com_zoo&controller=store&task=getPrice&format=json",
                 data: {item: item},
                 success: function(data){
                     var elem = $('#'+item.id+'-price span');
-                    price = self.trigger('onPublishPrice', {price: data.price, id: item.id});
-                    console.log(data.price);
                     elem.html(data.price.toFixed(2));
+                    self.trigger('afterPublishPrice', {price: data.price, item: item});
                 },
                 error: function(data, status, error) {
                     var elem = $('#'+item.id+'-price span');
@@ -413,7 +406,6 @@ self = this;
             var self = this;
             $.each(this.items, function(id, item){
                 var options = typeof self.fields[id] === 'undefined' ? {} : self.fields[id];
-                console.log(options);
                 var itemOptions = {};
                 $.each(options, function(name, elem){
                     itemOptions[elem.prop('name')] = {
@@ -430,7 +422,7 @@ self = this;
             var elems = this.$element.find('input.item-option, select.item-option'), self = this;
             var fields = {};
             $.each(elems, function(k, field) {
-                var id = $(this).closest('.storeItem').prop('id');
+                var id = $(this).closest('.options-container').data('id');
                 if(typeof fields[id] === 'undefined') {
                     fields[id] = {};
                 }
@@ -449,20 +441,22 @@ self = this;
             this.items[id].qty = elem.val();
             this.trigger('onChanged', {e: e});
         },
-        _refresh: function (args) {
+        _refresh: function (e) {
+            var id = $(e.target).closest('.options-container').data('id'), self = this;
+            triggerData = this.trigger('beforeChange', {event: e, item: this.items[id]});
             this._getOptions();
-            var self = this;
-            console.log(args);
-            $.each(args.items, function(k, item){
-                self._publishPrice(item);
-            })
-            if (this.validation.status === 'failed') {
-                this._validate();
+            var publishPrice = typeof triggerData.publishPrice === 'undefined' ? true : triggerData.args.publishPrice;
+            if(publishPrice) {
+                self._publishPrice(this.items[id]);
             }
+            if (this.validation.status === 'failed') {
+                this._validate(id);
+            }
+            this.trigger('afterChange', {event: e, item: this.items[id]});
             
         },
-        _validate: function () {
-            if(this.trigger('validate')) {
+        _validate: function (id) {
+            if(this.trigger('validate', {id: id})) {
                 this.trigger('validation_pass');
             } else {
                 this.trigger('validation_fail');

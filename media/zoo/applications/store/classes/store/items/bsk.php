@@ -13,12 +13,6 @@
  */
 class BSKStoreItem extends StoreItem {
 
-    public $type = "bsk";
-    /**
-     * @var [string]
-     */
-    public $make = "LaPorte's T-Top Boat Covers";
-
    	/**
    	 * @var [string]
    	 */
@@ -30,6 +24,8 @@ class BSKStoreItem extends StoreItem {
         parent::importItem($item);
         $this->type = 'bsk';
         $this->id = 'bsk';
+        $this->name = 'Boat Shade Kit';
+        $this->make = "LaPorte's T-Top Boat Covers";
     }
     
 
