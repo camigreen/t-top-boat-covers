@@ -184,7 +184,6 @@ self = this;
                 function (args) {
                     var self = this, validated = true;
                     var item = args.item;
-                    console.log(id);
                     self.$element.find('.validation-fail').removeClass('validation-fail');
                     var fields = typeof this.fields[item.id] === 'undefined' ? {} : this.fields[item.id];
                     $.each(fields, function (k, v) {
@@ -301,7 +300,7 @@ self = this;
             if(!this.cart.validated) {
                 var validate = true;
                 $.each(this.cart.items, function(key,item) {       
-                    validate = this.trigger('validate', {id: key});
+                    validate = self.trigger('validate', {id: key});
                 });
                 this.cart.validated = validate;
                 if(validate) {

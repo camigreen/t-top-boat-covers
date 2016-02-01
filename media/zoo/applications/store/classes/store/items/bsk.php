@@ -29,6 +29,7 @@ class BSKStoreItem extends StoreItem {
     public function importItem($item = null) {
         parent::importItem($item);
         $this->type = 'bsk';
+        $this->id = 'bsk';
     }
     
 

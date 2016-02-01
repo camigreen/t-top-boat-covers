@@ -19,7 +19,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
 <div id="storeOrderForm" class="<?php echo $item->type; ?>">
-    <div id="<?php echo $item->id; ?>" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid storeItem">
+    <div id="<?php echo $storeItem->id; ?>" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid storeItem">
     <div class="uk-form uk-margin main-item" >
         <div class="uk-grid">
                 <div class="uk-width-2-3">
@@ -403,12 +403,6 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     onInit: [
                         function (e) {
                             var self = this;
-                            $.each(self.items, function(k,v) {
-                                if(v.type === 'bsk') {
-                                    tempItem = v;
-                                    createItems();
-                                }
-                            });
 
                             var type = measurements.types;
 
@@ -454,21 +448,6 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             });
 
                             this.trigger('measure', {type: type});
-
-                            function createItems() {
-                                var item = tempItem;
-                                delete self.items[item.id];
-                                var fields = self.fields[item.id];
-                                delete self.fields[item.id];
-                                self.current_items = {};
-                                $.each(measurements.types, function(k, type) {
-                                    self.items['bsk-'+type] = item;
-                                    self.items['bsk-'+type].price_group = 'bsk.'+measurements.aft.kit.class
-                                    self.items['bsk-'+type].id = 'bsk-'+type;
-                                    self.fields['bsk-'+type] = fields;
-                                    self.current_items['bsk-'+type] = self.items['bsk-'+type];
-                                });
-                            }
                             
                         }
                             
@@ -476,6 +455,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     ],
                     measure: [
                         function (args) {
+                            console.log(this.items);
                             var types = args.type;
                             if(measurements.types.length > 1) {
                                 $('#use_on_bow').closest('label').hide();
@@ -552,7 +532,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
 
                                 m[type].kit.class = kit_class;
                                 if(old_class !== kit_class) {
-                                    self.items['bsk-'+type].price_group = 'bsk.'+kit_class;
+                                    self.items['bsk'].price_group = 'bsk.'+kit_class;
                                     self._publishPrice(self.items['bsk-'+type]);
                                 }
                             }
