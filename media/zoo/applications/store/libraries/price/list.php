@@ -180,33 +180,37 @@ $price['storage-bag.shipping.price'] = 0;
 $price['storage-bag.item.allowMarkup'] = false;
 
 // // Boat Shade Kit
-$price['bsk.A.item.base'] = 280;
-$price['bsk.A.item.option.bsk_kit.full'] = 219;
-$price['bsk.A.shipping.base.weight'] = 4;
-$price['bsk.A.shipping.base.price'] = 0;
-$price['bsk.A.shipping.option.bsk_kit.full.weight'] = 15;
-$price['bsk.A.shipping.option.bsk_kit.full.price'] = 0;
+$price['bsk.item.base'] = 0;
+$price['bsk.item.option.kit_class.A'] = 280;
+$price['bsk.item.option.kit_class.B'] = 355;
+$price['bsk.item.option.kit_class.C'] = 439;
+$price['bsk.item.option.kit_class.D'] = 525;
+$price['bsk.item.option.bsk_kit.full'] = 220;
+$price['bsk.shipping.base.weight'] = 4;
+$price['bsk.shipping.base.price'] = 0;
+$price['bsk.shipping.option.bsk_kit.full.weight'] = 15;
+$price['bsk.shipping.option.bsk_kit.full.price'] = 0;
 
-$price['bsk.B.item.base'] = 355;
-$price['bsk.B.item.option.bsk_kit.full'] = 224;
-$price['bsk.B.shipping.base.weight'] = 4;
-$price['bsk.B.shipping.base.price'] = 0;
-$price['bsk.B.shipping.option.bsk_kit.full.weight'] = 15;
-$price['bsk.B.shipping.option.bsk_kit.full.price'] = 0;
+// $price['bsk.B.item.base'] = 355;
+// $price['bsk.B.item.option.bsk_kit.full'] = 224;
+// $price['bsk.B.shipping.base.weight'] = 4;
+// $price['bsk.B.shipping.base.price'] = 0;
+// $price['bsk.B.shipping.option.bsk_kit.full.weight'] = 15;
+// $price['bsk.B.shipping.option.bsk_kit.full.price'] = 0;
 
-$price['bsk.C.item.base'] = 439;
-$price['bsk.C.item.option.bsk_kit.full'] = 220;
-$price['bsk.C.shipping.base.weight'] = 4;
-$price['bsk.C.shipping.base.price'] = 0;
-$price['bsk.C.shipping.option.bsk_kit.full.weight'] = 15;
-$price['bsk.C.shipping.option.bsk_kit.full.price'] = 0;
+// $price['bsk.C.item.base'] = 439;
+// $price['bsk.C.item.option.bsk_kit.full'] = 220;
+// $price['bsk.C.shipping.base.weight'] = 4;
+// $price['bsk.C.shipping.base.price'] = 0;
+// $price['bsk.C.shipping.option.bsk_kit.full.weight'] = 15;
+// $price['bsk.C.shipping.option.bsk_kit.full.price'] = 0;
 
-$price['bsk.D.item.base'] = 525;
-$price['bsk.D.item.option.bsk_kit.full'] = 224;
-$price['bsk.D.shipping.base.weight'] = 4;
-$price['bsk.D.shipping.base.price'] = 0;
-$price['bsk.D.shipping.option.bsk_kit.full.weight'] = 15;
-$price['bsk.D.shipping.option.bsk_kit.full.price'] = 0;
+// $price['bsk.D.item.base'] = 525;
+// $price['bsk.D.item.option.bsk_kit.full'] = 224;
+// $price['bsk.D.shipping.base.weight'] = 4;
+// $price['bsk.D.shipping.base.price'] = 0;
+// $price['bsk.D.shipping.option.bsk_kit.full.weight'] = 15;
+// $price['bsk.D.shipping.option.bsk_kit.full.price'] = 0;
 
 // //BSK Accessories
 

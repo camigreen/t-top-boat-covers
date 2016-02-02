@@ -23,7 +23,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
     <div class="uk-form uk-margin main-item" >
         <div class="uk-grid">
                 <div class="uk-width-2-3">
-                    <div class="uk-width-1-1">
+                    <div class="uk-width-1-1 options-container" data-id="bsk">
                         <div class="uk-grid uk-text-center bsk-chooser">
                             <div class="uk-width-1-1">
                                 <ul class="uk-list full-pic">
@@ -408,6 +408,14 @@ $storeItem = $this->app->item->create($item, 'bsk');
 
                             self.type = 'bsk';
 
+                            // Create Items
+                            this.items['bsk-aft'] = $.extend(true, {}, this.items['bsk']);
+                            this.items['bsk-aft'].id = 'bsk-aft';
+                            this.items['bsk-bow'] = $.extend(true, {}, this.items['bsk']);
+                            this.items['bsk-bow'].id = 'bsk-bow';
+                            delete this.items['bsk'];
+                            console.log(this.items);
+
                             $('#use_on_bow').on('change',function(e){
                                 self.trigger('measure', {type: ['aft']});
                             });
@@ -429,8 +437,8 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                         type = [type];
                                     }
                                     measurements.types = type;
-                                    console.log(type);
-                                    self.trigger('measure', {type: type});
+                                    total = {};
+                                    self._refresh(e);
                             })
 
                             $('.bow-measurements input').on('change',function(){
@@ -530,9 +538,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
 
                                 m[type].kit.class = kit_class;
                                 if(old_class !== kit_class) {
-                                    var item = $.extend(true, {}, self.items['bsk']);
-                                    item.id = 'bsk-'+type;
-                                    item.price_group = 'bsk.'+kit_class;
+                                    var item = self.items['bsk-'+type]; 
+                                    item.options.kit_class = {
+                                        name: 'Class',
+                                        text: kit_class,
+                                        value: kit_class
+                                    }
                                     self._publishPrice(item);
                                 }
                             }
@@ -543,18 +554,33 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         function (data) {
                             if(data.args.item.id === 'bsk') {
                                 data.publishPrice = false;
+                                this.trigger('measure', {type: measurements.types});
                             }
+                            return data;
+                        }
+                    ],
+                    afterChange: [
+                        function (data) {
+                            var types = measurements.types, self = this;
+                            $.each(types, function (k, v) {
+                                var bsk = measurements[v];
+                                var item = $.extend(true, {}, self.items['bsk']);
+                                item.id = 'bsk-'+v;
+                                item.price_group = 'bsk.'+bsk.kit.class;
+                                self._publishPrice(item);
+                            })
                             return data;
                         }
                     ],
                     beforePublishPrice: [],
                     afterPublishPrice: [
                         function (data) {
-                            total = {};
                             if(data.args.item.id === 'bsk-aft' || data.args.item.id === 'bsk-bow') {
                                 if($.inArray(data.args.item.id.substring(4), measurements.types) !== -1) {
+                                    console.log(data.args.item.id);
                                     total[data.args.item.id] = data.args.price;
                                 }
+                                console.log(total);
                                 var t = 0;
                                 $.each(total, function(k, v){
                                     t = t+v;
@@ -728,7 +754,6 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             var boat_options = this._getOptions();
                             var m = measurements, types = m.types, self = this;
                             var items = {};
-                            var tempItem = $.extend(true, {}, self.items['bsk']);
                             $.each(types, function(k,v){
                                 if(!m[v].measurements_changed) {
                                     self.trigger('measurementsNotChanged', {type: v});
@@ -736,10 +761,10 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                     return false;
                                 }
                                 var kit = m[v];
-                                var item = tempItem;
+                                var item = $.extend(true, {}, self.items['bsk']);
                                 item.id = 'bsk-'+v;
                                 item.name = 'Boat Shade Kit - '+v;
-                                item.price_group = 'bsk.'+kit.class;
+                                item.price_group = 'bsk.'+kit.kit.class;
                                 item.options.tapered = {
                                         name: 'Tapered',
                                         value: 'y',
@@ -772,10 +797,10 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                         value: kit.location.ttop2rod.total,
                                         text: kit.location.ttop2rod.total+' in'
                                     };  
+                                console.log(item);
                                 items[item.id] = item;
                             });
                             data.args.items = items;
-                            console.log(items);
                             return data;
                         }
                     ]

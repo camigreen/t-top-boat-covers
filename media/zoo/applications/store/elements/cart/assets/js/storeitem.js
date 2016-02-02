@@ -159,16 +159,8 @@
                     return data;
                 }
             ],
-            beforeChange: [
-                function (data) {
-                    return data;
-                }            
-            ],
-            afterchange: [
-                function (data) {
-                    return data;
-                }
-            ],
+            beforeChange: [],
+            afterchange: [],
             onComplete: [
                 function (data) {
                     this._debug('StoreItem Plugin Complete.', true);
@@ -252,7 +244,7 @@
                 args = {};
             }
             
-            result = {}
+            result = {};
             result.args = args;
             result.triggerResult = true;
             var events = this.getEvents(event, type);

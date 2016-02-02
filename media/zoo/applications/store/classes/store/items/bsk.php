@@ -26,7 +26,7 @@ class BSKStoreItem extends StoreItem {
         $this->id = 'bsk';
         $this->name = 'Boat Shade Kit';
         $this->make = "LaPorte's T-Top Boat Covers";
-        $this->price_group = 'bsk.A';
+        $this->price_group = 'bsk';
     }
     
 
