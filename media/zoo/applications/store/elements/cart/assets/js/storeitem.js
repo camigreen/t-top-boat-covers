@@ -183,19 +183,7 @@
                     return data;
                 },
                 function (data) {
-                    var self = this, validated = true;
-                    var id = data.args.id;
-                    self.$element.find('.validation-fail').removeClass('validation-fail');
-                    var fields = typeof this.fields[id] === 'undefined' ? {} : this.fields[id];
-                    $.each(fields, function (k, v) {
-                        if($(this).hasClass('required') && ($(this).val() === 'X' || $(this).val() === '')) {
-                            $(this).addClass('validation-fail');
-                            self._debug($(this).prop('name') + 'Failed Validation');
-                            validated = false;
-                            
-                        }; 
-                    });
-                    data.triggerResult = validated;
+                    
                     return data;
                 }
                 
