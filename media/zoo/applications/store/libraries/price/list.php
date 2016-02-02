@@ -187,26 +187,26 @@ $price['bsk.A.shipping.base.price'] = 0;
 $price['bsk.A.shipping.option.bsk_kit.full.weight'] = 15;
 $price['bsk.A.shipping.option.bsk_kit.full.price'] = 0;
 
-// $price['bsk.B.item.base'] = 355;
-// $price['bsk.B.item.option.bsk_kit.full'] = 224;
-// $price['bsk.B.shipping.base.weight'] = 4;
-// $price['bsk.B.shipping.base.price'] = 0;
-// $price['bsk.B.shipping.option.bsk_kit.full.weight'] = 15;
-// $price['bsk.B.shipping.option.bsk_kit.full.price'] = 0;
+$price['bsk.B.item.base'] = 355;
+$price['bsk.B.item.option.bsk_kit.full'] = 224;
+$price['bsk.B.shipping.base.weight'] = 4;
+$price['bsk.B.shipping.base.price'] = 0;
+$price['bsk.B.shipping.option.bsk_kit.full.weight'] = 15;
+$price['bsk.B.shipping.option.bsk_kit.full.price'] = 0;
 
-// $price['bsk.C.item.base'] = 439;
-// $price['bsk.C.item.option.bsk_kit.full'] = 220;
-// $price['bsk.C.shipping.base.weight'] = 4;
-// $price['bsk.C.shipping.base.price'] = 0;
-// $price['bsk.C.shipping.option.bsk_kit.full.weight'] = 15;
-// $price['bsk.C.shipping.option.bsk_kit.full.price'] = 0;
+$price['bsk.C.item.base'] = 439;
+$price['bsk.C.item.option.bsk_kit.full'] = 220;
+$price['bsk.C.shipping.base.weight'] = 4;
+$price['bsk.C.shipping.base.price'] = 0;
+$price['bsk.C.shipping.option.bsk_kit.full.weight'] = 15;
+$price['bsk.C.shipping.option.bsk_kit.full.price'] = 0;
 
-// $price['bsk.D.item.base'] = 525;
-// $price['bsk.D.item.option.bsk_kit.full'] = 224;
-// $price['bsk.D.shipping.base.weight'] = 4;
-// $price['bsk.D.shipping.base.price'] = 0;
-// $price['bsk.D.shipping.option.bsk_kit.full.weight'] = 15;
-// $price['bsk.D.shipping.option.bsk_kit.full.price'] = 0;
+$price['bsk.D.item.base'] = 525;
+$price['bsk.D.item.option.bsk_kit.full'] = 224;
+$price['bsk.D.shipping.base.weight'] = 4;
+$price['bsk.D.shipping.base.price'] = 0;
+$price['bsk.D.shipping.option.bsk_kit.full.weight'] = 15;
+$price['bsk.D.shipping.option.bsk_kit.full.price'] = 0;
 
 // // Center Console Curtains
 

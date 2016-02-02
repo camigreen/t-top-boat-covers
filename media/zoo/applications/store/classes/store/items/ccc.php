@@ -23,7 +23,7 @@ class CCCStoreItem extends StoreItem {
     public function importItem($item = null) {
         parent::importItem($item);
         $this->id = 'ccc';
-        $this->confirm = false;
+        $this->confirm = true;
         $this->type = 'ccc';
         $this->name = 'Center Console Curtain';
         $this->make = "LaPorte's T-Top Boat Covers";

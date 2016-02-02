@@ -26,7 +26,6 @@
         this.name = options.name;
         this.confirm = {
             elem: null,
-            complete: false,
             modal: null,
             button: null,
             cancel: null,
@@ -59,7 +58,6 @@
             confirmed: false
         },
         validation: {
-            status: null,
             message: null,
             messageData: {
                     message : '<span>Please complete the fields in red!</span><i class="uk-icon-arrow-down uk-margin-left" />',
@@ -167,23 +165,14 @@
                     return data;
                 }
             ],
-            validate: [
-                function (data) {
-                    if (!this.settings.validate) {
-                        data.triggerResult = 'break';
-                    }
-                    return data;
-                },
-                function (data) {
-                    
-                    return data;
-                }
-                
-            ],
+            beforeValidation: [],
+            afterValidation: [],
+            beforeConfirmation: [],
+            afterConfirmation: [],
             validation_pass: [
                 function (data) {
                     this._debug('Validation Passed!');
-                    this.validation.status = 'passed';
+                    this.validation.complete = true;
                     this.validation.closeMessage();
                     return data;
                 }
@@ -196,42 +185,7 @@
                     return data;
                 }
             ],
-            confirmation: [
-                function (data) {
-                    this._debug('Starting Confirmation');
-                    var result = false;
-                    $.each(data.args.items, function (k,item) {
-                        if(item.confirm) {
-                            result = true;
-                        }
-                    })
-                    console.log(result);
-                    if (this.confirm.complete || !result) {
-                        data.triggerResult = 'break';
-                        return data;
-                    }
-
-                    var self = this, container;
-                    var items = data.args.items;
-                    $.each(items, function(k,item) {
-                        var title = typeof item.title === 'undefined' ? item.name : item.title;
-                        container = $('<div id="'+item.id+'" class="uk-width-1-1"></div>').append('<div class="item-name uk-width-1-1 uk-margin-top uk-text-large">'+title+'</div>').append('<div class="item-options uk-width-1-1 uk-margin-top"><table class="uk-width-1-1"></table></div>');
-                        
-                        $.each(item.options, function(k, option){
-                            if (typeof option.visible === 'undefined' || option.visible) {
-                                container.find('.item-options table').append('<tr><td class="item-options-name">'+option.name+'</td><td class="item-options-text">'+option.text+'</td></tr>');
-                            }
-                        });
-                        
-                        self.confirm.elem.find('.item').append(container);
-                    
-                    });
-                    this.confirm.modal.show();
-                    data.triggerResult = false;
-                    return data;
-                    return data;
-                }
-            ],
+            confirmation: [],
             beforePublishPrice: [],
             afterPublishPrice: []
         },
@@ -262,36 +216,26 @@
         addToCart: function (e) {
             var self = this;
             var id = $(e.target).data('id');
-            console.log(id);
-            var items = {};
-            items[this.items[id].id] = $.extend(true,{},this.items[id]);
+            this.cart.items = {};
+
+            this.cart.items[this.items[id].id] = $.extend(true,{},this.items[id]);
+
             // trigger beforeAddToCart
-            var triggerData = this.trigger('beforeAddToCart', {event: e, items: items});
-            console.log(triggerData);
-            if (!triggerData.triggerResult) {
+            var triggerData = this.trigger('beforeAddToCart', {event: e, items: this.cart.items});
+            this.cart.items = triggerData.args.items;
+            console.log(this.cart.items);
+            if(!triggerData.triggerResult) {
                 return;
             }
-            this.cart.items = triggerData.args.items;
+            // Validate
+            this.cart.validated = this._validate(this.cart.items);
             if(!this.cart.validated) {
-                var validate = true;
-                $.each(this.cart.items, function(key,item) {       
-                    validate = self._validate(key);
-                });
-                this.cart.validated = validate;
-                if(validate) {
-                    this.trigger('validation_pass');
-                } else {
-                    this.trigger('validation_fail');
-                    this.clearCart();
-                }
+                return;
             }
-            
             // Trigger the confirmation.
-            if(!this.confirm.complete) {
-                triggerData = this.trigger('confirmation', {items: this.cart.items});
-                if (!triggerData.triggerResult) {
-                    return;
-                }
+            this.cart.confirmed = this._confirmation(this.cart.items, id);
+            if(!this.cart.confirmed) {
+                return;
             }
             $('body').ShoppingCart('addToCart', this.cart.items);
             this.clearCart();
@@ -306,6 +250,50 @@
         getItem: function(id) {
             return this.items[id];
         },
+        _confirmation: function (items, cart_id) { 
+            var result = false;
+            $.each(items, function (k,item) {
+                if(item.confirm) {
+                    result = true;
+                }
+            })                   
+
+            if (this.cart.confirmed) {
+                return true;
+            }
+
+            if (!result) {
+                return true;
+            }
+
+            this._debug('Starting Confirmation');
+            var triggerData = this.trigger('beforeConfirmation', {items: items});
+            items = triggerData.args.items;
+            var result = false;
+            $.each(items, function (k,item) {
+                if(item.confirm) {
+                    result = true;
+                }
+            })
+
+            var self = this, container;
+            this.confirm.elem.find('[name="cart_id"]').val(cart_id);
+            $.each(items, function(k,item) {
+                console.log('loading items into modal');
+                var title = typeof item.title === 'undefined' ? item.name : item.title;
+                container = $('<div id="'+item.id+'" class="uk-width-1-1"></div>').append('<div class="item-name uk-width-1-1 uk-margin-top uk-text-large">'+title+'</div>').append('<div class="item-options uk-width-1-1 uk-margin-top"><table class="uk-width-1-1"></table></div>');
+                
+                $.each(item.options, function(k, option){
+                    if (typeof option.visible === 'undefined' || option.visible) {
+                        container.find('.item-options table').append('<tr><td class="item-options-name">'+option.name+'</td><td class="item-options-text">'+option.text+'</td></tr>');
+                    }
+                });
+                self.confirm.elem.find('.item').append(container);
+            
+            });
+            this.confirm.modal.show();
+            return false;
+        },
         _confirm: function() {
             var modal = this.confirm.elem;
             var accept = modal.find('[name="accept"]');
@@ -313,17 +301,19 @@
             if (accept.val().toLowerCase() === 'yes') {
                 modal.hide();
                 this._clearConfirm();
-                $('#atc-ccc').trigger('click');
+                this.cart.confirmed = true;
+                var id = this.confirm.elem.find('[name="cart_id"]').val();
+                $('#atc-'+id).trigger('click');
             } else {
                 error.html('You must type "yes" or press cancel.');            
             }
         },
+
         _clearConfirm: function() {
             var modal = this.confirm.elem;
             var accept = modal.find('[name="accept"]');
             var error = modal.find('.confirm-error');
             
-            this.confirm.complete = false;
             modal.find('.item-name').html('');
             modal.find('.item-options').html('');
             accept.val('');
@@ -436,10 +426,31 @@
             this.trigger('afterChange', {event: e, item: this.items[id]});
             
         },
-        _validate: function (id) {
-            var fields = this.fields[id];
-            console.log(fields);
-            return true;
+        _validate: function (items) {
+
+            if(!this.settings.validate || this.cart.validated) {
+                return true;
+            }
+
+            var self = this, validated = true;
+            self.$element.find('.validation-fail').removeClass('validation-fail');
+            $.each(items, function (key, item) {
+                var fields = !self.fields[item.id] ? {} : self.fields[item.id];
+                $.each(fields, function (k, v) {
+                    if($(this).hasClass('required') && ($(this).val() === 'X' || $(this).val() === '')) {
+                        $(this).addClass('validation-fail');
+                        self._debug($(this).prop('name') + 'Failed Validation');
+                        validated = false;
+                    }; 
+                });
+            })
+
+            if(validated) {
+                this.trigger('validation_pass');
+            } else {
+                this.trigger('validation_fail');
+            }
+            return validated;
         },
         _debug: function (status, showThis) {
             if (!this.settings.debug) {

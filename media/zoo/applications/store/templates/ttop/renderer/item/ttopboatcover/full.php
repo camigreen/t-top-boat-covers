@@ -57,7 +57,7 @@ $category = $item->getPrimaryCategory()->getParent();
                             <?php endif; ?>
                         </ul>
 
-                        <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin options-container" data-item="<?php echo $storeItem->id; ?>">
+                        <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin options-container" data-id="<?php echo $storeItem->id; ?>">
                             <li class="uk-grid">
 
 
@@ -153,7 +153,7 @@ $category = $item->getPrimaryCategory()->getParent();
                             <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                     <?php endif; ?>
                 </div>
-                <div class="uk-width-1-1 options-container uk-margin-top" data-item="<?php echo $storeItem->id; ?>">
+                <div class="uk-width-1-1 options-container uk-margin-top" data-id="<?php echo $storeItem->id; ?>">
                     <?php if ($this->checkPosition('options')) : ?>
                         <div class="uk-panel uk-panel-box">
                             <h3><?php echo JText::_('Options'); ?></h3>
@@ -164,9 +164,9 @@ $category = $item->getPrimaryCategory()->getParent();
                 </div>
                 <div class="uk-width-1-1 addtocart-container uk-margin-top">
                     <label>Quantity</label>
-                    <input id="qty-<?php echo $storeItem->id; ?>" type="number" class="uk-width-1-1 qty" name="qty" data-item="<?php echo $storeItem->id; ?>" min="1" value ="1" />
+                    <input id="qty-<?php echo $storeItem->id; ?>" type="number" class="uk-width-1-1 qty" name="qty" data-id="<?php echo $storeItem->id; ?>" min="1" value ="1" />
                     <div class="uk-margin-top">
-                        <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger atc" data-item="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                        <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger atc" data-id="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
                     </div>
                 </div>
                 <?php if ($this->checkPosition('accessories')) : ?>
@@ -211,6 +211,9 @@ $category = $item->getPrimaryCategory()->getParent();
                                             <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <input type="hidden" name="cart_id" value="" />
                                 </div>
                             </div>
                         </div>
@@ -340,7 +343,7 @@ jQuery(function($){
                                 changeColor(f);
                             }
                         ],
-                        onChanged: [
+                        beforeChange: [
                             function(e) { 
                                 switch($(e.target).prop('name')) {
                                     case 'storage': //Check the storage value and if "IW" show the modal

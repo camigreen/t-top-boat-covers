@@ -48,7 +48,7 @@ $storeItem = $this->app->item->create($item, $item->alias);
                                 <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                         <?php endif; ?>
                     </div>
-            <div class="uk-width-1-1 options-container uk-margin-top">
+            <div class="uk-width-1-1 options-container uk-margin-top" data-id="<?php echo $storeItem->id; ?>">
                 <?php if ($this->checkPosition('options')) : ?>
                     <div class="uk-panel uk-panel-box">
                         <h3><?php echo JText::_('Options'); ?></h3>
@@ -60,9 +60,9 @@ $storeItem = $this->app->item->create($item, $item->alias);
 
             <div class="uk-width-1-1 addtocart-container uk-margin-top">
                 <label>Quantity</label>
-                <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1 qty" data-item="<?php echo $storeItem->id; ?>" name="qty" min="1" value ="1" />
+                <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1 qty" data-id="<?php echo $storeItem->id; ?>" name="qty" min="1" value ="1" />
                 <div class="uk-margin-top">
-                    <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger atc" data-item="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                    <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger atc" data-id="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -85,12 +85,7 @@ $storeItem = $this->app->item->create($item, $item->alias);
                 validate: true,
                 confirm: false,
                 debug: true,
-                events: {
-                    onInit: [],
-                    onChanged: [],
-                    validate: [],
-                    beforeAddToCart: []
-                }
+                events: {}
             });
         });
         

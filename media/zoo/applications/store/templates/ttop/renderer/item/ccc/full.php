@@ -296,7 +296,7 @@ $storeItem = $this->app->item->create($item, 'ccc');
         };
         $('#storeItemForm').StoreItem({
             name: 'CenterConsoleCurtain',
-            validate: true,
+            validate: false,
             debug: true,
             events: {
                 onInit: [
@@ -608,6 +608,7 @@ $storeItem = $this->app->item->create($item, 'ccc');
                 ],
                 beforeAddToCart: [
                     function(data) {
+                        console.log(CCC);
                         if (!CCC.measurements_changed) {
                             this.trigger('measurementsNotChanged');
                             data.triggerResult = false;
@@ -618,6 +619,11 @@ $storeItem = $this->app->item->create($item, 'ccc');
                         data.args.items['ccc'] = item;
 
                         console.log(item);
+                        return data;
+                    }
+                ],
+                afterAddToCart: [
+                    function (data) {
                         CCC.measurements_changed = false;
                         return data;
                     }
