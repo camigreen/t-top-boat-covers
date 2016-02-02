@@ -208,6 +208,68 @@ $price['bsk.A.shipping.option.bsk_kit.full.price'] = 0;
 // $price['bsk.D.shipping.option.bsk_kit.full.weight'] = 15;
 // $price['bsk.D.shipping.option.bsk_kit.full.price'] = 0;
 
+// // Center Console Curtains
+
+$price['ccc.A.item.base'] = 0;
+$price['ccc.A.item.option.fabric.8oz'] = 399;
+$price['ccc.A.item.option.fabric.9oz'] = 474;
+$price['ccc.A.shipping.base.weight'] = 16;
+$price['ccc.A.shipping.base.price'] = 0;
+
+$price['ccc.B.item.base'] = 0;
+$price['ccc.B.item.option.fabric.8oz'] = 449;
+$price['ccc.B.item.option.fabric.9oz'] = 524;
+$price['ccc.B.shipping.base.weight'] = 16;
+$price['ccc.B.shipping.base.price'] = 0;
+
+$price['ccc.C.item.base'] = 0;
+$price['ccc.C.item.option.fabric.8oz'] = 499;
+$price['ccc.C.item.option.fabric.9oz'] = 574;
+$price['ccc.C.shipping.base.weight'] = 16;
+$price['ccc.C.shipping.base.price'] = 0;
+
+$price['ccc.D.item.base'] = 0;
+$price['ccc.D.item.option.fabric.8oz'] = 649;
+$price['ccc.D.item.option.fabric.9oz'] = 724;
+$price['ccc.D.shipping.base.weight'] = 16;
+$price['ccc.D.shipping.base.price'] = 0;
+
+$price['ccc.E.item.base'] = 0;
+$price['ccc.E.item.option.fabric.8oz'] = 699;
+$price['ccc.E.item.option.fabric.9oz'] = 774;
+$price['ccc.E.shipping.base.weight'] = 16;
+$price['ccc.E.shipping.base.price'] = 0;
+
+$price['ccc.F.item.base'] = 0;
+$price['ccc.F.item.option.fabric.8oz'] = 749;
+$price['ccc.F.item.option.fabric.9oz'] = 824;
+$price['ccc.F.shipping.base.weight'] = 16;
+$price['ccc.F.shipping.base.price'] = 0;
+
+$price['ccc.G.item.base'] = 0;
+$price['ccc.G.item.option.fabric.8oz'] = 799;
+$price['ccc.G.item.option.fabric.9oz'] = 874;
+$price['ccc.G.shipping.base.weight'] = 16;
+$price['ccc.G.shipping.base.price'] = 0;
+
+$price['ccc.H.item.base'] = 0;
+$price['ccc.H.item.option.fabric.8oz'] = 849;
+$price['ccc.H.item.option.fabric.9oz'] = 924;
+$price['ccc.H.shipping.base.weight'] = 16;
+$price['ccc.H.shipping.base.price'] = 0;
+
+$price['ccc.I.item.base'] = 0;
+$price['ccc.I.item.option.fabric.8oz'] = 899;
+$price['ccc.I.item.option.fabric.9oz'] = 974;
+$price['ccc.I.shipping.base.weight'] = 16;
+$price['ccc.I.shipping.base.price'] = 0;
+
+$price['ccc.J.item.base'] = 0;
+$price['ccc.J.item.option.fabric.8oz'] = 949;
+$price['ccc.J.item.option.fabric.9oz'] = 1024;
+$price['ccc.J.shipping.base.weight'] = 16;
+$price['ccc.J.shipping.base.price'] = 0;
+
 // //BSK Accessories
 
 $price['telescoping-poles-2.item.base'] = 122.50;
@@ -786,57 +848,7 @@ $price['bsk-webbing-straps.item.allowMarkup'] = false;
 // );
 
 
-// // Center Console Curtains
 
-// $prices['ccc'] = array(
-//      'item' => array(
-// 	     'unk' => 'Choose Measurement',
-// 	 'A' => array(
-// 	     '8oz' => 399,
-// 		 '9oz' => 474
-// 	),
-// 	 'B' => array(
-// 	     '8oz' => 449,
-// 		 '9oz' => 524
-// 	),
-// 	 'C' => array(
-// 	     '8oz' => 499,
-// 		 '9oz' => 574
-// 	),
-// 	 'D' => array(
-// 	     '8oz' => 649,
-// 		 '9oz' => 724
-// 	),
-// 	 'E' => array(
-// 	     '8oz' => 699,
-// 		 '9oz' => 774
-// 	),
-// 	 'F' => array(
-// 	     '8oz' => 749,
-// 		 '9oz' => 824
-// 	),
-// 	 'G' => array(
-// 	     '8oz' => 799,
-// 		 '9oz' => 874
-// 	),
-// 	 'H' => array(
-// 	     '8oz' => 849,
-// 		 '9oz' => 924
-// 	),
-// 	 'I' => array(
-// 	     '8oz' => 899,
-// 		 '9oz' => 974
-// 	),
-// 	 'J' => array(
-// 	      '8oz' => 949,
-// 		  '9oz' => 1024
-// 		)
-// 	),
-//     'shipping' => array(
-//             'weight' => 16,
-//             'price' => 0
-// 	)
-// );
 
 
 

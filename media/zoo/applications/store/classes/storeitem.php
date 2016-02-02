@@ -259,6 +259,7 @@ class StoreItem {
                     $options[$key]->set('name', $option['name']);
                     $options[$key]->set('value', $option['value']);
                     $options[$key]->set('text', isset($option['text']) ? $option['text'] : null);
+                    $options[$key]->set('visible', isset($option['visible']) ? $option['visible'] : true);
                 }
             }
             if(isset($item['attributes'])) {
@@ -376,6 +377,13 @@ class StoreItem {
         $items[] = $item;    
         return htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
         
+    }
+
+    public function getOption($name) {
+        if(isset($this->options[$name])) {
+            return $this->options[$name];
+        }
+        return $this->app->parameter->create();
     }
 
     /**

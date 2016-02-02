@@ -8,8 +8,6 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$priceOptions = $this->app->parameter->create();
-$priceOptions->set('group', 'bsk')->set('options.', array('A', 'full'));
 $class = $item->type.'-full';
 $data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
 $storeItem = $this->app->item->create($item, 'bsk');
