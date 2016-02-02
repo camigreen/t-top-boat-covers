@@ -539,11 +539,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                 m[type].kit.class = kit_class;
                                 if(old_class !== kit_class) {
                                     var item = self.items['bsk-'+type]; 
-                                    item.options.kit_class = {
-                                        name: 'Class',
-                                        text: kit_class,
-                                        value: kit_class
-                                    }
+                                    item.price_group = 'bsk.'+kit_class;
                                     self._publishPrice(item);
                                 }
                             }
@@ -555,6 +551,9 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             if(data.args.item.id === 'bsk') {
                                 data.publishPrice = false;
                                 this.trigger('measure', {type: measurements.types});
+                                $.each(measurements.types, function (k,v) {
+                                    this.items['bsk-'+v].price_group = 'bsk.'+measurements[v].kit.class;
+                                })
                             }
                             return data;
                         }
