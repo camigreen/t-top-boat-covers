@@ -221,6 +221,7 @@ $price['velcro-clean-up-tabs-2.shipping.price'] = 0;
 $price['velcro-clean-up-tabs-2.item.allowMarkup'] = false;
 
 $price['shade-kit-bag.item.base'] = 30;
+$price['shade-kit-bag.item.option.bag_size.ubsk'] = 15;
 $price['shade-kit-bag.shipping.weight'] = 1;
 $price['shade-kit-bag.shipping.price'] = 0;
 $price['shade-kit-bag.item.allowMarkup'] = false;

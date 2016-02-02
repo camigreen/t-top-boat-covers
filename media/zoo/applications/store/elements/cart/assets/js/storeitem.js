@@ -279,12 +279,14 @@
             });
             return result;
         },
-        addToCart: function (items) {
+        addToCart: function (e) {
             var self = this;
-            items = typeof items === 'undefined' ? [] : items;
+            var id = $(e.target).data('id');
+            var items = {};
+            items[this.items[id].id] = $.extend(true,{},this.items[id]);
             // trigger beforeAddToCart
-            var triggerData = this.trigger('beforeAddToCart', {items: items});
-            
+            var triggerData = this.trigger('beforeAddToCart', {event: e, items: items});
+            console.log(triggerData);
             if (!triggerData.triggerResult) {
                 return;
             }

@@ -242,7 +242,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         <label>Quantity</label>
                         <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1 qty" name="qty" min="1" value ="1" />
                         <div class="uk-margin-top">
-                            <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger atc"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                            <button id="atc-bsk" class="uk-button uk-button-danger atc" data-id="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" style="margin-right:5px;"></i>Add to Cart</button>
                         </div>
                     </div>
                     <div class="uk-width-1-1 uk-container-center uk-margin-top">
@@ -706,7 +706,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             $('#toUBSK button.confirm').click(function(){
                                 measurements[type].measurements_changed = true;
                                 toUBSK_modal.hide();
-                                self.addToCart();
+                                $('#atc-bsk').trigger('click');
                             }).html('Continue');
                                 
                             $('#toUBSK button.cancel').click(function(){
@@ -727,8 +727,8 @@ $storeItem = $this->app->item->create($item, 'bsk');
                         function (data) {
                             var boat_options = this._getOptions();
                             var m = measurements, types = m.types, self = this;
-                            var items = [];
-                            var tempItem = self.items['bsk'];
+                            var items = {};
+                            var tempItem = $.extend(true, {}, self.items['bsk']);
                             $.each(types, function(k,v){
                                 if(!m[v].measurements_changed) {
                                     self.trigger('measurementsNotChanged', {type: v});
@@ -739,6 +739,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                 var item = tempItem;
                                 item.id = 'bsk-'+v;
                                 item.name = 'Boat Shade Kit - '+v;
+                                item.price_group = 'bsk.'+kit.class;
                                 item.options.tapered = {
                                         name: 'Tapered',
                                         value: 'y',
@@ -771,7 +772,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                         value: kit.location.ttop2rod.total,
                                         text: kit.location.ttop2rod.total+' in'
                                     };  
-                                items.push(item);
+                                items[item.id] = item;
                             });
                             data.args.items = items;
                             console.log(items);
