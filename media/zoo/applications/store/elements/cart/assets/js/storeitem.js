@@ -228,7 +228,7 @@
             // trigger beforeAddToCart
             var triggerData = this.trigger('beforeAddToCart', {event: e, items: this.cart.items});
             this.cart.items = triggerData.args.items;
-            console.log(this.cart.items);
+            
             if(!triggerData.triggerResult) {
                 return;
             }
@@ -242,6 +242,7 @@
             if(!this.cart.confirmed) {
                 return;
             }
+            console.log(this.cart.items);
             $('body').ShoppingCart('addToCart', this.cart.items);
             this.clearCart();
             this.trigger('afterAddToCart', {items: this.cart.items});

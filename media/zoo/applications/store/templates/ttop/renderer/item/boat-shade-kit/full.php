@@ -9,7 +9,6 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 $class = $item->type.'-full';
-$data_item = array('id' => $item->id, 'name' => 'Boat Shade Kit');
 $storeItem = $this->app->item->create($item, 'bsk');
 
 ?>
@@ -289,6 +288,9 @@ $storeItem = $this->app->item->create($item, 'bsk');
                                     <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="uk-width-1-1">
+                            <input type="hidden" name="cart_id" value="" />
                         </div>
                     </div>
                 </div>

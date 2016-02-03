@@ -49,7 +49,6 @@ class CartController extends AppController {
     public function add() {
 
         $items = $this->app->request->get('cartitems','array');
-
         $this->cart->add($items);
         
         $this->output();

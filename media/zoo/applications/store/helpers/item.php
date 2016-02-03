@@ -29,6 +29,7 @@ class ItemHelper extends AppHelper {
 		if(!isset($item->sku) || !isset($this->_items[$item->sku])) {
 			$class = $type.'StoreItem';
 			if($type) {
+
 				if(file_exists($this->app->path->path('classes:store/items/'.$type.'.php'))) {
 					$this->app->loader->register($class, 'classes:store/items/'.$type.'.php');
 					$storeItem = new $class($this->app);
@@ -40,15 +41,13 @@ class ItemHelper extends AppHelper {
 			} 
 
 			$storeItem->importItem($item);
-
 			// fire event
 	    	$this->app->event->dispatcher->notify($this->app->event->create($storeItem, 'storeitem:init'));
 
 	    	$this->_items[$storeItem->sku] = $storeItem;
-
+	    	
 	    	return $this->_items[$storeItem->sku];
 	    }
-
 		return $this->_items[$item->sku];
 	}
 }

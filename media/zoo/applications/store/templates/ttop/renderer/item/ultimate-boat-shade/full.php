@@ -8,15 +8,13 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$embed = $this->app->request->get('embed','bool');
 $class = $item->type.'-full';
-$prices = $this->app->prices->create('ubsk');
-$data_item = array('id' => $item->id, 'name' => 'Ultimate Boat Shade Kit');
+$storeItem = $this->app->item->create($item, 'ubsk');
 ?>
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
-<div id="<?php echo $item->id ?>" class="uk-form uk-margin" data-item='<?php echo json_encode($data_item); ?>'>
+<div id="storeItemForm" class="uk-form uk-margin" data-item="<?php echo $storeItem->getItemsJSON(); ?>">
     <div class="uk-grid">
         <div class="uk-width-2-3 ubsk-slideshow">
             <div class="uk-width-5-6 uk-container-center uk-margin">
@@ -41,7 +39,7 @@ $data_item = array('id' => $item->id, 'name' => 'Ultimate Boat Shade Kit');
                 <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin">
                     <li>
                         <?php if ($this->checkPosition('boat_options')) : ?>
-                            <div class="uk-width-1-1 uk-margin-top">
+                            <div class="uk-width-1-1 uk-margin-top options-container" data-id="<?php echo $storeItem->id; ?>">
                                 <fieldset> 
                                     <legend>
                                         <?php echo JText::_('Boat Information'); ?>
@@ -71,7 +69,7 @@ $data_item = array('id' => $item->id, 'name' => 'Ultimate Boat Shade Kit');
                                     </a>
                                 </div>
                             </div>
-                            <div class="uk-width-1-2">
+                            <div id="ubsk-price"class="uk-width-1-2">
                                 <i class="currency"></i>
                                 <span class="price">0.00</span>
                             </div>
@@ -156,8 +154,9 @@ $data_item = array('id' => $item->id, 'name' => 'Ultimate Boat Shade Kit');
             </div>
         </div>
         <div class="uk-width-1-3 uk-margin-top">
-            <div class="uk-width-1-1 price-container">
-                <span class="price"><i class="currency"></i><span id="price" data-price='<?php echo json_encode($prices); ?>'>0.00</span></span>
+            <div id="ubsk-total-price"class="uk-width-1-1">
+                <i class="currency"></i>
+                <span class="price">0.00</span>
             </div>
             <div class="uk-width-1-1">
                 <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
@@ -174,7 +173,7 @@ $data_item = array('id' => $item->id, 'name' => 'Ultimate Boat Shade Kit');
                         <?php echo $this->renderPosition('product_info', array('style' => 'blank')); ?>
                 <?php endif; ?>
             </div>
-            <?php if ($this->checkPosition('accessories') && !$embed) : ?>
+            <?php if ($this->checkPosition('accessories')) : ?>
             <div class="uk-width-1-1 uk-margin-top">
                     <fieldset>
                         <legend>Essential Accessories</legend>

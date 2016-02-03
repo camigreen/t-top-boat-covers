@@ -204,6 +204,9 @@ $storeItem = $this->app->item->create($item, 'ccc');
                             </div>
                         </div>
                     </div>
+                    <div class="uk-width-1-1">
+                        <input type="hidden" name="cart_id" value="" />
+                    </div>
                 </div>
             </div>
         </div>
