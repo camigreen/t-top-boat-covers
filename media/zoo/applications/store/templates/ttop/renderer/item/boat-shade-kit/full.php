@@ -327,12 +327,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
     var total = {};
     var tempItem = {};
     var measurements = {
+        changed: false,
         types: ['aft'],
         aft: {
             name: 'Boat Shade Kit',
             price: 0.00,
             shipping: 0.00,
-            measurements_changed: false,
             location: {
                 beam: {
                     total: 0,
@@ -363,7 +363,6 @@ $storeItem = $this->app->item->create($item, 'bsk');
             name: 'Boat Shade Kit',
             price: 0.00,
             shipping: 0.00,
-            measurements_changed: false,
             location: {
                 beam: {
                     total: 0,
@@ -440,13 +439,13 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             })
 
                             $('.bow-measurements input').on('change',function(){
-                                measurements.bow.measurements_changed = true;
+                                measurements.changed = true;
                                 self.trigger('measure', {type: ['bow']});
                                 
 
                             });
                             $('.aft-measurements input').on('change',function(e){
-                                measurements.aft.measurements_changed = true;
+                                measurements.changed = true;
                                 self.trigger('measure', {type: ['aft']});
 
                             });
@@ -546,11 +545,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     ],
                     beforeChange: [
                         function (data) {
-                            if(data.args.item.id === 'bsk') {
+                            var self = this;
+                            if($(data.args.event.target).closest('.options-container').data('id') === 'bsk') {
                                 data.publishPrice = false;
                                 this.trigger('measure', {type: measurements.types});
                                 $.each(measurements.types, function (k,v) {
-                                    this.items['bsk-'+v].price_group = 'bsk.'+measurements[v].kit.class;
+                                    self.items['bsk-'+v].price_group = 'bsk.'+measurements[v].kit.class;
                                 })
                             }
                             return data;
@@ -561,7 +561,7 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             var types = measurements.types, self = this;
                             $.each(types, function (k, v) {
                                 var bsk = measurements[v];
-                                var item = $.extend(true, {}, self.items['bsk']);
+                                var item = self.items['bsk-'+v];
                                 item.id = 'bsk-'+v;
                                 item.price_group = 'bsk.'+bsk.kit.class;
                                 self._publishPrice(item);
@@ -722,12 +722,12 @@ $storeItem = $this->app->item->create($item, 'bsk');
                     ],
                     measurementsNotChanged: [
                         function (data) {
-                            var self = this, type = data.args.type;
-                            $('#toUBSK').find('.ttop-modal-title').html('The order form measurements for the '+type+' Shade Kit have not been changed.');
+                            var self = this;
+                            $('#toUBSK').find('.ttop-modal-title').html('The order form measurements for the Boat Shade Kit have not been changed.');
                             $('#toUBSK').find('.ttop-modal-subtitle').html('The measurements on the order form are initially set to the lowest sizes that will work with the Boat Shade Kit. Please make sure that the measurements entered match the measurements of your boat.  If the measurements in the order form are correct click Continue or click Back to correct them.');
                             
                             $('#toUBSK button.confirm').click(function(){
-                                measurements[type].measurements_changed = true;
+                                measurements.changed = true;
                                 toUBSK_modal.hide();
                                 $('#atc-bsk').trigger('click');
                             }).html('Continue');
@@ -751,17 +751,20 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             var boat_options = this._getOptions();
                             var m = measurements, types = m.types, self = this;
                             var items = {};
+
+                            if(!m.changed) {
+                                self.trigger('measurementsNotChanged');
+                                data.triggerResult = false
+                                return data;
+                            }
+
                             $.each(types, function(k,v){
-                                if(!m[v].measurements_changed) {
-                                    self.trigger('measurementsNotChanged', {type: v});
-                                    data.triggerResult = false
-                                    return false;
-                                }
+
                                 var kit = m[v];
-                                var item = $.extend(true, {}, self.items['bsk']);
-                                item.id = 'bsk-'+v;
+                                var item = self.items['bsk-'+v];
                                 item.name = 'Boat Shade Kit - '+v;
                                 item.price_group = 'bsk.'+kit.kit.class;
+                                item.fromCart = true;
                                 item.options.tapered = {
                                         name: 'Tapered',
                                         value: 'y',

@@ -217,8 +217,13 @@
             var self = this;
             var id = $(e.target).data('id');
             this.cart.items = {};
-
-            this.cart.items[this.items[id].id] = $.extend(true,{},this.items[id]);
+            
+            if(this.items[id]) {
+                this.cart.items[this.items[id].id] = $.extend(true,{},this.items[id]);
+            } else {
+                this.cart.items = {};
+            }
+            
 
             // trigger beforeAddToCart
             var triggerData = this.trigger('beforeAddToCart', {event: e, items: this.cart.items});
