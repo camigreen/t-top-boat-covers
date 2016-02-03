@@ -14,8 +14,8 @@ $storeItem = $this->app->item->create($item, 'ubsk');
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
-<div id="storeItemForm" class="uk-form uk-margin" data-item="<?php echo $storeItem->getItemsJSON(); ?>">
-    <div class="uk-grid">
+<div id="storeItemForm" class="uk-form uk-margin">
+    <div id="<?php echo $storeItem->id; ?>" class="uk-grid storeItem" data-item="<?php echo $storeItem->getItemsJSON(); ?>">
         <div class="uk-width-2-3 ubsk-slideshow">
             <div class="uk-width-5-6 uk-container-center uk-margin">
                 <?php if ($this->checkPosition('media')) : ?>
@@ -46,7 +46,7 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                                     </legend>
                                     <div class="uk-grid">
                                         <?php echo $this->renderPosition('boat_options', array('style' => 'options')); ?>
-                                        <div class="uk-width-1-1 options-container uk-margin-top">
+                                        <div class="uk-width-1-1 options-container uk-margin-top" data-id="<?php echo $storeItem->id; ?>">
                                             <?php if ($this->checkPosition('options')) : ?>
                                                 <div class="uk-panel uk-panel-box">
                                                     <h3><?php echo JText::_('Options'); ?></h3>
@@ -86,13 +86,7 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                                             <label>1) From Rod Holder to Rod Holder</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="beam-width-ft" name="beam-width-ft" class="required" data-location="beam" data-unit="ft" min="6" value="7" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="beam-width-in" name="beam-width-in" class="required" data-location="beam" data-unit="in" min="0" max="11" value="0" />
+                                                   <input type="number" id="beam-width" name="beam-width" class="required" data-location="beam" min="0" value="84" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -103,13 +97,7 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                                             <label>2) Bridge Width Measurement</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop-width-ft" name="bridge-width-ft" class="required" data-location="bridge_width" data-unit="ft" min="0" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop-width-in" name="bridge-width-in" class="required" data-location="bridge_width" data-unit="in" min="0" max="11" value="0" />
+                                                   <input type="number" id="ttop-width" name="bridge-width" class="required" data-location="bridge_width" min="0" value="0" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -120,13 +108,7 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                                             <label>3) Bridge to Rod Holders Measurement</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="depth-ft" name="depth-ft" class="required" data-location="depth" data-unit="ft" min="3" value="3" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="depth-in" name="depth-in" class="required" data-location="depth" data-unit="in" min="0" max="11" value="10" />
+                                                   <input type="number" id="depth" name="depth" class="required" data-location="depth" min="0" value="46" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -249,16 +231,9 @@ $storeItem = $this->app->item->create($item, 'ubsk');
 
 <script>
     var info_modal = jQuery.UIkit.modal('#info_modal');
-    var mainItem = jQuery('#<?php echo $item->id; ?>:not(".related")');
     var UBSK = {
-        price: 0.00,
         measurements_changed: false,
         options: {
-            kit_option: {
-                name: 'Kit Option',
-                text: null,
-                value: 'full'
-            },
             shade_type: {
                 name: 'Shade Type',
                 text: null,
@@ -285,42 +260,36 @@ $storeItem = $this->app->item->create($item, 'ubsk');
         
     };
     jQuery(document).ready(function($){
-        mainItem.StoreItem({
+        $('#storeItemForm').StoreItem({
             name: 'UltimateBoatShadeKit',
             validate: true,
             confirm: true,
             debug: true,
             events: {
                 onInit: [
-                    function (e) {
+                    function (data) {
                         var self = this;
                         this.trigger('measure');
    
-                        this.item.name = "Ultimate Boat Shade Kit";
                         $('.ubsk-measurement input').on('change', function(){
                             UBSK.measurements_changed = true;
-                            self.trigger('measure',e);
+                            self.trigger('measure');
                         });
-                        }
-                        
+                        return data;
+                    }
                 ],
                 onChanged: [
-                    function (e) {
-                        this.trigger('measure',e);
-                        
+                    function (data) {
+                        this.trigger('measure');
+                        return data;
                     }
                 ],
                 measure: [
-                    function (e) {
+                    function (data) {
                         var self = this;
-                        UBSK.options = $.extend(true, UBSK.options,this._getOptions());
-                        var options = this._getOptions();
-                        UBSK.options.kit_option.text = options.ubsk_kit_options.text;
-                        UBSK.options.kit_option.value = options.ubsk_kit_options.value;
                         getMeasurements();
                         checkMinandMax();
-                        getPrice();
-                        //displayResults();
+
                         function getMeasurements() {
                             var measurements = $('.ubsk-measurement input[type="number"]'), length = {};
                             
@@ -328,13 +297,10 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                                 
                                 if(typeof length[$(this).data('location')] === 'undefined') {
                                     length[$(this).data('location')] = 0;
-                                }
-                                
-                                if($(this).data('unit') === 'ft') {
-                                    length[$(this).data('location')] += parseInt($(this).val())*12;
                                 } else {
                                     length[$(this).data('location')] += parseInt($(this).val());
                                 }
+                                
                                 
                                 $.each(length, function(k,v){
                                     UBSK.options[k].value = v;
@@ -345,7 +311,7 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         
                         function checkMinandMax() {
                             var beam = UBSK.options.beam, bridge_width = UBSK.options.bridge_width, depth = UBSK.options.depth, shade_type = UBSK.options.shade_type;
-                            
+                            console.log(UBSK);
                             // Checking depth and determine if it is an exended shade.
                             if (depth.value >= 54 && depth.value <= 80) {
                                 shade_type.text = 'Regular';
@@ -374,48 +340,14 @@ $storeItem = $this->app->item->create($item, 'ubsk');
 
                             
                         }
-                       
-                        function getPrice() {
-                            var price_array = self.$price.data('price'), price, m = UBSK.options.beam.value, shade_type = UBSK.options.shade_type.value, kit_option = UBSK.options.kit_option.value;
-                            $.each(price_array.item, function(k,v){
-                                if (m >= v.min && m <= v.max) {
-                                    price = typeof v[shade_type][kit_option] === 'undefined' ? 'Choose Measurements' : v[shade_type][kit_option];
-                                    return;
-                                }
-                            })
-                            if(kit_option === 'fullwithcups' ) {
-                                $.each(price_array.options.suction_cups, function(k,v) {
-                                    if (m >= v.min && m <= v.max) {
-                                        UBSK.options['suction_cups'] = {name: 'Suction Cups', text: k, value: k}; 
-                                    }
-                                   
-                                })
-                                
-                            } else { 
-                                delete UBSK.options.suction_cups;
-                            }
-                            UBSK.shipping = price_array.shipping[kit_option];
-                            UBSK.price = price;
-                            $('.ubsk-measurements .price').html(UBSK.price.toFixed(2));
-                        }
 
-                        function displayResults() {
-                            var container = $('.ubsk-results');
-                            container.html('');
-                            $.each(UBSK.options, function(k,v){
-                                container.append(v.name+': '+v.value+'</br>');
-                            })
-
-
-                        }
-                        
-                        this.price = UBSK.price;
-                        this._publishPrice();
+                        this._publishPrice(this.items[570]);
+                        return data;
                     }
                 ],
                 beamTooSmall: [
-                    function (e) {
-                        var type = arguments[1][2];
+                    function (data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Ultimate Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Please check out our Boat Shade Kit for smaller boats.');
                         
@@ -433,12 +365,13 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 beamTooLarge: [
-                    function (e) {
-                        var type = arguments[1][2];
+                    function (data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('The measurements you have selected falls outside of our standard Ultimate Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Ultimate Boat Shade Kit.  Click the contact us button below for send us an email.');
                         
@@ -456,12 +389,13 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 bridgeTooSmall: [
-                    function (e) {
-                        var type = arguments[1][2];
+                    function (data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us and we may be able to make a custom shade kit for your boat.  Click the contact us button below for send us an email.');
                         
@@ -479,12 +413,13 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 bridgeTooLarge: [
-                    function (e) {
-                        var type = arguments[1][2];
+                    function (data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('Boats with a T-Top width measurement over 7\' 6" are too big for our Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Please check out our Ultimate Boat Shade Kit for larger boats.');
                         
@@ -502,12 +437,13 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 depthTooSmall: [
-                    function(e) {
-                        var type = arguments[1][2];
+                    function(data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Ultimate Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Please check out our Boat Shade Kit for smaller boats.');
 
@@ -525,12 +461,13 @@ $storeItem = $this->app->item->create($item, 'ubsk');
 
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 depthTooLarge: [
-                    function (e) {
-                        var type = arguments[1][2];
+                    function (data) {
+                        var type = data.args.type;
                         $('#info_modal').find('.ttop-modal-title').html('The measurements you have selected falls outside of our standard Ultimate Boat Shade Kit.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Ultimate Boat Shade Kit.  Click the contact us button below for send us an email.');
                         
@@ -547,11 +484,12 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                         });
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 measurementsNotChanged: [
-                    function (e) {
+                    function (data) {
                         var self = this;
                         $('#info_modal').find('.ttop-modal-title').html('The order form measurements have not been changed.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('The measurements on the order form are initially set to the lowest sizes that will work with the Ultimate Boat Shade Kit. Please make sure that the measurements entered match the measurements of your boat.  If the measurements in the order form are correct click Continue or click Back to correct them.');
@@ -572,11 +510,12 @@ $storeItem = $this->app->item->create($item, 'ubsk');
 
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 beforeAddToCart: [
-                    function(e) {
+                    function (data) {
                         if (!UBSK.measurements_changed) {
                             this.trigger('measurementsNotChanged');
                             return false;
@@ -590,7 +529,8 @@ $storeItem = $this->app->item->create($item, 'ubsk');
                             shipping: UBSK.shipping,
                             options: UBSK.options
                         });
-                        return item;
+                        
+                        return data;
                     }
                 ]
             },

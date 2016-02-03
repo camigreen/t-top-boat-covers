@@ -80,6 +80,7 @@
         },
         init: function () {
             this.loadItems();
+            console.log(this);
             this.$element.find('#price').remove();
             this._createConfirmModal();
             this.trigger('onInit');
