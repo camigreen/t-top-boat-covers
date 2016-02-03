@@ -16,7 +16,7 @@
 		var ShoppingCart = function ( element, options ) {
 				this.$element = $(element);
                                 this.defaults = {
-                                    debug: true,
+                                    debug: false,
                                     currency: '$',
                                     checkoutUrl: '/store/checkout'
                                 };
@@ -112,7 +112,6 @@
                                         url: "?option=com_zoo&controller=cart&task=init&format=json",
                                         data: {},
                                         success: function(data){
-                                            console.log(data);
                                             if(data.result) {
                                                 self._updateCart(data);
                                             }

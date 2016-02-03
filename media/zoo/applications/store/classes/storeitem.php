@@ -149,6 +149,14 @@ class StoreItem {
      * @since 1.0.0
      */
     protected $price;
+
+        /**
+     * String that identifies the pricing group of an item.
+     *
+     * @var [string]
+     * @since 1.0.0
+     */
+    protected $confirm = false;
     
     
     /**
@@ -251,6 +259,7 @@ class StoreItem {
                     $options[$key]->set('name', $option['name']);
                     $options[$key]->set('value', $option['value']);
                     $options[$key]->set('text', isset($option['text']) ? $option['text'] : null);
+                    $options[$key]->set('visible', isset($option['visible']) ? $option['visible'] : true);
                 }
             }
             if(isset($item['attributes'])) {
@@ -285,14 +294,20 @@ class StoreItem {
         }
         $options = '';
         foreach($this->options as $key => $option) {
-            $parts = explode('.', $key);
-            $count = count($parts) - 1;
-            if($parts[$count] == 'value') {
-                $options .= $parts[$count];
-            }
+                $options .= $option->value;
         }
+
+        // foreach($this->options as $key => $option) {
+        //     $parts = explode('.', $key);
+        //     var_dump($parts);
+        //     $count = count($parts) - 1;
+        //     if($parts[$count] == 'value') {
+        //         $options .= $parts[$count];
+        //     }
+        // }
         $options .= $this->getPrice()->getMarkupRate();
         $options .= $this->getPrice()->getDiscountRate();
+        $options .= $this->id;
         
         $this->sku = hash('md5', $this->id.$options);
         return $this->sku;
@@ -338,6 +353,42 @@ class StoreItem {
     public function getPriceGroup() {
         return $this->price_group;
         
+    }
+
+    /**
+     * Get the JSON String for the attributes for the item.
+     *
+     * @return     string    the price group.
+     *
+     * @since 1.0
+     */
+    public function getItemsJSON() {
+        $item = array();
+        // foreach($this->attributes as $key => $value) {
+        //     $item[$key] = array(
+        //         'value' => $value->get('value'),
+        //         'name' => $value->get('name'),
+        //         'text' => $value->get('text')
+        //         );
+        // } 
+        $item['id'] = $this->id;
+        $item['name'] = $this->name;
+        $item['type'] = $this->type;
+        $item['model'] = $this->model;
+        $item['make'] = $this->make;
+        $item['confirm'] = $this->confirm;
+        $item['price_group'] = $this->price_group;
+        $item['attributes'] = $this->attributes;
+        $items[] = $item;    
+        return htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
+        
+    }
+
+    public function getOption($name) {
+        if(isset($this->options[$name])) {
+            return $this->options[$name];
+        }
+        return $this->app->parameter->create();
     }
 
     /**

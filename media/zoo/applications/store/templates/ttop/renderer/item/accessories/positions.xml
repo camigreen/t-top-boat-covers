@@ -25,16 +25,15 @@
 		<position name="specification">Specification</position>
 		<position name="links">Links</position>
 	</positions>
-        <positions layout="related_modal">
-                <position name="top">Top</position>
+    <positions layout="related_modal">
+        <position name="top">Top</position>
 		<position name="title">Title</position>
 		<position name="media">Media</position>
-                <position name="options">Options</position>
+        <position name="options">Options</position>
 		<position name="description">Description</position>
-                <position name="price">Price</position>
-                <position name="addtocart">Add To Cart</position>
-                <position name="modals">Modals</position>
-                
+        <position name="pricing">Price</position>
+        <position name="addtocart">Add To Cart</position>
+        <position name="modals">Modals</position>    
 	</positions>
 	<positions layout="feed">
 		<position name="description">Description</position>

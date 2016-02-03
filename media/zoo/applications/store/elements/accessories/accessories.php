@@ -58,8 +58,8 @@ class ElementAccessories extends Element {
 				$path   .= DIRECTORY_SEPARATOR.$type;
 				$prefix .= $type.'.';
 			}
-                        $storeItem = $this->app->store->create($item);   
-                        $modal[$item->id] = $renderer->render($prefix.'.related_modal', array('item' => $item, 'storeItem' => $storeItem, 'layout' => 'related_modal'));
+                        $storeItem = $this->app->item->create($item);   
+                        $modal[$item->id] = $renderer->render($prefix.'.related_modal', array('item' => $item, 'layout' => 'related_modal'));
 		}
                 foreach ($items as $item) {
                     if (in_array($layout, $renderer->getLayouts($path))) {

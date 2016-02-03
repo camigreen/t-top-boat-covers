@@ -340,8 +340,16 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                 
                             });
                             this.validation = this.$element.validate({
+                                debug: true,
                                 ignore: '.ignore',
-                                errorClass: "validation-fail"
+                                errorClass: "validation-fail",
+                                rules: {
+                                    email: "required",
+                                    confirm_email: {
+                                      equalTo: '#email'
+                                    }
+                                }   
+
                             });
                             $('#localPickup').on('click',function(e){
                                 self.trigger('validate');

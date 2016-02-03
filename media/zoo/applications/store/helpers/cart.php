@@ -39,10 +39,10 @@ class CartHelper extends AppHelper {
     }
 
     public function add($items) {
-    	foreach($items as $key => $value) {
+        foreach($items as $key => $value) {
             if(is_string($value)) {
                 $value = $this->app->parameter->create($value);
-            }
+            };
             $item = $this->app->item->create($value, $value['type']);
             if (isset($this->_items[$item->sku])) {
                 $this->_items[$item->sku]->qty += $item->qty;

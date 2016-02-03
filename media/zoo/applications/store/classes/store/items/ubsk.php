@@ -11,7 +11,7 @@
  *
  * @author Shawn
  */
-class BSKStoreItem extends StoreItem {
+class UBSKStoreItem extends StoreItem {
 
    	/**
    	 * @var [string]
@@ -22,19 +22,11 @@ class BSKStoreItem extends StoreItem {
 
     public function importItem($item = null) {
         parent::importItem($item);
-        if(!$item instanceof Item) {
-          if(isset($item['fromCart']) && $item['fromCart']) {
-            $this->id = 'bsk-'.$this->options['kit_type']->get('value', 'aft');
-          } else {
-            $this->id = 'bsk';
-          }
-        } else {
-          $this->id = 'bsk';
-        }
-        
+
+        $this->id = 'ubsk';
         $this->confirm = true;
-        $this->price_group = 'bsk.'.$this->getOption('kit_class')->get('value', 'A');
-        $this->type = 'bsk';
+        $this->price_group = 'ubsk.'.$this->getOption('kit_class')->get('value', 'A');
+        $this->type = 'ubsk';
         $this->make = "LaPorte's T-Top Boat Covers";
         
     }

@@ -10,14 +10,14 @@
 defined('_JEXEC') or die('Restricted access');
 
 $class = $item->type.'-full';
-$prices = $this->app->prices->create('ccc');
 $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
+$storeItem = $this->app->item->create($item, 'ccc');
 ?>
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
-<div id="<?php echo $item->id;?>" class="uk-form uk-margin" data-item='<?php echo json_encode($data_item); ?>'>
-    <div class="uk-grid">
+<div id="storeItemForm" class="uk-form uk-margin" data-item='<?php echo json_encode($data_item); ?>'>
+    <div id="<?php echo $storeItem->id ?>" class="uk-grid storeItem" data-item="<?php echo $storeItem->getItemsJSON(); ?>">
         <div class="uk-width-2-3 ccc-slideshow">
             <div class="uk-width-5-6 uk-container-center uk-margin">
                 <?php if ($this->checkPosition('media')) : ?>
@@ -41,7 +41,7 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                 <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin">
                     <li>
                         <?php if ($this->checkPosition('boat_options')) : ?>
-                            <div class="uk-width-1-1 uk-margin-top">
+                            <div class="uk-width-1-1 uk-margin-top options-container" data-id="ccc">
                                 <fieldset> 
                                     <legend>
                                         <?php echo JText::_('Boat Information'); ?>
@@ -63,8 +63,11 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                                 </div>
                             </div>
                             <div class="uk-width-1-2">
-                                <i class="currency"></i>
-                                <span class="price">0.00</span>
+                                <div class="uk-width-1-1 uk-grid price-container">
+                                    <?php if ($this->checkPosition('pricing')) : ?>
+                                            <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                             <div class="uk-width-1-2">
                                 <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
@@ -79,13 +82,7 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                                             <label>1) Height from T-Top to the Deck</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="ttop2deck-ft" name="ttop2deck-ft" class="required" data-unit="ft" min="5" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="ttop2deck-in" name="ttop2deck-in" class="required" data-unit="in" min="0" max="11" value="4" />
+                                                   <input type="number" id="ttop2deck" name="ttop2deck" class="required" min="0" value="76" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -96,13 +93,7 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                                             <label>2) Rear of Helm Seat to Front of Console Seat</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="helm2console-ft" name="helm2console-ft" class="required" data-unit="ft" min="5" value="6" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="helm2console-in" name="helm2console-in" class="required" data-unit="in" min="0" max="11" value="3" />
+                                                   <input type="number" id="helm2console" name="helm2console" class="required" min="0" value="75" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -113,13 +104,7 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                                             <label>3) Width of the Helm Seat</label>
                                             <div class="uk-grid">
                                                 <div class="uk-width-2-6">
-                                                    <input type="number" id="helmSeatWidth-ft" name="helmSeatWidth-ft" class="required" data-unit="ft" min="2" value="3" />
-                                                </div>
-                                                <div class="uk-width-1-6">
-                                                    ft
-                                                </div>
-                                                <div class="uk-width-2-6">
-                                                   <input type="number" id="helmSeatWidth-in" name="helmSeatWidth-in" class="required" data-unit="in" min="0" max="11" value="2" />
+                                                   <input type="number" id="helmSeatWidth" name="helmSeatWidth" class="required" min="0" value="38" />
                                                 </div>
                                                 <div class="uk-width-1-6">
                                                     in
@@ -150,13 +135,15 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
             </div>
         </div>
         <div class="uk-width-1-3 uk-margin-top">
-            <div class="uk-width-1-1 price-container">
-                <span class="price"><i class="currency"></i><span id="price" data-price='<?php echo json_encode($prices); ?>'>0.00</span></span>
+            <div class="uk-width-1-1 uk-grid price-container">
+                <?php if ($this->checkPosition('pricing')) : ?>
+                        <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
+                <?php endif; ?>
             </div>
             <div class="uk-width-1-1">
                 <p class="uk-text-danger" style="font-size:18px">Fill out the measurements below for your custom price.</p>
             </div>
-            <div class="uk-width-1-1 options-container uk-margin-top">
+            <div class="uk-width-1-1 options-container uk-margin-top" data-id="ccc">
                 <?php if ($this->checkPosition('options')) : ?>
                     <div class="uk-panel uk-panel-box">
                         <h3><?php echo JText::_('Options'); ?></h3>
@@ -168,9 +155,9 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
 
             <div class="uk-width-1-1 addtocart-container uk-margin-top">
                 <label>Quantity</label>
-                <input id="qty-<?php echo $item->id; ?>" type="number" class="uk-width-1-1" name="qty" min="1" value ="1" />
+                <input id="qty-ccc" type="number" class="uk-width-1-1 qty" name="qty" min="1" value ="1" />
                 <div class="uk-margin-top">
-                    <button id="atc-<?php echo $item->id; ?>" class="uk-button uk-button-danger"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                    <button id="atc-ccc" class="uk-button uk-button-danger atc" data-id="ccc"><i class="uk-icon-shopping-cart" style="margin-right:5px;"></i>Add to Cart</button>
                 </div>
             </div>
             <div class="uk-width-1-1 uk-container-center uk-margin-top">
@@ -217,6 +204,9 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             </div>
                         </div>
                     </div>
+                    <div class="uk-width-1-1">
+                        <input type="hidden" name="cart_id" value="" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,7 +242,6 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
 
 <script>
     var info_modal = jQuery.UIkit.modal('#info_modal');
-    var mainItem = jQuery('#<?php echo $item->id; ?>:not(".related")');
     var CCC = {
         price: 0.00,
         type: null,
@@ -308,72 +297,62 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                 $('.item-option[name="color"]').val('navy').trigger('input');
             }
         };
-        mainItem.StoreItem({
+        $('#storeItemForm').StoreItem({
             name: 'CenterConsoleCurtain',
-            validate: true,
-            confirm: true,
+            validate: false,
             debug: true,
             events: {
                 onInit: [
-                    function (e) {
+                    function (data) {
                         var self = this;
-                        this.trigger('measure',e);
+                        this.trigger('measure');
    
-                        this.item.name = "Center Console Curtain";
                         $('.ccc-measurement input').on('change', function(e){
                             CCC.measurements_changed = true;
-                            self.trigger('measure',e);
+                            var adjust = false;
+                            if($(e.target).prop('name') === 'helm2console') {
+                                adjust = true;
+                            }
+                            self.trigger('measure',{adjustHSW: adjust});
 
                         });
                         $('[name="fabric"]').on('change',function(){
                             changeColor($(this).val());
                         })
+                        return data;
                     }
                        
                 ],
-                onChanged: [
-                    function (e) {
-                        this.trigger('measure',e);
-                        
+                beforeChange: [
+                    function (data) {
+                        return data;
                     }
                 ],
                 measure: [
-                    function (e) {
+                    function (data) {
                         var self = this;
                         CCC.options = $.extend(true, CCC.options,this._getOptions());
                         getMeasurements();
                         getCCCClass();
-                        if (typeof e !== 'undefined') {
-                            var pattern = /^helm2console/;
-                            if(pattern.test($(e.target).prop('name'))) {
-                                adjustHelmSeatWidth();
-                            };    
+                        var adjust = typeof data.args.adjustHSW === 'undefined' ? false : data.args.adjustHSW;
+                        if(adjust) {
+                            adjustHelmSeatWidth();
                         }
                         checkMinandMax();
-                        getPrice();
-                        //displayResults();
+
+
                         function getMeasurements() {
                             var measurements = $('.ccc-measurement input[type="number"]'), length = {};
                             
                             measurements.each(function(k,v){
 
                                 var name = $(this).prop('name');
-                                name = name.substring(0,name.length - 3);
-                                
-                                if(typeof length[name] === 'undefined') {
-                                    length[name] = 0;
-                                }
-                                
-                                if($(this).data('unit') === 'ft') {
-                                    length[name] += parseInt($(this).val())*12;
-                                } else {
-                                    length[name] += parseInt($(this).val());
-                                }
-                                $.each(length, function(k,v){
-                                    CCC.options[k].value = v;
-                                    CCC.options[k].text = v+' inches';
-                                });
+                                console.log(name);
+                                value = $(v).val();
+                                CCC.options[name].value = value;
+                                CCC.options[name].text = value+' inches';
                             });
+                            console.log(CCC);
                         }
                         
                         function checkMinandMax() {
@@ -429,75 +408,49 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             }
                             CCC.options.curtain_class.value = CCC.type;
                             CCC.options.curtain_class.text = CCC.type + ' Class';
+                            self.items['ccc'].price_group = 'ccc.'+CCC.type;
 
                                     
                         }
                         function adjustHelmSeatWidth() {
                             console.log('Helm Seat');
-                            var elemFt = $('[name="helmSeatWidth-ft"]');
-                            var elemIn = $('[name="helmSeatWidth-in"]');
+                            var elem = $('[name="helmSeatWidth"]');
                             switch(CCC.type) {
                                 case 'A':
                                 case 'B':
                                     CCC.options.helmSeatWidth.min = 38;
                                     CCC.options.helmSeatWidth.max = 50;
                                     CCC.options.helmSeatWidth.value = 38;
-                                    elemFt.prop('min',2).val(3);
-                                    elemIn.val(2);
+                                    elem.val(38);
                                     break;
                                 case 'C':
                                     CCC.options.helmSeatWidth.min = 44;
                                     CCC.options.helmSeatWidth.max = 56;
                                     CCC.options.helmSeatWidth.value = 44;
-                                    elemFt.prop('min',2).val(3);
-                                    elemIn.val(8);
+                                    elem.val(44);
                                     break;
                                 case 'D':
                                     CCC.options.helmSeatWidth.min = 45;
                                     CCC.options.helmSeatWidth.max = 62;
                                     CCC.options.helmSeatWidth.value = 50;
-                                    elemFt.prop('min',3).val(4);
-                                    elemIn.val(2);
+                                    elem.val(50);
                                     break;
 
                             }
                         }
-                       
-                        function getPrice() {
-                            var price_array = self.$price.data('price'), price, $class = CCC.$class;
-                            console.log(CCC);
-                            price = price_array.item[CCC.type][CCC.options.fabric.value];
-                            CCC.shipping = price_array.shipping
-                            CCC.price = price;
-                            $('.ccc-measurements .price').html(CCC.price.toFixed(2));
-                        }
-
-                        function displayResults() {
-                            var container = $('.ccc-results');
-                            container.html('');
-                            $.each(CCC.options, function(k,v){
-                                container.append(v.name+': '+v.value+'</br>');
-                            })
-                            container.append('Price: '+CCC.price+'</br>').append('Class: '+CCC.type+'</br>');
-                            var inches = (CCC.options.helmSeatWidth.min%12)
-                            var feet = Math.floor(CCC.options.helmSeatWidth.min / 12);
-                            container.append(feet+' ft '+inches+' in </br>');
-
-
-                        }
-                        
-                        this.price = CCC.price;
-                        this._publishPrice();
-
+                        console.log(this.items);
+                        this._publishPrice(this.items['ccc']);
+                        return data;
                         }
                 ],
+                beforePublishPrice: [],
+                afterPublishPrice: [],
                 ttop2deckTooSmall: [
-                    function (e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Center Console Curtain.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Center Console Curtain.  Click the contact us button below to send us an email.');
                         
-                        $('.ccc-measurement #ttop2deck-ft').val(6);
-                        $('.ccc-measurement #ttop2deck-in').val(4);
+                        $('.ccc-measurement #ttop2deck').val(76);
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/contact-us';
                         }).html('Contact Us');
@@ -507,19 +460,19 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             info_modal.hide();
 
                         });
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 ttop2deckTooLarge: [
-                    function (e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('The measurements you have selected falls outside of our standard Center Console Curtain.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Center Console Curtain.  Click the contact us button below to send us an email.');
                         
-                        $('.ccc-measurement #ttop2deck-ft').val(7);
-                        $('.ccc-measurement #ttop2deck-in').val(4);
+                        $('.ccc-measurement #ttop2deck').val(85);
                         
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/contact-us';
@@ -530,19 +483,19 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             info_modal.hide();
                         });
 
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 helm2consoleTooSmall: [
-                    function (e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('We are sorry, but the measurements that you have entered are too small for our Center Console Curtain.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us and we may be able to make a custom curtain for your boat.  Click the contact us button below to send us an email.');
                         
-                        $('.ccc-measurement #helm2console-ft').val(6);
-                        $('.ccc-measurement #helm2console-in').val(3);
+                        $('.ccc-measurement #helm2console').val(75);
                         
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/contact-us';
@@ -553,19 +506,19 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             info_modal.hide();
 
                         });
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 helm2consoleTooLarge: [
-                    function (e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('Boats with a helm to console measurement over 11\' 1" are too big for our Center Console Curtain.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Please call for a custom curtain.');
                         
-                        $('.ccc-measurement #helm2console-ft').val(11);
-                        $('.ccc-measurement #helm2console-in').val(1);
+                        $('.ccc-measurement #helm2console').val(133);
                         
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/contact-us';
@@ -576,21 +529,19 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             info_modal.hide();
                         });
                         
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 helmSeatWidthTooSmall: [
-                    function(e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('The helm seat width is too small.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Center Console Curtain.  Click the contact us button below to send us an email.');
                         
-                        var inches = (CCC.options.helmSeatWidth.min%12)
-                        var feet = Math.floor(CCC.options.helmSeatWidth.min / 12);
-                        $('.ccc-measurement #helmSeatWidth-ft').val(feet);
-                        $('.ccc-measurement #helmSeatWidth-in').val(inches);
+                        $('.ccc-measurement #helmSeatWidth').val(38);
                         
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/store/boat-shade-kit';
@@ -600,21 +551,19 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                             $('#info_modal button').off();
                             info_modal.hide();
                         });
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 helmSeatWidthTooLarge: [
-                    function (e) {
+                    function (data) {
                         $('#info_modal').find('.ttop-modal-title').html('The helm seat width is too small.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('Contact us for a modified custom Center Console Curtain.  Click the contact us button below to send us an email.');
                         
-                        var inches = (CCC.options.helmSeatWidth.max%12)
-                        var feet = Math.floor(CCC.options.helmSeatWidth.max / 12);
-                        $('.ccc-measurement #helmSeatWidth-ft').val(feet);
-                        $('.ccc-measurement #helmSeatWidth-in').val(inches);
+                        $('.ccc-measurement #helmSeatWidth').val(50);
                         
                         $('#info_modal button.confirm').click(function(){
                             window.location = '/contact-us';
@@ -627,14 +576,15 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
 
                         });
 
-                        this.trigger('measure',e);
+                        this.trigger('measure');
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 measurementsNotChanged: [
-                    function (e) {
+                    function (data) {
                         var self = this;
                         $('#info_modal').find('.ttop-modal-title').html('The order form measurements have not been changed.');
                         $('#info_modal').find('.ttop-modal-subtitle').html('The measurements on the order form are initially set to the lowest sizes that will work with the Center Console Curtain. Please make sure that the measurements entered match the measurements of your boat.  If the measurements in the order form are correct click Continue or click Back to correct them.');
@@ -642,7 +592,7 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
                         $('#info_modal button.confirm').click(function(){
                             CCC.measurements_changed = true;
                             info_modal.hide();
-                            self.addToCart();
+                            $('#atc-ccc').trigger('click');
                         }).html('Continue');
                             
                         $('#info_modal button.cancel').click(function(){
@@ -655,26 +605,30 @@ $data_item = array('id' => $item->id, 'name' => 'Center Console Curtain');
 
                         info_modal.options.bgclose = false;
                         info_modal.show();
-                        return false;
+                        data.triggerResult = false;
+                        return data;
                     }
                 ],
                 beforeAddToCart: [
-                    function(e) {
+                    function(data) {
+                        console.log(CCC);
                         if (!CCC.measurements_changed) {
                             this.trigger('measurementsNotChanged');
-                            return false;
+                            data.triggerResult = false;
+                            return data;
                         }
-                        var item = [], self = this;
-                        item.push({
-                            name: 'Center Console Curtain',
-                            id: self.item.id,
-                            qty: self.qty,
-                            price: self.price,
-                            shipping: self.shipping,
-                            options: CCC.options
-                        });
+                        var item = data.args.items['ccc'], items = {};
+                        item.options = $.extend(true,item.options,CCC.options);
+                        data.args.items['ccc'] = item;
+
                         console.log(item);
-                        return item;
+                        return data;
+                    }
+                ],
+                afterAddToCart: [
+                    function (data) {
+                        CCC.measurements_changed = false;
+                        return data;
                     }
                 ]
             },

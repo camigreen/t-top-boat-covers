@@ -11,7 +11,6 @@ defined('_JEXEC') or die('Restricted access');
 
 $link = $this->app->route->item($item);
 $class = 'accessories related '.$item->type.'-related';
-
 ?>
 <div class="<?php echo $class; ?>">
     <li class="uk-width-1-1">

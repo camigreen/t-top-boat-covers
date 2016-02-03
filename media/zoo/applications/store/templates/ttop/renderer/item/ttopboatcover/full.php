@@ -10,8 +10,10 @@ $embed = $this->app->request->get('embed','bool');
 defined('_JEXEC') or die('Restricted access');
 $storeItem = $this->app->item->create($item, 'ttopboatcover');
 $category = $item->getPrimaryCategory()->getParent();
+
 ?>
-<div id="<?php echo $storeItem->id ?>" class="t-top-boat-cover">
+<div id="storeOrderForm" class="t-top-boat-cover" >
+    <div id="<?php echo $storeItem->id ?>" class="storeItem" data-item="<?php echo $storeItem->getItemsJSON(); ?>">
     <div class="uk-grid <?php echo $storeItem->getPriceGroup(); ?>">
         <div class="uk-width-1-2">
             <p class="uk-article-title"><?php echo $storeItem->name; ?></p>
@@ -55,7 +57,7 @@ $category = $item->getPrimaryCategory()->getParent();
                             <?php endif; ?>
                         </ul>
 
-                        <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin">
+                        <ul id="tabs" style="min-height:150px;" class="uk-width-1-1 uk-switcher uk-margin options-container" data-id="<?php echo $storeItem->id; ?>">
                             <li class="uk-grid">
 
 
@@ -151,7 +153,7 @@ $category = $item->getPrimaryCategory()->getParent();
                             <?php echo $this->renderPosition('pricing', array('item' => $storeItem)); ?>
                     <?php endif; ?>
                 </div>
-                <div class="uk-width-1-1 options-container uk-margin-top">
+                <div class="uk-width-1-1 options-container uk-margin-top" data-id="<?php echo $storeItem->id; ?>">
                     <?php if ($this->checkPosition('options')) : ?>
                         <div class="uk-panel uk-panel-box">
                             <h3><?php echo JText::_('Options'); ?></h3>
@@ -162,12 +164,12 @@ $category = $item->getPrimaryCategory()->getParent();
                 </div>
                 <div class="uk-width-1-1 addtocart-container uk-margin-top">
                     <label>Quantity</label>
-                    <input id="qty-<?php echo $storeItem->id; ?>" type="number" class="uk-width-1-1" name="qty" min="1" value ="1" />
+                    <input id="qty-<?php echo $storeItem->id; ?>" type="number" class="uk-width-1-1 qty" name="qty" data-id="<?php echo $storeItem->id; ?>" min="1" value ="1" />
                     <div class="uk-margin-top">
-                        <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
+                        <button id="atc-<?php echo $storeItem->id; ?>" class="uk-button uk-button-danger atc" data-id="<?php echo $storeItem->id; ?>"><i class="uk-icon-shopping-cart" data-store-cart style="margin-right:5px;"></i>Add to Cart</button>
                     </div>
                 </div>
-                <?php if ($this->checkPosition('accessories') && !$embed && false) : ?>
+                <?php if ($this->checkPosition('accessories')) : ?>
                 <div class="uk-width-1-1 uk-margin-top">
                         <fieldset>
                             <legend>Essential Accessories</legend>
@@ -177,25 +179,8 @@ $category = $item->getPrimaryCategory()->getParent();
                         </fieldset>
                 </div>
                 <?php endif; ?>
-                <?php if ($this->checkPosition('item_attributes')) : ?>
-                    <div class="uk-width-1-1 uk-margin-top item-attribute-container">
-                        <fieldset id="<?php echo $item->id; ?>-item-attributes">
-                            <input type="hidden" name="oem" data-name="OEM" data-text="<?php echo $storeItem->attributes['oem']->get('text'); ?>" value="<?php echo $storeItem->attributes['oem']->get('value'); ?>" />
-                            <input type="hidden" name="boat_model" data-name="Boat Model" data-text="<?php echo $storeItem->attributes['boat_model']->get('text'); ?>" value="<?php echo $storeItem->attributes['boat_model']->get('value'); ?>" />
-                            <?php echo $this->renderPosition('item_attributes'); ?>
-                        </fieldset>
-                    </div>
-                    
-                <?php endif; ?>
-                <div class="item-details">
-                    <input type="hidden" name="price_group" value="<?php echo $storeItem->getPriceGroup(); ?>" />  
-                    <input type="hidden" name="item-name" value="<?php echo $storeItem->name; ?>" />  
-                    <input type="hidden" name="item-id" value="<?php echo $storeItem->id; ?>" />
-                    <input type="hidden" name="item-type" value="<?php echo $storeItem->type; ?>" />
-                    <input type="hidden" name="make" value="<?php echo $storeItem->make; ?>" /> 
-                    <input type="hidden" name="model" value="<?php echo $storeItem->model; ?>" />    
-                </div>
             </div>
+
             <?php if ($this->checkPosition('bottom')) : ?>
                     <?php echo $this->renderPosition('bottom', array('style' => 'block')); ?>
             <?php endif; ?>
@@ -226,6 +211,9 @@ $category = $item->getPrimaryCategory()->getParent();
                                             <button class="uk-width-1-1 uk-button uk-button-danger cancel">Cancel</button>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <input type="hidden" name="cart_id" value="" />
                                 </div>
                             </div>
                         </div>
@@ -313,44 +301,17 @@ jQuery(function($){
 });
 </script>
 <script>
-    function changeColor (w) {
-        jQuery(function($) {
-            var swatch = $('.swatch div');
-            var colorValue = $('.item-option[name="color"]:not(".sub-item .item-option[name="color"]")').val();
-            var colors = {
-                    '9oz': ['navy','black','gray','tan'],
-                    '8oz': ['navy','black'],
-                    '7oz': ['navy','black']
-                }
-            $('[name="color"]:not(".sub-item .item-option[name="color"] option').each(function(k,v){
-                if ($(this).prop('value') !== 'X') {
-                    $(this).prop('disabled',($.inArray($(this).prop('value'), colors[w]) === -1 ? true : false));
-                }
-            });
-            if ($('[name="color"]:not(".sub-item .item-option[name="color"] [value="'+colorValue+'"]').prop('disabled')) {
-                $('.item-option[name="color"]').val('navy').trigger('input');
-            }
-
-            swatch.removeAttr('class');
-            swatch.addClass($('.color-chooser [name="color"]').val())
-        })
-    }
-    
-    
-</script>
-<script>
     jQuery(function($) {
-        var mainItem = jQuery('#<?php echo $storeItem->id; ?>:not(".related")');
         
         function changeColor (w) {
             var swatch = $('.swatch div');
-            var colorValue = $('.item-option[name="color"]').val();
+            var colorSelect = $('.item-option[name="color"]');
             var colors = {
                     '9oz': ['navy','black','gray','tan'],
                     '8oz': ['navy','black'],
                     '7oz': ['navy','black']
                 }
-            $('[name="color"] option').each(function(k,v){
+            colorSelect.find('option').each(function(k,v){
                 $(this).find('span').html('');
                 if ($(this).prop('value') !== 'X') {
                     if($.inArray($(this).prop('value'), colors[w]) === -1) {
@@ -361,76 +322,73 @@ jQuery(function($){
                     }
                 }
             });
-            if ($('[name="color"] [value="'+colorValue+'"]').prop('disabled')) {
-                $('.item-option[name="color"]').val('navy').trigger('input');
-            }
+            // if ($('[name="color"] [value="'+colorValue+'"]').prop('disabled')) {
+            //     $('.item-option[name="color"]').val('navy').trigger('input');
+            // }
 
             swatch.removeAttr('class');
             swatch.addClass($('.color-chooser [name="color"]').val())
         }
         $(document).ready(function(){
 
-            mainItem.StoreItem({
+            $('#storeOrderForm').StoreItem({
                 name: 'T-Top Boat Cover',
                 validate: false,
-                confirm: true,
                 debug: true,
                 events: {
-                    onInit: [
-                        function () {
-                            var f = this._getFieldValue('fabric');
-                            changeColor(f);
-                        }
-                    ],
-                    onChanged: [
-                        function(e) { 
-                            switch($(e.target).prop('name')) {
-                                case 'storage': //Check the storage value and if "IW" show the modal
-                                    if(this._getFieldValue('storage') === 'IW') {
-                                        var modal = $.UIkit.modal("#inwater-modal");
-                                        modal.options.bgclose = false;
-                                        modal.show();
-                                    }
-                                    break;
-                                case 'trolling_motor': // Check if the trolling motor is "yes" and show the modal for the photo upload
-                                    if(this._getFieldValue('trolling_motor') === 'y') {
-                                        var modal = $.UIkit.modal("#tm-temp-modal");
-                                        modal.options.bgclose = false;
-                                        modal.show();
-                                    }
-                                    break;
-                                case 'fabric':
-                                    changeColor(this._getFieldValue('fabric'));
-                                    break;
-                                case 'color':
-                                    changeColor(this._getFieldValue('fabric'));
-                                    break;
-                                case 'ttop_type':
-                                    if(this._getFieldValue('ttop_type') === 'hard-top') {
-                                        var modal = $.UIkit.modal("#hthsk-modal");
-                                        modal.options.bgclose = false;
-                                        modal.show();
-                                    }
+                    ttopboatcover: {
+                        onInit: [
+                            function () {
+                                var f = this._getOptionValue(<?php echo $storeItem->id; ?>,'fabric');
+                                changeColor(f);
                             }
-                        }
-                    ],
-                    beforeAddToCart: [
-                        function(e, args) {
-                            var items = args[0];
-                            console.log(items);
-                            items[0].name = items[0].name+' for a '+items[0].options.year.text+' '+items[0].attributes.oem.text+' '+items[0].attributes.boat_model.text;
-                            return items;
-                        }
-                    ],
-                    onPublishPrice: [
-                        function(e,args) {
-                            var price = args[0];
-                            if(this._getFieldValue('trolling_motor') === 'y') {
-                                price += 175;
+                        ],
+                        beforeChange: [
+                            function(e) { 
+                                switch($(e.target).prop('name')) {
+                                    case 'storage': //Check the storage value and if "IW" show the modal
+                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'storage') === 'IW') {
+                                            var modal = $.UIkit.modal("#inwater-modal");
+                                            modal.options.bgclose = false;
+                                            modal.show();
+                                        }
+                                        break;
+                                    case 'trolling_motor': // Check if the trolling motor is "yes" and show the modal for the photo upload
+                                        console.log(this._getOptionValue(<?php echo $storeItem->id; ?>,'trolling_motor'));
+                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'trolling_motor') === 'y') {
+                                            var modal = $.UIkit.modal("#tm-temp-modal");
+                                            modal.options.bgclose = false;
+                                            modal.show();
+                                        }
+                                        break;
+                                    case 'fabric':
+                                        changeColor(this._getOptionValue(<?php echo $storeItem->id; ?>,'fabric'));
+                                        break;
+                                    case 'color':
+                                        changeColor(this._getOptionValue(<?php echo $storeItem->id; ?>,'fabric'));
+                                        break;
+                                    case 'ttop_type':
+                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'ttop_type') === 'hard-top') {
+                                            var modal = $.UIkit.modal("#hthsk-modal");
+                                            modal.options.bgclose = false;
+                                            modal.show();
+                                        }
+                                }
                             }
-                            return price;
-                        }
-                    ]
+                        ],
+                        beforeAddToCart: [
+                            function(e, args) {
+                                var items = args[0];
+                                $.each(items, function(key, item){
+                                    console.log(item);
+                                    item.title = '';
+                                    item.title = item.name+' for a '+item.options.year.text+' '+item.attributes.oem.name+' '+item.attributes.boat_model.text;
+                                })
+                                return items;
+                            }
+                        ],
+                        onPublishPrice: []
+                    }
                 },
                 removeValues: true
             });
