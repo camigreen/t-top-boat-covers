@@ -301,557 +301,395 @@ $price['bsk-webbing-straps.item.allowMarkup'] = false;
 
 //Ultimate Boat Shade Kit
 
-// $prices['ubsk.unk'] = 'Choose Measurements';
-// $prices['ubsk.A.min'] = 84;
-// $prices['ubsk.A.max'] = 89;
-// $prices['ubsk.A.regular.full'] = 725;
-// $prices['ubsk.A.regular.fullwithcups'] = 915;
-// $prices['ubsk.A.regular.shade_only'] = 450;
-// $prices['ubsk.A.regular.full'] = 950;
-// $prices['ubsk.A.regular.fullwithcups'] = 1140;
-// $prices['ubsk.A.regular.shade_only'] = 675;
-// $prices['ubsk.B.min'] = 90;
-// $prices['ubsk.B.max'] = 95;
-// $prices['ubsk.B.regular.full'] = 760;
-// $prices['ubsk.B.regular.fullwithcups'] = 952.5;
-// $prices['ubsk.B.regular.shade_only'] = 487.5;
-// $prices['ubsk.B.regular.full'] = 1003.75;
-// $prices['ubsk.B.regular.fullwithcups'] = 1193.75;
-// $prices['ubsk.B.regular.shade_only'] = 731.25;
-// $prices['ubsk.C.min'] = 0;
-// $prices['ubsk.C.max'] = 0;
-// $prices['ubsk.C.regular.full'] = 0;
-// $prices['ubsk.C.regular.fullwithcups'] = 0;
-// $prices['ubsk.C.regular.shade_only'] = 0;
-// $prices['ubsk.C.regular.full'] = 0;
-// $prices['ubsk.C.regular.fullwithcups'] = 0;
-// $prices['ubsk.C.regular.shade_only'] = 0;
-// $prices['ubsk.D.min'] = 0;
-// $prices['ubsk.D.max'] = 0;
-// $prices['ubsk.D.regular.full'] = 0;
-// $prices['ubsk.D.regular.fullwithcups'] = 0;
-// $prices['ubsk.D.regular.shade_only'] = 0;
-// $prices['ubsk.D.regular.full'] = 0;
-// $prices['ubsk.D.regular.fullwithcups'] = 0;
-// $prices['ubsk.D.regular.shade_only'] = 0;
-// $prices['ubsk.E.min'] = 0;
-// $prices['ubsk.E.max'] = 0;
-// $prices['ubsk.E.regular.full'] = 0;
-// $prices['ubsk.E.regular.fullwithcups'] = 0;
-// $prices['ubsk.E.regular.shade_only'] = 0;
-// $prices['ubsk.E.regular.full'] = 0;
-// $prices['ubsk.E.regular.fullwithcups'] = 0;
-// $prices['ubsk.E.regular.shade_only'] = 0;
-// $prices['ubsk.F.min'] = 0;
-// $prices['ubsk.F.max'] = 0;
-// $prices['ubsk.F.regular.full'] = 0;
-// $prices['ubsk.F.regular.fullwithcups'] = 0;
-// $prices['ubsk.F.regular.shade_only'] = 0;
-// $prices['ubsk.F.regular.full'] = 0;
-// $prices['ubsk.F.regular.fullwithcups'] = 0;
-// $prices['ubsk.F.regular.shade_only'] = 0;
-// $prices['ubsk.G.min'] = 0;
-// $prices['ubsk.G.max'] = 0;
-// $prices['ubsk.G.regular.full'] = 0;
-// $prices['ubsk.G.regular.fullwithcups'] = 0;
-// $prices['ubsk.G.regular.shade_only'] = 0;
-// $prices['ubsk.G.regular.full'] = 0;
-// $prices['ubsk.G.regular.fullwithcups'] = 0;
-// $prices['ubsk.G.regular.shade_only'] = 0;
-// $prices['ubsk.H.min'] = 0;
-// $prices['ubsk.H.max'] = 0;
-// $prices['ubsk.H.regular.full'] = 0;
-// $prices['ubsk.H.regular.fullwithcups'] = 0;
-// $prices['ubsk.H.regular.shade_only'] = 0;
-// $prices['ubsk.H.regular.full'] = 0;
-// $prices['ubsk.H.regular.fullwithcups'] = 0;
-// $prices['ubsk.H.regular.shade_only'] = 0;
-// $prices['ubsk.I.min'] = 0;
-// $prices['ubsk.I.max'] = 0;
-// $prices['ubsk.I.regular.full'] = 0;
-// $prices['ubsk.I.regular.fullwithcups'] = 0;
-// $prices['ubsk.I.regular.shade_only'] = 0;
-// $prices['ubsk.I.regular.full'] = 0;
-// $prices['ubsk.I.regular.fullwithcups'] = 0;
-// $prices['ubsk.I.regular.shade_only'] = 0;
-// $prices['ubsk.J.min'] = 0;
-// $prices['ubsk.J.max'] = 0;
-// $prices['ubsk.J.regular.full'] = 0;
-// $prices['ubsk.J.regular.fullwithcups'] = 0;
-// $prices['ubsk.J.regular.shade_only'] = 0;
-// $prices['ubsk.J.regular.full'] = 0;
-// $prices['ubsk.J.regular.fullwithcups'] = 0;
-// $prices['ubsk.J.regular.shade_only'] = 0;
-// $prices['ubsk.K.min'] = 0;
-// $prices['ubsk.K.max'] = 0;
-// $prices['ubsk.K.regular.full'] = 0;
-// $prices['ubsk.K.regular.fullwithcups'] = 0;
-// $prices['ubsk.K.regular.shade_only'] = 0;
-// $prices['ubsk.K.regular.full'] = 0;
-// $prices['ubsk.K.regular.fullwithcups'] = 0;
-// $prices['ubsk.K.regular.shade_only'] = 0;
-// $prices['ubsk.L.min'] = 0;
-// $prices['ubsk.L.max'] = 0;
-// $prices['ubsk.L.regular.full'] = 0;
-// $prices['ubsk.L.regular.fullwithcups'] = 0;
-// $prices['ubsk.L.regular.shade_only'] = 0;
-// $prices['ubsk.L.regular.full'] = 0;
-// $prices['ubsk.L.regular.fullwithcups'] = 0;
-// $prices['ubsk.L.regular.shade_only'] = 0;
-// $prices['ubsk.M.min'] = 0;
-// $prices['ubsk.M.max'] = 0;
-// $prices['ubsk.M.regular.full'] = 0;
-// $prices['ubsk.M.regular.fullwithcups'] = 0;
-// $prices['ubsk.M.regular.shade_only'] = 0;
-// $prices['ubsk.M.regular.full'] = 0;
-// $prices['ubsk.M.regular.fullwithcups'] = 0;
-// $prices['ubsk.M.regular.shade_only'] = 0;
-// $prices['ubsk.N.min'] = 0;
-// $prices['ubsk.N.max'] = 0;
-// $prices['ubsk.N.regular.full'] = 0;
-// $prices['ubsk.N.regular.fullwithcups'] = 0;
-// $prices['ubsk.N.regular.shade_only'] = 0;
-// $prices['ubsk.N.regular.full'] = 0;
-// $prices['ubsk.N.regular.fullwithcups'] = 0;
-// $prices['ubsk.N.regular.shade_only'] = 0;
-// $prices['ubsk.O.min'] = 0;
-// $prices['ubsk.O.max'] = 0;
-// $prices['ubsk.O.regular.full'] = 0;
-// $prices['ubsk.O.regular.fullwithcups'] = 0;
-// $prices['ubsk.O.regular.shade_only'] = 0;
-// $prices['ubsk.O.regular.full'] = 0;
-// $prices['ubsk.O.regular.fullwithcups'] = 0;
-// $prices['ubsk.O.regular.shade_only'] = 0;
-// $prices['ubsk.P.min'] = 0;
-// $prices['ubsk.P.max'] = 0;
-// $prices['ubsk.P.regular.full'] = 0;
-// $prices['ubsk.P.regular.fullwithcups'] = 0;
-// $prices['ubsk.P.regular.shade_only'] = 0;
-// $prices['ubsk.P.regular.full'] = 0;
-// $prices['ubsk.P.regular.fullwithcups'] = 0;
-// $prices['ubsk.P.regular.shade_only'] = 0;
-// $prices['ubsk.Q.min'] = 0;
-// $prices['ubsk.Q.max'] = 0;
-// $prices['ubsk.Q.regular.full'] = 0;
-// $prices['ubsk.Q.regular.fullwithcups'] = 0;
-// $prices['ubsk.Q.regular.shade_only'] = 0;
-// $prices['ubsk.Q.regular.full'] = 0;
-// $prices['ubsk.Q.regular.fullwithcups'] = 0;
-// $prices['ubsk.Q.regular.shade_only'] = 0;
-// $prices['ubsk.R.min'] = 0;
-// $prices['ubsk.R.max'] = 0;
-// $prices['ubsk.R.regular.full'] = 0;
-// $prices['ubsk.R.regular.fullwithcups'] = 0;
-// $prices['ubsk.R.regular.shade_only'] = 0;
-// $prices['ubsk.R.regular.full'] = 0;
-// $prices['ubsk.R.regular.fullwithcups'] = 0;
-// $prices['ubsk.R.regular.shade_only'] = 0;
-// $prices['ubsk.S.min'] = 0;
-// $prices['ubsk.S.max'] = 0;
-// $prices['ubsk.S.regular.full'] = 0;
-// $prices['ubsk.S.regular.fullwithcups'] = 0;
-// $prices['ubsk.S.regular.shade_only'] = 0;
-// $prices['ubsk.S.regular.full'] = 0;
-// $prices['ubsk.S.regular.fullwithcups'] = 0;
-// $prices['ubsk.S.regular.shade_only'] = 0;
-// $prices['ubsk.T.min'] = 0;
-// $prices['ubsk.T.max'] = 0;
-// $prices['ubsk.T.regular.full'] = 0;
-// $prices['ubsk.T.regular.fullwithcups'] = 0;
-// $prices['ubsk.T.regular.shade_only'] = 0;
-// $prices['ubsk.T.regular.full'] = 0;
-// $prices['ubsk.T.regular.fullwithcups'] = 0;
-// $prices['ubsk.T.regular.shade_only'] = 0;
-// $prices['ubsk.U.min'] = 0;
-// $prices['ubsk.U.max'] = 0;
-// $prices['ubsk.U.regular.full'] = 0;
-// $prices['ubsk.U.regular.fullwithcups'] = 0;
-// $prices['ubsk.U.regular.shade_only'] = 0;
-// $prices['ubsk.U.regular.full'] = 0;
-// $prices['ubsk.U.regular.fullwithcups'] = 0;
-// $prices['ubsk.U.regular.shade_only'] = 0;
-// $prices['ubsk.V.min'] = 0;
-// $prices['ubsk.V.max'] = 0;
-// $prices['ubsk.V.regular.full'] = 0;
-// $prices['ubsk.V.regular.fullwithcups'] = 0;
-// $prices['ubsk.V.regular.shade_only'] = 0;
-// $prices['ubsk.V.regular.full'] = 0;
-// $prices['ubsk.V.regular.fullwithcups'] = 0;
-// $prices['ubsk.V.regular.shade_only'] = 0;
-// $prices['ubsk.W.min'] = 0;
-// $prices['ubsk.W.max'] = 0;
-// $prices['ubsk.W.regular.full'] = 0;
-// $prices['ubsk.W.regular.fullwithcups'] = 0;
-// $prices['ubsk.W.regular.shade_only'] = 0;
-// $prices['ubsk.W.regular.full'] = 0;
-// $prices['ubsk.W.regular.fullwithcups'] = 0;
-// $prices['ubsk.W.regular.shade_only'] = 0;
-// $prices['ubsk'] = array(
-//     'item' => array(
-//         'unk' => 'Choose Measurements',
-//         'A' => array(
-//             'min' => 84,
-//             'max' => 89,
-//             'regular' => array(
-//                 'full' => 725.00,
-//                 'fullwithcups' => 915.00,
-//                 'shade_only' => 450.00
-//             ),
-//             'extended' => array(
-//                 'full' => 950.00,
-//                 'fullwithcups' => 1140.00,
-//                 'shade_only' => 675.00
-//             ),
-//         ),
-//         'B' => array(
-//             'min' => 90,
-//             'max' => 95,
-//             'regular' => array(
-//                 'full' => 760.00,
-//                 'fullwithcups' => 952.50,
-//                 'shade_only' => 487.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1003.75,
-//                 'fullwithcups' => 1193.75,
-//                 'shade_only' => 731.25
-//             ),
-//         ),
-//         'C' => array(
-//             'min' => 96,
-//             'max' => 101,
-//             'regular' => array(
-//                 'full' => 795.00,
-//                 'fullwithcups' => 985.00,
-//                 'shade_only' => 525.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1057.50,
-//                 'fullwithcups' => 1247.50,
-//                 'shade_only' => 787.50
-//             ),
-//         ),
-//         'D' => array(
-//             'min' => 102,
-//             'max' => 107,
-//             'regular' => array(
-//                 'full' => 837.50,
-//                 'fullwithcups' => 1022.50,
-//                 'shade_only' => 562.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1118.75,
-//                 'fullwithcups' => 1308.75,
-//                 'shade_only' => 843.75
-//             )
-//         ),
-//         'E' => array(
-//             'min' => 108,
-//             'max' => 113,
-//             'regular' => array(
-//                 'full' => 870.00,
-//                 'fullwithcups' => 1060.00,
-//                 'shade_only' => 600.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1170.00,
-//                 'fullwithcups' => 1360.00,
-//                 'shade_only' => 900.00
-//             )
-//         ),
-//         'F' => array(
-//             'min' => 114,
-//             'max' => 119,
-//             'regular' => array(
-//                 'full' => 907.50,
-//                 'fullwithcups' => 1097.50,
-//                 'shade_only' => 637.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1226.25,
-//                 'fullwithcups' => 1416.25,
-//                 'shade_only' => 956.25
-//             )
-//         ),
-//         'G' => array(
-//             'min' => 120,
-//             'max' => 125,
-//             'regular' => array(
-//                 'full' => 945.00,
-//                 'fullwithcups' => 1135.00,
-//                 'shade_only' => 675.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1282.50,
-//                 'fullwithcups' => 1472.50,
-//                 'shade_only' => 1012.50
-//             )
-//         ),
-//         'H' => array(
-//             'min' => 126,
-//             'max' => 131,
-//             'regular' => array(
-//                 'full' => 982.50,
-//                 'fullwithcups' => 1172.05,
-//                 'shade_only' => 712.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1338.75,
-//                 'fullwithcups' => 1528.75,
-//                 'shade_only' => 1068.75
-//             )
-//         ),
-//         'I' => array(
-//             'min' => 132,
-//             'max' => 137,
-//             'regular' => array(
-//                 'full' => 1020.00,
-//                 'fullwithcups' => 1210.00,
-//                 'shade_only' => 750.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1395.00,
-//                 'fullwithcups' => 1585.00,
-//                 'shade_only' => 1125.00
-//             )
-//         ),
-//         'J' => array(
-//             'min' => 138,
-//             'max' => 143,
-//             'regular' => array(
-//                 'full' => 1057.50,
-//                 'fullwithcups' => 1257.50,
-//                 'shade_only' => 787.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1451.25,
-//                 'fullwithcups' => 1641.25,
-//                 'shade_only' => 1181.25
-//             )
-//         ),
-//         'K' => array(
-//             'min' => 144,
-//             'max' => 149,
-//             'regular' => array(
-//                 'full' => 1095.00,
-//                 'fullwithcups' => 1285.00,
-//                 'shade_only' => 825.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1507.50,
-//                 'fullwithcups' => 1697.50,
-//                 'shade_only' => 1237.50
-//             )
-//         ),
-//         'L' => array(
-//             'min' => 150,
-//             'max' => 155,
-//             'regular' => array(
-//                 'full' => 1132.50,
-//                 'fullwithcups' => 1322.50,
-//                 'shade_only' => 862.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1563.75,
-//                 'fullwithcups' => 1753.75,
-//                 'shade_only' => 1299.75
-//             )
-//         ),
-//         'M' => array(
-//             'min' => 156,
-//             'max' => 161,
-//             'regular' => array(
-//                 'full' => 1170.00,
-//                 'fullwithcups' => 1398.00,
-//                 'shade_only' => 900.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1620.00,
-//                 'fullwithcups' => 1848.00,
-//                 'shade_only' => 1350.00
-//             )
-//         ),
-//         'N' => array(
-//             'min' => 162,
-//             'max' => 167,
-//             'regular' => array(
-//                 'full' => 1207.50,
-//                 'fullwithcups' => 1435.50,
-//                 'shade_only' => 937.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1676.25,
-//                 'fullwithcups' => 1904.25,
-//                 'shade_only' => 1406.25
-//             )
-//         ),
-//         'O' => array(
-//             'min' => 168,
-//             'max' => 173,
-//             'regular' => array(
-//                 'full' => 1245.00,
-//                 'fullwithcups' => 1473.00,
-//                 'shade_only' => 975.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1732.50,
-//                 'fullwithcups' => 1960.50,
-//                 'shade_only' => 1462.50
-//             )
-//         ),
-//         'P' => array(
-//             'min' => 174,
-//             'max' => 179,
-//             'regular' => array(
-//                 'full' => 1282.50,
-//                 'fullwithcups' => 1510.50,
-//                 'shade_only' => 1012.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1788.75,
-//                 'fullwithcups' => 2016.75,
-//                 'shade_only' => 1518.75
-//             )
-//         ),
-//         'Q' => array(
-//             'min' => 180,
-//             'max' => 185,
-//             'regular' => array(
-//                 'full' => 1320.00,
-//                 'fullwithcups' => 1586.00,
-//                 'shade_only' => 1050.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1845.00,
-//                 'fullwithcups' => 2111.00,
-//                 'shade_only' => 1575.00
-//             )
-//         ),
-//         'R' => array(
-//             'min' => 186,
-//             'max' => 191,
-//             'regular' => array(
-//                 'full' => 1357.50,
-//                 'fullwithcups' => 1623.50,
-//                 'shade_only' => 1087.50
-//             ),
-//             'extended' => array(
-//                 'full' => 1901.25,
-//                 'fullwithcups' => 2167.25,
-//                 'shade_only' => 1631.25
-//             )
-//         ),
-//         'S' => array(
-//             'min' => 192,
-//             'max' => 197,
-//             'regular' => array(
-//                 'full' => 1395.00,
-//                 'fullwithcups' => 1661.00,
-//                 'shade_only' => 1125.00
-//             ),
-//             'extended' => array(
-//                 'full' => 1957.50,
-//                 'fullwithcups' => 2223.50,
-//                 'shade_only' => 1687.50
-//             )
-//         ),
-//         'T' => array(
-//             'min' => 198,
-//             'max' => 203,
-//             'regular' => array(
-//                 'full' => 1432.50,
-//                 'fullwithcups' => 1698.50,
-//                 'shade_only' => 1162.50
-//             ),
-//             'extended' => array(
-//                 'full' => 2013.50,
-//                 'fullwithcups' => 2279.50,
-//                 'shade_only' => 1743.75
-//             )
-//         ),
-//         'U' => array(
-//             'min' => 204,
-//             'max' => 209,
-//             'regular' => array(
-//                 'full' => 1470.00,
-//                 'fullwithcups' => 1774.00,
-//                 'shade_only' => 1200.00
-//             ),
-//             'extended' => array(
-//                 'full' => 2070.00,
-//                 'fullwithcups' => 2374.00,
-//                 'shade_only' => 1800.00
-//             )
-//         ),
-//         'V' => array(
-//             'min' => 210,
-//             'max' => 215,
-//             'regular' => array(
-//                 'full' => 1507.50,
-//                 'fullwithcups' => 1773.50,
-//                 'shade_only' => 1237.50
-//             ),
-//             'extended' => array(
-//                 'full' => 2126.25,
-//                 'fullwithcups' => 2430.25,
-//                 'shade_only' => 1856.25
-//             )
-//         ),
-//         'W' => array(
-//             'min' => 216,
-//             'max' => 222,
-//             'regular' => array(
-//                 'full' => 1545.00,
-//                 'fullwithcups' => 1811.00,
-//                 'shade_only' => 1275.00
-//             ),
-//             'extended' => array(
-//                 'full' => 2182.50,
-//                 'fullwithcups' => 2486.50,
-//                 'shade_only' => 1912.50
-//             )
-//         ),
-//     ),
-//     'shipping' => array(
-//         'full' => array(
-//             'weight' => 15,
-//             'price' => 0
-//         ),
-//         'fullwithcups' => array(
-//             'weight' => 20,
-//             'price' => 0
-//         ),
-//         'shade_only' => array(
-//             'weight' => 4,
-//             'price' => 0
-//         )
-//     ),
-//     'options' => array(
-//         'suction_cups' => array(
-//             5 => array(
-//                 'min' => 96,
-//                 'max' => 155
-//             ),
-//             6 => array(
-//                 'min' => 156,
-//                 'max' => 179
-//             ),
-//             7 => array(
-//                 'min' => 180,
-//                 'max' => 203
-//             ),
-//             8 => array(
-//                 'min' => 204,
-//                 'max' => 222
-//             )
-//         )
-//     )
-// );
+$price['ubsk.A.item.base'] = 450;
+$price['ubsk.A.item.option.kit_options.full'] = 275;
+$price['ubsk.A.item.option.kit_options.fullwithcups'] = 465;
+$price['ubsk.A.shipping.base.weight'] = 4;
+$price['ubsk.A.shipping.base.price'] = 0;
+$price['ubsk.A.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.A.shipping.option.kit_options.full.price'] = 0;
 
+$price['ubsk.A.extended.item.base'] = 675;
+$price['ubsk.A.extended.item.option.kit_options.full'] = 275;
+$price['ubsk.A.extended.item.option.kit_options.fullwithcups'] = 465;
+$price['ubsk.A.extended.shipping.base.weight'] = 4;
+$price['ubsk.A.extended.shipping.base.price'] = 0;
+$price['ubsk.A.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.A.extended.shipping.option.kit_options.full.price'] = 0;
 
+$price['ubsk.B.item.base'] = 487.5;
+$price['ubsk.B.item.option.kit_options.full'] = 272.50;
+$price['ubsk.B.item.option.kit_options.fullwithcups'] = 465;
+$price['ubsk.B.shipping.base.weight'] = 4;
+$price['ubsk.B.shipping.base.price'] = 0;
+$price['ubsk.B.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.B.shipping.option.kit_options.full.price'] = 0;
 
+$price['ubsk.B.extended.item.base'] = 731.25;
+$price['ubsk.B.extended.item.option.kit_options.full'] = 272.50;
+$price['ubsk.B.extended.item.option.kit_options.fullwithcups'] = 462.50;
+$price['ubsk.B.extended.shipping.base.weight'] = 4;
+$price['ubsk.B.extended.shipping.base.price'] = 0;
+$price['ubsk.B.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.B.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.B.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
 
+$price['ubsk.C.item.base'] = 525.5;
+$price['ubsk.C.item.option.kit_options.full'] = 270;
+$price['ubsk.C.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.C.shipping.base.weight'] = 4;
+$price['ubsk.C.shipping.base.price'] = 0;
+$price['ubsk.C.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.C.shipping.option.kit_options.full.price'] = 0;
 
+$price['ubsk.C.extended.item.base'] = 787.50;
+$price['ubsk.C.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.C.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.C.extended.shipping.base.weight'] = 4;
+$price['ubsk.C.extended.shipping.base.price'] = 0;
+$price['ubsk.C.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.C.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.C.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.D.item.base'] = 562.5;
+$price['ubsk.D.item.option.kit_options.full'] = 275;
+$price['ubsk.D.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.D.shipping.base.weight'] = 4;
+$price['ubsk.D.shipping.base.price'] = 0;
+$price['ubsk.D.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.D.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.D.extended.item.base'] = 843.75;
+$price['ubsk.D.extended.item.option.kit_options.full'] = 275;
+$price['ubsk.D.extended.item.option.kit_options.fullwithcups'] = 465;
+$price['ubsk.D.extended.shipping.base.weight'] = 4;
+$price['ubsk.D.extended.shipping.base.price'] = 0;
+$price['ubsk.D.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.D.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.D.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.E.item.base'] = 600;
+$price['ubsk.E.item.option.kit_options.full'] = 270;
+$price['ubsk.E.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.E.shipping.base.weight'] = 4;
+$price['ubsk.E.shipping.base.price'] = 0;
+$price['ubsk.E.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.E.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.E.extended.item.base'] = 900;
+$price['ubsk.E.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.E.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.E.extended.shipping.base.weight'] = 4;
+$price['ubsk.E.extended.shipping.base.price'] = 0;
+$price['ubsk.E.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.E.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.E.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.F.item.base'] = 637.5;
+$price['ubsk.F.item.option.kit_options.full'] = 270;
+$price['ubsk.F.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.F.shipping.base.weight'] = 4;
+$price['ubsk.F.shipping.base.price'] = 0;
+$price['ubsk.F.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.F.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.F.extended.item.base'] = 956.25;
+$price['ubsk.F.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.F.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.F.extended.shipping.base.weight'] = 4;
+$price['ubsk.F.extended.shipping.base.price'] = 0;
+$price['ubsk.F.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.F.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.F.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.G.item.base'] = 675;
+$price['ubsk.G.item.option.kit_options.full'] = 270;
+$price['ubsk.G.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.G.shipping.base.weight'] = 4;
+$price['ubsk.G.shipping.base.price'] = 0;
+$price['ubsk.G.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.G.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.G.extended.item.base'] = 1012.50;
+$price['ubsk.G.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.G.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.G.extended.shipping.base.weight'] = 4;
+$price['ubsk.G.extended.shipping.base.price'] = 0;
+$price['ubsk.G.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.G.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.G.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.H.item.base'] = 712.5;
+$price['ubsk.H.item.option.kit_options.full'] = 270;
+$price['ubsk.H.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.H.shipping.base.weight'] = 4;
+$price['ubsk.H.shipping.base.price'] = 0;
+$price['ubsk.H.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.H.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.H.extended.item.base'] = 1068.75;
+$price['ubsk.H.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.H.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.H.extended.shipping.base.weight'] = 4;
+$price['ubsk.H.extended.shipping.base.price'] = 0;
+$price['ubsk.H.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.H.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.H.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.I.item.base'] = 750;
+$price['ubsk.I.item.option.kit_options.full'] = 270;
+$price['ubsk.I.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.I.shipping.base.weight'] = 4;
+$price['ubsk.I.shipping.base.price'] = 0;
+$price['ubsk.I.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.I.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.I.extended.item.base'] = 1125;
+$price['ubsk.I.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.I.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.I.extended.shipping.base.weight'] = 4;
+$price['ubsk.I.extended.shipping.base.price'] = 0;
+$price['ubsk.I.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.I.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.I.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.J.item.base'] = 787.5;
+$price['ubsk.J.item.option.kit_options.full'] = 270;
+$price['ubsk.J.item.option.kit_options.fullwithcups'] = 470;
+$price['ubsk.J.shipping.base.weight'] = 4;
+$price['ubsk.J.shipping.base.price'] = 0;
+$price['ubsk.J.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.J.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.J.extended.item.base'] = 1181.25;
+$price['ubsk.J.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.J.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.J.extended.shipping.base.weight'] = 4;
+$price['ubsk.J.extended.shipping.base.price'] = 0;
+$price['ubsk.J.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.J.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.J.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.K.item.base'] = 825.5;
+$price['ubsk.K.item.option.kit_options.full'] = 270;
+$price['ubsk.K.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.K.shipping.base.weight'] = 4;
+$price['ubsk.K.shipping.base.price'] = 0;
+$price['ubsk.K.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.K.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.K.extended.item.base'] = 1237.50;
+$price['ubsk.K.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.K.extended.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.K.extended.shipping.base.weight'] = 4;
+$price['ubsk.K.extended.shipping.base.price'] = 0;
+$price['ubsk.K.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.K.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.K.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.L.item.base'] = 862.50;
+$price['ubsk.L.item.option.kit_options.full'] = 270;
+$price['ubsk.L.item.option.kit_options.fullwithcups'] = 460;
+$price['ubsk.L.shipping.base.weight'] = 4;
+$price['ubsk.L.shipping.base.price'] = 0;
+$price['ubsk.L.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.L.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.L.extended.item.base'] = 1299.75;
+$price['ubsk.L.extended.item.option.kit_options.full'] = 264;
+$price['ubsk.L.extended.item.option.kit_options.fullwithcups'] = 454;
+$price['ubsk.L.extended.shipping.base.weight'] = 4;
+$price['ubsk.L.extended.shipping.base.price'] = 0;
+$price['ubsk.L.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.L.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.L.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.M.item.base'] = 900;
+$price['ubsk.M.item.option.kit_options.full'] = 270;
+$price['ubsk.M.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.M.shipping.base.weight'] = 4;
+$price['ubsk.M.shipping.base.price'] = 0;
+$price['ubsk.M.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.M.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.M.extended.item.base'] = 1350;
+$price['ubsk.M.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.M.extended.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.M.extended.shipping.base.weight'] = 4;
+$price['ubsk.M.extended.shipping.base.price'] = 0;
+$price['ubsk.M.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.M.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.M.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.N.item.base'] = 937.5;
+$price['ubsk.N.item.option.kit_options.full'] = 270;
+$price['ubsk.N.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.N.shipping.base.weight'] = 4;
+$price['ubsk.N.shipping.base.price'] = 0;
+$price['ubsk.N.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.N.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.N.extended.item.base'] = 1406.25;
+$price['ubsk.N.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.N.extended.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.N.extended.shipping.base.weight'] = 4;
+$price['ubsk.N.extended.shipping.base.price'] = 0;
+$price['ubsk.N.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.N.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.N.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.O.item.base'] = 975;
+$price['ubsk.O.item.option.kit_options.full'] = 270;
+$price['ubsk.O.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.O.shipping.base.weight'] = 4;
+$price['ubsk.O.shipping.base.price'] = 0;
+$price['ubsk.O.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.O.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.O.extended.item.base'] = 1462.50;
+$price['ubsk.O.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.O.extended.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.O.extended.shipping.base.weight'] = 4;
+$price['ubsk.O.extended.shipping.base.price'] = 0;
+$price['ubsk.O.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.O.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.O.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.P.item.base'] = 1012.50;
+$price['ubsk.P.item.option.kit_options.full'] = 270;
+$price['ubsk.P.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.P.shipping.base.weight'] = 4;
+$price['ubsk.P.shipping.base.price'] = 0;
+$price['ubsk.P.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.P.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.P.extended.item.base'] = 1518.75;
+$price['ubsk.P.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.P.extended.item.option.kit_options.fullwithcups'] = 498;
+$price['ubsk.P.extended.shipping.base.weight'] = 4;
+$price['ubsk.P.extended.shipping.base.price'] = 0;
+$price['ubsk.P.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.P.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.P.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.Q.item.base'] = 1050;
+$price['ubsk.Q.item.option.kit_options.full'] = 270;
+$price['ubsk.Q.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.Q.shipping.base.weight'] = 4;
+$price['ubsk.Q.shipping.base.price'] = 0;
+$price['ubsk.Q.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.Q.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.Q.extended.item.base'] = 1575;
+$price['ubsk.Q.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.Q.extended.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.Q.extended.shipping.base.weight'] = 4;
+$price['ubsk.Q.extended.shipping.base.price'] = 0;
+$price['ubsk.Q.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.Q.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.Q.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.R.item.base'] = 1087.50;
+$price['ubsk.R.item.option.kit_options.full'] = 270;
+$price['ubsk.R.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.R.shipping.base.weight'] = 4;
+$price['ubsk.R.shipping.base.price'] = 0;
+$price['ubsk.R.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.R.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.R.extended.item.base'] = 1631.25;
+$price['ubsk.R.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.R.extended.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.R.extended.shipping.base.weight'] = 4;
+$price['ubsk.R.extended.shipping.base.price'] = 0;
+$price['ubsk.R.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.R.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.R.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.S.item.base'] = 1125;
+$price['ubsk.S.item.option.kit_options.full'] = 270;
+$price['ubsk.S.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.S.shipping.base.weight'] = 4;
+$price['ubsk.S.shipping.base.price'] = 0;
+$price['ubsk.S.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.S.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.S.extended.item.base'] = 1687.50;
+$price['ubsk.S.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.S.extended.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.S.extended.shipping.base.weight'] = 4;
+$price['ubsk.S.extended.shipping.base.price'] = 0;
+$price['ubsk.S.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.S.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.S.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.T.item.base'] = 1162.50;
+$price['ubsk.T.item.option.kit_options.full'] = 270;
+$price['ubsk.T.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.T.shipping.base.weight'] = 4;
+$price['ubsk.T.shipping.base.price'] = 0;
+$price['ubsk.T.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.T.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.T.extended.item.base'] = 1743.75;
+$price['ubsk.T.extended.item.option.kit_options.full'] = 269.75;
+$price['ubsk.T.extended.item.option.kit_options.fullwithcups'] = 535.75;
+$price['ubsk.T.extended.shipping.base.weight'] = 4;
+$price['ubsk.T.extended.shipping.base.price'] = 0;
+$price['ubsk.T.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.T.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.T.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.U.item.base'] = 1200;
+$price['ubsk.U.item.option.kit_options.full'] = 270;
+$price['ubsk.U.item.option.kit_options.fullwithcups'] = 574;
+$price['ubsk.U.shipping.base.weight'] = 4;
+$price['ubsk.U.shipping.base.price'] = 0;
+$price['ubsk.U.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.U.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.U.extended.item.base'] = 1800;
+$price['ubsk.U.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.U.extended.item.option.kit_options.fullwithcups'] = 574;
+$price['ubsk.U.extended.shipping.base.weight'] = 4;
+$price['ubsk.U.extended.shipping.base.price'] = 0;
+$price['ubsk.U.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.U.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.U.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.V.item.base'] = 1237.50;
+$price['ubsk.V.item.option.kit_options.full'] = 270;
+$price['ubsk.V.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.V.shipping.base.weight'] = 4;
+$price['ubsk.V.shipping.base.price'] = 0;
+$price['ubsk.V.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.V.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.V.extended.item.base'] = 1856.25;
+$price['ubsk.V.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.V.extended.item.option.kit_options.fullwithcups'] = 574;
+$price['ubsk.V.extended.shipping.base.weight'] = 4;
+$price['ubsk.V.extended.shipping.base.price'] = 0;
+$price['ubsk.V.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.V.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.V.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
+
+$price['ubsk.W.item.base'] = 1275;
+$price['ubsk.W.item.option.kit_options.full'] = 270;
+$price['ubsk.W.item.option.kit_options.fullwithcups'] = 536;
+$price['ubsk.W.shipping.base.weight'] = 4;
+$price['ubsk.W.shipping.base.price'] = 0;
+$price['ubsk.W.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.W.shipping.option.kit_options.full.price'] = 0;
+
+$price['ubsk.W.extended.item.base'] = 1912.50;
+$price['ubsk.W.extended.item.option.kit_options.full'] = 270;
+$price['ubsk.W.extended.item.option.kit_options.fullwithcups'] = 574;
+$price['ubsk.W.extended.shipping.base.weight'] = 4;
+$price['ubsk.W.extended.shipping.base.price'] = 0;
+$price['ubsk.W.extended.shipping.option.kit_options.full.weight'] = 15;
+$price['ubsk.W.extended.shipping.option.kit_options.full.price'] = 0;
+$price['ubsk.W.extended.shipping.option.kit_options.fullwithcups.weight'] = 20;
 
 // //Taylor Made Products
 

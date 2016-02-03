@@ -15,9 +15,9 @@ $storeItem = $this->app->item->create($item, 'bsk');
 <article>
     <span class="uk-article-title"><?php echo $item->name; ?></span>
 </article>
-<div id="storeOrderForm" class="<?php echo $item->type; ?>">
+<div id="storeOrderForm" class="<?php echo $item->type; ?> uk-form">
     <div id="<?php echo $storeItem->id; ?>" data-item='<?php echo $storeItem->getItemsJSON(); ?>' class="uk-grid storeItem">
-    <div class="uk-form uk-margin main-item" >
+    <div class="uk-margin" >
         <div class="uk-grid">
                 <div class="uk-width-2-3">
                     <div class="uk-width-1-1 options-container" data-id="bsk">
@@ -413,7 +413,10 @@ $storeItem = $this->app->item->create($item, 'bsk');
                             this.items['bsk-bow'] = $.extend(true, {}, this.items['bsk']);
                             this.items['bsk-bow'].id = 'bsk-bow';
                             delete this.items['bsk'];
-                            console.log(this.items);
+                            var fields = this.fields['bsk'];
+                            this.fields['bsk-aft'] = $.extend(true, {}, fields);
+                            this.fields['bsk-bow'] = $.extend(true, {}, fields);
+                            delete this.items['bsk'];
 
                             $('#use_on_bow').on('change',function(e){
                                 self.trigger('measure', {type: ['aft']});

@@ -294,12 +294,17 @@ class StoreItem {
         }
         $options = '';
         foreach($this->options as $key => $option) {
-            $parts = explode('.', $key);
-            $count = count($parts) - 1;
-            if($parts[$count] == 'value') {
-                $options .= $parts[$count];
-            }
+                $options .= $option->value;
         }
+
+        // foreach($this->options as $key => $option) {
+        //     $parts = explode('.', $key);
+        //     var_dump($parts);
+        //     $count = count($parts) - 1;
+        //     if($parts[$count] == 'value') {
+        //         $options .= $parts[$count];
+        //     }
+        // }
         $options .= $this->getPrice()->getMarkupRate();
         $options .= $this->getPrice()->getDiscountRate();
         $options .= $this->id;
