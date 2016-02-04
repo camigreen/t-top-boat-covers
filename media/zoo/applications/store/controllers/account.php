@@ -324,4 +324,9 @@ class AccountController extends AppController {
 
     }
 
+    public function testEmail () {
+        $this->app->document->setMimeEncoding('application/json');
+        echo json_encode(true);
+    }
+
 }

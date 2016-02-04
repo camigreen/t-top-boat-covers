@@ -7,7 +7,7 @@
  */
 
 // set attributes
-$attributes = array('type' => 'password', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
+$attributes = array('id' => $name, 'type' => 'password', 'name' => "{$control_name}[{$name}]", 'value' => $value, 'class' => isset($class) ? $class : '');
 
 $disabled = (bool) $node->attributes()->disabled ? 'disabled' : ''; 
 printf('<input %s '.$disabled.' autocomplete="off"/>', $this->app->field->attributes($attributes, array('label', 'description', 'default')));

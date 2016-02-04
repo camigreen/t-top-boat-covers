@@ -20,11 +20,11 @@
 					<?php echo $this->form->render('details')?>
 				</div>
 			<?php endif; ?>
-			<?php if($this->form->checkGroup('password')) : ?>
+			<?php if($this->form->checkGroup('pwd')) : ?>
 				<div class="uk-form-row">
 					<?php 
 						if($this->app->customer->get()->id == $this->account->id || $this->app->customer->isAccountAdmin()) {
-							echo $this->form->render('password');
+							echo $this->form->render('pwd');
 						} else {
 							echo '<button id="resetPWD" class="uk-width-1-3 uk-button uk-button-primary uk-margin" data-task="resetPassword">Reset Password</button>';
 						}

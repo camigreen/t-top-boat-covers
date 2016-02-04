@@ -67,12 +67,12 @@
 	</type>
 	<type name="user.dealership">
 		<fieldset group="details" name="details" label="Details" controlname="user">
-			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." />
-			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." />
-			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." />
-			<field name="state" controlname="core" type="statuslist" width="2-10" admin="1" edit="core.edit.state" default="" label="Account Status" value="account" description="The current status for the user." />
+			<field name="name" type="storetext" width="6-10" default="" label="Name" description="Name of the account." required="1" />
+			<field name="username" type="storetext" width="4-10" default="" label="Username" description="Username for the account." required="1"/>
+			<field name="email" type="storetext" width="4-10" default="" label="Email" description="An email address for the user." required="1"/>
+			<field name="state" controlname="core" type="statuslist" width="2-10" admin="1" edit="core.edit.state" default="" label="Account Status" value="account" description="The current status for the user." required="1"/>
 		</fieldset>
-		<fieldset group="password" label="password" controlname="user">
+		<fieldset group="pwd" label="password" controlname="user">
 			<field name="password" type="password" width="1-4" default="" label="Password" description="Password the account." />
 			<field name="password2" type="password" width="1-4" default="" label="Confirm Password" description="Confirm the password for the account." />
 		</fieldset>
