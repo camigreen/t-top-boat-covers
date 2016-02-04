@@ -39,198 +39,198 @@
 			</field>
 			<field name="boatmodelCCC" boatmake="albury_brothers" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="82,94,48,A">23</option>
+				<option value="82,94,48">23</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="bluewater" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,76,41,A">21</option>
+				<option value="84,76,41">21</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="boston_whaler" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,95,42,B">200 Dauntless</option>
-				<option value="84,96,41,B">210 Dauntless</option>
-				<option value="84,104,48,B">210 Outrage</option>
-				<option value="82,109,36,C">220 Outrage</option>
-				<option value="85,108,46,C">240 Outrage</option>
-				<option value="85,120,46,C">250 Outrage</option>
+				<option value="84,95,42">200 Dauntless</option>
+				<option value="84,96,41">210 Dauntless</option>
+				<option value="84,104,48">210 Outrage</option>
+				<option value="82,109,36">220 Outrage</option>
+				<option value="85,108,46">240 Outrage</option>
+				<option value="85,120,46">250 Outrage</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="carolina_cat" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="82,85,40,A">23</option>
+				<option value="82,85,40">23</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="century" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,88,44,A">2001</option>
+				<option value="84,88,44">2001</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="cobia" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="86,101,40,B">237</option>
-				<option value="87,102,40,B">237</option>
+				<option value="86,101,40">237</option>
+				<option value="87,102,40">237</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="contender" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,87,34,A">24</option>
-				<option value="83,105,34,B">31FS</option>
-				<option value="82,103,39,B">32</option>
+				<option value="84,87,34">24</option>
+				<option value="83,105,34">31FS</option>
+				<option value="82,103,39">32</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="edgewater" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,103,34,B">205</option>
-				<option value="85,106,39,B">225</option>
-				<option value="83,111,45,C">245</option>
-				<option value="88,120,48,C">265</option>
-				<option value="84,103,34,B">205</option>
+				<option value="84,103,34">205</option>
+				<option value="85,106,39">225</option>
+				<option value="83,111,45">245</option>
+				<option value="88,120,48">265</option>
+				<option value="84,103,34">205</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="grady_white" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,102,43,B">251 Coastal Explorer</option>
-				<option value="86,131,55,D">283 Release</option>
+				<option value="84,102,43">251 Coastal Explorer</option>
+				<option value="86,131,55">283 Release</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="hydra-sport" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,122,42,D">2900</option>
+				<option value="85,122,42">2900</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="jupiter" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,129,45,D">31</option>
+				<option value="84,129,45">31</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="key_west" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,81,41,A">189 FS</option>
-				<option value="85,91,44,A">2020</option>
-				<option value="84,90,43,A">203 FS</option>
-				<option value="85,90,41,A">230 Bay Reef</option>
-				<option value="85,92,43,A">244 Bluewater</option>
-				<option value="87,106,54,B">268</option>
+				<option value="85,81,41">189 FS</option>
+				<option value="85,91,44">2020</option>
+				<option value="84,90,43">203 FS</option>
+				<option value="85,90,41">230 Bay Reef</option>
+				<option value="85,92,43">244 Bluewater</option>
+				<option value="87,106,54">268</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="mako" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="82,90,40,B">221</option>
+				<option value="82,90,40">221</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="nautic_star" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,98,45,B">2200 XS</option>
+				<option value="84,98,45">2200 XS</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="pathfinder" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="82,89,41,A">2200</option>
-				<option value="83,86,42,A">2400</option>
+				<option value="82,89,41">2200</option>
+				<option value="83,86,42">2400</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="pioneer" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="79,68,35,A">180 Islander</option>
-				<option value="83,99,41,B">197 Islander</option>
-				<option value="83,92,33,A">197 Sportfish</option>
-				<option value="83,96,37,B">220 Bay Sport</option>
-				<option value="80,106,36,B">222 Sportfish</option>
+				<option value="79,68,35">180 Islander</option>
+				<option value="83,99,41">197 Islander</option>
+				<option value="83,92,33">197 Sportfish</option>
+				<option value="83,96,37">220 Bay Sport</option>
+				<option value="80,106,36">222 Sportfish</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="polar_kraft" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="87,97,46,B">2300</option>
+				<option value="87,97,46">2300</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="pro_line" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="83,118,36,C">22 Sport</option>
+				<option value="83,118,36">22 Sport</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="ranger" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,102,45,B">2510</option>
+				<option value="85,102,45">2510</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="regulator" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="83,107,41,B">23</option>
-				<option value="81,102,41,B">24 FS</option>
-				<option value="86,108,38,C">25</option>
-				<option value="82,122,38,D">28</option>
-				<option value="85,120,44,C">29 FS</option>
+				<option value="83,107,41">23</option>
+				<option value="81,102,41">24 FS</option>
+				<option value="86,108,38">25</option>
+				<option value="82,122,38">28</option>
+				<option value="85,120,44">29 FS</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="robalo" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="80,86,37,A">R200</option>
-				<option value="81,96,34,B">R222</option>
-				<option value="85,96,36,B">R242</option>
-				<option value="85,91,37,A">246 Cayman</option>
+				<option value="80,86,37">R200</option>
+				<option value="81,96,34">R222</option>
+				<option value="85,96,36">R242</option>
+				<option value="85,91,37">246 Cayman</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="sailfish" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,78,34,A">206</option>
-				<option value="86,114,39,C">2660</option>
+				<option value="85,78,34">206</option>
+				<option value="86,114,39">2660</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="scout" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="83,87,40,A">185</option>
-				<option value="83,85,38,A">195 SF</option>
-				<option value="84,118,37,C">210 XSF</option>
-				<option value="85,95,35,B">225 XSF</option>
-				<option value="82,82,42,A">225 Bay Fisher</option>
-				<option value="84,86,37,A">240 Bay</option>
-				<option value="84,111,38,C">260 SF</option>
-				<option value="82,120,43,C">275 LXF</option>
+				<option value="83,87,40">185</option>
+				<option value="83,85,38">195 SF</option>
+				<option value="84,118,37">210 XSF</option>
+				<option value="85,95,35">225 XSF</option>
+				<option value="82,82,42">225 Bay Fisher</option>
+				<option value="84,86,37">240 Bay</option>
+				<option value="84,111,38">260 SF</option>
+				<option value="82,120,43">275 LXF</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="sea_fox" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="80,87,35,A">200 XT</option>
-				<option value="80,87,43,A">200 Viper</option>
-				<option value="83,95,39,B">209 Commander</option>
-				<option value="83,93,42,A">220 Viper</option>
-				<option value="85,101,41,B">226 Commander</option>
-				<option value="92,91,36,A">237</option>
-				<option value="89,103,41,B">246 Commander</option>
-				<option value="88,108,39,C">249 Avenger</option>
-				<option value="90,123,39,D">266 Commander</option>
-				<option value="87,126,42,D">286</option>
+				<option value="80,87,35">200 XT</option>
+				<option value="80,87,43">200 Viper</option>
+				<option value="83,95,39">209 Commander</option>
+				<option value="83,93,42">220 Viper</option>
+				<option value="85,101,41">226 Commander</option>
+				<option value="92,91,36">237</option>
+				<option value="89,103,41">246 Commander</option>
+				<option value="88,108,39">249 Avenger</option>
+				<option value="90,123,39">266 Commander</option>
+				<option value="87,126,42">286</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="sea_hunt" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,88,37,A">210 Ultra</option>
-				<option value="83,86,39,A">211 Ultra</option>
-				<option value="83,86,40,A">22 BX BR</option>
-				<option value="83,88,38,A">225 Ultra</option>
-				<option value="76,96,42,B">225 Triton</option>
-				<option value="83,95,39,B">232 Ultra</option>
-				<option value="84,104,41,B">234 Ultra</option>
-				<option value="94,96,43,B">24 BX BR</option>
-				<option value="82,108,39,B">24 RZR</option>
-				<option value="85,105,43,B">25 Gamefish</option>
-				<option value="85,127,48,D">27 Gamefish</option>
+				<option value="85,88,37">210 Ultra</option>
+				<option value="83,86,39">211 Ultra</option>
+				<option value="83,86,40">22 BX BR</option>
+				<option value="83,88,38">225 Ultra</option>
+				<option value="76,96,42">225 Triton</option>
+				<option value="83,95,39">232 Ultra</option>
+				<option value="84,104,41">234 Ultra</option>
+				<option value="94,96,43">24 BX BR</option>
+				<option value="82,108,39">24 RZR</option>
+				<option value="85,105,43">25 Gamefish</option>
+				<option value="85,127,48">27 Gamefish</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="sea_pro" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="83,88,44,A">210</option>
-				<option value="83,87,38,A">220</option>
-				<option value="85,83,37,A">SV 2300</option>
-				<option value="84,105,40,B">238</option>
+				<option value="83,88,44">210</option>
+				<option value="83,87,38">220</option>
+				<option value="85,83,37">SV 2300</option>
+				<option value="84,105,40">238</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="seacraft" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="84,85,37,A">23</option>
+				<option value="84,85,37">23</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="sportsman" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="83,82,39,A">211 Heritage</option>
-				<option value="83,84,38,A">227 Masters</option>
-				<option value="86,84,39,A">231 Heritage</option>
-				<option value="82,87,40,A">231 Platinum</option>
-				<option value="81,88,40,A">247 Platinum</option>
-				<option value="85,86,39,A">247 Masters</option>
-				<option value="84,105,39,B">251 Heritage</option>
+				<option value="83,82,39">211 Heritage</option>
+				<option value="83,84,38">227 Masters</option>
+				<option value="86,84,39">231 Heritage</option>
+				<option value="82,87,40">231 Platinum</option>
+				<option value="81,88,40">247 Platinum</option>
+				<option value="85,86,39">247 Masters</option>
+				<option value="84,105,39">251 Heritage</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="tidewater" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,88,40,A">220</option>
-				<option value="82,106,39,B">250</option>
+				<option value="85,88,40">220</option>
+				<option value="82,106,39">250</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="triton" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="85,102,45,B">2501</option>
+				<option value="85,102,45">2501</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="triumph" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="82,79,37,A">190 Bay</option>
+				<option value="82,79,37">190 Bay</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="yellowfin" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
-				<option value="78,104,47,B">29</option>
+				<option value="78,104,47">29</option>
 			</field>
 		</fieldset>
 	</type>
