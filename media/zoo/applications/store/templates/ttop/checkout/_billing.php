@@ -13,8 +13,7 @@
                     <div><?php echo $elements->get('billing.street2'); ?></div>
                     <div><?php echo $elements->get('billing.city').', '.$elements->get('billing.state').'  '.$elements->get('billing.postalCode'); ?></div>
                     <div><?php echo $elements->get('billing.phoneNumber'); ?></div>
-                    <div><?php echo $elements->get('billing.altNumber'); ?></div>
-                    <div><?php echo $elements->get('email'); ?></div>
+                    <div><?php echo $elements->get('billing.altNumber'); ?></div>                
                 </td>
             </tr>
         </tbody>

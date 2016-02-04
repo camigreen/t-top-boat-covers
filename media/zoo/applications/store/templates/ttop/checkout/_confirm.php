@@ -9,7 +9,6 @@ $items = $this->cart->getAllItems();
 $elements = $order->elements;
 $article = JTable::getInstance("content"); 
 $article->load(22); // Get Article ID  
-$salesperson = null;
 list($page) = explode('.',$this->page, 2);
 ?>
 <div class="uk-width-1-1 uk-container-center ttop-receipt">
@@ -32,14 +31,15 @@ list($page) = explode('.',$this->page, 2);
         <div class="uk-width-1-1 uk-margin-top">
             <div>E-mail: <?php echo $elements->get('email'); ?></div>
         </div>
-        <?php if($salesperson) : ?>
+        <?php if($this->app->customer->isReseller()) : ?>
             <div class="uk-width-1-1 uk-margin-top">
-                <div>Sales Rep: <?php echo $salesperson; ?></div>
+                <div>Sales Rep: <?php echo $this->app->user->get($order->created_by)->name; ?></div>
             </div>
         <?php endif; ?>
         <div class="uk-width-1-1 uk-margin-top">
             <div>Delivery Method: <?php echo $elements->get('shipping_method') == 'LP' ? 'Local Pickup' : 'UPS Ground' ?></div>
         </div>
+        <?php if($this->app->customer->isReseller()) : ?>
         <div class="uk-width-1-1 uk-margin-top">
             <h3>Payment</h3>
             <div>Account Name:  <?php echo $elements->get('payment.account_name'); ?></div>
@@ -47,6 +47,7 @@ list($page) = explode('.',$this->page, 2);
             <div>Customer Name:  <?php echo $elements->get('payment.customer_name'); ?></div>
             <div>Purchase Order Number:  <?php echo $elements->get('payment.po_number'); ?></div>
         </div>
+        <?php endif; ?>
         <div class='uk-width1-1 uk-margin-top'>
             <?php if($this->app->customer->isReseller()) : ?>
             <div class='uk-width1-1 items-table'>

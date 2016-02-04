@@ -1,3 +1,4 @@
+
 <?php 
 
 class ReceiptFormPDF extends FormPDF {
@@ -48,26 +49,21 @@ class ReceiptFormPDF extends FormPDF {
 	    			array('format' => 'item-options','text' => implode("\n",$options))
 	    		),
 	    		'qty' => array('text' => $item->qty),
-	    		'msrp' => array('text' => $item->getTotal('base')),
-	    		'markup_price' => array('text' => $this->app->number->currency($item->getTotal('markup'), array('currency' => 'USD'))."\n".$item->getPrice()->getMarkupRate(true).' Markup'),
-	    		'dealer_price' => array('text' => $this->app->number->currency($item->getTotal('reseller'), array('currency' => 'USD'))."\n".$item->getPrice()->getDiscountRate(true).' Discount'),
-	    		'dealer_profit' => array('text' => $this->app->number->currency($item->getTotal('margin'), array('currency' => 'USD'))."\nTotal Discount ".$item->getPrice()->getProfitRate(true))
+	    		'price' => array('text' => $item->getTotal('base'))
 	    	);
 
 	    }
 
 	    $order->set('items', $item_array);
 	    $tzoffset = $this->app->date->getOffset();
+	    $salesperson = $this->app->user->get($order->created_by) ?  $this->app->user->get($order->created_by)->name : 'Website';
 	    $order->set('created', $this->app->html->_('date', $order->created, JText::_('DATE_FORMAT_STORE1'), $tzoffset));
-	    $order->set('salesperson', $this->app->account->get($order->created_by)->name);
+	    $order->set('salesperson', $salesperson);
+	    $order->set('payment_info', $order->params->get('payment.creditcard.card_name').' '.$order->params->get('payment.creditcard.cardNumber'));
 	    $order->set('delivery_method', JText::_(($ship = $order->elements->get('shipping_method')) ? 'SHIPPING_METHOD_'.$ship : ''));
-	    $order->set('account_name', $order->elements->get('payment.account_name'));
-	    $order->set('account_number', $order->elements->get('payment.account_number'));
-	    $order->set('po_number', $order->elements->get('payment.po_number'));
-	    $order->set('customer', $order->elements->get('payment.customer_name'));
 	    $order->set('terms', JText::_(($terms = $order->params->get('terms')) ? 'ACCOUNT_TERMS_'.$terms : ''));
-	    $order->set('balance_due', $order->params->get('payment.status') == 3 ? 0 : $order->total);
-
+	    $order->set('tax_total', $order->tax_total);
+	    $order->set('ship_total', $order->ship_total);
 	    $order->remove('app');
 
 		return parent::setData($order);

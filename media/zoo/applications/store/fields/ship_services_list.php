@@ -2,7 +2,7 @@
 $methods = $this->app->shipper->getAvailableShippingMethods();
 
 
-printf('<select %s>', $this->app->field->attributes(array('name' => "{$control_name}[{$name}]", 'class' => $class)));
+printf('<select %s>', $this->app->field->attributes(array('id' => $name,'name' => "{$control_name}[{$name}]", 'class' => $class)));
 printf('<option %s>%s</option>', 'value=""', '- SELECT -');
 
 foreach ($methods as $method) {

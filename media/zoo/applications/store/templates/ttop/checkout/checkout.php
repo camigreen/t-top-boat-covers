@@ -159,6 +159,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
             billing.find('input, select').each(function(k,v){
                 var bName = $(this).prop('name');
                 var sName = bName.replace('billing','shipping');
+                console.log(sName);
                 if($(this).is('select')) {
                     shipping.find('select[name="'+sName+'"]').val($(this).val());
                 } else {
@@ -167,6 +168,9 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                 $(this).trigger('input');
                 
             });
+        }
+        function clearShipping () {
+            $('fieldset#shipping').find('input, select').val('');
         }
         function ProcessingModal (state, payment) {
             var content = '<div class="uk-text-center uk-h2"><i class="uk-icon-spinner uk-icon-spin uk-margin-right"></i>Processing</div>';
@@ -254,18 +258,13 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                             $('[name="same_as_billing"]').on('click',function(e) {
                                 var target = $(e.target);
                                 if(target.is(':checked')) {
-                                    $('fieldset#billing input').on('input',function(){
                                     copyToShipping();
-                                    });
-                                    $('fieldset#billing select').on('change',function(){
-                                    copyToShipping();
-                                    });
-                                    copyToShipping();
-                                    self.trigger('onChanged',e);
                                 } else {
-                                    $('fieldset#billing').off('input').off('changed');
+                                    clearShipping();
                                 }
-                                self.validation.form();
+                                $('fieldset#shipping').find('input, select').each(function (k, v) {
+                                    self.validation.element($(this));
+                                })
 
                             });
                             $('#back.ttop-checkout-step-button').unbind("click").on("click",function(e){
@@ -298,6 +297,24 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                                     dataType: 'json'
                                 });
                             })
+
+                            $('#shipping_method').on('change', function (e) {
+                                console.log($(this).val());
+                                if($(this).val() !== '' && $(this).val() !== 'LP') {
+                                    $('fieldset#shipping').find('input, select').each(function () {
+                                        if($(this).prop('id') !== 'shipping.altNumber' && $(this).prop('id') !== 'shipping.street2') {
+                                            $(this).rules('add', 'required');
+                                        }
+                                    })
+                                } else {
+                                    $('fieldset#shipping').find('input, select').each(function () {
+                                        $(this).rules('remove', 'required');
+                                        self.validation.element( $(this) );
+                                    })
+                                }
+                                self.validation.form();
+                            })
+
                             $('.trash-item').on('click',function(e){
                                 var elem = $(this), sku = $(this).closest('tr').prop('id');
                                 e.preventDefault();
@@ -341,20 +358,21 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                                 
                             });
                             this.validation = this.$element.validate({
-                                debug: true,
+                                debug: false,
                                 ignore: '.ignore',
                                 errorClass: "validation-fail",
+                                success: 'valid',
                                 rules: {
-                                    'elements[billing][name]': {
+                                    'elements[billing.name]': {
                                         minlength: 5
                                     },
-                                    'elements[shipping][name]': {
+                                    'elements[shipping.name]': {
                                         minlength: 5
                                     },
-                                    'elements[billing][phoneNumber]': {
+                                    'elements[billing.phoneNumber]': {
                                         phoneUS: true
                                     },
-                                    'elements[billing][altNumber]': {
+                                    'elements[billing.altNumber]': {
                                         phoneUS: true
                                     },
                                     'elements[email]': {
@@ -362,7 +380,14 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                                     },
                                     'elements[confirm_email]': {
                                         email: true,
-                                        equalTo: '[name="elements[email]"]'
+                                        equalTo: '#email'
+                                    },
+                                    'creditCard[cardNumber]': {
+                                        creditcard: true
+                                    },
+                                    'creditCard[card_code]': {
+                                        minlength: 3,
+                                        digits: true
                                     }
                                 },
                                 messages: {

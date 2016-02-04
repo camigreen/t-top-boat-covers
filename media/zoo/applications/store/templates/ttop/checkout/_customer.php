@@ -29,17 +29,17 @@ $elements = $this->order->elements;
         </div>
         <div class="uk-width-1-2">
             <?php $this->form->setValues($elements); ?>
-            <?php if($this->form->checkGroup('email')) : ?>
+            <?php if($this->form->checkGroup('email-address')) : ?>
                 <div class="uk-form-row">
-                    <?php echo $this->form->render('email')?>
+                    <?php echo $this->form->render('email-address')?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="uk-width-1-2">    
             <?php $this->form->setValues($elements); ?>
-            <?php if($this->form->checkGroup('shipping_method')) : ?>
+            <?php if($this->form->checkGroup('shipping_selection')) : ?>
                 <div class="uk-form-row">
-                    <?php echo $this->form->render('shipping_method')?>
+                    <?php echo $this->form->render('shipping_selection')?>
                 </div>
             <?php endif; ?>
         </div> 
