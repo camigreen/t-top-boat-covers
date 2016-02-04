@@ -67,7 +67,7 @@ class WorkOrderFormPDF extends FormPDF {
 	    $order->set('po_number', $order->elements->get('payment.po_number'));
 	    $order->set('customer', $order->elements->get('payment.customer_name'));
 	    $order->set('terms', JText::_(($terms = $order->params->get('terms')) ? 'ACCOUNT_TERMS_'.$terms : ''));
-	    $order->set('transaction_id', $order->elements)
+	    $order->set('transaction_id', $order->elements);
 	    $order->remove('app');
 
 		return parent::setData($order);

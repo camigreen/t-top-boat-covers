@@ -41,7 +41,7 @@
 //         Set the event handlers
         this.$atc.on('click', $.proxy(this, 'addToCart'));
         this.$qty.on('change', $.proxy(this, '_updateQuantity'));
-        this.$element.on('input','.item-option:not(select)', $.proxy(this, '_refresh'));
+        this.$element.on('input','input.item-option', $.proxy(this, '_refresh'));
         this.$element.on('change','select.item-option', $.proxy(this, '_refresh'));
         this.trigger('onComplete');
 
@@ -193,10 +193,13 @@
             
             var self = this;
 
-            var type = this.type;
+            
             if(typeof args === 'undefined') {
                 args = {};
             }
+
+            var type = !args.item ? null : args.item.type;
+            console.log(type);
             
             result = {};
             result.args = args;

@@ -37,7 +37,7 @@
 				<field name="page_number" type="pageNumbers" x="179" y="5" h="5" w="30" align="R" />
 				<field name="companyname" type="textbox" x="35" y="10" h="5" w="80" font-size="12" font-style="B" />
 				<field name="companyaddress" type="textbox" x="35" y="15" h="35" w="80" line-height="4" />
-				<field name="totals_box" type="textbox" x="152" y="245" h="25" w="53" border="B,L,R" />
+				<field name="totals_box" type="textbox" x="152" y="245" h="20" w="53" border="B,L,R" />
 				<field name="billto" type="textbox" x="10" y="45" h="30" w="75" border="1">
 					<title align="T" text-align="C" border="1" font-style="B" text="Bill To" />
 				</field>
@@ -95,65 +95,44 @@
 				<field name="companyname" type="textbox" x="35" y="10" h="5" w="80" font-size="12" font-style="B" />
 				<field name="companyaddress" type="textbox" x="35" y="15" h="35" w="80" line-height="4" />
 				<field name="logo" type="logo" x="10" y="10" h="25" w="25" border="0" />
-				<field name="totals_box" type="textbox" x="155" y="250" h="20" w="50" border="B,L,R" />
 				<field name="created" type="textbox" x="170" y="20" h="5" w="35" align="R" >
 					<title align="L" text-align="R" text="Order Date:" />
 				</field>
 				<field name="id" type="textbox" x="170" y="25" h="5" w="35" align="C" >
 					<title align="L" text-align="R" text="Order Number:" />
 				</field>
-				<field name="terms" type="textbox" x="170" y="30" h="5" w="35" align="C" >
-					<title align="L" text-align="R" text="Terms:" />
-				</field>
-				<field name="subtotal" type="textbox" x="176" y="250" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="totals_box" type="textbox" x="152" y="245" h="20" w="53" border="B,L,R" />
+				<field name="subtotal" type="textbox" x="176" y="245" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Subtotal"  font-size="10"/>
 				</field>
-				<field name="ship_total" type="textbox" x="176" y="255" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="ship_total" type="textbox" x="176" y="250" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Shipping"  font-size="10"/>
 				</field>
-				<field name="tax_total" type="textbox" x="176" y="260" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="tax_total" type="textbox" x="176" y="255" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Sales Tax"  font-size="10"/>
 				</field>
-				<field name="total" type="textbox" x="176" y="265" h="5" w="29" align="R" font-size="10" mask="currency">
+				<field name="total" type="textbox" x="176" y="260" h="5" w="29" align="R" font-size="10" mask="currency">
 					<title align="L" text-align="R" text="Total"  font-size="10"/>
 				</field>
-				<field name="account_name" type="textbox" x="10" y="45" h="5" w="45" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Account Name" font-size="8"/>
-				</field>
-				<field name="account_number" type="textbox" x="55" y="45" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Account Number" font-size="8"/>
-				</field>
-				<field name="salesperson" type="textbox" x="85" y="45" h="5" w="30" align="C" font-size="9" border="1">
+				<field name="salesperson" type="textbox" x="10" y="45" h="5" w="65" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Salesperson" font-size="8"/>
 				</field>
-				<field name="delivery_method" type="textbox" x="115" y="45" h="5" w="30" align="C" font-size="9" border="1">
+				<field name="delivery_method" type="textbox" x="75" y="45" h="5" w="65" align="C" font-size="9" border="1">
 					<title align="T" border="1" text-align="C" text="Delivery" font-size="8"/>
 				</field>
-				<field name="po_number" type="textbox" x="145" y="45" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="PO Number" font-size="8"/>
+				<field name="payment_info" type="textbox" x="140" y="45" h="5" w="65" align="C" font-size="9" border="1">
+					<title align="T" border="1" text-align="C" text="Payment Information" font-size="8"/>
 				</field>
-				<field name="customer" type="textbox" x="175" y="45" h="5" w="30" align="C" font-size="9" border="1">
-					<title align="T" border="1" text-align="C" text="Customer" font-size="8"/>
-				</field>
-				<field name="items" type="table" x="10" y="55" rows="38" w="195">
+				<field name="items" type="table" x="10" y="55" rows="37" w="195">
 					<columns>
-						<column name="item_description" w=".50">
+						<column name="item_description" w=".73">
 							<header text="Item Description" />
 						</column>
 						<column name="qty" w=".05" align="C">
 							<header text="Qty" />
 						</column>
-						<column name="msrp" w=".10" align="C" mask="currency">
-							<header text="MSRP" />
-						</column>
-						<column name="markup_price" w=".12" align="C">
-							<header text="Customer Price" />
-						</column>
-						<column name="dealer_price" w=".11" align="C">
-							<header text="Dealer Price" />
-						</column>
-						<column name="dealer_profit" w=".12" align="C">
-							<header text="Dealer Profit" />
+						<column name="price" w=".22" align="C" mask="currency">
+							<header text="Price" />
 						</column>
 					</columns>
 				</field>

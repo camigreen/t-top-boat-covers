@@ -148,14 +148,14 @@ class OrderDev {
 		return $this->subtotal;
 	}
 
-	public function getShippingTotal() {
-		$this->ship_total = 0;
-		if($this->isProcessed()) {
+	public function getShippingTotal($refresh = false) {
+		if($this->isProcessed() || (!$refresh && $this->ship_total != 0)) {
 			return $this->ship_total;
 		}
         if(!$service = $this->elements->get('shipping_method')) {
             return 0;
         }
+        $this->ship_total = 0;
         $application = $this->app->zoo->getApplication();
         $markup = $application->getParams()->get('global.shipping.ship_markup', 0);
         $markup = intval($markup)/100;
@@ -164,6 +164,7 @@ class OrderDev {
 
         $rates = $ship->setDestination($ship_to)->assemblePackages($this->app->cart->getAllItems())->getRates();
         $rate = 0;
+        var_dump($rates);
         foreach($rates as $shippingMethod) {
             if($shippingMethod->getService()->getCode() == $service) {
                 $rate = $shippingMethod->getTotalCharges();

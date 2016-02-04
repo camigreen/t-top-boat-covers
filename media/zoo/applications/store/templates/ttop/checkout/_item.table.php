@@ -49,7 +49,7 @@
                     Shipping:
                 </td>
                 <td>
-                    <?php echo $this->app->number->currency($order->getShippingTotal(),array('currency' => 'USD')); ?>
+                    <?php echo $this->app->number->currency($order->getShippingTotal(true),array('currency' => 'USD')); ?>
                 </td>
             </tr>
             <tr>

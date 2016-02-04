@@ -11,7 +11,7 @@ $elements = $this->order->elements;
 <div class="uk-width-1-1 uk-container-center"> 
     <div class="uk-grid">
         <div class="uk-width-1-2">
-            <?php $this->form->setValues($elements->get('billing.')); ?>
+            <?php $this->form->setValues($elements); ?>
             <?php if($this->form->checkGroup('billing')) : ?>
                 <div class="uk-form-row">
                     <?php echo $this->form->render('billing')?>
@@ -19,7 +19,6 @@ $elements = $this->order->elements;
             <?php endif; ?>
         </div>
         <div class="uk-width-1-2">
-            <?php $this->form->setValues($elements->get('shipping.')); ?>
             <?php if($this->form->checkGroup('shipping')) : ?>
                 <div class="uk-form-row">
                     <legend>Shipping Address<label class="uk-text-small uk-margin-left" ><input type="checkbox" id="same_as_billing" class="ttop-checkout-field" name="same_as_billing" style="height:15px; width:15px;" />Same as billing</label></legend>
@@ -28,7 +27,6 @@ $elements = $this->order->elements;
             <?php endif; ?>
         </div>
         <div class="uk-width-1-2">
-            <?php $this->form->setValues($elements); ?>
             <?php if($this->form->checkGroup('email-address')) : ?>
                 <div class="uk-form-row">
                     <?php echo $this->form->render('email-address')?>
@@ -36,7 +34,6 @@ $elements = $this->order->elements;
             <?php endif; ?>
         </div>
         <div class="uk-width-1-2">    
-            <?php $this->form->setValues($elements); ?>
             <?php if($this->form->checkGroup('shipping_selection')) : ?>
                 <div class="uk-form-row">
                     <?php echo $this->form->render('shipping_selection')?>

@@ -344,47 +344,49 @@ jQuery(function($){
                             }
                         ],
                         beforeChange: [
-                            function(e) { 
+                            function(data) { 
+                                var e = data.args.event, item = data.args.item, elem = $(e.target);
                                 switch($(e.target).prop('name')) {
                                     case 'storage': //Check the storage value and if "IW" show the modal
-                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'storage') === 'IW') {
+                                        if(elem.val() === 'IW') {
                                             var modal = $.UIkit.modal("#inwater-modal");
                                             modal.options.bgclose = false;
                                             modal.show();
                                         }
                                         break;
                                     case 'trolling_motor': // Check if the trolling motor is "yes" and show the modal for the photo upload
-                                        console.log(this._getOptionValue(<?php echo $storeItem->id; ?>,'trolling_motor'));
-                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'trolling_motor') === 'y') {
+                                        if(elem.val() === 'y') {
                                             var modal = $.UIkit.modal("#tm-temp-modal");
                                             modal.options.bgclose = false;
                                             modal.show();
                                         }
                                         break;
                                     case 'fabric':
-                                        changeColor(this._getOptionValue(<?php echo $storeItem->id; ?>,'fabric'));
+                                        changeColor(elem.val());
                                         break;
                                     case 'color':
-                                        changeColor(this._getOptionValue(<?php echo $storeItem->id; ?>,'fabric'));
+                                        changeColor(elem.val());
                                         break;
                                     case 'ttop_type':
-                                        if(this._getOptionValue(<?php echo $storeItem->id; ?>,'ttop_type') === 'hard-top') {
+                                        if(elem.val() === 'hard-top') {
                                             var modal = $.UIkit.modal("#hthsk-modal");
                                             modal.options.bgclose = false;
                                             modal.show();
                                         }
                                 }
+                                return data;
                             }
                         ],
                         beforeAddToCart: [
-                            function(e, args) {
-                                var items = args[0];
+                            function(data) {
+                                var items = data.args.items
                                 $.each(items, function(key, item){
                                     console.log(item);
                                     item.title = '';
                                     item.title = item.name+' for a '+item.options.year.text+' '+item.attributes.oem.name+' '+item.attributes.boat_model.text;
                                 })
-                                return items;
+
+                                return data;
                             }
                         ],
                         onPublishPrice: []
