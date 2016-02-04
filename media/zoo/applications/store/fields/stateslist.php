@@ -7,7 +7,7 @@ printf('<select %s>', $this->app->field->attributes(array('name' => "{$control_n
 foreach ($states->getStates('US',true) as $key => $state) {
 
 	// set attributes
-	$attributes = array('value' => $key);
+	$attributes = array('value' => $key == 'X' ? '' : $key);
 
 	// is checked ?
 	if ($key == $value) {

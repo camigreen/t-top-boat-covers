@@ -7,6 +7,7 @@
 
 $order = $this->order;
 $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.validate.min.js');
+$this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additional-methods.min.js');
 ?>
 <?php if($this->app->merchant->testMode()) : ?>
 <div class="uk-width-1-1 uk-margin">
@@ -50,9 +51,6 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
     <div class="uk-width-1-1 uk-margin uk-text-center ttop-checkout-pagetitle">
         <div class="uk-article-title"><?php echo $this->title; ?></div>
         <div class="uk-article-lead"><?php echo $this->subtitle; ?></div>
-    </div>
-    <div class="uk-width-1-1 uk-text-center ttop-checkout-validation-errors">
-        
     </div>
     <?php echo $this->partial($this->page,compact('order')); ?>
     <div class="uk-width-1-2 uk-container-center uk-margin-top">
@@ -166,6 +164,7 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                 } else {
                     shipping.find('input[name="'+sName+'"]').val($(this).val());
                 }
+                $(this).trigger('input');
                 
             });
         }
@@ -255,17 +254,19 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                             $('[name="same_as_billing"]').on('click',function(e) {
                                 var target = $(e.target);
                                 if(target.is(':checked')) {
-                                        $('fieldset#billing input').on('input',function(){
-                                        copyToShipping();
-                                        });
-                                        $('fieldset#billing select').on('change',function(){
-                                        copyToShipping();
-                                        });
-                                        copyToShipping();
-                                        self.trigger('onChanged',e);
-                                    } else {
-                                        $('fieldset#billing').off('input').off('changed');
-                                    }
+                                    $('fieldset#billing input').on('input',function(){
+                                    copyToShipping();
+                                    });
+                                    $('fieldset#billing select').on('change',function(){
+                                    copyToShipping();
+                                    });
+                                    copyToShipping();
+                                    self.trigger('onChanged',e);
+                                } else {
+                                    $('fieldset#billing').off('input').off('changed');
+                                }
+                                self.validation.form();
+
                             });
                             $('#back.ttop-checkout-step-button').unbind("click").on("click",function(e){
                                 e.preventDefault();
@@ -344,15 +345,34 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
                                 ignore: '.ignore',
                                 errorClass: "validation-fail",
                                 rules: {
-                                    email: "required",
-                                    confirm_email: {
-                                      equalTo: '#email'
+                                    'elements[billing][name]': {
+                                        minlength: 5
+                                    },
+                                    'elements[shipping][name]': {
+                                        minlength: 5
+                                    },
+                                    'elements[billing][phoneNumber]': {
+                                        phoneUS: true
+                                    },
+                                    'elements[billing][altNumber]': {
+                                        phoneUS: true
+                                    },
+                                    'elements[email]': {
+                                        email: true
+                                    },
+                                    'elements[confirm_email]': {
+                                        email: true,
+                                        equalTo: '[name="elements[email]"]'
+                                    }
+                                },
+                                messages: {
+                                    'elements[confirm_email]': {
+                                        equalTo: 'Your email addresses do not match.'
                                     }
                                 }   
 
                             });
                             $('#localPickup').on('click',function(e){
-                                self.trigger('validate');
                             });
                             //localPickup();
                             return true;
@@ -400,12 +420,6 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.
 
                             }
                             return true;
-                        }
-                    ],
-                    validate: [
-                        function(e) {
-                            console.log(this.validation.form());
-                            return this.validation.form();
                         }
                     ]
                 }

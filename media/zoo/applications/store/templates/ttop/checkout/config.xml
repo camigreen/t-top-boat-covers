@@ -11,7 +11,7 @@
 			<field name="phoneNumber" type="text" width="1-2" default="" label="Phone Number" description="Phone Number" required="1" />
 			<field name="altNumber" type="text" width="1-2" default="" label="Alternate Phone Number" description="Alternate Phone Number" />
 		</fieldset>
-		<fieldset group="shipping" label="Shipping Address" controlname="elements[shipping]" >
+		<fieldset group="shipping" controlname="elements[shipping]" >
 			<field name="name" type="text" width="1-1" default="" label="Name" description="Name of the account." required="1" />
 			<field name="street1" type="text" width="1-1" default="" label="Address Line 1" description="Address Line 1." required="1" />
 			<field name="street2" type="text" width="1-1" default="" label="Address Line 2" description="Address Line 2." />
