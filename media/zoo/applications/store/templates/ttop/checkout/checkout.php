@@ -6,8 +6,11 @@
  */
 
 $order = $this->order;
+
 $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/jquery.validate.min.js');
+//$this->app->document->addScript('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js');
 $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additional-methods.min.js');
+//$this->app->document->addScript('http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.min.js');
 ?>
 <?php if($this->app->merchant->testMode()) : ?>
 <div class="uk-width-1-1 uk-margin">
@@ -254,6 +257,14 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                     onInit: [
                         function (e) {
                             var self = this;
+                            
+                            $.validator.setDefaults({
+                                debug: false,
+                                ignore: '.ignore',
+                                errorClass: "validation-fail",
+                                success: 'valid'
+                            })
+                            this.validator = $('#ttop-checkout').validate();
                             $('#proceed.ttop-checkout-step-button').unbind("click").on('click',$.proxy(this,'_submit'));
                             $('[name="same_as_billing"]').on('click',function(e) {
                                 var target = $(e.target);
@@ -357,46 +368,36 @@ $this->app->document->addScript('assets:js/jquery-validation-1.13.1/dist/additio
                                 
                                 
                             });
-                            this.validation = this.$element.validate({
-                                debug: false,
-                                ignore: '.ignore',
-                                errorClass: "validation-fail",
-                                success: 'valid',
-                                rules: {
-                                    'elements[billing.name]': {
-                                        minlength: 5
-                                    },
-                                    'elements[shipping.name]': {
-                                        minlength: 5
-                                    },
-                                    'elements[billing.phoneNumber]': {
-                                        phoneUS: true
-                                    },
-                                    'elements[billing.altNumber]': {
-                                        phoneUS: true
-                                    },
-                                    'elements[email]': {
-                                        email: true
-                                    },
-                                    'elements[confirm_email]': {
-                                        email: true,
-                                        equalTo: '#email'
-                                    },
-                                    'creditCard[cardNumber]': {
-                                        creditcard: true
-                                    },
-                                    'creditCard[card_code]': {
-                                        minlength: 3,
-                                        digits: true
-                                    }
-                                },
-                                messages: {
-                                    'elements[confirm_email]': {
-                                        equalTo: 'Your email addresses do not match.'
-                                    }
-                                }   
+                            // this.validation = this.$element.validate({
+                            //     rules: {
+                            //         'elements[billing.name]': {
+                            //             minlength: 5
+                            //         },
+                            //         'elements[shipping.name]': {
+                            //             minlength: 5
+                            //         },
+                            //         'elements[billing.phoneNumber]': {
+                            //             phoneUS: true
+                            //         },
+                            //         'elements[billing.altNumber]': {
+                            //             phoneUS: true
+                            //         },
+                            //         'elements[email]': {
+                            //             email: true
+                            //         },
+                            //         'elements[confirm_email]': {
+                            //             email: true,
+                            //             equalTo: '#email'
+                            //         }
 
-                            });
+                            //     },
+                            //     messages: {
+                            //         'elements[confirm_email]': {
+                            //             equalTo: 'Your email addresses do not match.'
+                            //         }
+                            //     }   
+
+                            // });
                             $('#localPickup').on('click',function(e){
                             });
                             //localPickup();

@@ -71,3 +71,15 @@ $page = $this->page;
         </div>
     </div>
 </div>
+<script>
+jQuery(function($) {
+    $(document).ready(function(){
+        // $('[name="creditCard[cardNumber]"]').rules({
+        //         creditcard: true
+        // })
+        $('#card_code').rules('add',{
+            minlength: 3
+        });  
+    });
+})
+</script>

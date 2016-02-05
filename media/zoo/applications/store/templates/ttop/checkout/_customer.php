@@ -42,3 +42,8 @@ $elements = $this->order->elements;
         </div> 
     </div>
 </div>
+<script>
+jQuery(function($){
+    $(document).ready(function(){})
+})
+</script>

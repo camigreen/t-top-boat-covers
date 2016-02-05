@@ -22,7 +22,7 @@
         </div>
         <div class="uk-width-2-6">
             <label>CVV Code</label>
-            <input type="text" name="creditcard[card_code]" class="ttop-checkout-field required" placeholder="CVV Number" value='<?php echo $elements->get('payment.creditcard.card_code'); ?>'/>
+            <input id="card_code" type="text" name="creditcard[card_code]" class="ttop-checkout-field required" placeholder="CVV Number" value='<?php echo $elements->get('payment.creditcard.card_code'); ?>'/>
         </div>
     </div>
 </div> 

@@ -162,7 +162,7 @@
         },
         _validate: function () {
             this.trigger('validate');
-            var status = this.validation.valid();
+            var status = this.validator.valid();
             if(status) {
                 this.trigger('validation_pass');
             } else {

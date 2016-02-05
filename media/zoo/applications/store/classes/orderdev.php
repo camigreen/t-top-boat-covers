@@ -164,7 +164,6 @@ class OrderDev {
 
         $rates = $ship->setDestination($ship_to)->assemblePackages($this->app->cart->getAllItems())->getRates();
         $rate = 0;
-        var_dump($rates);
         foreach($rates as $shippingMethod) {
             if($shippingMethod->getService()->getCode() == $service) {
                 $rate = $shippingMethod->getTotalCharges();
