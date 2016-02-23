@@ -143,6 +143,7 @@
 			</field>
 			<field name="boatmodelBSK" boatmake="nautic_star" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
+				<option value="aft,89,66,24">2102 Legacy</option>
 				<option value="aft,88,74,44">2200 XS</option>
 				<option value="aft,90,70,42">2500</option>
 			</field>

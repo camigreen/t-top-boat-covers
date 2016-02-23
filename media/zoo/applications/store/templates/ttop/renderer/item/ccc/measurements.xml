@@ -109,6 +109,7 @@
 			</field>
 			<field name="boatmodelCCC" boatmake="nautic_star" type="list" width="6-10" default="" label="Boat Model" description="">
 				<option value="0">- Select -</option>
+				<option value="83,93,45">2102 Legacy</option>
 				<option value="84,98,45">2200 XS</option>
 			</field>
 			<field name="boatmodelCCC" boatmake="pathfinder" type="list" width="6-10" default="" label="Boat Model" description="">
