@@ -169,6 +169,7 @@ $price['tie-down-set.shipping.weight'] = 2;
 $price['tie-down-set.shipping.price'] = 0;
 
 $price['suction-cups.item.base'] = 38;
+$price['suction-cups.item.discount'] = 0.15;
 $price['suction-cups.shipping.weight'] = 1;
 $price['suction-cups.shipping.price'] = 0;
 $price['suction-cups.item.allowMarkup'] = false;
